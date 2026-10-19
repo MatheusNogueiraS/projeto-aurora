@@ -74,7 +74,11 @@ export const tokenMergeConfig = {
         "divider",
         "field",
         "disabled",
-        "disabled-surface"
+        "disabled-surface",
+        "transparent",
+        "current",
+        "currentcolor",
+        "inherit"
       ],
       "spacing": [
         "none",

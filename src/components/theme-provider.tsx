@@ -30,6 +30,24 @@ function isTheme(value: string | null): value is Theme {
   return THEME_VALUES.includes(value as Theme)
 }
 
+// O armazenamento do navegador pode estar bloqueado (aba anônima, dados de site
+// bloqueados, página embutida). Nesses casos o tema só não é lembrado.
+function readStoredTheme(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+function storeTheme(key: string, theme: Theme) {
+  try {
+    window.localStorage.setItem(key, theme)
+  } catch {
+    // sem armazenamento disponível: segue sem lembrar a escolha
+  }
+}
+
 function getSystemTheme(): ResolvedTheme {
   if (window.matchMedia(COLOR_SCHEME_QUERY).matches) {
     return "dark"
@@ -84,7 +102,7 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(() => {
-    const storedTheme = localStorage.getItem(storageKey)
+    const storedTheme = readStoredTheme(storageKey)
     if (isTheme(storedTheme)) {
       return storedTheme
     }
@@ -94,7 +112,7 @@ export function ThemeProvider({
 
   const setTheme = React.useCallback(
     (nextTheme: Theme) => {
-      localStorage.setItem(storageKey, nextTheme)
+      storeTheme(storageKey, nextTheme)
       setThemeState(nextTheme)
     },
     [storageKey]
@@ -166,7 +184,7 @@ export function ThemeProvider({
                 ? "light"
                 : "dark"
 
-        localStorage.setItem(storageKey, nextTheme)
+        storeTheme(storageKey, nextTheme)
         return nextTheme
       })
     }
@@ -180,7 +198,14 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.storageArea !== localStorage) {
+      let storage: Storage
+      try {
+        storage = window.localStorage
+      } catch {
+        return
+      }
+
+      if (event.storageArea !== storage) {
         return
       }
 
