@@ -1,7 +1,8 @@
 import * as React from "react"
-import { BoldIcon, InfoIcon, ItalicIcon, MailIcon, SearchIcon, TriangleAlertIcon } from "lucide-react"
+import { BoldIcon, InfoIcon, ItalicIcon, MailIcon, MoonIcon, SearchIcon, SunIcon, TriangleAlertIcon } from "lucide-react"
 import { toast } from "sonner"
 
+import { useTheme } from "@/components/theme-provider"
 import {
   Accordion,
   AccordionContent,
@@ -80,9 +81,28 @@ const frutas = ["Banana", "Maçã", "Laranja", "Uva", "Manga"]
 const hoje = new Date()
 const intervalo = { from: hoje, to: new Date(hoje.getTime() + 5 * 864e5) }
 
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const isDark =
+    theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      className="shrink-0"
+      aria-label={isDark ? "Ativar tema claro" : "Ativar tema escuro"}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+    >
+      {isDark ? <SunIcon data-icon="inline-start" /> : <MoonIcon data-icon="inline-start" />}
+      {isDark ? "Claro" : "Escuro"}
+    </Button>
+  )
+}
+
 function Showcase({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="flex flex-col gap-xxs rounded-card border-default border-divider bg-background-5 p-xs">
+    <section className="flex flex-col gap-xxs rounded-card border-default border-divider bg-background-5 p-xxs sm:p-xs">
       <h2 className="typo-headline-5 text-text-1">{title}</h2>
       <div className="grid gap-xxs sm:grid-cols-2">{children}</div>
     </section>
@@ -105,13 +125,16 @@ export function App() {
   return (
     <TooltipProvider>
       <div className="min-h-svh bg-background-4 text-text-1">
-        <div className="mx-auto flex max-w-(--aurora-breakpoint-lg) flex-col gap-xs p-xs">
+        <div className="mx-auto flex max-w-(--aurora-breakpoint-lg) flex-col gap-xxs p-xxs sm:gap-xs sm:p-xs">
           <header className="flex flex-col gap-quark">
-            <h1 className="typo-headline-3">Aurora · Vitrine de componentes</h1>
+            <div className="flex items-start justify-between gap-xxxs">
+              <h1 className="typo-headline-4 sm:typo-headline-3">Aurora · Vitrine de componentes</h1>
+              <ThemeToggle />
+            </div>
             <p className="typo-body-small text-text-3">
-              Todos os componentes com duas variantes, usando as cores do tema Bmg. Aperte{" "}
-              <kbd className="rounded-kbd border-default border-field px-quark typo-caption">d</kbd> para
-              alternar o modo escuro.
+              Todos os componentes com duas variantes, usando as cores do tema Bmg. Troque o tema
+              pelo botão ou pela tecla{" "}
+              <kbd className="rounded-kbd border-default border-field px-quark typo-caption">d</kbd>.
             </p>
           </header>
 
@@ -437,9 +460,9 @@ export function App() {
               </div>
             </Variant>
             <Variant label="Cartão com avatar">
-              <div className="flex items-center gap-xxxs">
-                <Skeleton className="size-control-lg rounded-avatar" />
-                <div className="flex flex-col gap-nano">
+              <div className="flex w-full items-center gap-xxxs">
+                <Skeleton className="size-control-lg shrink-0 rounded-avatar" />
+                <div className="flex flex-1 flex-col gap-nano">
                   <Skeleton className="h-xxs w-2/3" />
                   <Skeleton className="h-xxs w-1/3" />
                 </div>

@@ -306,7 +306,9 @@ const sides = ["x", "y", "s", "e", "t", "r", "b", "l"]
 const mergeConfig = {
   override: {
     theme: {
-      color: namesOf(["color"]),
+      // + palavras-chave do CSS, que não são tokens mas precisam ser reconhecidas como cor
+      // (sem elas, cn("border-transparent", "border-link-4") mantém as duas e a transparente vence)
+      color: [...namesOf(["color"]), "transparent", "current", "currentcolor", "inherit"],
       spacing: [...namesOf(["spacing"]), ...namesOf(["size"])],
       radius: namesOf(["radius"]),
       shadow: namesOf(["elevation"]),
