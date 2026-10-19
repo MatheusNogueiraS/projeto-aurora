@@ -1,15 +1,15 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 const alertVariants = cva(
-  "group/alert relative grid w-full gap-0.5 rounded-lg border px-4 py-3 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4",
+  "group/alert relative grid w-full gap-pico rounded-card border-default px-xxs py-xxxs text-left typo-body-small has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-xxl-plus has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-nano-plus *:[svg]:row-span-2 *:[svg]:translate-y-pico *:[svg]:text-current *:[svg:not([class*='size-'])]:size-icon-md",
   {
     variants: {
       variant: {
-        default: "bg-card text-card-foreground",
+        default: "bg-background-6 text-text-1",
         destructive:
-          "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+          "bg-background-6 text-alerts-7 *:data-[slot=alert-description]:text-alerts-7/text-subtle *:[svg]:text-current",
       },
     },
     defaultVariants: {
@@ -38,7 +38,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "font-medium group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground",
+        "typo-body-small-bold group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+        "typo-body-small text-balance text-text-3 md:text-pretty [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-xxs",
         className
       )}
       {...props}
@@ -66,7 +66,7 @@ function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-action"
-      className={cn("absolute top-2.5 right-3", className)}
+      className={cn("absolute top-nano-plus right-xxxs", className)}
       {...props}
     />
   )

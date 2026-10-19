@@ -1,36 +1,36 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-button border-default border-transparent bg-clip-padding typo-button-small whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring active:not-aria-[haspopup]:translate-y-hairline disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/invalid-ring [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-icon-md",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/80",
+        default:
+          "bg-link-1 text-link-10 hover:bg-link-3 aria-expanded:bg-link-3 disabled:bg-disabled-surface",
         outline:
-          "border-border bg-background shadow-xs hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-link-4 bg-transparent text-link-4 hover:bg-link-5 aria-expanded:bg-link-5 disabled:border-details-1",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
-        ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "bg-link-5 text-link-4 hover:bg-link-5/hover aria-expanded:bg-link-5/hover disabled:bg-disabled-surface",
+        ghost: "text-link-4 hover:bg-link-5 aria-expanded:bg-link-5",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-alerts-8 text-alerts-9 hover:bg-alerts-8/hover focus-visible:border-alerts-7/danger-border focus-visible:ring-alerts-7/invalid-ring disabled:bg-disabled-surface",
+        link: "text-link-4 underline-offset-(--aurora-underline-offset) hover:underline",
       },
       size: {
         default:
-          "h-9 gap-1.5 px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
-        lg: "h-10 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-9",
+          "h-control-md gap-quark-plus px-xxs typo-button-small-bold in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-xxxs has-data-[icon=inline-start]:pl-xxxs",
+        xs: "h-control-xs gap-quark px-nano typo-caption in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-quark-plus has-data-[icon=inline-start]:pl-quark-plus [&_svg:not([class*='size-'])]:size-icon-xs",
+        sm: "h-control-sm gap-quark-plus px-xxxs typo-button-small-bold in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-nano has-data-[icon=inline-start]:pl-nano",
+        lg: "h-control-lg gap-nano px-xxs typo-button-bold has-data-[icon=inline-end]:pr-xxxs has-data-[icon=inline-start]:pl-xxxs",
+        icon: "size-control-md",
         "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),8px)] in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",
+          "size-control-xs in-data-[slot=button-group]:rounded-button [&_svg:not([class*='size-'])]:size-icon-xs",
         "icon-sm":
-          "size-8 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-md",
-        "icon-lg": "size-10",
+          "size-control-sm in-data-[slot=button-group]:rounded-button",
+        "icon-lg": "size-control-lg",
       },
     },
     defaultVariants: {

@@ -1,0 +1,301 @@
+{
+  "$description": "Semânticos: dão significado aos átomos. Sempre apontam para outro token ({grupo.nome}), nunca para um valor literal. São os únicos tokens que os componentes podem usar. Tema padrão (claro, Bmg); o escuro sobrescreve só o necessário em themes/dark.json.",
+
+  "color": {
+    "$type": "color",
+    "background": {
+      "1": { "$value": "{color.neutral.0}" },
+      "2": { "$value": "{color.neutral.20}", "$description": "Superfície escura em tema claro (ex.: tooltip)." },
+      "3": { "$value": "{color.neutral.90}" },
+      "4": { "$value": "{color.neutral.95}", "$description": "Superfície sutil: hover, selecionado, skeleton." },
+      "5": { "$value": "{color.neutral.100}", "$description": "Fundo da página." },
+      "6": { "$value": "{color.neutral.100}", "$description": "Superfície elevada: card, popover, menus." },
+      "overlay": { "$value": "{color.black-alpha.64}", "$description": "Véu atrás de modais." },
+      "overlay-inverse": { "$value": "{color.white-alpha.15}" }
+    },
+    "text": {
+      "1": { "$value": "{color.neutral.0}", "$description": "Texto principal." },
+      "2": { "$value": "{color.neutral.20}" },
+      "3": { "$value": "{color.neutral.40}", "$description": "Texto secundário." },
+      "4": { "$value": "{color.neutral.50}" },
+      "5": { "$value": "{color.neutral.100}" },
+      "6": { "$value": "{color.neutral.0}" }
+    },
+    "details": {
+      "1": { "$value": "{color.neutral.60}" },
+      "2": { "$value": "{color.neutral.80}" },
+      "3": { "$value": "{color.neutral.90}" },
+      "4": { "$value": "{color.neutral.90}" }
+    },
+    "img": {
+      "skin-1": { "$value": "{color.skin.40}" },
+      "skin-2": { "$value": "{color.skin.30}" },
+      "skin-3": { "$value": "{color.skin.60}" },
+      "skin-4": { "$value": "{color.skin.80}" },
+      "skin-5": { "$value": "{color.skin.95}" },
+      "details-1": { "$value": "{color.neutral.60}" },
+      "details-2": { "$value": "{color.neutral.80}" },
+      "details-3": { "$value": "{color.neutral.90}" },
+      "details-4": { "$value": "{color.neutral.100}" },
+      "primary": { "$value": "{color.brand.2}" },
+      "secondary": { "$value": "{color.brand.1}" },
+      "big-details": { "$value": "{color.brand.3}" },
+      "small-details": { "$value": "{color.brand.4}" }
+    },
+    "brand": {
+      "$description": "Cores da marca. Não mudam entre temas.",
+      "1": { "$value": "{color.orange.50}" },
+      "2": { "$value": "{color.purple.20}" },
+      "3": { "$value": "{color.yellow.90}" },
+      "4": { "$value": "{color.aqua.90}" }
+    },
+    "brand-details": {
+      "1": { "$value": "{color.brand.2}" },
+      "2": { "$value": "{color.brand.3}" },
+      "3": { "$value": "{color.brand.4}" }
+    },
+    "link": {
+      "$description": "CTAs e links.",
+      "1": { "$value": "{color.brand.1}", "$description": "Ação principal (fundo)." },
+      "2": { "$value": "{color.orange.95}" },
+      "3": { "$value": "{color.orange.40}", "$description": "Ação principal: hover." },
+      "4": { "$value": "{color.brand.2}", "$description": "Ação secundária (texto e borda)." },
+      "5": { "$value": "{color.purple.90}", "$description": "Ação secundária: fundo e hover." },
+      "6": { "$value": "{color.purple.10}" },
+      "7": { "$value": "{color.aqua.90}" },
+      "8": { "$value": "{color.aqua.95}" },
+      "9": { "$value": "{color.green.50}" },
+      "10": { "$value": "{color.neutral.100}", "$description": "Texto sobre a ação principal." },
+      "11": { "$value": "{color.neutral.90}" },
+      "12": { "$value": "{color.neutral.20}" }
+    },
+    "alerts": {
+      "1": { "$value": "{color.green.50}" },
+      "2": { "$value": "{color.green.90}" },
+      "3": { "$value": "{color.green.40}" },
+      "4": { "$value": "{color.yellow.90}" },
+      "5": { "$value": "{color.yellow.95}" },
+      "6": { "$value": "{color.yellow.40}" },
+      "7": { "$value": "{color.red.50}", "$description": "Erro (forte)." },
+      "8": { "$value": "{color.red.90}", "$description": "Erro (fundo)." },
+      "9": { "$value": "{color.red.30}", "$description": "Erro (texto sobre o fundo)." }
+    },
+    "splash": { "$value": "{color.brand.1}" },
+    "shadow": { "$value": "{color.black-alpha.10}", "$description": "Cor das sombras (elevation)." },
+
+    "focus": { "$value": "{color.link.4}", "$description": "Papel: anel e borda de foco em todos os componentes." },
+    "invalid": { "$value": "{color.alerts.7}", "$description": "Papel: borda e anel de campo inválido." },
+    "divider": { "$value": "{color.details.3}", "$description": "Papel: borda padrão e separadores." },
+    "field": { "$value": "{color.neutral.50}", "$description": "Papel: borda de campos (input, select, checkbox...). Aponta direto para neutral-50 para garantir contraste mínimo de 3:1 (WCAG 1.4.11) nos dois temas." },
+    "disabled": { "$value": "{color.text.4}", "$description": "Papel: texto de elemento desabilitado." },
+    "disabled-surface": { "$value": "{color.link.11}", "$description": "Papel: fundo de ação desabilitada." }
+  },
+
+  "spacing": {
+    "$type": "dimension",
+    "$description": "Espaço entre e dentro de elementos (padding, gap, margem, deslocamentos).",
+    "none": { "$value": "{value.0}" },
+    "hairline": { "$value": "{value.1}" },
+    "pico": { "$value": "{value.2}" },
+    "quark": { "$value": "{value.4}" },
+    "quark-plus": { "$value": "{value.6}" },
+    "nano": { "$value": "{value.8}" },
+    "nano-plus": { "$value": "{value.10}" },
+    "xxxs": { "$value": "{value.12}" },
+    "xxs": { "$value": "{value.16}" },
+    "xs": { "$value": "{value.24}" },
+    "sm": { "$value": "{value.32}" },
+    "md": { "$value": "{value.40}" },
+    "lg": { "$value": "{value.48}" },
+    "xl": { "$value": "{value.56}" },
+    "xxl": { "$value": "{value.64}" },
+    "xxl-plus": { "$value": "{value.72}" },
+    "xxxl": { "$value": "{value.80}" }
+  },
+
+  "size": {
+    "$type": "dimension",
+    "$description": "Altura, largura e limites. Use primeiro as escalas genéricas (control, icon); específicos de componente só quando nenhuma escala serve.",
+    "control": {
+      "$description": "Altura de botões, campos, toggles e itens clicáveis.",
+      "xs": { "$value": "{value.24}" },
+      "xs-plus": { "$value": "{value.28}" },
+      "sm": { "$value": "{value.32}" },
+      "md": { "$value": "{value.36}" },
+      "lg": { "$value": "{value.40}" }
+    },
+    "icon": {
+      "xs": { "$value": "{value.12}" },
+      "sm": { "$value": "{value.14}" },
+      "md": { "$value": "{value.16}" },
+      "lg": { "$value": "{value.20}" }
+    },
+    "badge": { "$value": "{value.20}" },
+    "chip": { "$value": "{value.22}" },
+    "progress": { "$value": "{value.6}" },
+    "tooltip-arrow": { "$value": "{value.10}" },
+    "radio-indicator": { "$value": "{value.8}" },
+    "switch": {
+      "width": { "$value": "{value.32}" },
+      "height": { "$value": "{value.18}" },
+      "sm-width": { "$value": "{value.24}" },
+      "sm-height": { "$value": "{value.14}" }
+    },
+    "hover-card": { "$value": "{value.256}" },
+    "popover": { "$value": "{value.288}" },
+    "select-min": { "$value": "{value.144}", "$description": "Largura mínima da lista do select." },
+    "combobox-input-min": { "$value": "{value.64}" },
+    "combobox-list-max": { "$value": "{value.288}", "$description": "Altura máxima da lista do combobox." },
+    "tooltip-max": { "$value": "{value.320}", "$description": "Largura máxima do tooltip." },
+    "textarea-min": { "$value": "{value.64}", "$description": "Altura mínima do textarea." }
+  },
+
+  "radius": {
+    "$type": "dimension",
+    "$description": "Arredondamento. A escala serve aos tokens de componente; nos componentes, prefira o token do componente.",
+    "none": { "$value": "{value.0}" },
+    "xxs": { "$value": "{value.2}" },
+    "xs": { "$value": "{value.4}" },
+    "xs-plus": { "$value": "{value.6}" },
+    "s": { "$value": "{value.8}" },
+    "m": { "$value": "{value.16}" },
+    "pill": { "$value": "{value.800}" },
+    "tag": { "$value": "{radius.pill}", "$description": "Badge." },
+    "button": { "$value": "{radius.pill}" },
+    "switch": { "$value": "{radius.pill}" },
+    "radio": { "$value": "{radius.pill}" },
+    "progress": { "$value": "{radius.pill}" },
+    "avatar": { "$value": "{radius.pill}" },
+    "tooltip-arrow": { "$value": "{radius.xxs}" },
+    "kbd": { "$value": "{radius.xxs}", "$description": "Tecla de atalho dentro do tooltip e do input-group." },
+    "tooltip": { "$value": "{radius.xs}" },
+    "checkbox": { "$value": "{radius.xs}" },
+    "item": { "$value": "{radius.xs-plus}", "$description": "Itens de lista e chips (select, combobox)." },
+    "card": { "$value": "{radius.s}", "$description": "Card, alert, popover, hover-card, listas, toast." },
+    "input": { "$value": "{radius.s}", "$description": "Input, textarea, select, combobox, input-group." },
+    "toggle": { "$value": "{radius.s}" },
+    "accordion": { "$value": "{radius.s}" },
+    "skeleton": { "$value": "{radius.s}" },
+    "calendar-day": { "$value": "{radius.s}" }
+  },
+
+  "underline-offset": {
+    "$type": "dimension",
+    "$value": "{value.4}",
+    "$description": "Distância entre o texto e o sublinhado dos links."
+  },
+
+  "stroke": {
+    "$type": "dimension",
+    "$description": "Espessura de linhas.",
+    "none": { "$value": "{value.0}" },
+    "default": { "$value": "{value.1}" },
+    "focus": { "$value": "{value.3}", "$description": "Anel de foco." }
+  },
+
+  "opacity": {
+    "$type": "number",
+    "hidden": { "$value": "{opacity.0}" },
+    "invalid-ring": { "$value": "{opacity.20}" },
+    "danger-border": { "$value": "{opacity.40}" },
+    "disabled": { "$value": "{opacity.50}", "$description": "Elementos desabilitados ou esmaecidos." },
+    "focus-ring": { "$value": "{opacity.50}" },
+    "surface-subtle": { "$value": "{opacity.50}" },
+    "pulse": { "$value": "{opacity.50}", "$description": "Ponto mais transparente da animação pulse (skeleton)." },
+    "hover": { "$value": "{opacity.70}" },
+    "muted": { "$value": "{opacity.70}" },
+    "text-subtle": { "$value": "{opacity.90}" },
+    "visible": { "$value": "{opacity.100}" }
+  },
+
+  "font": {
+    "$type": "fontFamily",
+    "$description": "Papéis de fonte. Trocar a fonte do produto = mudar só aqui.",
+    "heading": { "$value": "{font-family.montserrat}" },
+    "body": { "$value": "{font-family.lato}" }
+  },
+
+  "typography": {
+    "$type": "typography",
+    "$description": "Estilos de texto. Cada um vira as variáveis --aurora-typography-<estilo>-* e a classe typo-<estilo>.",
+    "headline-1": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.40}", "lineHeight": "{value.46}", "letterSpacing": "{letter-spacing.minus-150}", "textCase": "{text-case.original}" } },
+    "headline-2": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.32}", "lineHeight": "{value.38}", "letterSpacing": "{letter-spacing.minus-100}", "textCase": "{text-case.original}" } },
+    "headline-3": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.24}", "lineHeight": "{value.32}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "headline-4": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.20}", "lineHeight": "{value.28}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "headline-5": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{value.20}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "display": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.20}", "lineHeight": "{value.28}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-highlight": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.24}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "body": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "body-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.15}", "textCase": "{text-case.original}" } },
+    "body-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "body-small-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "body-micro": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.10}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "button": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" } },
+    "button-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" } },
+    "button-uppercase": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.upper}" } },
+    "button-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" }, "$description": "Botão grande: mesmo desenho do estilo button, com peso forte." },
+    "button-small-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" }, "$description": "Botão padrão e pequeno: mesmo desenho do estilo button-small, com peso forte." },
+    "link": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "link-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
+    "caption": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.12}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.25}", "textCase": "{text-case.original}" } },
+    "modernizacao-title": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.24}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "modernizacao-subtitle": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.20}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "modernizacao-sectiontitle": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.semibold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "modernizacao-input-text": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.18}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } }
+  },
+
+  "elevation": {
+    "$type": "shadow",
+    "$description": "Sombras dos elementos que se destacam na tela.",
+    "s": { "$value": { "color": "{color.shadow}", "offsetX": "{value.0}", "offsetY": "{value.1}", "blur": "{value.4}", "spread": "{value.0}" }, "$description": "Destaque leve (campos, controles)." },
+    "m": { "$value": { "color": "{color.shadow}", "offsetX": "{value.0}", "offsetY": "{value.4}", "blur": "{value.8}", "spread": "{value.0}" }, "$description": "Sobreposições (popover, menus)." },
+    "inverse": { "$value": { "color": "{color.shadow}", "offsetX": "{value.0}", "offsetY": "-{value.4}", "blur": "{value.8}", "spread": "{value.0}" }, "$description": "Elementos presos embaixo (sombra para cima)." }
+  },
+
+  "layer": {
+    "$type": "number",
+    "base": { "$value": "{layer.0}" },
+    "raised": { "$value": "{layer.10}", "$description": "Acima do conteúdo vizinho." },
+    "overlay": { "$value": "{layer.50}", "$description": "Sobreposições: popover, tooltip, menus." }
+  },
+
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": { "$value": "{duration.100}", "$description": "Abrir/fechar sobreposições." },
+      "normal": { "$value": "{duration.150}", "$description": "Hover, foco e tooltip." },
+      "slow": { "$value": "{duration.200}", "$description": "Abrir/fechar accordion." },
+      "spin": { "$value": "{duration.1000}", "$description": "Uma volta do ícone de carregando." },
+      "pulse": { "$value": "{duration.2000}", "$description": "Um ciclo do skeleton." }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": { "$value": "{easing.in-out}", "$description": "Hover e foco." },
+      "overlay": { "$value": "{easing.ease}", "$description": "Abrir/fechar sobreposições." },
+      "expand": { "$value": "{easing.ease-out}", "$description": "Abrir/fechar accordion." },
+      "linear": { "$value": "{easing.linear}", "$description": "Animações contínuas (spin)." },
+      "pulse": { "$value": "{easing.pulse}" }
+    },
+    "distance": {
+      "$type": "dimension",
+      "overlay": { "$value": "{spacing.nano}", "$description": "Quanto a sobreposição desliza ao abrir." }
+    },
+    "scale": {
+      "$type": "number",
+      "overlay": { "$value": "{scale.95}", "$description": "Tamanho inicial da sobreposição ao abrir." }
+    }
+  },
+
+  "rotate": {
+    "$type": "string",
+    "diagonal": { "$value": "{angle.45}", "$description": "Ex.: seta do tooltip." },
+    "flip": { "$value": "{angle.180}", "$description": "Espelha ícones em idiomas escritos da direita para a esquerda." }
+  },
+
+  "breakpoint": {
+    "$type": "dimension",
+    "sm": { "$value": "{value.640}" },
+    "md": { "$value": "{value.768}" },
+    "lg": { "$value": "{value.1024}" }
+  }
+}

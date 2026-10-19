@@ -1,21 +1,21 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { Toggle as TogglePrimitive } from "radix-ui"
 
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/toggle inline-flex items-center justify-center gap-quark rounded-toggle typo-button-small whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-background-4 hover:text-text-1 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:pointer-events-none disabled:opacity-disabled aria-invalid:border-invalid aria-invalid:ring-invalid/invalid-ring aria-pressed:bg-background-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-icon-md",
   {
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border border-input bg-transparent shadow-xs hover:bg-muted",
+        outline: "border-default border-field bg-transparent shadow-s hover:bg-background-4",
       },
       size: {
         default:
-          "h-9 min-w-9 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        sm: "h-8 min-w-8 px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
-        lg: "h-10 min-w-10 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "h-control-md min-w-control-md px-nano-plus has-data-[icon=inline-end]:pr-nano has-data-[icon=inline-start]:pl-nano",
+        sm: "h-control-sm min-w-control-sm px-nano-plus has-data-[icon=inline-end]:pr-quark-plus has-data-[icon=inline-start]:pl-quark-plus",
+        lg: "h-control-lg min-w-control-lg px-nano-plus has-data-[icon=inline-end]:pr-nano has-data-[icon=inline-start]:pl-nano",
       },
     },
     defaultVariants: {
