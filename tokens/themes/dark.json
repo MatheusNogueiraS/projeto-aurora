@@ -1,0 +1,44 @@
+{
+  "$description": "Tema escuro. Sobrescreve apenas semânticos que precisam mudar; tudo que não está aqui segue o tema padrão. É proibido sobrescrever color.brand (marca). Ativado pela classe .dark no <html>.",
+
+  "color": {
+    "background": {
+      "1": { "$value": "{color.neutral.100}" },
+      "2": { "$value": "{color.neutral.90}", "$description": "Tooltip claro sobre a página escura." },
+      "3": { "$value": "{color.neutral.20}" },
+      "4": { "$value": "{color.neutral.30}" },
+      "5": { "$value": "{color.neutral.10}" },
+      "6": { "$value": "{color.neutral.15}" }
+    },
+    "text": {
+      "1": { "$value": "{color.neutral.100}" },
+      "2": { "$value": "{color.neutral.90}" },
+      "3": { "$value": "{color.neutral.60}" },
+      "4": { "$value": "{color.neutral.50}" },
+      "5": { "$value": "{color.neutral.0}" },
+      "6": { "$value": "{color.neutral.100}" }
+    },
+    "details": {
+      "1": { "$value": "{color.neutral.60}" },
+      "2": { "$value": "{color.neutral.50}" },
+      "3": { "$value": "{color.neutral.30}" },
+      "4": { "$value": "{color.neutral.30}" }
+    },
+    "link": {
+      "2": { "$value": "{color.orange.40}" },
+      "4": { "$value": "{color.purple.90}", "$description": "Roxo claro: o roxo da marca some sobre fundo escuro." },
+      "5": { "$value": "{color.purple.20}" },
+      "11": { "$value": "{color.neutral.30}" },
+      "12": { "$value": "{color.neutral.90}" }
+    },
+    "alerts": {
+      "2": { "$value": "{color.green.30}" },
+      "3": { "$value": "{color.green.90}" },
+      "5": { "$value": "{color.yellow.40}" },
+      "6": { "$value": "{color.yellow.95}" },
+      "7": { "$value": "{color.red.60}" },
+      "8": { "$value": "{color.red.30}" },
+      "9": { "$value": "{color.red.90}" }
+    }
+  }
+}

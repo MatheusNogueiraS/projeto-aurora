@@ -1,0 +1,199 @@
+{
+  "$description": "Fundação (átomos). Valores literais e imutáveis: nunca mude o valor de um token daqui para ajustar algo; crie outro e aponte o semântico para ele. Só os semânticos podem usar estes tokens; componentes nunca.",
+
+  "color": {
+    "$type": "color",
+    "$description": "Paleta. Hexadecimal; transparências em hex de 8 dígitos.",
+    "aqua": {
+      "90": { "$value": "#37FEC8" },
+      "95": { "$value": "#C2FFEE" }
+    },
+    "grey": {
+      "20": { "$value": "#373737" }
+    },
+    "green": {
+      "30": { "$value": "#0A4A3C" },
+      "40": { "$value": "#147963" },
+      "50": { "$value": "#0BA180" },
+      "90": { "$value": "#D4EDDA" }
+    },
+    "neutral": {
+      "0": { "$value": "#000000" },
+      "10": { "$value": "#1C2027", "$description": "Criado para o tema escuro (fundo da página)." },
+      "15": { "$value": "#2A2F38", "$description": "Criado para o tema escuro (superfície elevada: card, popover)." },
+      "20": { "$value": "#37404E" },
+      "30": { "$value": "#4A525E", "$description": "Criado para o tema escuro (superfície sutil)." },
+      "40": { "$value": "#5E646E" },
+      "41": { "$value": "#5E6463" },
+      "50": { "$value": "#868D98" },
+      "60": { "$value": "#9CA2AB" },
+      "80": { "$value": "#C8CBD0" },
+      "90": { "$value": "#DEE0E3" },
+      "95": { "$value": "#F4F5F6" },
+      "100": { "$value": "#FFFFFF" }
+    },
+    "orange": {
+      "40": { "$value": "#993D00" },
+      "50": { "$value": "#FA6300" },
+      "95": { "$value": "#FEF0E4" }
+    },
+    "purple": {
+      "10": { "$value": "#25163B" },
+      "20": { "$value": "#462A71" },
+      "90": { "$value": "#E9E5EE" }
+    },
+    "red": {
+      "30": { "$value": "#721C24" },
+      "40": { "$value": "#B20007" },
+      "50": { "$value": "#CE2F23" },
+      "60": { "$value": "#EE7A71", "$description": "Criado para o tema escuro (erro legível sobre fundo escuro)." },
+      "90": { "$value": "#F8D7DA" }
+    },
+    "skin": {
+      "30": { "$value": "#B45742" },
+      "40": { "$value": "#854D3F" },
+      "60": { "$value": "#DE7A66" },
+      "80": { "$value": "#FDC6BA" },
+      "95": { "$value": "#FFE8D2" }
+    },
+    "yellow": {
+      "40": { "$value": "#856404" },
+      "90": { "$value": "#FFD400" },
+      "95": { "$value": "#FFF3CD" }
+    },
+    "black-alpha": {
+      "0": { "$value": "#00000000" },
+      "10": { "$value": "#0000001A" },
+      "64": { "$value": "#000000A3" }
+    },
+    "white-alpha": {
+      "15": { "$value": "#FFFFFF26" }
+    }
+  },
+
+  "value": {
+    "$type": "dimension",
+    "$description": "Escala numérica única: tamanhos, espaços, raios, tipografia, sombras e breakpoints. Escrita em px (como no design) e gerada em rem.",
+    "0": { "$value": "0px" },
+    "1": { "$value": "1px" },
+    "2": { "$value": "2px" },
+    "3": { "$value": "3px" },
+    "4": { "$value": "4px" },
+    "6": { "$value": "6px" },
+    "8": { "$value": "8px" },
+    "10": { "$value": "10px" },
+    "12": { "$value": "12px" },
+    "14": { "$value": "14px" },
+    "16": { "$value": "16px" },
+    "18": { "$value": "18px" },
+    "20": { "$value": "20px" },
+    "22": { "$value": "22px" },
+    "24": { "$value": "24px" },
+    "28": { "$value": "28px" },
+    "32": { "$value": "32px" },
+    "36": { "$value": "36px" },
+    "38": { "$value": "38px" },
+    "40": { "$value": "40px" },
+    "46": { "$value": "46px" },
+    "48": { "$value": "48px" },
+    "56": { "$value": "56px" },
+    "64": { "$value": "64px" },
+    "72": { "$value": "72px" },
+    "80": { "$value": "80px" },
+    "144": { "$value": "144px" },
+    "256": { "$value": "256px" },
+    "288": { "$value": "288px" },
+    "320": { "$value": "320px" },
+    "640": { "$value": "640px" },
+    "768": { "$value": "768px" },
+    "800": { "$value": "800px" },
+    "1024": { "$value": "1024px" }
+  },
+
+  "opacity": {
+    "$type": "number",
+    "$description": "Transparência de 0 a 1. Gerada em porcentagem para servir tanto à cor quanto ao elemento.",
+    "0": { "$value": 0 },
+    "20": { "$value": 0.2 },
+    "40": { "$value": 0.4 },
+    "50": { "$value": 0.5 },
+    "70": { "$value": 0.7 },
+    "90": { "$value": 0.9 },
+    "100": { "$value": 1 }
+  },
+
+  "font-family": {
+    "$type": "fontFamily",
+    "montserrat": { "$value": ["Montserrat Variable", "Montserrat", "sans-serif"] },
+    "lato": { "$value": ["Lato", "sans-serif"] }
+  },
+
+  "font-weight": {
+    "$type": "fontWeight",
+    "regular": { "$value": 400 },
+    "medium": { "$value": 500 },
+    "semibold": { "$value": 600 },
+    "bold": { "$value": 700 }
+  },
+
+  "line-height": {
+    "$type": "number",
+    "$description": "Altura de linha proporcional ao tamanho da letra (sem unidade). Alturas fixas usam a escala value.",
+    "144": { "$value": 1.44 }
+  },
+
+  "letter-spacing": {
+    "$type": "dimension",
+    "$description": "Espaço entre letras, em px. Nome em centésimos de px: 15 = 0.15px; minus-150 = -1.5px.",
+    "minus-150": { "$value": "-1.5px" },
+    "minus-100": { "$value": "-1px" },
+    "0": { "$value": "0px" },
+    "10": { "$value": "0.1px" },
+    "15": { "$value": "0.15px" },
+    "25": { "$value": "0.25px" },
+    "50": { "$value": "0.5px" }
+  },
+
+  "text-case": {
+    "$type": "string",
+    "original": { "$value": "none" },
+    "upper": { "$value": "uppercase" }
+  },
+
+  "duration": {
+    "$type": "duration",
+    "100": { "$value": "100ms" },
+    "150": { "$value": "150ms" },
+    "200": { "$value": "200ms" },
+    "1000": { "$value": "1000ms" },
+    "2000": { "$value": "2000ms" }
+  },
+
+  "easing": {
+    "$type": "cubicBezier",
+    "ease": { "$value": [0.25, 0.1, 0.25, 1], "$description": "Equivale a 'ease' do CSS." },
+    "ease-out": { "$value": [0, 0, 0.58, 1], "$description": "Equivale a 'ease-out' do CSS." },
+    "in-out": { "$value": [0.4, 0, 0.2, 1] },
+    "linear": { "$value": [0, 0, 1, 1] },
+    "pulse": { "$value": [0.4, 0, 0.6, 1] }
+  },
+
+  "scale": {
+    "$type": "number",
+    "95": { "$value": 0.95 }
+  },
+
+  "angle": {
+    "$type": "string",
+    "45": { "$value": "45deg" },
+    "180": { "$value": "180deg" }
+  },
+
+  "layer": {
+    "$type": "number",
+    "$description": "Ordem de empilhamento (z-index).",
+    "0": { "$value": 0 },
+    "10": { "$value": 10 },
+    "50": { "$value": 50 }
+  }
+}
