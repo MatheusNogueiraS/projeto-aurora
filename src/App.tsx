@@ -184,7 +184,7 @@ export function App() {
 
           <Showcase title="Accordion">
             <Variant label="Fechado">
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion className="w-full">
                 <AccordionItem value="a">
                   <AccordionTrigger>O que é o consignado?</AccordionTrigger>
                   <AccordionContent>Um empréstimo com parcelas descontadas na folha.</AccordionContent>
@@ -196,7 +196,7 @@ export function App() {
               </Accordion>
             </Variant>
             <Variant label="Aberto">
-              <Accordion type="single" collapsible defaultValue="a" className="w-full">
+              <Accordion defaultValue={["a"]} className="w-full">
                 <AccordionItem value="a">
                   <AccordionTrigger>O que é o consignado?</AccordionTrigger>
                   <AccordionContent>Um empréstimo com parcelas descontadas na folha.</AccordionContent>
@@ -349,17 +349,11 @@ export function App() {
 
           <Showcase title="Checkbox">
             <Variant label="Desmarcado">
-              <label className="flex items-center gap-sm typo-body-md-regular">
-                <Checkbox /> Aceito os termos
-              </label>
+              <Checkbox label="Aceito os termos" />
             </Variant>
             <Variant label="Marcado / Desabilitado">
-              <label className="flex items-center gap-sm typo-body-md-regular">
-                <Checkbox defaultChecked /> Receber novidades
-              </label>
-              <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
-                <Checkbox disabled /> Indisponível
-              </label>
+              <Checkbox defaultChecked label="Receber novidades" />
+              <Checkbox disabled label="Indisponível" />
             </Variant>
           </Showcase>
 

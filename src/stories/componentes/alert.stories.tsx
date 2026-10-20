@@ -56,7 +56,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Mensagem fixa na tela para informar o resultado de uma ação ou um aviso importante. Anatomia: **ícone, título, descrição (opcional) e ação/CTA (opcional)** à direita.\n\nO CTA segue a cor do texto de cada Tipo, sem token próprio. No código: `<AlertAction variant=\"link\">Ver</AlertAction>`, que só aceita os estilos `link` e `outline`.",
+          "Mensagem fixa na tela para informar o resultado de uma ação ou um aviso importante. Descrição e ação (CTA) são opcionais; a ação segue a cor do Tipo.",
       },
     },
   },
@@ -70,11 +70,11 @@ const meta = {
     actionStyle: "link",
   },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "default (neutro), info, success (sucesso), warning (atenção) e destructive (erro)." },
+    variant: { name: "Tipo", control: "select", options: variants, description: "Neutro, informação, sucesso, atenção ou erro." },
     title: { name: "Título", control: "text" },
-    showDescription: { name: "Descrição", control: "boolean", description: "Liga/desliga a descrição: dá para ter alert só com título." },
+    showDescription: { name: "Descrição", control: "boolean", description: "Mostra a descrição abaixo do título." },
     description: { name: "Descrição · texto", control: "text", if: { arg: "showDescription" } },
-    showAction: { name: "Ação (CTA)", control: "boolean", description: "Mostra uma ação à direita, na cor do texto do Tipo. No código: `<AlertAction>`.", table: { category: "Ação" } },
+    showAction: { name: "Ação (CTA)", control: "boolean", description: "Mostra uma ação à direita.", table: { category: "Ação" } },
     actionLabel: { name: "Ação · texto", control: "text", if: { arg: "showAction" }, table: { category: "Ação" } },
     actionStyle: { name: "Ação · estilo", control: "inline-radio", options: ["link", "outline"], if: { arg: "showAction" }, table: { category: "Ação" } },
   },
