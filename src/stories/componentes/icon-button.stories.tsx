@@ -52,16 +52,16 @@ const meta = {
     docs: {
       description: {
         component:
-          "Botão só com ícone, para ações conhecidas que não precisam de texto (adicionar, fechar, favoritar). Tem as mesmas variantes do **Button** e a mesma altura do Button do mesmo tamanho, então os dois alinham lado a lado.\n\nNo código: `<IconButton aria-label=\"Adicionar\"><PlusIcon /></IconButton>`. O `aria-label` é obrigatório: sem texto visível, é o que o leitor de tela anuncia.",
+          "Botão só com ícone, para ações conhecidas (adicionar, fechar, favoritar). Mesmas variantes e alturas do **Button**.",
       },
     },
   },
   args: { variant: "default", size: "default", disabled: false, iconName: "Plus" },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual (as mesmas do Button, sem link)." },
+    variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
     size: { name: "Tamanho", control: "select", options: sizes },
     disabled: { name: "Desabilitado", control: "boolean" },
-    iconName: { name: "Ícone", control: "select", options: Object.keys(icons), description: "No código, o ícone vai dentro do componente." },
+    iconName: { name: "Ícone", control: "select", options: Object.keys(icons), description: "Ícone exibido." },
     // propriedades de código que não fazem sentido como controle visual
     children: { table: { disable: true } },
     "aria-label": { table: { disable: true } },

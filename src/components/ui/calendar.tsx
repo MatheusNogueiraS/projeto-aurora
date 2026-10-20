@@ -6,6 +6,7 @@ import {
   type DayButton,
   type Locale,
 } from "react-day-picker"
+import { ptBR } from "react-day-picker/locale"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
@@ -16,7 +17,8 @@ function Calendar({
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
-  locale,
+  // português do Brasil por padrão (nomes de meses e dias, semana começando no domingo)
+  locale = ptBR,
   formatters,
   components,
   ...props
@@ -117,7 +119,10 @@ function Calendar({
           defaultClassNames.range_end
         ),
         today: cn(
+          // hoje: fundo leve; se hoje for o dia selecionado, só a marcação da seleção aparece
+          // (no intervalo o fundo continua, porque é a faixa que liga início e fim)
           "rounded-(--cell-radius) bg-background-4 text-text-1 data-[selected=true]:rounded-none",
+          String.raw`[&[data-selected=true]:not(.rdp-range\_start,.rdp-range\_middle,.rdp-range\_end)]:bg-transparent`,
           defaultClassNames.today
         ),
         outside: cn(

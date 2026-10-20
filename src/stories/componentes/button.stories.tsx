@@ -63,7 +63,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Dispara uma ação. Anatomia: **[ícone antes] texto [ícone depois]**, com os dois ícones opcionais em qualquer variante e tamanho. Para botão só com ícone, use o **IconButton**.\n\nUse `default` para a ação principal da tela (uma por contexto), `outline` e `secondary` para ações de apoio, `ghost` e `link` para ações discretas e `destructive` para ações que apagam ou cancelam.\n\nNo código: `<Button iconLeading={PlusIcon} iconTrailing={ArrowRightIcon}>Continuar</Button>`.",
+          "Dispara uma ação. Ícone opcional antes e/ou depois do texto. Para botão só com ícone, use o **IconButton**.",
       },
     },
   },
@@ -85,7 +85,7 @@ const meta = {
     showIconLeading: {
       name: "Icon Leading",
       control: "boolean",
-      description: "Mostra um ícone antes do texto. No código: `iconLeading={PlusIcon}`.",
+      description: "Mostra um ícone antes do texto.",
       table: { category: "Ícones" },
     },
     iconLeadingName: {
@@ -98,7 +98,7 @@ const meta = {
     showIconTrailing: {
       name: "Icon Trailing",
       control: "boolean",
-      description: "Mostra um ícone depois do texto. No código: `iconTrailing={ArrowRightIcon}`.",
+      description: "Mostra um ícone depois do texto.",
       table: { category: "Ícones" },
     },
     iconTrailingName: {
@@ -150,7 +150,7 @@ export const ComIcone: Story = {
     docs: {
       description: {
         story:
-          "Ícone antes, depois ou nos dois lados, em cada tamanho. O lado com ícone fica com menos padding, para o conjunto parecer centralizado. Troque o Tipo nos controles para ver em outra variante.",
+          "Ícone antes, depois ou nos dois lados, em cada tamanho.",
       },
     },
   },
