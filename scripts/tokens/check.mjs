@@ -123,6 +123,7 @@ const FORBIDDEN = [
   [/^rounded(-[tblrse]{1,2})?(-full)?$/, "raio solto: use um token de radius (rounded-button, rounded-pill...)"],
   [/^(opacity|z|duration|delay|rotate|scale|scale-[xy]|zoom-(in|out)|fade-(in|out)|spin-(in|out))-\d+$/, "valor numérico solto: use um token semântico"],
   [/^slide-(in|out)-from-[a-z]+-\d+$/, "distância solta: use slide-*-overlay"],
+  [/^(max-w|max-h)-none$/, "colide com o token spacing.none (0) e vira largura/altura máxima zero; para tirar o limite, não use classe de max"],
   [/^(underline-offset|outline-offset|ring-offset|decoration|leading|blur|backdrop-blur)-\d+$/, "valor numérico solto: use um token semântico (ex.: underline-offset-(--aurora-underline-offset))"],
   [/^(?!(w|h|size|min-w|max-w|min-h|max-h|inset|inset-[xy]|top|left|right|bottom|start|end|translate-[xy]|basis|aspect)-\d+\/\d+$).*\/\d+$/, "opacidade solta (ex.: /50): use um token de opacity (ex.: /hover)"],
   [/--spacing\(/, "--spacing() não existe sem o tema do Tailwind: use um token"],
