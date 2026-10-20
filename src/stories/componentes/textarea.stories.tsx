@@ -8,7 +8,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Campo de texto de várias linhas; cresce conforme o conteúdo." } } },
   args: { placeholder: "Escreva uma observação", disabled: false },
-  render: (args) => <Textarea {...args} className="max-w-popover" />,
+  render: (args) => <Textarea {...args} className="max-w-[288px]" />,
 } satisfies Meta<typeof Textarea>
 
 export default meta

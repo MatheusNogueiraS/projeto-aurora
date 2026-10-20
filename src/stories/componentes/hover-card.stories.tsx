@@ -18,8 +18,8 @@ type Story = StoryObj<typeof meta>
 
 const Conteudo = () => (
   <HoverCardContent>
-    <p className="typo-body-small-bold">Projeto Aurora</p>
-    <p className="typo-body-small text-text-3">Design system do Bmg.</p>
+    <p className="typo-body-md-bold">Projeto Aurora</p>
+    <p className="typo-body-md-regular text-text-3">Design system do Bmg.</p>
   </HoverCardContent>
 )
 

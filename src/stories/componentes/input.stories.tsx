@@ -8,7 +8,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Campo de texto de uma linha." } } },
   args: { placeholder: "Seu nome", disabled: false },
-  render: (args) => <Input {...args} className="max-w-popover" />,
+  render: (args) => <Input {...args} className="max-w-[288px]" />,
 } satisfies Meta<typeof Input>
 
 export default meta

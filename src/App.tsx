@@ -91,10 +91,10 @@ function ThemeToggle() {
       variant="outline"
       size="sm"
       className="shrink-0"
+      iconLeading={isDark ? SunIcon : MoonIcon}
       aria-label={isDark ? "Ativar tema claro" : "Ativar tema escuro"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <SunIcon data-icon="inline-start" /> : <MoonIcon data-icon="inline-start" />}
       {isDark ? "Claro" : "Escuro"}
     </Button>
   )
@@ -102,18 +102,18 @@ function ThemeToggle() {
 
 function Showcase({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="flex flex-col gap-xxs rounded-card border-default border-divider bg-background-5 p-xxs sm:p-xs">
-      <h2 className="typo-headline-5 text-text-1">{title}</h2>
-      <div className="grid gap-xxs sm:grid-cols-2">{children}</div>
+    <section className="flex flex-col gap-lg rounded-sm border-default border-divider bg-background-5 p-lg sm:p-xl">
+      <h2 className="typo-heading-6 text-text-1">{title}</h2>
+      <div className="grid gap-lg sm:grid-cols-2">{children}</div>
     </section>
   )
 }
 
 function Variant({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-xxxs">
-      <span className="typo-button-uppercase text-text-3">{label}</span>
-      <div className="flex flex-wrap items-start gap-xxxs">{children}</div>
+    <div className="flex flex-col gap-md">
+      <span className="typo-overline-bold text-text-3">{label}</span>
+      <div className="flex flex-wrap items-start gap-md">{children}</div>
     </div>
   )
 }
@@ -125,16 +125,16 @@ export function App() {
   return (
     <TooltipProvider>
       <div className="min-h-svh bg-background-4 text-text-1">
-        <div className="mx-auto flex max-w-(--aurora-breakpoint-lg) flex-col gap-xxs p-xxs sm:gap-xs sm:p-xs">
-          <header className="flex flex-col gap-quark">
-            <div className="flex items-start justify-between gap-xxxs">
-              <h1 className="typo-headline-4 sm:typo-headline-3">Aurora · Vitrine de componentes</h1>
+        <div className="mx-auto flex max-w-(--aurora-breakpoint-lg) flex-col gap-lg p-lg sm:gap-xl sm:p-xl">
+          <header className="flex flex-col gap-xs">
+            <div className="flex items-start justify-between gap-md">
+              <h1 className="typo-heading-6 sm:typo-heading-5">Aurora · Vitrine de componentes</h1>
               <ThemeToggle />
             </div>
-            <p className="typo-body-small text-text-3">
+            <p className="typo-body-md-regular text-text-3">
               Todos os componentes com duas variantes, usando as cores do tema Bmg. Troque o tema
               pelo botão ou pela tecla{" "}
-              <kbd className="rounded-kbd border-default border-field px-quark typo-caption">d</kbd>.
+              <kbd className="rounded-xxs border-default border-field px-xs typo-body-sm-regular">d</kbd>.
             </p>
           </header>
 
@@ -349,15 +349,15 @@ export function App() {
 
           <Showcase title="Checkbox">
             <Variant label="Desmarcado">
-              <label className="flex items-center gap-nano typo-body-small">
+              <label className="flex items-center gap-sm typo-body-md-regular">
                 <Checkbox /> Aceito os termos
               </label>
             </Variant>
             <Variant label="Marcado / Desabilitado">
-              <label className="flex items-center gap-nano typo-body-small">
+              <label className="flex items-center gap-sm typo-body-md-regular">
                 <Checkbox defaultChecked /> Receber novidades
               </label>
-              <label className="flex items-center gap-nano typo-body-small text-text-3">
+              <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
                 <Checkbox disabled /> Indisponível
               </label>
             </Variant>
@@ -366,20 +366,20 @@ export function App() {
           <Showcase title="Radio Group">
             <Variant label="Vertical">
               <RadioGroup defaultValue="pix">
-                <label className="flex items-center gap-nano typo-body-small">
+                <label className="flex items-center gap-sm typo-body-md-regular">
                   <RadioGroupItem value="pix" /> Pix
                 </label>
-                <label className="flex items-center gap-nano typo-body-small">
+                <label className="flex items-center gap-sm typo-body-md-regular">
                   <RadioGroupItem value="ted" /> TED
                 </label>
               </RadioGroup>
             </Variant>
             <Variant label="Desabilitado">
               <RadioGroup defaultValue="pix" disabled>
-                <label className="flex items-center gap-nano typo-body-small text-text-3">
+                <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
                   <RadioGroupItem value="pix" /> Pix
                 </label>
-                <label className="flex items-center gap-nano typo-body-small text-text-3">
+                <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
                   <RadioGroupItem value="ted" /> TED
                 </label>
               </RadioGroup>
@@ -388,15 +388,15 @@ export function App() {
 
           <Showcase title="Switch">
             <Variant label="Desligado">
-              <label className="flex items-center gap-nano typo-body-small">
+              <label className="flex items-center gap-sm typo-body-md-regular">
                 <Switch /> Notificações
               </label>
             </Variant>
             <Variant label="Ligado / Pequeno">
-              <label className="flex items-center gap-nano typo-body-small">
+              <label className="flex items-center gap-sm typo-body-md-regular">
                 <Switch defaultChecked /> Modo avião
               </label>
-              <label className="flex items-center gap-nano typo-body-small">
+              <label className="flex items-center gap-sm typo-body-md-regular">
                 <Switch size="sm" defaultChecked /> Pequeno
               </label>
             </Variant>
@@ -435,14 +435,14 @@ export function App() {
 
           <Showcase title="Separator">
             <Variant label="Horizontal">
-              <div className="flex w-full flex-col gap-nano typo-body-small">
+              <div className="flex w-full flex-col gap-sm typo-body-md-regular">
                 <span>Acima</span>
                 <Separator />
                 <span>Abaixo</span>
               </div>
             </Variant>
             <Variant label="Vertical">
-              <div className="flex h-badge items-center gap-xxxs typo-body-small">
+              <div className="flex h-[20px] items-center gap-md typo-body-md-regular">
                 <span>Perfil</span>
                 <Separator orientation="vertical" />
                 <span>Conta</span>
@@ -454,17 +454,17 @@ export function App() {
 
           <Showcase title="Skeleton">
             <Variant label="Linhas de texto">
-              <div className="flex w-full flex-col gap-nano">
-                <Skeleton className="h-xxs w-3/4" />
-                <Skeleton className="h-xxs w-1/2" />
+              <div className="flex w-full flex-col gap-sm">
+                <Skeleton className="h-[16px] w-3/4" />
+                <Skeleton className="h-[16px] w-1/2" />
               </div>
             </Variant>
             <Variant label="Cartão com avatar">
-              <div className="flex w-full items-center gap-xxxs">
-                <Skeleton className="size-control-lg shrink-0 rounded-avatar" />
-                <div className="flex flex-1 flex-col gap-nano">
-                  <Skeleton className="h-xxs w-2/3" />
-                  <Skeleton className="h-xxs w-1/3" />
+              <div className="flex w-full items-center gap-md">
+                <Skeleton className="size-[40px] shrink-0 rounded-pill" />
+                <div className="flex flex-1 flex-col gap-sm">
+                  <Skeleton className="h-[16px] w-2/3" />
+                  <Skeleton className="h-[16px] w-1/3" />
                 </div>
               </div>
             </Variant>
@@ -496,8 +496,8 @@ export function App() {
                   <Button variant="link">@aurora</Button>
                 </HoverCardTrigger>
                 <HoverCardContent>
-                  <p className="typo-body-small-bold">Projeto Aurora</p>
-                  <p className="typo-body-small text-text-3">Design system do Bmg.</p>
+                  <p className="typo-body-md-bold">Projeto Aurora</p>
+                  <p className="typo-body-md-regular text-text-3">Design system do Bmg.</p>
                 </HoverCardContent>
               </HoverCard>
             </Variant>
@@ -572,14 +572,14 @@ export function App() {
 
           <Showcase title="Calendar">
             <Variant label="Data única">
-              <Calendar mode="single" selected={single} onSelect={setSingle} className="rounded-card border-default border-divider" />
+              <Calendar mode="single" selected={single} onSelect={setSingle} className="rounded-sm border-default border-divider" />
             </Variant>
             <Variant label="Intervalo">
               <Calendar
                 mode="range"
                 defaultMonth={hoje}
                 selected={intervalo}
-                className="rounded-card border-default border-divider"
+                className="rounded-sm border-default border-divider"
               />
             </Variant>
           </Showcase>

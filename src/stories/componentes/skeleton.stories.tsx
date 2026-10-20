@@ -17,9 +17,9 @@ type Story = StoryObj<typeof meta>
 export const LinhasDeTexto: Story = {
   name: "Linhas de texto",
   render: () => (
-    <div className="flex max-w-popover flex-col gap-nano">
-      <Skeleton className="h-xxs w-3/4" />
-      <Skeleton className="h-xxs w-1/2" />
+    <div className="flex max-w-[288px] flex-col gap-sm">
+      <Skeleton className="h-[16px] w-3/4" />
+      <Skeleton className="h-[16px] w-1/2" />
     </div>
   ),
 }
@@ -27,11 +27,11 @@ export const LinhasDeTexto: Story = {
 export const CartaoComAvatar: Story = {
   name: "Cartão com avatar",
   render: () => (
-    <div className="flex max-w-popover items-center gap-xxxs">
-      <Skeleton className="size-control-lg shrink-0 rounded-avatar" />
-      <div className="flex flex-1 flex-col gap-nano">
-        <Skeleton className="h-xxs w-2/3" />
-        <Skeleton className="h-xxs w-1/3" />
+    <div className="flex max-w-[288px] items-center gap-md">
+      <Skeleton className="size-[40px] shrink-0 rounded-pill" />
+      <div className="flex flex-1 flex-col gap-sm">
+        <Skeleton className="h-[16px] w-2/3" />
+        <Skeleton className="h-[16px] w-1/3" />
       </div>
     </div>
   ),

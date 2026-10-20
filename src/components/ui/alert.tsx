@@ -1,15 +1,21 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 const alertVariants = cva(
-  "group/alert relative grid w-full gap-pico rounded-card border-default px-xxs py-xxxs text-left typo-body-small has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-xxl-plus has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-nano-plus *:[svg]:row-span-2 *:[svg]:translate-y-pico *:[svg]:text-current *:[svg:not([class*='size-'])]:size-icon-md",
+  "group/alert relative grid w-full gap-xxs rounded-sm border-default px-lg py-md text-left typo-body-md-regular has-data-[slot=alert-action]:grid-cols-[1fr_auto] has-data-[slot=alert-action]:gap-x-md has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:has-data-[slot=alert-action]:grid-cols-[auto_1fr_auto] has-[>svg]:gap-x-sm *:[svg]:row-span-2 *:[svg]:translate-y-xxs *:[svg]:text-current *:[svg:not([class*='size-'])]:size-[16px]",
   {
     variants: {
       variant: {
+        // neutro: fundo da página com borda
         default: "bg-background-6 text-text-1",
-        destructive:
-          "bg-background-6 text-alerts-7 *:data-[slot=alert-description]:text-alerts-7/text-subtle *:[svg]:text-current",
+        // status (como a versão light do Genesis): fundo claro e texto escuro da mesma cor,
+        // sem borda; título, descrição e ícone seguem a cor do status
+        info: "border-transparent bg-link-5 text-link-4 *:data-[slot=alert-description]:text-link-4",
+        success: "border-transparent bg-alerts-2 text-alerts-3 *:data-[slot=alert-description]:text-alerts-3",
+        warning: "border-transparent bg-alerts-5 text-alerts-6 *:data-[slot=alert-description]:text-alerts-6",
+        destructive: "border-transparent bg-alerts-8 text-alerts-9 *:data-[slot=alert-description]:text-alerts-9",
       },
     },
     defaultVariants: {
@@ -38,7 +44,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "typo-body-small-bold group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1",
+        "typo-body-md-bold group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1",
         className
       )}
       {...props}
@@ -54,7 +60,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "typo-body-small text-balance text-text-3 md:text-pretty [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-xxs",
+        "typo-body-md-regular text-balance text-text-3 md:text-pretty [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-lg",
         className
       )}
       {...props}
@@ -62,13 +68,26 @@ function AlertDescription({
   )
 }
 
-function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
+// O CTA do alert já é o botão: só aceita os estilos link e outline (travado no tipo),
+// sempre pequeno, e segue a cor do texto do alert (currentColor), mudando junto com o
+// Tipo, sem token próprio.
+const alertActionStyles = {
+  link: "text-current underline hover:opacity-hover",
+  outline: "border-current text-current hover:bg-transparent hover:opacity-hover",
+} as const
+
+function AlertAction({
+  className,
+  variant = "link",
+  ...props
+}: Omit<React.ComponentProps<typeof Button>, "variant" | "size"> & {
+  /** Estilo do CTA: link (padrão) ou outline. */
+  variant?: keyof typeof alertActionStyles
+}) {
   return (
-    <div
-      data-slot="alert-action"
-      className={cn("absolute top-nano-plus right-xxxs", className)}
-      {...props}
-    />
+    <div data-slot="alert-action" className="-col-start-2 row-span-2 row-start-1 self-start">
+      <Button size="xs" variant={variant} className={cn(alertActionStyles[variant], className)} {...props} />
+    </div>
   )
 }
 

@@ -9,7 +9,7 @@ const meta = {
   parameters: { docs: { description: { component: "Mostra quanto de uma tarefa já foi concluído." } } },
   args: { value: 35 },
   argTypes: { value: { control: { type: "range", min: 0, max: 100, step: 5 } } },
-  render: (args) => <Progress {...args} className="max-w-popover" aria-label="Progresso da proposta" />,
+  render: (args) => <Progress {...args} className="max-w-[288px]" aria-label="Progresso da proposta" />,
 } satisfies Meta<typeof Progress>
 
 export default meta

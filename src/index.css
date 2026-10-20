@@ -27,6 +27,6 @@
     @apply border-divider outline-focus/focus-ring;
   }
   body {
-    @apply bg-background-5 text-text-1 typo-body;
+    @apply bg-background-5 text-text-1 typo-body-lg-regular;
   }
 }

@@ -13,12 +13,12 @@ type Story = StoryObj<typeof meta>
 
 /** Amostra de cor semântica: usa a variável CSS, então acompanha o tema ativo. */
 const SemanticSwatch = ({ token }: { token: Token }) => (
-  <div className="size-control-lg rounded-item border-default border-divider" style={{ background: cssVar(token.id) }} />
+  <div className="size-[40px] rounded-xs border-default border-divider" style={{ background: cssVar(token.id) }} />
 )
 
 /** Amostra de cor da fundação: usa o hex do JSON (átomos não viram variável de componente). */
 const PaletteSwatch = ({ token }: { token: Token }) => (
-  <div className="size-control-lg rounded-item border-default border-divider" style={{ background: String(resolve(token.id)) }} />
+  <div className="size-[40px] rounded-xs border-default border-divider" style={{ background: String(resolve(token.id)) }} />
 )
 
 const semanticGroups: { title: string; description: string; filter: (t: Token) => boolean }[] = [

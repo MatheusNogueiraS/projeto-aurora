@@ -12,7 +12,7 @@ const meta = {
     docs: { description: { component: "Aviso temporário no canto da tela, para confirmar ações. Some sozinho." } },
   },
   render: () => (
-    <div className="flex flex-wrap items-center gap-xxxs">
+    <div className="flex flex-wrap items-center gap-md">
       <Button variant="outline" onClick={() => toast.success("Proposta enviada!")}>
         Sucesso
       </Button>

@@ -1,8 +1,9 @@
 # Tokens do Aurora
 
 Esta pasta é a **fonte de verdade** de todos os valores visuais do design system:
-cores, espaços, tamanhos, raios, tipografia, sombras, camadas e animação.
-Nenhum valor visual é escrito direto em componente ou em CSS à mão.
+cores, padding, gap, raios, tipografia, sombras, camadas e animação.
+Nenhum valor visual é escrito direto em componente ou em CSS à mão. A única exceção são
+as **medidas de tamanho** (largura, altura, mínimo e máximo), que não são token (veja abaixo).
 
 ```
 tokens/
@@ -34,8 +35,9 @@ src/lib/tokens-merge.ts     GERADO: ensina o cn() a fundir as classes dos tokens
   sem relação (ex.: `value.8` serve a raio, espaço, altura de linha e sombra).
   Para mudar, crie outro átomo e aponte o semântico para ele.
 - **Semântico** (`semantic.json`): sempre aponta para outro token (`{grupo.nome}`),
-  nunca para um valor. Inclui os tokens específicos de componente
-  (`radius.button`, `size.switch.width`), agrupados e descritos.
+  nunca para um valor. **Não há token específico de componente**: botão, card e campo
+  usam as mesmas escalas gerais (`padding`, `gap`, `radius`). Se um token só serve a um
+  componente, ele perde a função.
 - **Componentes** usam **só semânticos**. Primitivos nunca viram classe.
 
 ## Como mudar algo no sistema inteiro
@@ -44,14 +46,16 @@ Edite **uma linha** no JSON e rode `pnpm tokens`:
 
 | Quero mudar | Edite |
 |---|---|
-| A fonte dos textos | `font.body` |
+| A fonte dos textos | `font.text` |
 | A fonte dos títulos | `font.heading` |
-| O raio de todos os cards, campos e afins | `radius.s` (ou o token do componente, ex.: `radius.card`) |
-| O formato do botão | `radius.button` |
+| O respiro (e a altura) dos controles | `padding.*` (ex.: `padding.sm`) |
+| O espaço entre elementos | `gap.*` |
+| O arredondamento de um passo da escala | `radius.*` (ex.: `radius.sm`) |
 | A cor de foco em todos os componentes | `color.focus` |
 | A cor de erro dos campos | `color.invalid` |
 | A borda dos campos | `color.field` |
-| Um estilo de texto (ex.: corpo) | `typography.body` |
+| O tamanho de um passo da escala de letra | `font-size.*` (ex.: `font-size.text.md`) |
+| Um estilo de texto (ex.: corpo 14 bold) | `typography.*` (ex.: `typography.body-md-bold`) |
 | A velocidade das animações | `motion.duration.*` |
 
 ## Usando nos componentes
@@ -62,16 +66,17 @@ não existem. As classes disponíveis são as dos semânticos:
 | Tipo | Exemplos de classe | Vem de |
 |---|---|---|
 | Cor | `bg-link-1`, `text-text-3`, `border-field`, `ring-focus` | `color.*` |
-| Espaço | `p-nano`, `gap-quark`, `-ml-pico`, `inset-none` | `spacing.*` |
-| Tamanho | `h-control-md`, `size-icon-md`, `w-popover`, `max-w-tooltip-max` | `size.*` |
-| Raio | `rounded-button`, `rounded-card`, `rounded-t-card` | `radius.*` |
+| Padding (dentro) | `p-sm`, `px-lg`, `py-xs`, `top-md`, `inset-x-none` | `padding.*` |
+| Gap (entre) | `gap-xs`, `gap-x-md`, `mt-sm`, `-ml-xxs`, `space-y-sm`, `translate-y-xxs` | `gap.*` |
+| Raio | `rounded-sm`, `rounded-pill`, `rounded-t-xs` | `radius.*` |
+| Tamanho (não é token) | `size-[16px]`, `w-[32px]`, `min-h-[64px]`, `max-w-[320px]` | escrito no componente |
 | Espessura | `border-default` | `stroke.default` |
 | Opacidade | `opacity-disabled`, `bg-link-5/hover`, `ring-focus/focus-ring` | `opacity.*` |
 | Sombra | `shadow-s`, `shadow-m` | `elevation.*` |
 | Camada | `z-overlay`, `z-raised` | `layer.*` |
 | Curva | `ease-standard` | `motion.easing.*` |
 | Giro | `rotate-diagonal`, `rotate-flip` | `rotate.*` |
-| Texto | `typo-body`, `typo-button-small`, `md:typo-body-small` | `typography.*` |
+| Texto | `typo-heading-5`, `typo-body-md-regular`, `md:typo-body-md-bold` | `typography.*` |
 | Breakpoint | `sm:`, `md:`, `lg:` | `breakpoint.*` |
 
 Onde o Tailwind não tem classe nomeada, use a variável semântica direto:
@@ -85,7 +90,8 @@ Sempre importe `cn` de `@/lib/utils` (ele conhece os tokens; o `cn` do pacote n�
 1. Precisa mesmo? Só vira token o que é **decisão de design** ou **se repete**.
    Antes, tente: (1) reaproveitar uma escala semântica que já existe;
    (2) derivar com uma conta entre semânticos
-   (ex.: bolinha do switch = `size.switch.height - 2 × stroke.default`).
+   (ex.: deslocamento da bolinha do switch = `100% - 2 × stroke.default`).
+   Nunca crie token com nome de componente nem token de tamanho.
 2. Se o valor não existe, crie o átomo em `foundation.json`.
 3. Crie o semântico em `semantic.json` apontando para ele, com `$description`.
 4. `pnpm tokens` e `pnpm tokens:check`.
@@ -103,7 +109,8 @@ Sempre importe `cn` de `@/lib/utils` (ele conhece os tokens; o `cn` do pacote n�
 
 - Arquivos gerados atualizados com o JSON.
 - Toda classe usada nos componentes gera CSS.
-- Nenhum valor solto (`[13px]`, `opacity-50`, `rounded-full`, `z-50`, `/50`...).
+- Nenhum valor solto (`[13px]`, `opacity-50`, `rounded-full`, `z-50`, `/50`...), exceto
+  medidas de tamanho em px (`w-`, `h-`, `size-`, `min-*`, `max-*`).
 - Nenhum token de fundação nos componentes; nenhuma variável desconhecida.
 - Contraste mínimo (WCAG) dos pares principais, em todos os temas.
 
@@ -118,5 +125,17 @@ Sempre importe `cn` de `@/lib/utils` (ele conhece os tokens; o `cn` do pacote n�
   (estilo de borda). Use `border-(length:--aurora-stroke-none)`.
 - **Contraste do botão principal** (branco sobre laranja da marca, 3,07:1) atende
   só ao mínimo de texto grande; é limitado pela cor da marca.
+- **Escalas como no Nitro Core**: padding e gap têm os mesmos passos (none, xxs 2, xs 4,
+  sm 8, md 12, lg 16, xl 20, xxl 32), mas são independentes: mudar o padding não mexe no gap.
+  `p-*` só aceita padding; `gap-*`, margens e `translate-*` só aceitam gap.
+- **Altura dos controles = padding + conteúdo**: com a linha de texto do Nitro (150%), as
+  alturas dão números inteiros (botão padrão: 21 + 2 × 8 + 2 de borda = 39px). O IconButton
+  (botão só com ícone) usa a mesma altura do Button do seu tamanho (ex.: `size-[39px]`): se mudar o
+  padding ou a tipografia do Button, atualize as medidas em `icon-button.tsx`.
 - **Variáveis com prefixo `--aurora-`**: evitam colisão com o Tailwind e com outras
   aplicações na mesma página.
+- **Tipografia como no Nitro**: `font` (heading, text) → `font-size` (heading xxs–4xl,
+  text xs–xl) → estilos `display-1..3`, `heading-1..6`, `body-<tamanho>-<peso>`, `overline-*`.
+  Linha: títulos 120% (heading-6 130%), body xl 140%, demais 150%; espaço entre letras 0,
+  exceto overline (1px, caixa alta). Os textos só têm **regular e bold**: a Lato (fonte de
+  texto) só existe em 400 e 700, então medium e semibold seriam pesos falsos.

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-button border-default border-transparent bg-clip-padding typo-button-small whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring active:not-aria-[haspopup]:translate-y-hairline disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/invalid-ring [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-icon-md",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-pill border-default border-transparent bg-clip-padding typo-body-md-regular whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/invalid-ring [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
   {
     variants: {
       variant: {
@@ -21,16 +21,10 @@ const buttonVariants = cva(
       },
       size: {
         default:
-          "h-control-md gap-quark-plus px-xxs typo-button-small-bold in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-xxxs has-data-[icon=inline-start]:pl-xxxs",
-        xs: "h-control-xs gap-quark px-nano typo-caption in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-quark-plus has-data-[icon=inline-start]:pl-quark-plus [&_svg:not([class*='size-'])]:size-icon-xs",
-        sm: "h-control-sm gap-quark-plus px-xxxs typo-button-small-bold in-data-[slot=button-group]:rounded-button has-data-[icon=inline-end]:pr-nano has-data-[icon=inline-start]:pl-nano",
-        lg: "h-control-lg gap-nano px-xxs typo-button-bold has-data-[icon=inline-end]:pr-xxxs has-data-[icon=inline-start]:pl-xxxs",
-        icon: "size-control-md",
-        "icon-xs":
-          "size-control-xs in-data-[slot=button-group]:rounded-button [&_svg:not([class*='size-'])]:size-icon-xs",
-        "icon-sm":
-          "size-control-sm in-data-[slot=button-group]:rounded-button",
-        "icon-lg": "size-control-lg",
+          "gap-xs px-lg py-sm typo-body-md-bold in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
+        xs: "gap-xs px-sm py-xxs typo-body-sm-regular in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm [&_svg:not([class*='size-'])]:size-[12px]",
+        sm: "gap-xs px-md py-xs typo-body-md-bold in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm",
+        lg: "gap-sm px-lg py-sm typo-body-lg-bold has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
       },
     },
     defaultVariants: {
@@ -40,15 +34,28 @@ const buttonVariants = cva(
   }
 )
 
+/** Um ícone do lucide-react (ex.: PlusIcon) ou qualquer componente de ícone SVG. */
+type ButtonIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
+
+// Anatomia como no Button do Nitro: [ícone antes] texto [ícone depois].
+// Os ícones são opcionais e valem em todas as variantes e tamanhos; o lado com ícone
+// ganha menos padding (has-data-[icon=...]) para o conjunto parecer centralizado.
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  iconLeading: IconLeading,
+  iconTrailing: IconTrailing,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    /** Ícone antes do texto. Sem valor, não aparece. */
+    iconLeading?: ButtonIcon
+    /** Ícone depois do texto. Sem valor, não aparece. */
+    iconTrailing?: ButtonIcon
   }) {
   const Comp = asChild ? Slot.Root : "button"
 
@@ -59,7 +66,11 @@ function Button({
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {IconLeading && <IconLeading data-icon="inline-start" aria-hidden />}
+      <Slot.Slottable>{children}</Slot.Slottable>
+      {IconTrailing && <IconTrailing data-icon="inline-end" aria-hidden />}
+    </Comp>
   )
 }
 

@@ -9,7 +9,7 @@ const meta = {
   parameters: { docs: { description: { component: "Marca uma ou mais opções independentes." } } },
   args: { disabled: false },
   render: (args) => (
-    <label className="flex items-center gap-nano typo-body-small">
+    <label className="flex items-center gap-sm typo-body-md-regular">
       <Checkbox {...args} /> Aceito os termos
     </label>
   ),

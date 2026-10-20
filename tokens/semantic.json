@@ -72,7 +72,7 @@
     "alerts": {
       "1": { "$value": "{color.green.50}" },
       "2": { "$value": "{color.green.90}" },
-      "3": { "$value": "{color.green.40}" },
+      "3": { "$value": "{color.green.30}", "$description": "Texto do alert de sucesso. green.30 (não green.40) para atingir 4.5:1 sobre alerts.2." },
       "4": { "$value": "{color.yellow.90}" },
       "5": { "$value": "{color.yellow.95}" },
       "6": { "$value": "{color.yellow.40}" },
@@ -91,92 +91,43 @@
     "disabled-surface": { "$value": "{color.link.11}", "$description": "Papel: fundo de ação desabilitada." }
   },
 
-  "spacing": {
+  "padding": {
     "$type": "dimension",
-    "$description": "Espaço entre e dentro de elementos (padding, gap, margem, deslocamentos).",
+    "$description": "Espaço DENTRO de um elemento: padding e a distância de um item posicionado até a borda do container (top, right, inset). A altura dos controles vem do padding somado ao conteúdo.",
     "none": { "$value": "{value.0}" },
-    "hairline": { "$value": "{value.1}" },
-    "pico": { "$value": "{value.2}" },
-    "quark": { "$value": "{value.4}" },
-    "quark-plus": { "$value": "{value.6}" },
-    "nano": { "$value": "{value.8}" },
-    "nano-plus": { "$value": "{value.10}" },
-    "xxxs": { "$value": "{value.12}" },
-    "xxs": { "$value": "{value.16}" },
-    "xs": { "$value": "{value.24}" },
-    "sm": { "$value": "{value.32}" },
-    "md": { "$value": "{value.40}" },
-    "lg": { "$value": "{value.48}" },
-    "xl": { "$value": "{value.56}" },
-    "xxl": { "$value": "{value.64}" },
-    "xxl-plus": { "$value": "{value.72}" },
-    "xxxl": { "$value": "{value.80}" }
+    "xxs": { "$value": "{value.2}" },
+    "xs": { "$value": "{value.4}" },
+    "sm": { "$value": "{value.8}" },
+    "md": { "$value": "{value.12}" },
+    "lg": { "$value": "{value.16}" },
+    "xl": { "$value": "{value.20}" },
+    "xxl": { "$value": "{value.32}" }
   },
 
-  "size": {
+  "gap": {
     "$type": "dimension",
-    "$description": "Altura, largura e limites. Use primeiro as escalas genéricas (control, icon); específicos de componente só quando nenhuma escala serve.",
-    "control": {
-      "$description": "Altura de botões, campos, toggles e itens clicáveis.",
-      "xs": { "$value": "{value.24}" },
-      "xs-plus": { "$value": "{value.28}" },
-      "sm": { "$value": "{value.32}" },
-      "md": { "$value": "{value.36}" },
-      "lg": { "$value": "{value.40}" }
-    },
-    "icon": {
-      "xs": { "$value": "{value.12}" },
-      "sm": { "$value": "{value.14}" },
-      "md": { "$value": "{value.16}" },
-      "lg": { "$value": "{value.20}" }
-    },
-    "badge": { "$value": "{value.20}" },
-    "chip": { "$value": "{value.22}" },
-    "progress": { "$value": "{value.6}" },
-    "tooltip-arrow": { "$value": "{value.10}" },
-    "radio-indicator": { "$value": "{value.8}" },
-    "switch": {
-      "width": { "$value": "{value.32}" },
-      "height": { "$value": "{value.18}" },
-      "sm-width": { "$value": "{value.24}" },
-      "sm-height": { "$value": "{value.14}" }
-    },
-    "hover-card": { "$value": "{value.256}" },
-    "popover": { "$value": "{value.288}" },
-    "select-min": { "$value": "{value.144}", "$description": "Largura mínima da lista do select." },
-    "combobox-input-min": { "$value": "{value.64}" },
-    "combobox-list-max": { "$value": "{value.288}", "$description": "Altura máxima da lista do combobox." },
-    "tooltip-max": { "$value": "{value.320}", "$description": "Largura máxima do tooltip." },
-    "textarea-min": { "$value": "{value.64}", "$description": "Altura mínima do textarea." }
+    "$description": "Espaço ENTRE elementos: gap, margem, space-between e deslocamentos (translate).",
+    "none": { "$value": "{value.0}" },
+    "xxs": { "$value": "{value.2}" },
+    "xs": { "$value": "{value.4}" },
+    "sm": { "$value": "{value.8}" },
+    "md": { "$value": "{value.12}" },
+    "lg": { "$value": "{value.16}" },
+    "xl": { "$value": "{value.20}" },
+    "xxl": { "$value": "{value.32}" }
   },
 
   "radius": {
     "$type": "dimension",
-    "$description": "Arredondamento. A escala serve aos tokens de componente; nos componentes, prefira o token do componente.",
+    "$description": "Arredondamento. Escala única: todo componente usa um destes passos, sem token próprio.",
     "none": { "$value": "{value.0}" },
-    "xxs": { "$value": "{value.2}" },
-    "xs": { "$value": "{value.4}" },
-    "xs-plus": { "$value": "{value.6}" },
-    "s": { "$value": "{value.8}" },
-    "m": { "$value": "{value.16}" },
-    "pill": { "$value": "{value.800}" },
-    "tag": { "$value": "{radius.pill}", "$description": "Badge." },
-    "button": { "$value": "{radius.pill}" },
-    "switch": { "$value": "{radius.pill}" },
-    "radio": { "$value": "{radius.pill}" },
-    "progress": { "$value": "{radius.pill}" },
-    "avatar": { "$value": "{radius.pill}" },
-    "tooltip-arrow": { "$value": "{radius.xxs}" },
-    "kbd": { "$value": "{radius.xxs}", "$description": "Tecla de atalho dentro do tooltip e do input-group." },
-    "tooltip": { "$value": "{radius.xs}" },
-    "checkbox": { "$value": "{radius.xs}" },
-    "item": { "$value": "{radius.xs-plus}", "$description": "Itens de lista e chips (select, combobox)." },
-    "card": { "$value": "{radius.s}", "$description": "Card, alert, popover, hover-card, listas, toast." },
-    "input": { "$value": "{radius.s}", "$description": "Input, textarea, select, combobox, input-group." },
-    "toggle": { "$value": "{radius.s}" },
-    "accordion": { "$value": "{radius.s}" },
-    "skeleton": { "$value": "{radius.s}" },
-    "calendar-day": { "$value": "{radius.s}" }
+    "xxs": { "$value": "{value.4}" },
+    "xs": { "$value": "{value.6}" },
+    "sm": { "$value": "{value.8}" },
+    "md": { "$value": "{value.12}" },
+    "lg": { "$value": "{value.16}" },
+    "xl": { "$value": "{value.24}" },
+    "pill": { "$value": "{value.800}" }
   },
 
   "underline-offset": {
@@ -211,37 +162,55 @@
   "font": {
     "$type": "fontFamily",
     "$description": "Papéis de fonte. Trocar a fonte do produto = mudar só aqui.",
-    "heading": { "$value": "{font-family.montserrat}" },
-    "body": { "$value": "{font-family.lato}" }
+    "heading": { "$value": "{font-family.montserrat}", "$description": "Títulos (heading e display)." },
+    "text": { "$value": "{font-family.lato}", "$description": "Textos (body e overline). A Lato só tem os pesos regular (400) e bold (700)." }
+  },
+
+  "font-size": {
+    "$type": "dimension",
+    "$description": "Escala de tamanhos de letra, como no Nitro: heading para títulos, text para textos. Os estilos de texto usam esta escala.",
+    "heading": {
+      "xxs": { "$value": "{value.20}" },
+      "xs": { "$value": "{value.24}" },
+      "sm": { "$value": "{value.32}" },
+      "md": { "$value": "{value.40}" },
+      "lg": { "$value": "{value.48}" },
+      "xl": { "$value": "{value.56}" },
+      "xxl": { "$value": "{value.64}" },
+      "3xl": { "$value": "{value.72}" },
+      "4xl": { "$value": "{value.80}" }
+    },
+    "text": {
+      "xs": { "$value": "{value.10}" },
+      "sm": { "$value": "{value.12}" },
+      "md": { "$value": "{value.14}" },
+      "lg": { "$value": "{value.16}" },
+      "xl": { "$value": "{value.18}" }
+    }
   },
 
   "typography": {
     "$type": "typography",
-    "$description": "Estilos de texto. Cada um vira as variáveis --aurora-typography-<estilo>-* e a classe typo-<estilo>.",
-    "headline-1": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.40}", "lineHeight": "{value.46}", "letterSpacing": "{letter-spacing.minus-150}", "textCase": "{text-case.original}" } },
-    "headline-2": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.32}", "lineHeight": "{value.38}", "letterSpacing": "{letter-spacing.minus-100}", "textCase": "{text-case.original}" } },
-    "headline-3": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.24}", "lineHeight": "{value.32}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "headline-4": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.20}", "lineHeight": "{value.28}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "headline-5": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{value.20}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "display": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.20}", "lineHeight": "{value.28}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "body-highlight": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.24}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "body": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "body-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.15}", "textCase": "{text-case.original}" } },
-    "body-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "body-small-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "body-micro": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.10}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "button": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" } },
-    "button-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" } },
-    "button-uppercase": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.upper}" } },
-    "button-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" }, "$description": "Botão grande: mesmo desenho do estilo button, com peso forte." },
-    "button-small-bold": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.bold}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.50}", "textCase": "{text-case.original}" }, "$description": "Botão padrão e pequeno: mesmo desenho do estilo button-small, com peso forte." },
-    "link": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "link-small": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.14}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.10}", "textCase": "{text-case.original}" } },
-    "caption": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.12}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.25}", "textCase": "{text-case.original}" } },
-    "modernizacao-title": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.24}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "modernizacao-subtitle": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.medium}", "fontSize": "{value.20}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "modernizacao-sectiontitle": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.semibold}", "fontSize": "{value.16}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
-    "modernizacao-input-text": { "$value": { "fontFamily": "{font.body}", "fontWeight": "{font-weight.regular}", "fontSize": "{value.18}", "lineHeight": "{line-height.144}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } }
+    "$description": "Estilos de texto, como no Nitro: display, heading (H1 a H6), body (por tamanho e peso) e overline. Cada um vira a classe typo-<estilo>.",
+    "display-1": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.4xl}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "display-2": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.3xl}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "display-3": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.xxl}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-1": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.xl}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-2": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.lg}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-3": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.md}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-4": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.sm}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-5": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.xs}", "lineHeight": "{line-height.120}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "heading-6": { "$value": { "fontFamily": "{font.heading}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.heading.xxs}", "lineHeight": "{line-height.130}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-xl-regular": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.regular}", "fontSize": "{font-size.text.xl}", "lineHeight": "{line-height.140}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-xl-bold": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.text.xl}", "lineHeight": "{line-height.140}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-lg-regular": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.regular}", "fontSize": "{font-size.text.lg}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-lg-bold": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.text.lg}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-md-regular": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.regular}", "fontSize": "{font-size.text.md}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-md-bold": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.text.md}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-sm-regular": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.regular}", "fontSize": "{font-size.text.sm}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "body-sm-bold": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.text.sm}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.0}", "textCase": "{text-case.original}" } },
+    "overline-regular": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.regular}", "fontSize": "{font-size.text.xs}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.100}", "textCase": "{text-case.upper}" } },
+    "overline-bold": { "$value": { "fontFamily": "{font.text}", "fontWeight": "{font-weight.bold}", "fontSize": "{font-size.text.xs}", "lineHeight": "{line-height.150}", "letterSpacing": "{letter-spacing.100}", "textCase": "{text-case.upper}" } }
   },
 
   "elevation": {
@@ -278,7 +247,7 @@
     },
     "distance": {
       "$type": "dimension",
-      "overlay": { "$value": "{spacing.nano}", "$description": "Quanto a sobreposição desliza ao abrir." }
+      "overlay": { "$value": "{value.8}", "$description": "Quanto a sobreposição desliza ao abrir." }
     },
     "scale": {
       "$type": "number",

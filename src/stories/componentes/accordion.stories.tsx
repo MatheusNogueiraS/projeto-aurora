@@ -17,7 +17,7 @@ const meta = {
   },
   args: { type: "single", collapsible: true },
   render: (args) => (
-    <Accordion {...args} className="max-w-popover">
+    <Accordion {...args} className="max-w-[288px]">
       {perguntas.map((p) => (
         <AccordionItem key={p.id} value={p.id}>
           <AccordionTrigger>{p.pergunta}</AccordionTrigger>

@@ -14,7 +14,7 @@ const meta = {
     size: { control: "select", options: ["sm", "default", "lg"] },
   },
   render: (args) => (
-    <div className="flex items-center gap-xxxs">
+    <div className="flex items-center gap-md">
       <Toggle {...args} aria-label="Negrito">
         <BoldIcon />
       </Toggle>

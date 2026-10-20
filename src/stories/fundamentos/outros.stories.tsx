@@ -22,7 +22,7 @@ export const Opacidade: Story = {
           <TokenCard
             key={t.id}
             token={t}
-            sample={<div className="size-control-lg rounded-item bg-link-1" style={{ opacity: cssVar(t.id) }} />}
+            sample={<div className="size-[40px] rounded-xs bg-link-1" style={{ opacity: cssVar(t.id) }} />}
           />
         ))}
       </Grid>
@@ -42,7 +42,7 @@ export const Linhas: Story = {
           <TokenCard
             key={t.id}
             token={t}
-            sample={<div className="w-xxxl border-link-4" style={{ borderTopWidth: cssVar(t.id), borderTopStyle: "solid" }} />}
+            sample={<div className="w-[80px] border-link-4" style={{ borderTopWidth: cssVar(t.id), borderTopStyle: "solid" }} />}
           />
         ))}
       </Grid>
