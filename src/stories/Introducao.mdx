@@ -1,0 +1,33 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Introdução" />
+
+# Aurora · Design System
+
+Componentes e tokens visuais do Aurora, no tema Bmg. Tudo o que aparece aqui usa exatamente o mesmo código do produto.
+
+## Como navegar
+
+- **Fundamentos**: os tokens (cores, tipografia, espaço, forma, opacidade e movimento). Estas páginas leem direto da fonte de verdade, a pasta `tokens/`, então nunca ficam desatualizadas.
+- **Componentes**: cada componente com suas variantes. Em **Docs** fica a página completa; nos controles abaixo da prévia dá para trocar variante, tamanho e estado.
+- **Tema**: o botão de pincel na barra de cima alterna entre claro e escuro.
+- **Acessibilidade**: a aba *Accessibility* de cada história mostra problemas de contraste, rótulos e foco.
+
+## Como os tokens funcionam
+
+Há dois níveis, e cada um só pode apontar para o anterior:
+
+1. **Fundação**: valores puros e imutáveis (hexadecimais, medidas, fontes, durações). Nunca são usados nos componentes.
+2. **Semânticos**: dão significado aos valores (`color.focus`, `radius.button`, `typography.body-small`). São os únicos que os componentes usam.
+
+Exemplo de cadeia: `color.focus` → `color.link.4` → `color.brand.2` → `color.purple.20` → `#462A71`.
+
+Para mudar algo no sistema inteiro, mude **um token semântico**. Por exemplo, trocar `font.body` troca a fonte de todos os textos; trocar `radius.button` muda o formato de todos os botões.
+
+## Regras
+
+- Componentes usam só classes de tokens semânticos: `bg-link-1`, `p-nano`, `h-control-md`, `typo-body-small`, `rounded-button`.
+- Nada de valor solto (`p-4`, `text-sm`, `[13px]`, `#fff`, `opacity-50`). O comando `pnpm tokens:check` bloqueia isso automaticamente.
+- Um token novo nasce primeiro no JSON (`tokens/`), depois `pnpm tokens` gera o CSS.
+
+O guia completo está em `tokens/README.md`.
