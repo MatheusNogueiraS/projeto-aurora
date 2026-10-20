@@ -18,6 +18,15 @@ export type Token = {
 type Node = { [key: string]: unknown }
 const REF = /^-?\{([^{}]+)\}$/
 
+// O JavaScript põe chaves que parecem inteiro ("0", "100") antes das demais, o que
+// jogaria "025" para o fim da escala. Aqui as chaves numéricas seguem a ordem do
+// número (025 < 050 < 100) e as outras mantêm a ordem do JSON.
+const orderedEntries = (obj: object) => {
+  const entries = Object.entries(obj)
+  const numeric = entries.filter(([k]) => /^\d+$/.test(k)).sort(([a], [b]) => Number(a) - Number(b))
+  return [...numeric, ...entries.filter(([k]) => !/^\d+$/.test(k))]
+}
+
 function flatten(obj: Node, tier: Tier, prefix: string[] = [], inheritedType = ""): Token[] {
   const type = typeof obj.$type === "string" ? obj.$type : inheritedType
   if ("$value" in obj) {
@@ -30,7 +39,7 @@ function flatten(obj: Node, tier: Tier, prefix: string[] = [], inheritedType = "
       tier,
     }]
   }
-  return Object.entries(obj)
+  return orderedEntries(obj)
     .filter(([key, child]) => !key.startsWith("$") && typeof child === "object" && child !== null)
     .flatMap(([key, child]) => flatten(child as Node, tier, [...prefix, key], type))
 }

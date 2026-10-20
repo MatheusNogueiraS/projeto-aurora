@@ -10,7 +10,7 @@ const meta = {
   args: { size: "default", disabled: false },
   argTypes: { size: { control: "select", options: ["default", "sm"] } },
   render: (args) => (
-    <label className="flex items-center gap-nano typo-body-small">
+    <label className="flex items-center gap-sm typo-body-md-regular">
       <Switch {...args} /> Receber notificações
     </label>
   ),

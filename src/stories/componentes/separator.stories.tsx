@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>
 
 export const Horizontal: Story = {
   render: () => (
-    <div className="flex max-w-popover flex-col gap-nano typo-body-small">
+    <div className="flex max-w-[288px] flex-col gap-sm typo-body-md-regular">
       <span>Dados pessoais</span>
       <Separator />
       <span>Endereço</span>
@@ -24,7 +24,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div className="flex h-badge items-center gap-xxxs typo-body-small">
+    <div className="flex h-[20px] items-center gap-md typo-body-md-regular">
       <span>Perfil</span>
       <Separator orientation="vertical" />
       <span>Conta</span>

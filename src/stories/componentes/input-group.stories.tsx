@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>
 export const ComIcone: Story = {
   name: "Com ícone",
   render: () => (
-    <InputGroup className="max-w-popover">
+    <InputGroup className="max-w-[288px]">
       <InputGroupAddon>
         <SearchIcon />
       </InputGroupAddon>
@@ -37,7 +37,7 @@ export const ComIcone: Story = {
 export const ComTextoEBotao: Story = {
   name: "Com texto e botão",
   render: () => (
-    <InputGroup className="max-w-popover">
+    <InputGroup className="max-w-[288px]">
       <InputGroupAddon>
         <MailIcon />
       </InputGroupAddon>
@@ -53,7 +53,7 @@ export const ComTextoEBotao: Story = {
 export const ComTextarea: Story = {
   name: "Com textarea",
   render: () => (
-    <InputGroup className="max-w-popover">
+    <InputGroup className="max-w-[288px]">
       <InputGroupTextarea placeholder="Descreva o problema" />
       <InputGroupAddon align="block-end">
         <InputGroupButton variant="default" className="ml-auto">

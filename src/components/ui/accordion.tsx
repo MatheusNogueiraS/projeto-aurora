@@ -39,7 +39,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start justify-between rounded-accordion border-default border-transparent py-xxs text-left typo-body-small-bold transition-all outline-none hover:underline focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring focus-visible:after:border-focus disabled:pointer-events-none disabled:opacity-disabled **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-icon-md **:data-[slot=accordion-trigger-icon]:text-text-3",
+          "group/accordion-trigger relative flex flex-1 items-start justify-between rounded-sm border-default border-transparent py-lg text-left typo-body-md-bold transition-all outline-none hover:underline focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring focus-visible:after:border-focus disabled:pointer-events-none disabled:opacity-disabled **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-[16px] **:data-[slot=accordion-trigger-icon]:text-text-3",
           className
         )}
         {...props}
@@ -60,12 +60,12 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="overflow-hidden typo-body-small data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className="overflow-hidden typo-body-md-regular data-open:animate-accordion-down data-closed:animate-accordion-up"
       {...props}
     >
       <div
         className={cn(
-          "h-(--radix-accordion-content-height) pt-none pb-xxs [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-xxs",
+          "h-(--radix-accordion-content-height) pt-none pb-lg [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-lg",
           className
         )}
       >

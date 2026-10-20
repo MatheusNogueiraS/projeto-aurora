@@ -9,7 +9,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     >
       <table
         data-slot="table"
-        className={cn("w-full caption-bottom typo-body-small", className)}
+        className={cn("w-full caption-bottom typo-body-md-regular", className)}
         {...props}
       />
     </div>
@@ -41,7 +41,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
     <tfoot
       data-slot="table-footer"
       className={cn(
-        "border-t-default bg-background-4/surface-subtle typo-body-small-bold [&>tr]:last:border-b-(length:--aurora-stroke-none)",
+        "border-t-default bg-background-4/surface-subtle typo-body-md-bold [&>tr]:last:border-b-(length:--aurora-stroke-none)",
         className
       )}
       {...props}
@@ -67,7 +67,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "h-control-lg px-nano text-left align-middle typo-body-small-bold whitespace-nowrap text-text-1 [&:has([role=checkbox])]:pr-none",
+        "px-sm py-sm text-left align-middle typo-body-md-bold whitespace-nowrap text-text-1 [&:has([role=checkbox])]:pr-none",
         className
       )}
       {...props}
@@ -80,7 +80,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "p-nano align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-none",
+        "p-sm align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-none",
         className
       )}
       {...props}
@@ -95,7 +95,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("mt-xxs typo-body-small text-text-3", className)}
+      className={cn("mt-lg typo-body-md-regular text-text-3", className)}
       {...props}
     />
   )

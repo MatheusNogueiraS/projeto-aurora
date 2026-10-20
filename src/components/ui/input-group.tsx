@@ -12,7 +12,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex h-control-md w-full min-w-none items-center rounded-input border-default border-field shadow-s transition-[color,box-shadow] outline-none in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-(length:--aurora-stroke-none) has-[[data-slot=input-group-control]:focus-visible]:border-focus has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--aurora-stroke-focus) has-[[data-slot=input-group-control]:focus-visible]:ring-focus/focus-ring has-[[data-slot][aria-invalid=true]]:border-invalid has-[[data-slot][aria-invalid=true]]:ring-(length:--aurora-stroke-focus) has-[[data-slot][aria-invalid=true]]:ring-invalid/invalid-ring has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-xxxs has-[>[data-align=block-start]]:[&>input]:pb-xxxs has-[>[data-align=inline-end]]:[&>input]:pr-quark-plus has-[>[data-align=inline-start]]:[&>input]:pl-quark-plus",
+        "group/input-group relative flex w-full min-w-[0px] items-center rounded-sm border-default border-field shadow-s transition-[color,box-shadow] outline-none in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-(length:--aurora-stroke-none) has-[[data-slot=input-group-control]:focus-visible]:border-focus has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--aurora-stroke-focus) has-[[data-slot=input-group-control]:focus-visible]:ring-focus/focus-ring has-[[data-slot][aria-invalid=true]]:border-invalid has-[[data-slot][aria-invalid=true]]:ring-(length:--aurora-stroke-focus) has-[[data-slot][aria-invalid=true]]:ring-invalid/invalid-ring has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-md has-[>[data-align=block-start]]:[&>input]:pb-md has-[>[data-align=inline-end]]:[&>input]:pr-sm has-[>[data-align=inline-start]]:[&>input]:pl-sm",
         className
       )}
       {...props}
@@ -21,18 +21,18 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-nano py-quark-plus typo-body-small text-text-3 select-none group-data-[disabled=true]/input-group:opacity-disabled [&>kbd]:rounded-kbd [&>svg:not([class*='size-'])]:size-icon-md",
+  "flex h-auto cursor-text items-center justify-center gap-sm py-sm typo-body-md-regular text-text-3 select-none group-data-[disabled=true]/input-group:opacity-disabled [&>kbd]:rounded-xxs [&>svg:not([class*='size-'])]:size-[16px]",
   {
     variants: {
       align: {
         "inline-start":
-          "order-first pl-nano has-[>button]:-ml-quark has-[>kbd]:-ml-pico",
+          "order-first pl-sm has-[>button]:-ml-xs has-[>kbd]:-ml-xxs",
         "inline-end":
-          "order-last pr-nano has-[>button]:-mr-quark has-[>kbd]:-mr-pico",
+          "order-last pr-sm has-[>button]:-mr-xs has-[>kbd]:-mr-xxs",
         "block-start":
-          "order-first w-full justify-start px-nano-plus pt-nano group-has-[>input]/input-group:pt-nano [.border-b]:pb-nano",
+          "order-first w-full justify-start px-md pt-sm group-has-[>input]/input-group:pt-sm [.border-b]:pb-sm",
         "block-end":
-          "order-last w-full justify-start px-nano-plus pb-nano group-has-[>input]/input-group:pb-nano [.border-t]:pt-nano",
+          "order-last w-full justify-start px-md pb-sm group-has-[>input]/input-group:pb-sm [.border-t]:pt-sm",
       },
     },
     defaultVariants: {
@@ -64,15 +64,15 @@ function InputGroupAddon({
 }
 
 const inputGroupButtonVariants = cva(
-  "flex items-center gap-nano typo-button-small shadow-none has-data-[icon=inline-end]:pr-nano has-data-[icon=inline-start]:pl-nano",
+  "flex items-center gap-sm typo-body-md-regular shadow-none has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm",
   {
     variants: {
       size: {
-        xs: "h-control-xs gap-quark rounded-button px-quark-plus [&>svg:not([class*='size-'])]:size-icon-sm",
-        sm: "px-nano-plus",
+        xs: "gap-xs rounded-pill px-sm py-xxs [&>svg:not([class*='size-'])]:size-[14px]",
+        sm: "px-md py-xs",
         "icon-xs":
-          "size-control-xs rounded-button p-none has-[>svg]:p-none",
-        "icon-sm": "size-control-sm p-none has-[>svg]:p-none",
+          "size-[24px] rounded-pill p-none has-[>svg]:p-none",
+        "icon-sm": "size-[32px] p-none has-[>svg]:p-none",
       },
     },
     defaultVariants: {
@@ -104,7 +104,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       className={cn(
-        "flex items-center gap-nano typo-body-small text-text-3 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-icon-md",
+        "flex items-center gap-sm typo-body-md-regular text-text-3 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-[16px]",
         className
       )}
       {...props}
@@ -136,7 +136,7 @@ function InputGroupTextarea({
     <Textarea
       data-slot="input-group-control"
       className={cn(
-        "flex-1 resize-none rounded-none border-(length:--aurora-stroke-none) bg-transparent py-nano shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:ring-(length:--aurora-stroke-none)",
+        "flex-1 resize-none rounded-none border-(length:--aurora-stroke-none) bg-transparent py-sm shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:ring-(length:--aurora-stroke-none)",
         className
       )}
       {...props}

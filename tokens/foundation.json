@@ -138,20 +138,18 @@
 
   "line-height": {
     "$type": "number",
-    "$description": "Altura de linha proporcional ao tamanho da letra (sem unidade). Alturas fixas usam a escala value.",
-    "144": { "$value": 1.44 }
+    "$description": "Altura de linha proporcional ao tamanho da letra (sem unidade). Nome em %: 150 = 1.5.",
+    "120": { "$value": 1.2 },
+    "130": { "$value": 1.3 },
+    "140": { "$value": 1.4 },
+    "150": { "$value": 1.5 }
   },
 
   "letter-spacing": {
     "$type": "dimension",
-    "$description": "Espaço entre letras, em px. Nome em centésimos de px: 15 = 0.15px; minus-150 = -1.5px.",
-    "minus-150": { "$value": "-1.5px" },
-    "minus-100": { "$value": "-1px" },
+    "$description": "Espaço entre letras, em px. Nome em centésimos de px: 100 = 1px.",
     "0": { "$value": "0px" },
-    "10": { "$value": "0.1px" },
-    "15": { "$value": "0.15px" },
-    "25": { "$value": "0.25px" },
-    "50": { "$value": "0.5px" }
+    "100": { "$value": "1px" }
   },
 
   "text-case": {

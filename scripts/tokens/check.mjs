@@ -1,7 +1,8 @@
 // Trava do design system. Falha (exit 1) se:
 //   1. os arquivos gerados em src/styles/ estão desatualizados em relação a tokens/*.json;
 //   2. algum componente usa uma classe que não gera CSS (ex.: p-4, text-sm — não existem sem o tema do Tailwind);
-//   3. algum componente usa valor solto ([13px], opacity-50, rounded-full...) ou token de fundação;
+//   3. algum componente usa valor solto ([13px], opacity-50, rounded-full...) ou token de fundação
+//      (exceção: medidas de tamanho w/h/size/min/max, escritas em px no componente);
 //   4. algum par de cores principal fica abaixo do contraste mínimo (WCAG), em qualquer tema.
 //
 //   node scripts/tokens/check.mjs
@@ -28,11 +29,13 @@ for (const [rel, content] of Object.entries(manifest.outputs)) {
 // ---------------------------------------------------------------------------
 const SOURCE_DIRS = ["src"]
 const files = []
+const cssFiles = [] // CSS escrito à mão: as classes de @apply também passam pela trava
 const walkDir = dir => {
   for (const name of readdirSync(dir)) {
     const p = path.join(dir, name)
     if (statSync(p).isDirectory()) walkDir(p)
     else if (/\.(tsx|ts)$/.test(name)) files.push(p)
+    else if (/\.css$/.test(name) && !manifest.outputs[path.relative(root, p).replace(/\\/g, "/")]) cssFiles.push(p)
   }
 }
 SOURCE_DIRS.forEach(d => walkDir(path.join(root, d)))
@@ -98,6 +101,16 @@ for (const file of files) {
     }
   }
 }
+for (const file of cssFiles) {
+  const src = readFileSync(file, "utf8")
+  const rel = path.relative(root, file).replace(/\\/g, "/")
+  for (const m of src.matchAll(/@apply\s+([^;]+);/g)) {
+    for (const cls of m[1].split(/\s+/).filter(Boolean)) {
+      if (!candidates.has(cls)) candidates.set(cls, [])
+      candidates.get(cls).push(`${rel}:${lineOf(src, m.index)}`)
+    }
+  }
+}
 
 // ---------------------------------------------------------------------------
 // 3. Valores soltos e tokens de fundação
@@ -120,21 +133,25 @@ const FORBIDDEN = [
   [/^(border|border-[trblxyse])-\d+$/, "espessura de borda solta: use border-default ou border-(length:--aurora-stroke-*)"],
   [/^ring(-\d+)?$/, "espessura de anel solta: use ring-(length:--aurora-stroke-*)"],
   [/^outline-\d+$/, "espessura de contorno solta"],
-  [/^rounded(-[tblrse]{1,2})?(-full)?$/, "raio solto: use um token de radius (rounded-button, rounded-pill...)"],
+  [/^rounded(-[tblrse]{1,2})?(-full)?$/, "raio solto: use um passo da escala de radius (rounded-sm, rounded-pill...)"],
   [/^(opacity|z|duration|delay|rotate|scale|scale-[xy]|zoom-(in|out)|fade-(in|out)|spin-(in|out))-\d+$/, "valor numérico solto: use um token semântico"],
   [/^slide-(in|out)-from-[a-z]+-\d+$/, "distância solta: use slide-*-overlay"],
-  [/^(max-w|max-h)-none$/, "colide com o token spacing.none (0) e vira largura/altura máxima zero; para tirar o limite, não use classe de max"],
   [/^(underline-offset|outline-offset|ring-offset|decoration|leading|blur|backdrop-blur)-\d+$/, "valor numérico solto: use um token semântico (ex.: underline-offset-(--aurora-underline-offset))"],
   [/^(?!(w|h|size|min-w|max-w|min-h|max-h|inset|inset-[xy]|top|left|right|bottom|start|end|translate-[xy]|basis|aspect)-\d+\/\d+$).*\/\d+$/, "opacidade solta (ex.: /50): use um token de opacity (ex.: /hover)"],
   [/--spacing\(/, "--spacing() não existe sem o tema do Tailwind: use um token"],
 ]
 const UNIT = /(\d)(px|rem|em|vh|vw|deg|turn|ms|s)\b|#[0-9a-f]{3,8}\b|\b(rgb|rgba|hsl|hsla|oklch|oklab)\(/i
+// Medidas de tamanho não são token: largura, altura e limites ficam escritos no próprio
+// componente, em px (ex.: size-[16px], max-w-[320px]). Só estas classes aceitam valor direto:
+// w/h/size com um valor em px; min/max também com cálculo (ex.: min-w-[calc(var(--anchor-width)+28px)]);
+// e o tamanho da célula do calendário, que a biblioteca recebe por variável (--cell-size).
+const SIZE_UTILITY = /^(w|h|size)-\[\d+px\]$|^(min-w|min-h|max-w|max-h)-\[[^\]]+\]$|^\[--cell-size:\d+px\]$/
 for (const [cls, where] of candidates) {
   const util = utilityOf(cls)
   for (const [re, msg] of FORBIDDEN) if (re.test(util) || (re.source.startsWith("--") && re.test(cls))) where.forEach(w => report(w, `"${cls}" — ${msg}`))
   // valores arbitrários (fora dos colchetes de variantes)
-  const values = [...util.matchAll(/\[([^\]]*)\]/g)].map(m => m[1])
-  for (const v of values) if (UNIT.test(v.replace(/_/g, " "))) where.forEach(w => report(w, `"${cls}" — valor solto dentro de [...]: use var(--aurora-<semântico>)`))
+  const values = SIZE_UTILITY.test(util) ? [] : [...util.matchAll(/\[([^\]]*)\]/g)].map(m => m[1])
+  for (const v of values) if (UNIT.test(v.replace(/_/g, " "))) where.forEach(w => report(w, `"${cls}" — valor solto dentro de [...]: use var(--aurora-<semântico>) (só w/h/size/min/max aceitam px direto)`))
   // variáveis referenciadas
   for (const m of cls.matchAll(/--aurora-[a-z0-9-]+/g)) {
     if (foundationVars.has(m[0])) where.forEach(w => report(w, `"${cls}" — ${m[0]} é fundação; componentes só usam semânticos`))
@@ -184,15 +201,22 @@ const twDir = path.join(root, "node_modules/tailwindcss")
 const { compile } = await import(pathToFileURL(path.join(twDir, "dist/lib.mjs")).href)
 const entry = path.join(root, "src/index.css")
 // usa os arquivos gerados em memória (o que DEVERIA estar em disco)
-const compiler = await compile(readFileSync(entry, "utf8"), {
-  base: path.dirname(entry),
-  loadStylesheet: async (id, base) => {
-    const res = await loadStylesheet(id, base)
-    const rel = path.relative(root, res.path).replace(/\\/g, "/")
-    if (manifest.outputs[rel]) res.content = manifest.outputs[rel]
-    return res
-  },
-})
+let compiler
+try {
+  compiler = await compile(readFileSync(entry, "utf8"), {
+    base: path.dirname(entry),
+    loadStylesheet: async (id, base) => {
+      const res = await loadStylesheet(id, base)
+      const rel = path.relative(root, res.path).replace(/\\/g, "/")
+      if (manifest.outputs[rel]) res.content = manifest.outputs[rel]
+      return res
+    },
+  })
+} catch (err) {
+  // ex.: um @apply no CSS com classe que não existe mais
+  console.error(`\nO CSS não compila: ${err.message}`)
+  process.exit(1)
+}
 const css = compiler.build([...candidates.keys()])
 const cssEscape = s => s.replace(/[^a-zA-Z0-9_-]/g, ch => "\\" + ch)
 for (const [cls, where] of candidates) {
@@ -237,6 +261,8 @@ const PAIRS = [
   ["link-10", "link-1", 3, "texto do botão principal (limitado pela marca: mínimo para texto grande)"],
   ["alerts-9", "alerts-8", 4.5, "botão/badge destrutivo"],
   ["alerts-7", "background-6", 4.5, "texto de alerta de erro"],
+  ["alerts-3", "alerts-2", 4.5, "alert de sucesso"],
+  ["alerts-6", "alerts-5", 4.5, "alert de atenção"],
   ["text-1", "link-2", 4.5, "texto no intervalo do calendário"],
   ["field", "background-5", 3, "borda de campo (componente de interface)"],
   ["focus", "background-5", 3, "anel de foco"],

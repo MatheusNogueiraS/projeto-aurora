@@ -87,72 +87,78 @@
     --color-field: var(--aurora-color-field);
     --color-disabled: var(--aurora-color-disabled);
     --color-disabled-surface: var(--aurora-color-disabled-surface);
-    --spacing-none: var(--aurora-spacing-none);
-    --spacing-hairline: var(--aurora-spacing-hairline);
-    --spacing-pico: var(--aurora-spacing-pico);
-    --spacing-quark: var(--aurora-spacing-quark);
-    --spacing-quark-plus: var(--aurora-spacing-quark-plus);
-    --spacing-nano: var(--aurora-spacing-nano);
-    --spacing-nano-plus: var(--aurora-spacing-nano-plus);
-    --spacing-xxxs: var(--aurora-spacing-xxxs);
-    --spacing-xxs: var(--aurora-spacing-xxs);
-    --spacing-xs: var(--aurora-spacing-xs);
-    --spacing-sm: var(--aurora-spacing-sm);
-    --spacing-md: var(--aurora-spacing-md);
-    --spacing-lg: var(--aurora-spacing-lg);
-    --spacing-xl: var(--aurora-spacing-xl);
-    --spacing-xxl: var(--aurora-spacing-xxl);
-    --spacing-xxl-plus: var(--aurora-spacing-xxl-plus);
-    --spacing-xxxl: var(--aurora-spacing-xxxl);
-    --spacing-control-xs: var(--aurora-size-control-xs);
-    --spacing-control-xs-plus: var(--aurora-size-control-xs-plus);
-    --spacing-control-sm: var(--aurora-size-control-sm);
-    --spacing-control-md: var(--aurora-size-control-md);
-    --spacing-control-lg: var(--aurora-size-control-lg);
-    --spacing-icon-xs: var(--aurora-size-icon-xs);
-    --spacing-icon-sm: var(--aurora-size-icon-sm);
-    --spacing-icon-md: var(--aurora-size-icon-md);
-    --spacing-icon-lg: var(--aurora-size-icon-lg);
-    --spacing-badge: var(--aurora-size-badge);
-    --spacing-chip: var(--aurora-size-chip);
-    --spacing-progress: var(--aurora-size-progress);
-    --spacing-tooltip-arrow: var(--aurora-size-tooltip-arrow);
-    --spacing-radio-indicator: var(--aurora-size-radio-indicator);
-    --spacing-switch-width: var(--aurora-size-switch-width);
-    --spacing-switch-height: var(--aurora-size-switch-height);
-    --spacing-switch-sm-width: var(--aurora-size-switch-sm-width);
-    --spacing-switch-sm-height: var(--aurora-size-switch-sm-height);
-    --spacing-hover-card: var(--aurora-size-hover-card);
-    --spacing-popover: var(--aurora-size-popover);
-    --spacing-select-min: var(--aurora-size-select-min);
-    --spacing-combobox-input-min: var(--aurora-size-combobox-input-min);
-    --spacing-combobox-list-max: var(--aurora-size-combobox-list-max);
-    --spacing-tooltip-max: var(--aurora-size-tooltip-max);
-    --spacing-textarea-min: var(--aurora-size-textarea-min);
+    --padding-none: var(--aurora-padding-none);
+    --inset-none: var(--aurora-padding-none);
+    --scroll-padding-none: var(--aurora-padding-none);
+    --padding-xxs: var(--aurora-padding-xxs);
+    --inset-xxs: var(--aurora-padding-xxs);
+    --scroll-padding-xxs: var(--aurora-padding-xxs);
+    --padding-xs: var(--aurora-padding-xs);
+    --inset-xs: var(--aurora-padding-xs);
+    --scroll-padding-xs: var(--aurora-padding-xs);
+    --padding-sm: var(--aurora-padding-sm);
+    --inset-sm: var(--aurora-padding-sm);
+    --scroll-padding-sm: var(--aurora-padding-sm);
+    --padding-md: var(--aurora-padding-md);
+    --inset-md: var(--aurora-padding-md);
+    --scroll-padding-md: var(--aurora-padding-md);
+    --padding-lg: var(--aurora-padding-lg);
+    --inset-lg: var(--aurora-padding-lg);
+    --scroll-padding-lg: var(--aurora-padding-lg);
+    --padding-xl: var(--aurora-padding-xl);
+    --inset-xl: var(--aurora-padding-xl);
+    --scroll-padding-xl: var(--aurora-padding-xl);
+    --padding-xxl: var(--aurora-padding-xxl);
+    --inset-xxl: var(--aurora-padding-xxl);
+    --scroll-padding-xxl: var(--aurora-padding-xxl);
+    --gap-none: var(--aurora-gap-none);
+    --margin-none: var(--aurora-gap-none);
+    --space-none: var(--aurora-gap-none);
+    --scroll-margin-none: var(--aurora-gap-none);
+    --translate-none: var(--aurora-gap-none);
+    --gap-xxs: var(--aurora-gap-xxs);
+    --margin-xxs: var(--aurora-gap-xxs);
+    --space-xxs: var(--aurora-gap-xxs);
+    --scroll-margin-xxs: var(--aurora-gap-xxs);
+    --translate-xxs: var(--aurora-gap-xxs);
+    --gap-xs: var(--aurora-gap-xs);
+    --margin-xs: var(--aurora-gap-xs);
+    --space-xs: var(--aurora-gap-xs);
+    --scroll-margin-xs: var(--aurora-gap-xs);
+    --translate-xs: var(--aurora-gap-xs);
+    --gap-sm: var(--aurora-gap-sm);
+    --margin-sm: var(--aurora-gap-sm);
+    --space-sm: var(--aurora-gap-sm);
+    --scroll-margin-sm: var(--aurora-gap-sm);
+    --translate-sm: var(--aurora-gap-sm);
+    --gap-md: var(--aurora-gap-md);
+    --margin-md: var(--aurora-gap-md);
+    --space-md: var(--aurora-gap-md);
+    --scroll-margin-md: var(--aurora-gap-md);
+    --translate-md: var(--aurora-gap-md);
+    --gap-lg: var(--aurora-gap-lg);
+    --margin-lg: var(--aurora-gap-lg);
+    --space-lg: var(--aurora-gap-lg);
+    --scroll-margin-lg: var(--aurora-gap-lg);
+    --translate-lg: var(--aurora-gap-lg);
+    --gap-xl: var(--aurora-gap-xl);
+    --margin-xl: var(--aurora-gap-xl);
+    --space-xl: var(--aurora-gap-xl);
+    --scroll-margin-xl: var(--aurora-gap-xl);
+    --translate-xl: var(--aurora-gap-xl);
+    --gap-xxl: var(--aurora-gap-xxl);
+    --margin-xxl: var(--aurora-gap-xxl);
+    --space-xxl: var(--aurora-gap-xxl);
+    --scroll-margin-xxl: var(--aurora-gap-xxl);
+    --translate-xxl: var(--aurora-gap-xxl);
     --radius-none: var(--aurora-radius-none);
     --radius-xxs: var(--aurora-radius-xxs);
     --radius-xs: var(--aurora-radius-xs);
-    --radius-xs-plus: var(--aurora-radius-xs-plus);
-    --radius-s: var(--aurora-radius-s);
-    --radius-m: var(--aurora-radius-m);
+    --radius-sm: var(--aurora-radius-sm);
+    --radius-md: var(--aurora-radius-md);
+    --radius-lg: var(--aurora-radius-lg);
+    --radius-xl: var(--aurora-radius-xl);
     --radius-pill: var(--aurora-radius-pill);
-    --radius-tag: var(--aurora-radius-tag);
-    --radius-button: var(--aurora-radius-button);
-    --radius-switch: var(--aurora-radius-switch);
-    --radius-radio: var(--aurora-radius-radio);
-    --radius-progress: var(--aurora-radius-progress);
-    --radius-avatar: var(--aurora-radius-avatar);
-    --radius-tooltip-arrow: var(--aurora-radius-tooltip-arrow);
-    --radius-kbd: var(--aurora-radius-kbd);
-    --radius-tooltip: var(--aurora-radius-tooltip);
-    --radius-checkbox: var(--aurora-radius-checkbox);
-    --radius-item: var(--aurora-radius-item);
-    --radius-card: var(--aurora-radius-card);
-    --radius-input: var(--aurora-radius-input);
-    --radius-toggle: var(--aurora-radius-toggle);
-    --radius-accordion: var(--aurora-radius-accordion);
-    --radius-skeleton: var(--aurora-radius-skeleton);
-    --radius-calendar-day: var(--aurora-radius-calendar-day);
     --border-width-default: var(--aurora-stroke-default);
     --border-width-focus: var(--aurora-stroke-focus);
     --opacity-hidden: var(--aurora-opacity-hidden);
@@ -184,7 +190,7 @@
     /* Padrões usados por utilitários sem valor (transition, font-family base). */
     --default-transition-duration: var(--aurora-motion-duration-normal);
     --default-transition-timing-function: var(--aurora-motion-easing-standard);
-    --default-font-family: var(--aurora-font-body);
+    --default-font-family: var(--aurora-font-text);
 
     /* Animações contínuas. */
     --animate-spin: spin var(--aurora-motion-duration-spin) var(--aurora-motion-easing-linear) infinite;
@@ -199,218 +205,173 @@
 }
 
 /* Estilos de texto: uma classe aplica as 6 propriedades do estilo. */
-@utility typo-headline-1 {
-    font-family: var(--aurora-typography-headline-1-font-family);
-    font-weight: var(--aurora-typography-headline-1-font-weight);
-    font-size: var(--aurora-typography-headline-1-font-size);
-    line-height: var(--aurora-typography-headline-1-line-height);
-    letter-spacing: var(--aurora-typography-headline-1-letter-spacing);
-    text-transform: var(--aurora-typography-headline-1-text-case);
+@utility typo-display-1 {
+    font-family: var(--aurora-typography-display-1-font-family);
+    font-weight: var(--aurora-typography-display-1-font-weight);
+    font-size: var(--aurora-typography-display-1-font-size);
+    line-height: var(--aurora-typography-display-1-line-height);
+    letter-spacing: var(--aurora-typography-display-1-letter-spacing);
+    text-transform: var(--aurora-typography-display-1-text-case);
 }
 
-@utility typo-headline-2 {
-    font-family: var(--aurora-typography-headline-2-font-family);
-    font-weight: var(--aurora-typography-headline-2-font-weight);
-    font-size: var(--aurora-typography-headline-2-font-size);
-    line-height: var(--aurora-typography-headline-2-line-height);
-    letter-spacing: var(--aurora-typography-headline-2-letter-spacing);
-    text-transform: var(--aurora-typography-headline-2-text-case);
+@utility typo-display-2 {
+    font-family: var(--aurora-typography-display-2-font-family);
+    font-weight: var(--aurora-typography-display-2-font-weight);
+    font-size: var(--aurora-typography-display-2-font-size);
+    line-height: var(--aurora-typography-display-2-line-height);
+    letter-spacing: var(--aurora-typography-display-2-letter-spacing);
+    text-transform: var(--aurora-typography-display-2-text-case);
 }
 
-@utility typo-headline-3 {
-    font-family: var(--aurora-typography-headline-3-font-family);
-    font-weight: var(--aurora-typography-headline-3-font-weight);
-    font-size: var(--aurora-typography-headline-3-font-size);
-    line-height: var(--aurora-typography-headline-3-line-height);
-    letter-spacing: var(--aurora-typography-headline-3-letter-spacing);
-    text-transform: var(--aurora-typography-headline-3-text-case);
+@utility typo-display-3 {
+    font-family: var(--aurora-typography-display-3-font-family);
+    font-weight: var(--aurora-typography-display-3-font-weight);
+    font-size: var(--aurora-typography-display-3-font-size);
+    line-height: var(--aurora-typography-display-3-line-height);
+    letter-spacing: var(--aurora-typography-display-3-letter-spacing);
+    text-transform: var(--aurora-typography-display-3-text-case);
 }
 
-@utility typo-headline-4 {
-    font-family: var(--aurora-typography-headline-4-font-family);
-    font-weight: var(--aurora-typography-headline-4-font-weight);
-    font-size: var(--aurora-typography-headline-4-font-size);
-    line-height: var(--aurora-typography-headline-4-line-height);
-    letter-spacing: var(--aurora-typography-headline-4-letter-spacing);
-    text-transform: var(--aurora-typography-headline-4-text-case);
+@utility typo-heading-1 {
+    font-family: var(--aurora-typography-heading-1-font-family);
+    font-weight: var(--aurora-typography-heading-1-font-weight);
+    font-size: var(--aurora-typography-heading-1-font-size);
+    line-height: var(--aurora-typography-heading-1-line-height);
+    letter-spacing: var(--aurora-typography-heading-1-letter-spacing);
+    text-transform: var(--aurora-typography-heading-1-text-case);
 }
 
-@utility typo-headline-5 {
-    font-family: var(--aurora-typography-headline-5-font-family);
-    font-weight: var(--aurora-typography-headline-5-font-weight);
-    font-size: var(--aurora-typography-headline-5-font-size);
-    line-height: var(--aurora-typography-headline-5-line-height);
-    letter-spacing: var(--aurora-typography-headline-5-letter-spacing);
-    text-transform: var(--aurora-typography-headline-5-text-case);
+@utility typo-heading-2 {
+    font-family: var(--aurora-typography-heading-2-font-family);
+    font-weight: var(--aurora-typography-heading-2-font-weight);
+    font-size: var(--aurora-typography-heading-2-font-size);
+    line-height: var(--aurora-typography-heading-2-line-height);
+    letter-spacing: var(--aurora-typography-heading-2-letter-spacing);
+    text-transform: var(--aurora-typography-heading-2-text-case);
 }
 
-@utility typo-display {
-    font-family: var(--aurora-typography-display-font-family);
-    font-weight: var(--aurora-typography-display-font-weight);
-    font-size: var(--aurora-typography-display-font-size);
-    line-height: var(--aurora-typography-display-line-height);
-    letter-spacing: var(--aurora-typography-display-letter-spacing);
-    text-transform: var(--aurora-typography-display-text-case);
+@utility typo-heading-3 {
+    font-family: var(--aurora-typography-heading-3-font-family);
+    font-weight: var(--aurora-typography-heading-3-font-weight);
+    font-size: var(--aurora-typography-heading-3-font-size);
+    line-height: var(--aurora-typography-heading-3-line-height);
+    letter-spacing: var(--aurora-typography-heading-3-letter-spacing);
+    text-transform: var(--aurora-typography-heading-3-text-case);
 }
 
-@utility typo-body-highlight {
-    font-family: var(--aurora-typography-body-highlight-font-family);
-    font-weight: var(--aurora-typography-body-highlight-font-weight);
-    font-size: var(--aurora-typography-body-highlight-font-size);
-    line-height: var(--aurora-typography-body-highlight-line-height);
-    letter-spacing: var(--aurora-typography-body-highlight-letter-spacing);
-    text-transform: var(--aurora-typography-body-highlight-text-case);
+@utility typo-heading-4 {
+    font-family: var(--aurora-typography-heading-4-font-family);
+    font-weight: var(--aurora-typography-heading-4-font-weight);
+    font-size: var(--aurora-typography-heading-4-font-size);
+    line-height: var(--aurora-typography-heading-4-line-height);
+    letter-spacing: var(--aurora-typography-heading-4-letter-spacing);
+    text-transform: var(--aurora-typography-heading-4-text-case);
 }
 
-@utility typo-body {
-    font-family: var(--aurora-typography-body-font-family);
-    font-weight: var(--aurora-typography-body-font-weight);
-    font-size: var(--aurora-typography-body-font-size);
-    line-height: var(--aurora-typography-body-line-height);
-    letter-spacing: var(--aurora-typography-body-letter-spacing);
-    text-transform: var(--aurora-typography-body-text-case);
+@utility typo-heading-5 {
+    font-family: var(--aurora-typography-heading-5-font-family);
+    font-weight: var(--aurora-typography-heading-5-font-weight);
+    font-size: var(--aurora-typography-heading-5-font-size);
+    line-height: var(--aurora-typography-heading-5-line-height);
+    letter-spacing: var(--aurora-typography-heading-5-letter-spacing);
+    text-transform: var(--aurora-typography-heading-5-text-case);
 }
 
-@utility typo-body-bold {
-    font-family: var(--aurora-typography-body-bold-font-family);
-    font-weight: var(--aurora-typography-body-bold-font-weight);
-    font-size: var(--aurora-typography-body-bold-font-size);
-    line-height: var(--aurora-typography-body-bold-line-height);
-    letter-spacing: var(--aurora-typography-body-bold-letter-spacing);
-    text-transform: var(--aurora-typography-body-bold-text-case);
+@utility typo-heading-6 {
+    font-family: var(--aurora-typography-heading-6-font-family);
+    font-weight: var(--aurora-typography-heading-6-font-weight);
+    font-size: var(--aurora-typography-heading-6-font-size);
+    line-height: var(--aurora-typography-heading-6-line-height);
+    letter-spacing: var(--aurora-typography-heading-6-letter-spacing);
+    text-transform: var(--aurora-typography-heading-6-text-case);
 }
 
-@utility typo-body-small {
-    font-family: var(--aurora-typography-body-small-font-family);
-    font-weight: var(--aurora-typography-body-small-font-weight);
-    font-size: var(--aurora-typography-body-small-font-size);
-    line-height: var(--aurora-typography-body-small-line-height);
-    letter-spacing: var(--aurora-typography-body-small-letter-spacing);
-    text-transform: var(--aurora-typography-body-small-text-case);
+@utility typo-body-xl-regular {
+    font-family: var(--aurora-typography-body-xl-regular-font-family);
+    font-weight: var(--aurora-typography-body-xl-regular-font-weight);
+    font-size: var(--aurora-typography-body-xl-regular-font-size);
+    line-height: var(--aurora-typography-body-xl-regular-line-height);
+    letter-spacing: var(--aurora-typography-body-xl-regular-letter-spacing);
+    text-transform: var(--aurora-typography-body-xl-regular-text-case);
 }
 
-@utility typo-body-small-bold {
-    font-family: var(--aurora-typography-body-small-bold-font-family);
-    font-weight: var(--aurora-typography-body-small-bold-font-weight);
-    font-size: var(--aurora-typography-body-small-bold-font-size);
-    line-height: var(--aurora-typography-body-small-bold-line-height);
-    letter-spacing: var(--aurora-typography-body-small-bold-letter-spacing);
-    text-transform: var(--aurora-typography-body-small-bold-text-case);
+@utility typo-body-xl-bold {
+    font-family: var(--aurora-typography-body-xl-bold-font-family);
+    font-weight: var(--aurora-typography-body-xl-bold-font-weight);
+    font-size: var(--aurora-typography-body-xl-bold-font-size);
+    line-height: var(--aurora-typography-body-xl-bold-line-height);
+    letter-spacing: var(--aurora-typography-body-xl-bold-letter-spacing);
+    text-transform: var(--aurora-typography-body-xl-bold-text-case);
 }
 
-@utility typo-body-micro {
-    font-family: var(--aurora-typography-body-micro-font-family);
-    font-weight: var(--aurora-typography-body-micro-font-weight);
-    font-size: var(--aurora-typography-body-micro-font-size);
-    line-height: var(--aurora-typography-body-micro-line-height);
-    letter-spacing: var(--aurora-typography-body-micro-letter-spacing);
-    text-transform: var(--aurora-typography-body-micro-text-case);
+@utility typo-body-lg-regular {
+    font-family: var(--aurora-typography-body-lg-regular-font-family);
+    font-weight: var(--aurora-typography-body-lg-regular-font-weight);
+    font-size: var(--aurora-typography-body-lg-regular-font-size);
+    line-height: var(--aurora-typography-body-lg-regular-line-height);
+    letter-spacing: var(--aurora-typography-body-lg-regular-letter-spacing);
+    text-transform: var(--aurora-typography-body-lg-regular-text-case);
 }
 
-@utility typo-button {
-    font-family: var(--aurora-typography-button-font-family);
-    font-weight: var(--aurora-typography-button-font-weight);
-    font-size: var(--aurora-typography-button-font-size);
-    line-height: var(--aurora-typography-button-line-height);
-    letter-spacing: var(--aurora-typography-button-letter-spacing);
-    text-transform: var(--aurora-typography-button-text-case);
+@utility typo-body-lg-bold {
+    font-family: var(--aurora-typography-body-lg-bold-font-family);
+    font-weight: var(--aurora-typography-body-lg-bold-font-weight);
+    font-size: var(--aurora-typography-body-lg-bold-font-size);
+    line-height: var(--aurora-typography-body-lg-bold-line-height);
+    letter-spacing: var(--aurora-typography-body-lg-bold-letter-spacing);
+    text-transform: var(--aurora-typography-body-lg-bold-text-case);
 }
 
-@utility typo-button-small {
-    font-family: var(--aurora-typography-button-small-font-family);
-    font-weight: var(--aurora-typography-button-small-font-weight);
-    font-size: var(--aurora-typography-button-small-font-size);
-    line-height: var(--aurora-typography-button-small-line-height);
-    letter-spacing: var(--aurora-typography-button-small-letter-spacing);
-    text-transform: var(--aurora-typography-button-small-text-case);
+@utility typo-body-md-regular {
+    font-family: var(--aurora-typography-body-md-regular-font-family);
+    font-weight: var(--aurora-typography-body-md-regular-font-weight);
+    font-size: var(--aurora-typography-body-md-regular-font-size);
+    line-height: var(--aurora-typography-body-md-regular-line-height);
+    letter-spacing: var(--aurora-typography-body-md-regular-letter-spacing);
+    text-transform: var(--aurora-typography-body-md-regular-text-case);
 }
 
-@utility typo-button-uppercase {
-    font-family: var(--aurora-typography-button-uppercase-font-family);
-    font-weight: var(--aurora-typography-button-uppercase-font-weight);
-    font-size: var(--aurora-typography-button-uppercase-font-size);
-    line-height: var(--aurora-typography-button-uppercase-line-height);
-    letter-spacing: var(--aurora-typography-button-uppercase-letter-spacing);
-    text-transform: var(--aurora-typography-button-uppercase-text-case);
+@utility typo-body-md-bold {
+    font-family: var(--aurora-typography-body-md-bold-font-family);
+    font-weight: var(--aurora-typography-body-md-bold-font-weight);
+    font-size: var(--aurora-typography-body-md-bold-font-size);
+    line-height: var(--aurora-typography-body-md-bold-line-height);
+    letter-spacing: var(--aurora-typography-body-md-bold-letter-spacing);
+    text-transform: var(--aurora-typography-body-md-bold-text-case);
 }
 
-@utility typo-button-bold {
-    font-family: var(--aurora-typography-button-bold-font-family);
-    font-weight: var(--aurora-typography-button-bold-font-weight);
-    font-size: var(--aurora-typography-button-bold-font-size);
-    line-height: var(--aurora-typography-button-bold-line-height);
-    letter-spacing: var(--aurora-typography-button-bold-letter-spacing);
-    text-transform: var(--aurora-typography-button-bold-text-case);
+@utility typo-body-sm-regular {
+    font-family: var(--aurora-typography-body-sm-regular-font-family);
+    font-weight: var(--aurora-typography-body-sm-regular-font-weight);
+    font-size: var(--aurora-typography-body-sm-regular-font-size);
+    line-height: var(--aurora-typography-body-sm-regular-line-height);
+    letter-spacing: var(--aurora-typography-body-sm-regular-letter-spacing);
+    text-transform: var(--aurora-typography-body-sm-regular-text-case);
 }
 
-@utility typo-button-small-bold {
-    font-family: var(--aurora-typography-button-small-bold-font-family);
-    font-weight: var(--aurora-typography-button-small-bold-font-weight);
-    font-size: var(--aurora-typography-button-small-bold-font-size);
-    line-height: var(--aurora-typography-button-small-bold-line-height);
-    letter-spacing: var(--aurora-typography-button-small-bold-letter-spacing);
-    text-transform: var(--aurora-typography-button-small-bold-text-case);
+@utility typo-body-sm-bold {
+    font-family: var(--aurora-typography-body-sm-bold-font-family);
+    font-weight: var(--aurora-typography-body-sm-bold-font-weight);
+    font-size: var(--aurora-typography-body-sm-bold-font-size);
+    line-height: var(--aurora-typography-body-sm-bold-line-height);
+    letter-spacing: var(--aurora-typography-body-sm-bold-letter-spacing);
+    text-transform: var(--aurora-typography-body-sm-bold-text-case);
 }
 
-@utility typo-link {
-    font-family: var(--aurora-typography-link-font-family);
-    font-weight: var(--aurora-typography-link-font-weight);
-    font-size: var(--aurora-typography-link-font-size);
-    line-height: var(--aurora-typography-link-line-height);
-    letter-spacing: var(--aurora-typography-link-letter-spacing);
-    text-transform: var(--aurora-typography-link-text-case);
+@utility typo-overline-regular {
+    font-family: var(--aurora-typography-overline-regular-font-family);
+    font-weight: var(--aurora-typography-overline-regular-font-weight);
+    font-size: var(--aurora-typography-overline-regular-font-size);
+    line-height: var(--aurora-typography-overline-regular-line-height);
+    letter-spacing: var(--aurora-typography-overline-regular-letter-spacing);
+    text-transform: var(--aurora-typography-overline-regular-text-case);
 }
 
-@utility typo-link-small {
-    font-family: var(--aurora-typography-link-small-font-family);
-    font-weight: var(--aurora-typography-link-small-font-weight);
-    font-size: var(--aurora-typography-link-small-font-size);
-    line-height: var(--aurora-typography-link-small-line-height);
-    letter-spacing: var(--aurora-typography-link-small-letter-spacing);
-    text-transform: var(--aurora-typography-link-small-text-case);
-}
-
-@utility typo-caption {
-    font-family: var(--aurora-typography-caption-font-family);
-    font-weight: var(--aurora-typography-caption-font-weight);
-    font-size: var(--aurora-typography-caption-font-size);
-    line-height: var(--aurora-typography-caption-line-height);
-    letter-spacing: var(--aurora-typography-caption-letter-spacing);
-    text-transform: var(--aurora-typography-caption-text-case);
-}
-
-@utility typo-modernizacao-title {
-    font-family: var(--aurora-typography-modernizacao-title-font-family);
-    font-weight: var(--aurora-typography-modernizacao-title-font-weight);
-    font-size: var(--aurora-typography-modernizacao-title-font-size);
-    line-height: var(--aurora-typography-modernizacao-title-line-height);
-    letter-spacing: var(--aurora-typography-modernizacao-title-letter-spacing);
-    text-transform: var(--aurora-typography-modernizacao-title-text-case);
-}
-
-@utility typo-modernizacao-subtitle {
-    font-family: var(--aurora-typography-modernizacao-subtitle-font-family);
-    font-weight: var(--aurora-typography-modernizacao-subtitle-font-weight);
-    font-size: var(--aurora-typography-modernizacao-subtitle-font-size);
-    line-height: var(--aurora-typography-modernizacao-subtitle-line-height);
-    letter-spacing: var(--aurora-typography-modernizacao-subtitle-letter-spacing);
-    text-transform: var(--aurora-typography-modernizacao-subtitle-text-case);
-}
-
-@utility typo-modernizacao-sectiontitle {
-    font-family: var(--aurora-typography-modernizacao-sectiontitle-font-family);
-    font-weight: var(--aurora-typography-modernizacao-sectiontitle-font-weight);
-    font-size: var(--aurora-typography-modernizacao-sectiontitle-font-size);
-    line-height: var(--aurora-typography-modernizacao-sectiontitle-line-height);
-    letter-spacing: var(--aurora-typography-modernizacao-sectiontitle-letter-spacing);
-    text-transform: var(--aurora-typography-modernizacao-sectiontitle-text-case);
-}
-
-@utility typo-modernizacao-input-text {
-    font-family: var(--aurora-typography-modernizacao-input-text-font-family);
-    font-weight: var(--aurora-typography-modernizacao-input-text-font-weight);
-    font-size: var(--aurora-typography-modernizacao-input-text-font-size);
-    line-height: var(--aurora-typography-modernizacao-input-text-line-height);
-    letter-spacing: var(--aurora-typography-modernizacao-input-text-letter-spacing);
-    text-transform: var(--aurora-typography-modernizacao-input-text-text-case);
+@utility typo-overline-bold {
+    font-family: var(--aurora-typography-overline-bold-font-family);
+    font-weight: var(--aurora-typography-overline-bold-font-weight);
+    font-size: var(--aurora-typography-overline-bold-font-size);
+    line-height: var(--aurora-typography-overline-bold-line-height);
+    letter-spacing: var(--aurora-typography-overline-bold-letter-spacing);
+    text-transform: var(--aurora-typography-overline-bold-text-case);
 }

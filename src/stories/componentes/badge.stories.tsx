@@ -22,7 +22,7 @@ export const Padrao: Story = { name: "Padrão" }
 
 export const Variantes: Story = {
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-xxxs">
+    <div className="flex flex-wrap items-center gap-md">
       {variants.map((variant) => (
         <Badge key={variant} {...args} variant={variant}>
           {variant}
@@ -34,7 +34,7 @@ export const Variantes: Story = {
 
 export const Status: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-xxxs">
+    <div className="flex flex-wrap items-center gap-md">
       <Badge>Aprovado</Badge>
       <Badge variant="secondary">Em análise</Badge>
       <Badge variant="outline">Rascunho</Badge>

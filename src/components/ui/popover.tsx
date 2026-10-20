@@ -27,7 +27,7 @@ function PopoverContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          "z-overlay flex w-popover origin-(--radix-popover-content-transform-origin) flex-col gap-xxs rounded-card bg-background-6 p-xxs typo-body-small text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider outline-hidden duration-(--aurora-motion-duration-fast) data-[side=bottom]:slide-in-from-top-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay data-open:animate-in data-open:fade-in-(--aurora-opacity-hidden) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-hidden) data-closed:zoom-out-(--aurora-motion-scale-overlay)",
+          "z-overlay flex w-[288px] origin-(--radix-popover-content-transform-origin) flex-col gap-lg rounded-sm bg-background-6 p-lg typo-body-md-regular text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider outline-hidden duration-(--aurora-motion-duration-fast) data-[side=bottom]:slide-in-from-top-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay data-open:animate-in data-open:fade-in-(--aurora-opacity-hidden) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-hidden) data-closed:zoom-out-(--aurora-motion-scale-overlay)",
           className
         )}
         {...props}
@@ -46,7 +46,7 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="popover-header"
-      className={cn("flex flex-col gap-quark typo-body-small", className)}
+      className={cn("flex flex-col gap-xs typo-body-md-regular", className)}
       {...props}
     />
   )
@@ -56,7 +56,7 @@ function PopoverTitle({ className, ...props }: React.ComponentProps<"h2">) {
   return (
     <div
       data-slot="popover-title"
-      className={cn("typo-body-small-bold", className)}
+      className={cn("typo-body-md-bold", className)}
       {...props}
     />
   )

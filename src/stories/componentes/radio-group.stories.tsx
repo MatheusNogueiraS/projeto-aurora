@@ -15,7 +15,7 @@ const meta = {
         ["ted", "TED"],
         ["boleto", "Boleto"],
       ].map(([value, label]) => (
-        <label key={value} className="flex items-center gap-nano typo-body-small">
+        <label key={value} className="flex items-center gap-sm typo-body-md-regular">
           <RadioGroupItem value={value} /> {label}
         </label>
       ))}

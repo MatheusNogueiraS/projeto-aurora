@@ -25,6 +25,15 @@ const fail = msg => errors.push(msg)
 // ---------------------------------------------------------------------------
 // Leitura
 // ---------------------------------------------------------------------------
+// O JavaScript põe chaves que parecem inteiro ("0", "100") antes das demais, o que
+// jogaria "025" para o fim da escala. Aqui as chaves numéricas seguem a ordem do
+// número (025 < 050 < 100) e as outras mantêm a ordem do JSON.
+const orderedEntries = obj => {
+  const entries = Object.entries(obj)
+  const numeric = entries.filter(([k]) => /^\d+$/.test(k)).sort(([a], [b]) => Number(a) - Number(b))
+  return [...numeric, ...entries.filter(([k]) => !/^\d+$/.test(k))]
+}
+
 function flatten(obj, tier, file, prefix = [], inheritedType) {
   const out = []
   const type = obj.$type ?? inheritedType
@@ -35,7 +44,7 @@ function flatten(obj, tier, file, prefix = [], inheritedType) {
     out.push({ id: prefix.join("."), path: prefix, tier, file, type, value: obj.$value, description: obj.$description })
     return out
   }
-  for (const [key, child] of Object.entries(obj)) {
+  for (const [key, child] of orderedEntries(obj)) {
     if (key.startsWith("$")) continue
     if (typeof child !== "object" || child === null) { fail(`${file}: "${[...prefix, key].join(".")}" não é token nem grupo`); continue }
     out.push(...flatten(child, tier, file, [...prefix, key], type))
@@ -209,11 +218,14 @@ ${block(`.${theme.name}`, theme.tokens, true)}`
 // ---------------------------------------------------------------------------
 // tailwind.css (adaptador: expõe SÓ semânticos como classes)
 // ---------------------------------------------------------------------------
-// grupo semântico -> namespace do Tailwind
+// grupo semântico -> namespace(s) do Tailwind
+// padding e gap ficam em namespaces próprios (não em --spacing-*), então cada classe
+// só aceita a escala certa: p-sm usa padding, gap-sm/mt-sm usam gap. Larguras e alturas
+// (w-, h-, size-, min-*, max-*) não têm token: são escritas direto no componente.
 const NAMESPACES = [
   [["color"], "--color-"],
-  [["spacing"], "--spacing-"],
-  [["size"], "--spacing-"], // o namespace de spacing alimenta h-, w-, size-, min-*, max-*
+  [["padding"], ["--padding-", "--inset-", "--scroll-padding-"]],
+  [["gap"], ["--gap-", "--margin-", "--space-", "--scroll-margin-", "--translate-"]],
   [["radius"], "--radius-"],
   [["opacity"], "--opacity-"],
   [["layer"], "--z-index-"],
@@ -231,11 +243,13 @@ for (const t of semantic) {
   if (NOT_EXPOSED.has(t.id)) continue
   const ns = NAMESPACES.find(([p]) => p.every((seg, i) => t.path[i] === seg))
   if (!ns) continue
-  const [prefixPath, twPrefix] = ns
-  const key = twPrefix + t.path.slice(prefixPath.length).join("-")
-  if (seenKeys.has(key)) { fail(`"${t.id}" e "${seenKeys.get(key)}" viram a mesma classe (${key})`); continue }
-  seenKeys.set(key, t.id)
-  themeLines.push(`    ${key}: var(${cssName(t.id)});`)
+  const [prefixPath, twPrefixes] = ns
+  for (const twPrefix of [twPrefixes].flat()) {
+    const key = twPrefix + t.path.slice(prefixPath.length).join("-")
+    if (seenKeys.has(key)) { fail(`"${t.id}" e "${seenKeys.get(key)}" viram a mesma classe (${key})`); continue }
+    seenKeys.set(key, t.id)
+    themeLines.push(`    ${key}: var(${cssName(t.id)});`)
+  }
 }
 if (errors.length) {
   console.error("Tokens inválidos:\n  - " + errors.join("\n  - "))
@@ -264,7 +278,7 @@ ${themeLines.join("\n")}
     /* Padrões usados por utilitários sem valor (transition, font-family base). */
     --default-transition-duration: var(${cssName("motion.duration.normal")});
     --default-transition-timing-function: var(${cssName("motion.easing.standard")});
-    --default-font-family: var(${cssName("font.body")});
+    --default-font-family: var(${cssName("font.text")});
 
     /* Animações contínuas. */
     --animate-spin: spin var(${cssName("motion.duration.spin")}) var(${cssName("motion.easing.linear")}) infinite;
@@ -309,7 +323,7 @@ const mergeConfig = {
       // + palavras-chave do CSS, que não são tokens mas precisam ser reconhecidas como cor
       // (sem elas, cn("border-transparent", "border-link-4") mantém as duas e a transparente vence)
       color: [...namesOf(["color"]), "transparent", "current", "currentcolor", "inherit"],
-      spacing: [...namesOf(["spacing"]), ...namesOf(["size"])],
+      spacing: [...new Set([...namesOf(["padding"]), ...namesOf(["gap"])])],
       radius: namesOf(["radius"]),
       shadow: namesOf(["elevation"]),
       ease: namesOf(["motion", "easing"]),

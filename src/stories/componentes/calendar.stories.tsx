@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>
 
 function DataUnica() {
   const [data, setData] = React.useState<Date | undefined>(new Date())
-  return <Calendar mode="single" selected={data} onSelect={setData} className="rounded-card border-default border-divider" />
+  return <Calendar mode="single" selected={data} onSelect={setData} className="rounded-sm border-default border-divider" />
 }
 
 function Intervalo() {
@@ -29,7 +29,7 @@ function Intervalo() {
       mode="range"
       selected={intervalo}
       onSelect={setIntervalo}
-      className="rounded-card border-default border-divider"
+      className="rounded-sm border-default border-divider"
     />
   )
 }
