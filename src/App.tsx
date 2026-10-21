@@ -157,11 +157,9 @@ export function App() {
               <Badge>Novo</Badge>
               <Badge variant="secondary">Em análise</Badge>
             </Variant>
-            <Variant label="Destructive / Outline / Ghost / Link">
+            <Variant label="Destructive / Outline">
               <Badge variant="destructive">Recusado</Badge>
               <Badge variant="outline">Rascunho</Badge>
-              <Badge variant="ghost">Ghost</Badge>
-              <Badge variant="link">Link</Badge>
             </Variant>
           </Showcase>
 
