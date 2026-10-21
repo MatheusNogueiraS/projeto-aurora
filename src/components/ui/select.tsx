@@ -34,14 +34,17 @@ function SelectTrigger({
   children,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
-  size?: "sm" | "default"
+  /** sm 31, default 39 e lg 42px: as mesmas alturas do Button e do Input. */
+  size?: "sm" | "default" | "lg"
 }) {
+  // hover: borda roxa. Erro só com o campo habilitado e sem valor escolhido (vermelho sobre
+  // uma escolha feita seria mal interpretado); desabilitado nunca fica em erro.
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "flex w-fit items-center justify-between gap-xs rounded-sm border-default border-field bg-transparent py-sm pr-sm pl-md typo-body-md-regular whitespace-nowrap shadow-s transition-[color,box-shadow] outline-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:cursor-not-allowed disabled:opacity-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/invalid-ring data-placeholder:text-text-3 data-[size=sm]:py-xs *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-xs [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
+        "flex w-fit items-center justify-between gap-xs rounded-sm border-default border-field bg-transparent py-sm pr-sm pl-md typo-body-md-regular whitespace-nowrap shadow-s transition-[color,box-shadow] outline-none not-aria-invalid:enabled:hover:border-link-4 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:cursor-not-allowed disabled:opacity-disabled aria-invalid:data-placeholder:enabled:border-invalid aria-invalid:data-placeholder:enabled:ring-(length:--aurora-stroke-focus) aria-invalid:data-placeholder:enabled:ring-invalid/invalid-ring aria-invalid:not-data-placeholder:enabled:hover:border-link-4 data-placeholder:text-text-3 data-[size=sm]:py-xs data-[size=lg]:typo-body-lg-regular *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-xs [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
         className
       )}
       {...props}

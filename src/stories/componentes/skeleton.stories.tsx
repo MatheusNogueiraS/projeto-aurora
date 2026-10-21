@@ -2,37 +2,39 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Skeleton } from "@/components/ui/skeleton"
 
+// Formato e uma largura de exemplo para cada um (no produto, a largura vem do conteúdo).
+const shapes = {
+  Texto: { shape: "text", className: "w-[200px]" },
+  Círculo: { shape: "circle", className: "w-[40px]" },
+  Bloco: { shape: "block", className: "h-[80px] w-[200px]" },
+} as const
+type Shape = keyof typeof shapes
+type SkeletonStoryArgs = { shape: Shape }
+
 const meta = {
   title: "Componentes/Skeleton",
-  component: Skeleton,
   tags: ["autodocs"],
   parameters: {
     docs: { description: { component: "Marcador de lugar enquanto o conteúdo carrega. Imita o formato do que vai aparecer." } },
   },
-} satisfies Meta<typeof Skeleton>
+  args: { shape: "Texto" },
+  argTypes: {
+    shape: { name: "Formato", control: "inline-radio", options: Object.keys(shapes), description: "Forma do conteúdo que vai aparecer." },
+  },
+  render: ({ shape = "Texto" }) => <Skeleton {...shapes[shape]} />,
+} satisfies Meta<SkeletonStoryArgs>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const LinhasDeTexto: Story = {
-  name: "Linhas de texto",
-  render: () => (
-    <div className="flex max-w-[288px] flex-col gap-sm">
-      <Skeleton className="h-[16px] w-3/4" />
-      <Skeleton className="h-[16px] w-1/2" />
-    </div>
-  ),
-}
+export const Padrao: Story = { name: "Padrão" }
 
-export const CartaoComAvatar: Story = {
-  name: "Cartão com avatar",
+export const Variantes: Story = {
   render: () => (
-    <div className="flex max-w-[288px] items-center gap-md">
-      <Skeleton className="size-[40px] shrink-0 rounded-pill" />
-      <div className="flex flex-1 flex-col gap-sm">
-        <Skeleton className="h-[16px] w-2/3" />
-        <Skeleton className="h-[16px] w-1/3" />
-      </div>
+    <div className="flex flex-wrap items-center gap-lg">
+      {(Object.keys(shapes) as Shape[]).map((s) => (
+        <Skeleton key={s} {...shapes[s]} />
+      ))}
     </div>
   ),
 }

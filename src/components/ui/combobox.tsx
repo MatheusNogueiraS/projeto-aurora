@@ -223,7 +223,7 @@ function ComboboxChips({
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
-        "flex flex-wrap items-center gap-xs rounded-sm border-default border-field bg-transparent bg-clip-padding px-md py-sm typo-body-md-regular shadow-s transition-[color,box-shadow] focus-within:border-focus focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/focus-ring has-aria-invalid:border-invalid has-aria-invalid:ring-(length:--aurora-stroke-focus) has-aria-invalid:ring-invalid/invalid-ring has-data-[slot=combobox-chip]:px-sm has-data-[slot=combobox-chip]:py-xs",
+        "flex flex-wrap items-center gap-xs rounded-sm border-default border-field bg-transparent bg-clip-padding px-md py-sm typo-body-md-regular shadow-s transition-[color,box-shadow] focus-within:border-focus focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/focus-ring not-has-aria-invalid:hover:border-link-4 has-aria-invalid:not-has-data-[slot=combobox-chip]:border-invalid has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-(length:--aurora-stroke-focus) has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-invalid/invalid-ring has-data-[slot=combobox-chip]:px-sm has-data-[slot=combobox-chip]:py-xs",
         className
       )}
       {...props}
