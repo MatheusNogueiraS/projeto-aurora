@@ -31,13 +31,15 @@ function Breadcrumb({
 const MAX_VISIBLE_LEVELS = 3
 
 function BreadcrumbList({ className, children, ...props }: React.ComponentProps<"ol">) {
-  // abre os fragmentos (<>…</>) para contar os níveis mesmo quando vêm agrupados com o separador
-  const flatten = (nodes: React.ReactNode): React.ReactNode[] =>
-    React.Children.toArray(nodes).flatMap((node) =>
-      React.isValidElement<{ children?: React.ReactNode }>(node) && node.type === React.Fragment
-        ? flatten(node.props.children)
-        : [node]
-    )
+  // abre os fragmentos (<>…</>) para contar os níveis mesmo quando vêm agrupados com o separador.
+  // Cada elemento recebe uma key única (key do fragmento + a dele); sem isso, níveis de fragmentos
+  // diferentes ficavam com a mesma key e o React deixava níveis antigos na tela ao trocar.
+  const flatten = (nodes: React.ReactNode, prefix = ""): React.ReactNode[] =>
+    React.Children.toArray(nodes).flatMap((node) => {
+      if (!React.isValidElement<{ children?: React.ReactNode }>(node)) return [node]
+      if (node.type === React.Fragment) return flatten(node.props.children, `${prefix}${node.key}/`)
+      return [React.cloneElement(node, { key: `${prefix}${node.key}` })]
+    })
   const items = flatten(children).filter(
     (child): child is React.ReactElement => React.isValidElement(child) && child.type === BreadcrumbItem
   )
