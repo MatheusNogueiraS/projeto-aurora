@@ -4,7 +4,6 @@ import { HouseIcon } from "lucide-react"
 
 import {
   Breadcrumb,
-  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -12,35 +11,30 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-const niveis = ["Início", "Produtos", "Consignado", "Propostas", "Detalhes da proposta"]
+const niveis = ["Início", "Consignado", "Propostas", "Detalhes da proposta"]
 
 // Os controles seguem o Breadcrumb do Nitro: quantidade de níveis, divisor e ícone de início.
+// As reticências não são controle: o componente as mostra sozinho com mais de 3 níveis.
 type BreadcrumbStoryArgs = {
-  amount: 2 | 3 | 4 | 5
+  amount: 2 | 3 | 4
   divider: "Seta" | "Barra"
   homeIcon: boolean
   homeIconOnly: boolean
-  collapse: boolean
 }
 
-function StoryBreadcrumb({ amount, divider, homeIcon, homeIconOnly, collapse }: BreadcrumbStoryArgs) {
+function StoryBreadcrumb({ amount, divider, homeIcon, homeIconOnly }: BreadcrumbStoryArgs) {
   // pega o início e os últimos níveis, para sempre terminar na página atual
   const items = [niveis[0], ...niveis.slice(niveis.length - (amount - 1))]
-  // reticências: mantém início e os dois últimos níveis, e esconde o meio
-  const collapsed = collapse && items.length > 3
-  const visible = collapsed ? [items[0], "…", ...items.slice(-2)] : items
   return (
     <Breadcrumb divider={divider === "Barra" ? "slash" : "arrow"}>
       <BreadcrumbList>
-        {visible.map((label, i) => {
-          const last = i === visible.length - 1
+        {items.map((label, i) => {
+          const last = i === items.length - 1
           return (
             <React.Fragment key={`${label}-${i}`}>
               <BreadcrumbItem>
                 {last ? (
                   <BreadcrumbPage>{label}</BreadcrumbPage>
-                ) : label === "…" ? (
-                  <BreadcrumbEllipsis />
                 ) : i === 0 && homeIcon ? (
                   <BreadcrumbLink href="#" iconLeading={HouseIcon} aria-label={homeIconOnly ? label : undefined}>
                     {homeIconOnly ? null : label}
@@ -64,13 +58,12 @@ const meta = {
   parameters: {
     docs: { description: { component: "Mostra onde a pessoa está e permite voltar para níveis anteriores. O último nível é a página atual." } },
   },
-  args: { amount: 3, divider: "Seta", homeIcon: false, homeIconOnly: false, collapse: false },
+  args: { amount: 3, divider: "Seta", homeIcon: false, homeIconOnly: false },
   argTypes: {
-    amount: { name: "Níveis", control: "inline-radio", options: [2, 3, 4, 5], description: "Quantidade de níveis, contando a página atual." },
+    amount: { name: "Níveis", control: "inline-radio", options: [2, 3, 4], description: "Quantidade de níveis, contando a página atual. Com 4, os do meio viram reticências." },
     divider: { name: "Divisor", control: "inline-radio", options: ["Seta", "Barra"], description: "Separador entre os níveis." },
     homeIcon: { name: "Ícone de início", control: "boolean", description: "Mostra um ícone no primeiro nível.", table: { category: "Ícone" } },
     homeIconOnly: { name: "Apenas ícone", control: "boolean", description: "Mostra só o ícone no primeiro nível.", if: { arg: "homeIcon" }, table: { category: "Ícone" } },
-    collapse: { name: "Reticências", control: "boolean", description: "Esconde os níveis do meio quando há mais de 3." },
   },
   render: (args) => <StoryBreadcrumb {...args} />,
 } satisfies Meta<BreadcrumbStoryArgs>
@@ -86,7 +79,7 @@ export const Variantes: Story = {
       <StoryBreadcrumb {...args} divider="Seta" />
       <StoryBreadcrumb {...args} divider="Barra" />
       <StoryBreadcrumb {...args} divider="Seta" homeIcon homeIconOnly />
-      <StoryBreadcrumb {...args} amount={5} collapse />
+      <StoryBreadcrumb {...args} amount={4} />
     </div>
   ),
 }

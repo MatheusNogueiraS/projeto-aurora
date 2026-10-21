@@ -26,7 +26,28 @@ function Breadcrumb({
   )
 }
 
-function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
+// Regra do componente: com mais de 3 níveis, mostra o início, reticências e os dois últimos
+// níveis (ex.: Início › … › Propostas › Detalhes). Os separadores são refeitos nesse caso.
+const MAX_VISIBLE_LEVELS = 3
+
+function BreadcrumbList({ className, children, ...props }: React.ComponentProps<"ol">) {
+  // abre os fragmentos (<>…</>) para contar os níveis mesmo quando vêm agrupados com o separador
+  const flatten = (nodes: React.ReactNode): React.ReactNode[] =>
+    React.Children.toArray(nodes).flatMap((node) =>
+      React.isValidElement<{ children?: React.ReactNode }>(node) && node.type === React.Fragment
+        ? flatten(node.props.children)
+        : [node]
+    )
+  const items = flatten(children).filter(
+    (child): child is React.ReactElement => React.isValidElement(child) && child.type === BreadcrumbItem
+  )
+  const collapsed =
+    items.length > MAX_VISIBLE_LEVELS
+      ? [items[0], <BreadcrumbItem key="ellipsis"><BreadcrumbEllipsis /></BreadcrumbItem>, ...items.slice(-2)].flatMap(
+          (item, i) => (i === 0 ? [item] : [<BreadcrumbSeparator key={`sep-${i}`} />, item])
+        )
+      : null
+
   return (
     <ol
       data-slot="breadcrumb-list"
@@ -35,7 +56,9 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
         className
       )}
       {...props}
-    />
+    >
+      {collapsed ?? children}
+    </ol>
   )
 }
 
