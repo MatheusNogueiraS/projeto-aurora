@@ -358,39 +358,25 @@ export function App() {
           <Showcase title="Radio Group">
             <Variant label="Vertical">
               <RadioGroup defaultValue="pix">
-                <label className="flex items-center gap-sm typo-body-md-regular">
-                  <RadioGroupItem value="pix" /> Pix
-                </label>
-                <label className="flex items-center gap-sm typo-body-md-regular">
-                  <RadioGroupItem value="ted" /> TED
-                </label>
+                <RadioGroupItem value="pix" label="Pix" />
+                <RadioGroupItem value="ted" label="TED" />
               </RadioGroup>
             </Variant>
             <Variant label="Desabilitado">
               <RadioGroup defaultValue="pix" disabled>
-                <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
-                  <RadioGroupItem value="pix" /> Pix
-                </label>
-                <label className="flex items-center gap-sm typo-body-md-regular text-text-3">
-                  <RadioGroupItem value="ted" /> TED
-                </label>
+                <RadioGroupItem value="pix" label="Pix" />
+                <RadioGroupItem value="ted" label="TED" />
               </RadioGroup>
             </Variant>
           </Showcase>
 
           <Showcase title="Switch">
             <Variant label="Desligado">
-              <label className="flex items-center gap-sm typo-body-md-regular">
-                <Switch /> Notificações
-              </label>
+              <Switch label="Notificações" />
             </Variant>
             <Variant label="Ligado / Pequeno">
-              <label className="flex items-center gap-sm typo-body-md-regular">
-                <Switch defaultChecked /> Modo avião
-              </label>
-              <label className="flex items-center gap-sm typo-body-md-regular">
-                <Switch size="sm" defaultChecked /> Pequeno
-              </label>
+              <Switch defaultChecked label="Modo avião" />
+              <Switch size="sm" defaultChecked label="Pequeno" />
             </Variant>
           </Showcase>
 
@@ -447,16 +433,16 @@ export function App() {
           <Showcase title="Skeleton">
             <Variant label="Linhas de texto">
               <div className="flex w-full flex-col gap-sm">
-                <Skeleton className="h-[16px] w-3/4" />
-                <Skeleton className="h-[16px] w-1/2" />
+                <Skeleton shape="text" className="w-3/4" />
+                <Skeleton shape="text" className="w-1/2" />
               </div>
             </Variant>
             <Variant label="Cartão com avatar">
               <div className="flex w-full items-center gap-md">
-                <Skeleton className="size-[40px] shrink-0 rounded-pill" />
+                <Skeleton shape="circle" className="w-[40px] shrink-0" />
                 <div className="flex flex-1 flex-col gap-sm">
-                  <Skeleton className="h-[16px] w-2/3" />
-                  <Skeleton className="h-[16px] w-1/3" />
+                  <Skeleton shape="text" className="w-2/3" />
+                  <Skeleton shape="text" className="w-1/3" />
                 </div>
               </div>
             </Variant>
