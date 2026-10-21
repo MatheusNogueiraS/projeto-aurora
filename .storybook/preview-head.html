@@ -1,0 +1,48 @@
+<!--
+  Ajustes da documentação do Storybook para celular (até 599px de largura).
+  Só mexem na moldura das páginas de Docs do Storybook: não alteram componentes, tokens nem a
+  versão desktop. Os nomes de classe (.sbdocs-*, .docblock-argstable) são do próprio Storybook.
+-->
+<style>
+  @media (max-width: 599px) {
+    /* margens laterais menores, para o conteúdo ganhar largura */
+    .sbdocs.sbdocs-wrapper {
+      padding: 24px 16px;
+    }
+
+    /* tabela de controles: sem a coluna "Default" (só repete o valor inicial) e mais compacta */
+    table.docblock-argstable thead th:nth-child(3),
+    table.docblock-argstable tbody td:nth-child(3):not([colspan]) {
+      display: none;
+    }
+    table.docblock-argstable {
+      table-layout: fixed;
+      width: 100% !important;
+    }
+    table.docblock-argstable th,
+    table.docblock-argstable td {
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+      overflow-wrap: anywhere;
+    }
+    /* nome, descrição e controle dividem a largura da tela */
+    table.docblock-argstable thead th:nth-child(1) { width: 28% !important; }
+    table.docblock-argstable thead th:nth-child(2) { width: 34% !important; }
+    table.docblock-argstable thead th:nth-child(4) { width: 38% !important; }
+    table.docblock-argstable td * {
+      min-width: 0 !important;
+    }
+    table.docblock-argstable td input,
+    table.docblock-argstable td textarea,
+    table.docblock-argstable td select {
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    /* se algum controle ainda for largo, a tabela rola sozinha em vez da página inteira */
+    .docblock-argstable-wrapper,
+    div:has(> table.docblock-argstable) {
+      overflow-x: auto;
+    }
+  }
+</style>
