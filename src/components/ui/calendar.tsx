@@ -56,12 +56,12 @@ function Calendar({
         ),
         button_previous: cn(
           buttonVariants({ variant: buttonVariant }),
-          "size-(--cell-size) p-none select-none aria-disabled:opacity-disabled",
+          "size-(--cell-size) p-none select-none aria-disabled:opacity-md",
           defaultClassNames.button_previous
         ),
         button_next: cn(
           buttonVariants({ variant: buttonVariant }),
-          "size-(--cell-size) p-none select-none aria-disabled:opacity-disabled",
+          "size-(--cell-size) p-none select-none aria-disabled:opacity-md",
           defaultClassNames.button_next
         ),
         month_caption: cn(
@@ -77,7 +77,7 @@ function Calendar({
           defaultClassNames.dropdown_root
         ),
         dropdown: cn(
-          "absolute inset-none bg-background-6 opacity-hidden",
+          "absolute inset-none bg-background-6 opacity-none",
           defaultClassNames.dropdown
         ),
         caption_label: cn(
@@ -130,7 +130,7 @@ function Calendar({
           defaultClassNames.outside
         ),
         disabled: cn(
-          "text-text-3 opacity-disabled",
+          "text-text-3 opacity-md",
           defaultClassNames.disabled
         ),
         hidden: cn("invisible", defaultClassNames.hidden),
@@ -213,7 +213,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "relative isolate z-raised flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-xs border-(length:--aurora-stroke-none) leading-none group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-raised group-data-[focused=true]/day:border-focus group-data-[focused=true]/day:ring-(length:--aurora-stroke-focus) group-data-[focused=true]/day:ring-focus/focus-ring data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-link-1 data-[range-end=true]:text-link-10 data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-link-2 data-[range-middle=true]:text-text-1 data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-link-1 data-[range-start=true]:text-link-10 data-[selected-single=true]:bg-link-1 data-[selected-single=true]:text-link-10 [&>span]:typo-body-sm-regular [&>span]:opacity-muted",
+        "relative isolate z-raised flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-xs border-(length:--aurora-stroke-none) leading-none group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-raised group-data-[focused=true]/day:border-focus group-data-[focused=true]/day:ring-(length:--aurora-stroke-focus) group-data-[focused=true]/day:ring-focus/md data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-link-1 data-[range-end=true]:text-link-10 data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-link-2 data-[range-middle=true]:text-text-1 data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-link-1 data-[range-start=true]:text-link-10 data-[selected-single=true]:bg-link-1 data-[selected-single=true]:text-link-10 [&>span]:typo-body-sm-regular [&>span]:opacity-lg",
         defaultClassNames.day,
         className
       )}

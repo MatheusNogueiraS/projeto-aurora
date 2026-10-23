@@ -14,7 +14,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex w-full min-w-[0px] items-center rounded-sm border-default border-field shadow-s transition-[color,box-shadow] outline-none in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-(length:--aurora-stroke-none) not-has-[[data-slot][aria-invalid=true]:enabled]:not-has-[[data-slot=input-group-control]:disabled]:hover:border-link-4 has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:opacity-disabled has-[[data-slot=input-group-control]:focus-visible]:border-focus has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--aurora-stroke-focus) has-[[data-slot=input-group-control]:focus-visible]:ring-focus/focus-ring has-[[data-slot][aria-invalid=true]:enabled]:border-invalid has-[[data-slot][aria-invalid=true]:enabled]:ring-(length:--aurora-stroke-focus) has-[[data-slot][aria-invalid=true]:enabled]:ring-invalid/invalid-ring has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-md has-[>[data-align=block-start]]:[&>input]:pb-md has-[>[data-align=inline-end]]:[&>input]:pr-sm has-[>[data-align=inline-start]]:[&>input]:pl-sm",
+        "group/input-group relative flex w-full min-w-[0px] items-center rounded-sm border-default border-field shadow-s transition-[color,box-shadow] outline-none in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-(length:--aurora-stroke-none) not-has-[[data-slot][aria-invalid=true]:enabled]:not-has-[[data-slot=input-group-control]:disabled]:hover:border-link-4 has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:opacity-md has-[[data-slot=input-group-control]:focus-visible]:border-focus has-[[data-slot=input-group-control]:focus-visible]:ring-(length:--aurora-stroke-focus) has-[[data-slot=input-group-control]:focus-visible]:ring-focus/md has-[[data-slot][aria-invalid=true]:enabled]:border-invalid has-[[data-slot][aria-invalid=true]:enabled]:ring-(length:--aurora-stroke-focus) has-[[data-slot][aria-invalid=true]:enabled]:ring-invalid/xs has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-md has-[>[data-align=block-start]]:[&>input]:pb-md has-[>[data-align=inline-end]]:[&>input]:pr-sm has-[>[data-align=inline-start]]:[&>input]:pl-sm",
         className
       )}
       {...props}
@@ -122,7 +122,7 @@ function InputGroupInput({
     <Input
       data-slot="input-group-control"
       className={cn(
-        "flex-1 rounded-none border-(length:--aurora-stroke-none) bg-transparent shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:enabled:ring-(length:--aurora-stroke-none) disabled:opacity-visible",
+        "flex-1 rounded-none border-(length:--aurora-stroke-none) bg-transparent shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:enabled:ring-(length:--aurora-stroke-none) disabled:opacity-full",
         className
       )}
       {...props}
@@ -138,7 +138,7 @@ function InputGroupTextarea({
     <Textarea
       data-slot="input-group-control"
       className={cn(
-        "flex-1 resize-none rounded-none border-(length:--aurora-stroke-none) bg-transparent py-sm shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:enabled:ring-(length:--aurora-stroke-none) disabled:opacity-visible",
+        "flex-1 resize-none rounded-none border-(length:--aurora-stroke-none) bg-transparent py-sm shadow-none ring-(length:--aurora-stroke-none) focus-visible:ring-(length:--aurora-stroke-none) aria-invalid:enabled:ring-(length:--aurora-stroke-none) disabled:opacity-full",
         className
       )}
       {...props}

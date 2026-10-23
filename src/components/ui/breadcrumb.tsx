@@ -93,7 +93,7 @@ function BreadcrumbLink({
     <Comp
       data-slot="breadcrumb-link"
       className={cn(
-        "inline-flex items-center gap-xs rounded-xxs underline-offset-(--aurora-underline-offset) transition-colors outline-none hover:text-text-1 hover:underline focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring [&>svg]:size-[16px] [&>svg]:shrink-0",
+        "inline-flex items-center gap-xs rounded-xxs underline-offset-(--aurora-underline-offset) transition-colors outline-none hover:text-text-1 hover:underline focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md [&>svg]:size-[16px] [&>svg]:shrink-0",
         className
       )}
       {...props}

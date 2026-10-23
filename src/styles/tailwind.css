@@ -161,17 +161,13 @@
     --radius-pill: var(--aurora-radius-pill);
     --border-width-default: var(--aurora-stroke-default);
     --border-width-focus: var(--aurora-stroke-focus);
-    --opacity-hidden: var(--aurora-opacity-hidden);
-    --opacity-invalid-ring: var(--aurora-opacity-invalid-ring);
-    --opacity-danger-border: var(--aurora-opacity-danger-border);
-    --opacity-disabled: var(--aurora-opacity-disabled);
-    --opacity-focus-ring: var(--aurora-opacity-focus-ring);
-    --opacity-surface-subtle: var(--aurora-opacity-surface-subtle);
-    --opacity-pulse: var(--aurora-opacity-pulse);
-    --opacity-hover: var(--aurora-opacity-hover);
-    --opacity-muted: var(--aurora-opacity-muted);
-    --opacity-text-subtle: var(--aurora-opacity-text-subtle);
-    --opacity-visible: var(--aurora-opacity-visible);
+    --opacity-none: var(--aurora-opacity-none);
+    --opacity-xs: var(--aurora-opacity-xs);
+    --opacity-sm: var(--aurora-opacity-sm);
+    --opacity-md: var(--aurora-opacity-md);
+    --opacity-lg: var(--aurora-opacity-lg);
+    --opacity-xl: var(--aurora-opacity-xl);
+    --opacity-full: var(--aurora-opacity-full);
     --shadow-s: var(--aurora-elevation-s);
     --shadow-m: var(--aurora-elevation-m);
     --shadow-inverse: var(--aurora-elevation-inverse);
@@ -200,7 +196,7 @@
         to { rotate: 1turn; }
     }
     @keyframes pulse {
-        50% { opacity: var(--aurora-opacity-pulse); }
+        50% { opacity: var(--aurora-opacity-md); }
     }
 }
 

@@ -112,7 +112,7 @@ function ComboboxContent({
         <ComboboxPrimitive.Popup
           data-slot="combobox-content"
           data-chips={!!anchor}
-          className={cn("group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+28px)] origin-(--transform-origin) overflow-hidden rounded-sm bg-background-6 text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider duration-(--aurora-motion-duration-fast) data-[chips=true]:min-w-(--anchor-width) data-[side=bottom]:slide-in-from-top-overlay data-[side=inline-end]:slide-in-from-left-overlay data-[side=inline-start]:slide-in-from-right-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay *:data-[slot=input-group]:m-xs *:data-[slot=input-group]:mb-none *:data-[slot=input-group]:border-divider *:data-[slot=input-group]:bg-background-4 *:data-[slot=input-group]:shadow-none data-open:animate-in data-open:fade-in-(--aurora-opacity-hidden) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-hidden) data-closed:zoom-out-(--aurora-motion-scale-overlay)", className )}
+          className={cn("group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+28px)] origin-(--transform-origin) overflow-hidden rounded-sm bg-background-6 text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider duration-(--aurora-motion-duration-fast) data-[chips=true]:min-w-(--anchor-width) data-[side=bottom]:slide-in-from-top-overlay data-[side=inline-end]:slide-in-from-left-overlay data-[side=inline-start]:slide-in-from-right-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay *:data-[slot=input-group]:m-xs *:data-[slot=input-group]:mb-none *:data-[slot=input-group]:border-divider *:data-[slot=input-group]:bg-background-4 *:data-[slot=input-group]:shadow-none data-open:animate-in data-open:fade-in-(--aurora-opacity-none) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-none) data-closed:zoom-out-(--aurora-motion-scale-overlay)", className )}
           {...props}
         />
       </ComboboxPrimitive.Positioner>
@@ -142,7 +142,7 @@ function ComboboxItem({
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-sm rounded-xs py-sm pr-xxl pl-sm typo-body-md-regular outline-hidden select-none data-highlighted:bg-background-4 data-highlighted:text-text-1 not-data-[variant=destructive]:data-highlighted:**:text-text-1 data-disabled:pointer-events-none data-disabled:opacity-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
+        "relative flex w-full cursor-default items-center gap-sm rounded-xs py-sm pr-xxl pl-sm typo-body-md-regular outline-hidden select-none data-highlighted:bg-background-4 data-highlighted:text-text-1 not-data-[variant=destructive]:data-highlighted:**:text-text-1 data-disabled:pointer-events-none data-disabled:opacity-md [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
         className
       )}
       {...props}
@@ -223,7 +223,7 @@ function ComboboxChips({
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
-        "flex flex-wrap items-center gap-xs rounded-sm border-default border-field bg-transparent bg-clip-padding px-md py-sm typo-body-md-regular shadow-s transition-[color,box-shadow] focus-within:border-focus focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/focus-ring not-has-aria-invalid:hover:border-link-4 has-aria-invalid:not-has-data-[slot=combobox-chip]:border-invalid has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-(length:--aurora-stroke-focus) has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-invalid/invalid-ring has-data-[slot=combobox-chip]:px-sm has-data-[slot=combobox-chip]:py-xs",
+        "flex flex-wrap items-center gap-xs rounded-sm border-default border-field bg-transparent bg-clip-padding px-md py-sm typo-body-md-regular shadow-s transition-[color,box-shadow] focus-within:border-focus focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/md not-has-aria-invalid:hover:border-link-4 has-aria-invalid:not-has-data-[slot=combobox-chip]:border-invalid has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-(length:--aurora-stroke-focus) has-aria-invalid:not-has-data-[slot=combobox-chip]:ring-invalid/xs has-data-[slot=combobox-chip]:px-sm has-data-[slot=combobox-chip]:py-xs",
         className
       )}
       {...props}
@@ -243,7 +243,7 @@ function ComboboxChip({
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
       className={cn(
-        "flex w-fit items-center justify-center gap-xs rounded-xs bg-background-4 px-sm py-xxs typo-body-sm-regular whitespace-nowrap text-text-1 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-disabled has-data-[slot=combobox-chip-remove]:pr-none",
+        "flex w-fit items-center justify-center gap-xs rounded-xs bg-background-4 px-sm py-xxs typo-body-sm-regular whitespace-nowrap text-text-1 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-md has-data-[slot=combobox-chip-remove]:pr-none",
         className
       )}
       {...props}
@@ -252,7 +252,7 @@ function ComboboxChip({
       {showRemove && (
         <ComboboxPrimitive.ChipRemove
           render={<IconButton variant="ghost" size="xs" aria-label="Remover" />}
-          className="-ml-xs opacity-disabled hover:opacity-visible"
+          className="-ml-xs opacity-md hover:opacity-full"
           data-slot="combobox-chip-remove"
         >
           <XIcon className="pointer-events-none" />

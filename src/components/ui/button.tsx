@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-pill border-default border-transparent bg-clip-padding typo-body-md-regular whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/invalid-ring [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-pill border-default border-transparent bg-clip-padding typo-body-md-regular whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/xs [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
   {
     variants: {
       variant: {
@@ -13,10 +13,10 @@ const buttonVariants = cva(
         outline:
           "border-link-4 bg-transparent text-link-4 hover:bg-link-5 aria-expanded:bg-link-5 disabled:border-details-1",
         secondary:
-          "bg-link-5 text-link-4 hover:bg-link-5/hover aria-expanded:bg-link-5/hover disabled:bg-disabled-surface",
+          "bg-link-5 text-link-4 hover:bg-link-5/lg aria-expanded:bg-link-5/lg disabled:bg-disabled-surface",
         ghost: "text-link-4 hover:bg-link-5 aria-expanded:bg-link-5",
         destructive:
-          "bg-alerts-8 text-alerts-9 hover:bg-alerts-8/hover focus-visible:border-alerts-7/danger-border focus-visible:ring-alerts-7/invalid-ring disabled:bg-disabled-surface",
+          "bg-alerts-8 text-alerts-9 hover:bg-alerts-8/lg focus-visible:border-alerts-7/sm focus-visible:ring-alerts-7/xs disabled:bg-disabled-surface",
         link: "text-link-4 underline-offset-(--aurora-underline-offset) hover:underline",
       },
       size: {

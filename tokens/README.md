@@ -71,7 +71,7 @@ não existem. As classes disponíveis são as dos semânticos:
 | Raio | `rounded-sm`, `rounded-pill`, `rounded-t-xs` | `radius.*` |
 | Tamanho (não é token) | `size-[16px]`, `w-[32px]`, `min-h-[64px]`, `max-w-[320px]` | escrito no componente |
 | Espessura | `border-default` | `stroke.default` |
-| Opacidade | `opacity-disabled`, `bg-link-5/hover`, `ring-focus/focus-ring` | `opacity.*` |
+| Opacidade | `opacity-md`, `bg-link-5/lg`, `ring-focus/md` | `opacity.*` |
 | Sombra | `shadow-s`, `shadow-m` | `elevation.*` |
 | Camada | `z-overlay`, `z-raised` | `layer.*` |
 | Curva | `ease-standard` | `motion.easing.*` |

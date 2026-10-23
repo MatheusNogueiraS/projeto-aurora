@@ -146,23 +146,20 @@
 
   "opacity": {
     "$type": "number",
-    "hidden": { "$value": "{opacity.0}" },
-    "invalid-ring": { "$value": "{opacity.20}" },
-    "danger-border": { "$value": "{opacity.40}" },
-    "disabled": { "$value": "{opacity.50}", "$description": "Elementos desabilitados ou esmaecidos." },
-    "focus-ring": { "$value": "{opacity.50}" },
-    "surface-subtle": { "$value": "{opacity.50}" },
-    "pulse": { "$value": "{opacity.50}", "$description": "Ponto mais transparente da animação pulse (skeleton)." },
-    "hover": { "$value": "{opacity.70}" },
-    "muted": { "$value": "{opacity.70}" },
-    "text-subtle": { "$value": "{opacity.90}" },
-    "visible": { "$value": "{opacity.100}" }
+    "$description": "Escala geral de transparência, do invisível (none) ao opaco (full). Serve no elemento (opacity-md) e na cor (bg-link-1/lg).",
+    "none": { "$value": "{opacity.0}", "$description": "Invisível." },
+    "xs": { "$value": "{opacity.20}", "$description": "Bem leve (ex.: anel de erro)." },
+    "sm": { "$value": "{opacity.40}" },
+    "md": { "$value": "{opacity.50}", "$description": "Metade (ex.: desabilitado, anel de foco, pulso do skeleton)." },
+    "lg": { "$value": "{opacity.70}", "$description": "Ex.: hover em cor cheia." },
+    "xl": { "$value": "{opacity.90}" },
+    "full": { "$value": "{opacity.100}", "$description": "Opaco." }
   },
 
   "font": {
     "$type": "fontFamily",
     "$description": "Papéis de fonte. Trocar a fonte do produto = mudar só aqui.",
-    "heading": { "$value": "{font-family.montserrat}", "$description": "Títulos (heading e display)." },
+    "heading": { "$value": "{font-family.poppins}", "$description": "Títulos (heading e display)." },
     "text": { "$value": "{font-family.lato}", "$description": "Textos (body e overline). A Lato só tem os pesos regular (400) e bold (700)." }
   },
 
