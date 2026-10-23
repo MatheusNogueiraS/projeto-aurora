@@ -44,7 +44,7 @@ function StoryTable({ rows, showCaption, caption = "", showFooter, selectedRow }
             <TableCell>{p.vencimento}</TableCell>
             <TableCell>{real(p.valor)}</TableCell>
             <TableCell>
-              <Badge variant={p.status === "Pago" ? "default" : "outline"}>{p.status}</Badge>
+              <Badge variant={p.status === "Pago" ? "primary" : "outline"}>{p.status}</Badge>
             </TableCell>
           </TableRow>
         ))}
