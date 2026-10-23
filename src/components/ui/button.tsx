@@ -3,6 +3,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
+import { Spinner } from "@/components/ui/spinner"
+
 const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-pill border-default border-transparent bg-clip-padding typo-body-md-regular whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/xs [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
   {
@@ -40,6 +42,7 @@ type ButtonIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 // Anatomia como no Button do Nitro: [ícone antes] texto [ícone depois].
 // Os ícones são opcionais e valem em todas as variantes e tamanhos; o lado com ícone
 // ganha menos padding (has-data-[icon=...]) para o conjunto parecer centralizado.
+// Carregando (loading): o Spinner entra no lugar do ícone de antes e o botão fica bloqueado.
 function Button({
   className,
   variant = "default",
@@ -47,6 +50,8 @@ function Button({
   asChild = false,
   iconLeading: IconLeading,
   iconTrailing: IconTrailing,
+  loading = false,
+  disabled,
   children,
   ...props
 }: React.ComponentProps<"button"> &
@@ -56,6 +61,8 @@ function Button({
     iconLeading?: ButtonIcon
     /** Ícone depois do texto. Sem valor, não aparece. */
     iconTrailing?: ButtonIcon
+    /** Carregando: mostra o Spinner antes do texto e bloqueia o clique. */
+    loading?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
 
@@ -65,9 +72,16 @@ function Button({
       data-variant={variant}
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...props}
     >
-      {IconLeading && <IconLeading data-icon="inline-start" aria-hidden />}
+      {loading ? (
+        // o Spinner acompanha a cor do texto do botão e o tamanho do ícone (12px no xs)
+        <Spinner data-icon="inline-start" size="sm" tone="inherit" className={cn(size === "xs" && "[&_svg]:size-[12px]")} />
+      ) : (
+        IconLeading && <IconLeading data-icon="inline-start" aria-hidden />
+      )}
       <Slot.Slottable>{children}</Slot.Slottable>
       {IconTrailing && <IconTrailing data-icon="inline-end" aria-hidden />}
     </Comp>

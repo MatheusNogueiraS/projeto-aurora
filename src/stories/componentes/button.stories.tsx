@@ -63,7 +63,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Dispara uma ação. Ícone opcional antes e/ou depois do texto. Para botão só com ícone, use o **IconButton**.",
+          "Dispara uma ação. Ícone opcional antes e/ou depois do texto, e estado carregando. Para botão só com ícone, use o **IconButton**.",
       },
     },
   },
@@ -71,6 +71,7 @@ const meta = {
     variant: "default",
     size: "default",
     disabled: false,
+    loading: false,
     children: "Continuar",
     showIconLeading: false,
     iconLeadingName: "Plus",
@@ -80,7 +81,8 @@ const meta = {
   argTypes: {
     variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
     size: { name: "Tamanho", control: "select", options: sizes },
-    disabled: { name: "Desabilitado", control: "boolean" },
+    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o botão.", table: { category: "Estado" } },
+    loading: { name: "Carregando", control: "boolean", description: "Mostra o Spinner antes do texto e bloqueia o clique.", table: { category: "Estado" } },
     children: { name: "Label", control: "text", description: "Texto do botão." },
     showIconLeading: {
       name: "Icon Leading",
@@ -122,12 +124,21 @@ export const Padrao: Story = { name: "Padrão" }
 
 export const Variantes: Story = {
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-md">
-      {variants.map((variant) => (
-        <StoryButton key={variant} {...args} variant={variant}>
-          {variant}
-        </StoryButton>
-      ))}
+    <div className="flex flex-col gap-md">
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryButton key={variant} {...args} variant={variant}>
+            {variant}
+          </StoryButton>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryButton key={variant} {...args} variant={variant} loading>
+            Carregando
+          </StoryButton>
+        ))}
+      </div>
     </div>
   ),
 }
@@ -139,36 +150,6 @@ export const Tamanhos: Story = {
         <StoryButton key={size} {...args} size={size}>
           Tamanho {size}
         </StoryButton>
-      ))}
-    </div>
-  ),
-}
-
-export const ComIcone: Story = {
-  name: "Com ícone",
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Ícone antes, depois ou nos dois lados, em cada tamanho.",
-      },
-    },
-  },
-  render: (args) => (
-    <div className="flex flex-col gap-md">
-      {sizes.map((size) => (
-        <div key={size} className="flex flex-wrap items-center gap-md">
-          <StoryButton {...args} size={size} showIconLeading showIconTrailing={false}>
-            Antes
-          </StoryButton>
-          <StoryButton {...args} size={size} showIconLeading={false} showIconTrailing>
-            Depois
-          </StoryButton>
-          <StoryButton {...args} size={size} showIconLeading showIconTrailing>
-            Os dois
-          </StoryButton>
-          <span className="typo-body-sm-regular text-text-3">{size}</span>
-        </div>
       ))}
     </div>
   ),
