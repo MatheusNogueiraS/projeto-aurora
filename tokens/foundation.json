@@ -124,7 +124,7 @@
 
   "font-family": {
     "$type": "fontFamily",
-    "montserrat": { "$value": ["Montserrat Variable", "Montserrat", "sans-serif"] },
+    "poppins": { "$value": ["Poppins", "sans-serif"] },
     "lato": { "$value": ["Lato", "sans-serif"] }
   },
 

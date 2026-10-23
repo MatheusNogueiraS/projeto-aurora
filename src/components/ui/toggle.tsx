@@ -6,7 +6,7 @@ import { Toggle as TogglePrimitive } from "radix-ui"
 // Ligado usa o lilás com ícone roxo (como o Button secondary), para não se confundir com o
 // hover, que é cinza.
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-xs rounded-sm typo-body-md-regular whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-background-4 hover:text-text-1 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring disabled:pointer-events-none disabled:opacity-disabled aria-invalid:border-invalid aria-invalid:ring-invalid/invalid-ring aria-pressed:bg-link-5 aria-pressed:text-link-4 aria-pressed:hover:bg-link-5/hover aria-pressed:hover:text-link-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
+  "group/toggle inline-flex items-center justify-center gap-xs rounded-sm typo-body-md-regular whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-background-4 hover:text-text-1 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:pointer-events-none disabled:opacity-md aria-invalid:border-invalid aria-invalid:ring-invalid/xs aria-pressed:bg-link-5 aria-pressed:text-link-4 aria-pressed:hover:bg-link-5/lg aria-pressed:hover:text-link-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
   {
     variants: {
       variant: {

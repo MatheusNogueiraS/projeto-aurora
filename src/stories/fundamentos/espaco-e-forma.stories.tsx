@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-import { Grid, Page, Section, TokenCard, TokenTable } from "./doc-ui"
+import { Grid, Page, TokenCard, TokenTable } from "./doc-ui"
 import { cssVar, foundation, group, semantic } from "./tokens-data"
 
 const meta = {
@@ -54,28 +54,6 @@ export const Gap: Story = {
           />
         ))}
       </div>
-    </Page>
-  ),
-}
-
-export const Tamanhos: Story = {
-  render: () => (
-    <Page
-      title="Tamanhos"
-      intro="Tamanho não é token. Assim o design system é controlado por poucas escalas gerais (padding, gap, radius), sem um token para cada componente."
-    >
-      <Section
-        title="Altura dos controles"
-        description="Botão, campo, select, toggle e badge não têm altura fixa: a altura é o padding vertical somado ao conteúdo. Mudar o padding muda todos os controles juntos."
-      />
-      <Section
-        title="Medidas fixas"
-        description="Ícones, caixa do checkbox, trilho do switch, barra do progress e botões só com ícone têm a medida escrita no próprio componente, em px (ex.: size-[16px])."
-      />
-      <Section
-        title="Mínimos e máximos"
-        description="Limites como largura máxima do tooltip ou altura mínima do textarea também ficam escritos no componente (ex.: max-w-[320px], min-h-[64px])."
-      />
     </Page>
   ),
 }

@@ -288,7 +288,7 @@ ${themeLines.join("\n")}
         to { rotate: 1turn; }
     }
     @keyframes pulse {
-        50% { opacity: var(${cssName("opacity.pulse")}); }
+        50% { opacity: var(${cssName("opacity.md")}); }
     }
 }
 

@@ -72,8 +72,8 @@ function AlertDescription({
 // sempre pequeno, e segue a cor do texto do alert (currentColor), mudando junto com o
 // Tipo, sem token próprio.
 const alertActionStyles = {
-  link: "text-current underline hover:opacity-hover",
-  outline: "border-current text-current hover:bg-transparent hover:opacity-hover",
+  link: "text-current underline hover:opacity-lg",
+  outline: "border-current text-current hover:bg-transparent hover:opacity-lg",
 } as const
 
 function AlertAction({

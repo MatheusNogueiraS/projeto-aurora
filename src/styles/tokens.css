@@ -97,7 +97,7 @@
     --aurora-opacity-100: 100%;
 
     /* fundação · font-family */
-    --aurora-font-family-montserrat: 'Montserrat Variable', 'Montserrat', sans-serif;
+    --aurora-font-family-poppins: 'Poppins', sans-serif;
     --aurora-font-family-lato: 'Lato', sans-serif;
 
     /* fundação · font-weight */
@@ -254,20 +254,16 @@
     --aurora-stroke-focus: var(--aurora-value-3);
 
     /* semântico · opacity */
-    --aurora-opacity-hidden: var(--aurora-opacity-0);
-    --aurora-opacity-invalid-ring: var(--aurora-opacity-20);
-    --aurora-opacity-danger-border: var(--aurora-opacity-40);
-    --aurora-opacity-disabled: var(--aurora-opacity-50);
-    --aurora-opacity-focus-ring: var(--aurora-opacity-50);
-    --aurora-opacity-surface-subtle: var(--aurora-opacity-50);
-    --aurora-opacity-pulse: var(--aurora-opacity-50);
-    --aurora-opacity-hover: var(--aurora-opacity-70);
-    --aurora-opacity-muted: var(--aurora-opacity-70);
-    --aurora-opacity-text-subtle: var(--aurora-opacity-90);
-    --aurora-opacity-visible: var(--aurora-opacity-100);
+    --aurora-opacity-none: var(--aurora-opacity-0);
+    --aurora-opacity-xs: var(--aurora-opacity-20);
+    --aurora-opacity-sm: var(--aurora-opacity-40);
+    --aurora-opacity-md: var(--aurora-opacity-50);
+    --aurora-opacity-lg: var(--aurora-opacity-70);
+    --aurora-opacity-xl: var(--aurora-opacity-90);
+    --aurora-opacity-full: var(--aurora-opacity-100);
 
     /* semântico · font */
-    --aurora-font-heading: var(--aurora-font-family-montserrat);
+    --aurora-font-heading: var(--aurora-font-family-poppins);
     --aurora-font-text: var(--aurora-font-family-lato);
 
     /* semântico · font-size */

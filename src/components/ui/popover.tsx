@@ -27,7 +27,7 @@ function PopoverContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          "z-overlay flex w-[288px] origin-(--radix-popover-content-transform-origin) flex-col gap-lg rounded-sm bg-background-6 p-lg typo-body-md-regular text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider outline-hidden duration-(--aurora-motion-duration-fast) data-[side=bottom]:slide-in-from-top-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay data-open:animate-in data-open:fade-in-(--aurora-opacity-hidden) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-hidden) data-closed:zoom-out-(--aurora-motion-scale-overlay)",
+          "z-overlay flex w-[288px] origin-(--radix-popover-content-transform-origin) flex-col gap-lg rounded-sm bg-background-6 p-lg typo-body-md-regular text-text-1 shadow-m ring-(length:--aurora-stroke-default) ring-divider outline-hidden duration-(--aurora-motion-duration-fast) data-[side=bottom]:slide-in-from-top-overlay data-[side=left]:slide-in-from-right-overlay data-[side=right]:slide-in-from-left-overlay data-[side=top]:slide-in-from-bottom-overlay data-open:animate-in data-open:fade-in-(--aurora-opacity-none) data-open:zoom-in-(--aurora-motion-scale-overlay) data-closed:animate-out data-closed:fade-out-(--aurora-opacity-none) data-closed:zoom-out-(--aurora-motion-scale-overlay)",
           className
         )}
         {...props}

@@ -137,7 +137,7 @@ const FORBIDDEN = [
   [/^(opacity|z|duration|delay|rotate|scale|scale-[xy]|zoom-(in|out)|fade-(in|out)|spin-(in|out))-\d+$/, "valor numérico solto: use um token semântico"],
   [/^slide-(in|out)-from-[a-z]+-\d+$/, "distância solta: use slide-*-overlay"],
   [/^(underline-offset|outline-offset|ring-offset|decoration|leading|blur|backdrop-blur)-\d+$/, "valor numérico solto: use um token semântico (ex.: underline-offset-(--aurora-underline-offset))"],
-  [/^(?!(w|h|size|min-w|max-w|min-h|max-h|inset|inset-[xy]|top|left|right|bottom|start|end|translate-[xy]|basis|aspect)-\d+\/\d+$).*\/\d+$/, "opacidade solta (ex.: /50): use um token de opacity (ex.: /hover)"],
+  [/^(?!(w|h|size|min-w|max-w|min-h|max-h|inset|inset-[xy]|top|left|right|bottom|start|end|translate-[xy]|basis|aspect)-\d+\/\d+$).*\/\d+$/, "opacidade solta (ex.: /50): use um token de opacity (ex.: /lg)"],
   [/--spacing\(/, "--spacing() não existe sem o tema do Tailwind: use um token"],
 ]
 const UNIT = /(\d)(px|rem|em|vh|vw|deg|turn|ms|s)\b|#[0-9a-f]{3,8}\b|\b(rgb|rgba|hsl|hsla|oklch|oklab)\(/i

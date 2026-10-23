@@ -191,17 +191,13 @@ export const tokenMergeConfig = {
       "opacity": [
         {
           "opacity": [
-            "hidden",
-            "invalid-ring",
-            "danger-border",
-            "disabled",
-            "focus-ring",
-            "surface-subtle",
-            "pulse",
-            "hover",
-            "muted",
-            "text-subtle",
-            "visible"
+            "none",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "full"
           ]
         }
       ],

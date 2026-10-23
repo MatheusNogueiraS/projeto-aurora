@@ -64,7 +64,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-sm rounded-sm border-default border-transparent py-lg text-left typo-body-md-bold transition-all outline-none hover:underline focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/focus-ring focus-visible:after:border-focus disabled:pointer-events-none disabled:opacity-disabled **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-[16px] **:data-[slot=accordion-trigger-icon]:text-text-3 **:data-[slot=accordion-trigger-icon]:translate-y-xxs *:data-[icon=inline-start]:size-[16px] *:data-[icon=inline-start]:shrink-0 *:data-[icon=inline-start]:translate-y-xxs",
+          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-sm rounded-sm border-default border-transparent py-lg text-left typo-body-md-bold transition-all outline-none hover:underline focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md focus-visible:after:border-focus disabled:pointer-events-none disabled:opacity-md **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-[16px] **:data-[slot=accordion-trigger-icon]:text-text-3 **:data-[slot=accordion-trigger-icon]:translate-y-xxs *:data-[icon=inline-start]:size-[16px] *:data-[icon=inline-start]:shrink-0 *:data-[icon=inline-start]:translate-y-xxs",
           className
         )}
         {...props}

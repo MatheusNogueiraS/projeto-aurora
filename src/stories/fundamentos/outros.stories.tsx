@@ -15,7 +15,7 @@ export const Opacidade: Story = {
   render: () => (
     <Page
       title="Opacidade"
-      intro="Transparências por papel. Na cor: bg-link-5/hover. No elemento: opacity-disabled."
+      intro="Escala geral de transparência, do invisível (none) ao opaco (full). Serve no elemento (opacity-md) e na cor (bg-link-1/lg)."
     >
       <Grid>
         {group(semantic, ["opacity"]).map((t) => (
