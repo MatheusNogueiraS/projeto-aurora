@@ -3,6 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
+// Cores de status (tonal, como a versão light do Genesis): fundo claro e texto escuro da mesma
+// cor, sem borda. Fonte única: o Toast usa as mesmas.
+const statusTones = {
+  info: cn("border-transparent bg-link-5 text-link-4"),
+  success: cn("border-transparent bg-alerts-2 text-alerts-3"),
+  warning: cn("border-transparent bg-alerts-5 text-alerts-6"),
+  destructive: cn("border-transparent bg-alerts-8 text-alerts-9"),
+}
+// no status, título, descrição e ícone seguem a cor do texto
+const statusDescription = cn("*:data-[slot=alert-description]:text-current")
+
 const alertVariants = cva(
   "group/alert relative grid w-full gap-xxs rounded-sm border-default px-lg py-md text-left typo-body-md-regular has-data-[slot=alert-action]:grid-cols-[1fr_auto] has-data-[slot=alert-action]:gap-x-md has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:has-data-[slot=alert-action]:grid-cols-[auto_1fr_auto] has-[>svg]:gap-x-sm *:[svg]:row-span-2 *:[svg]:translate-y-xxs *:[svg]:text-current *:[svg:not([class*='size-'])]:size-[16px]",
   {
@@ -10,12 +21,10 @@ const alertVariants = cva(
       variant: {
         // neutro: fundo da página com borda
         default: "bg-background-6 text-text-1",
-        // status (como a versão light do Genesis): fundo claro e texto escuro da mesma cor,
-        // sem borda; título, descrição e ícone seguem a cor do status
-        info: "border-transparent bg-link-5 text-link-4 *:data-[slot=alert-description]:text-link-4",
-        success: "border-transparent bg-alerts-2 text-alerts-3 *:data-[slot=alert-description]:text-alerts-3",
-        warning: "border-transparent bg-alerts-5 text-alerts-6 *:data-[slot=alert-description]:text-alerts-6",
-        destructive: "border-transparent bg-alerts-8 text-alerts-9 *:data-[slot=alert-description]:text-alerts-9",
+        info: cn(statusTones.info, statusDescription),
+        success: cn(statusTones.success, statusDescription),
+        warning: cn(statusTones.warning, statusDescription),
+        destructive: cn(statusTones.destructive, statusDescription),
       },
     },
     defaultVariants: {
@@ -91,4 +100,4 @@ function AlertAction({
   )
 }
 
-export { Alert, AlertTitle, AlertDescription, AlertAction }
+export { Alert, AlertTitle, AlertDescription, AlertAction, statusTones }
