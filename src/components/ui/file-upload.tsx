@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils"
 
 import { IconButton } from "@/components/ui/icon-button"
 import { Progress } from "@/components/ui/progress"
+import { Spinner } from "@/components/ui/spinner"
 
 /** Arquivo exibido no componente (um File serve, ou só nome e tamanho vindos do servidor). */
 type FileUploadFile = { name: string; size: number; type?: string }
@@ -195,7 +196,7 @@ type FileUploadProps = Omit<React.ComponentProps<"div">, "title"> & {
   file?: FileUploadFile | null
   /** Situação do envio do arquivo escolhido. */
   status?: "uploading" | "done" | "error"
-  /** Progresso do envio, de 0 a 100. */
+  /** Progresso do envio, de 0 a 100. Sem ele, o envio mostra o Spinner (carregando, sem porcentagem). */
   progress?: number
   /** Mensagem de erro (ex.: falha no envio, campo obrigatório). */
   error?: string
@@ -208,7 +209,8 @@ type FileUploadProps = Omit<React.ComponentProps<"div">, "title"> & {
 }
 
 // Envio de um arquivo, no modelo do GUpload do Genesis: um cartão que muda de estado —
-// vazio (área tracejada; clique ou arraste), enviando (barra de progresso), concluído e erro.
+// vazio (área tracejada; clique ou arraste), enviando (barra de progresso ou, sem progresso, o Spinner),
+// concluído e erro.
 // Valida tipo e tamanho antes de entregar o arquivo.
 function FileUpload({
   className,
@@ -223,7 +225,7 @@ function FileUpload({
   orientation = "horizontal",
   file,
   status = "done",
-  progress = 0,
+  progress,
   error,
   onFileSelect,
   onRemove,
@@ -277,15 +279,23 @@ function FileUpload({
 
   let card: React.ReactNode
   if (file && !uploadFailed) {
+    const uploading = status === "uploading"
+    const loading = uploading && progress == null
     card = (
       <Card
         {...shared}
         state={status === "uploading" ? "uploading" : "done"}
-        icon={status === "done" ? <CircleCheckIcon /> : <FileTypeIcon file={file} />}
+        icon={
+          status === "done" ? <CircleCheckIcon /> : loading ? <Spinner size="sm" tone="inherit" /> : <FileTypeIcon file={file} />
+        }
         title={file.name}
         isFileName
         description={
-          status === "uploading" ? `${formatFileSize(file.size)} · ${Math.round(progress)}%` : formatFileSize(file.size)
+          loading
+            ? `${formatFileSize(file.size)} · Enviando...`
+            : uploading
+              ? `${formatFileSize(file.size)} · ${Math.round(progress ?? 0)}%`
+              : formatFileSize(file.size)
         }
         actions={
           onRemove && (
@@ -295,7 +305,7 @@ function FileUpload({
           )
         }
       >
-        {status === "uploading" && (
+        {uploading && !loading && (
           <Progress value={progress} aria-label={`Enviando ${file.name}`} className="mt-xs" />
         )}
       </Card>

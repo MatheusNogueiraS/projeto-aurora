@@ -52,15 +52,16 @@ const meta = {
     docs: {
       description: {
         component:
-          "Botão só com ícone, para ações conhecidas (adicionar, fechar, favoritar). Mesmas variantes e alturas do **Button**.",
+          "Botão só com ícone, para ações conhecidas (adicionar, fechar, favoritar). Mesmas variantes e alturas do **Button**, e estado carregando.",
       },
     },
   },
-  args: { variant: "default", size: "default", disabled: false, iconName: "Plus" },
+  args: { variant: "default", size: "default", disabled: false, loading: false, iconName: "Plus" },
   argTypes: {
     variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
     size: { name: "Tamanho", control: "select", options: sizes },
-    disabled: { name: "Desabilitado", control: "boolean" },
+    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o botão.", table: { category: "Estado" } },
+    loading: { name: "Carregando", control: "boolean", description: "Troca o ícone pelo Spinner e bloqueia o clique.", table: { category: "Estado" } },
     iconName: { name: "Ícone", control: "select", options: Object.keys(icons), description: "Ícone exibido." },
     // propriedades de código que não fazem sentido como controle visual
     children: { table: { disable: true } },
@@ -76,10 +77,17 @@ export const Padrao: Story = { name: "Padrão" }
 
 export const Variantes: Story = {
   render: (args) => (
-    <div className="flex flex-wrap items-center gap-md">
-      {variants.map((variant) => (
-        <StoryIconButton key={variant} {...args} variant={variant} />
-      ))}
+    <div className="flex flex-col gap-md">
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryIconButton key={variant} {...args} variant={variant} />
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryIconButton key={variant} {...args} variant={variant} loading />
+        ))}
+      </div>
     </div>
   ),
 }
