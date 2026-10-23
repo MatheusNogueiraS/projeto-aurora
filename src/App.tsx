@@ -154,7 +154,7 @@ export function App() {
 
           <Showcase title="Badge">
             <Variant label="Default / Secondary">
-              <Badge>Novo</Badge>
+              <Badge variant="primary">Novo</Badge>
               <Badge variant="secondary">Em análise</Badge>
             </Variant>
             <Variant label="Destructive / Outline">
@@ -534,7 +534,7 @@ export function App() {
                   <TableRow data-state="selected">
                     <TableCell>Setembro</TableCell>
                     <TableCell>
-                      <Badge>Pago</Badge>
+                      <Badge variant="primary">Pago</Badge>
                     </TableCell>
                   </TableRow>
                   <TableRow>

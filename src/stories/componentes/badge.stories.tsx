@@ -1,9 +1,11 @@
+import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { CheckIcon, CircleAlertIcon, ClockIcon, InfoIcon, StarIcon, XIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
-const variants = ["default", "secondary", "destructive", "outline"] as const
+const variants = ["default", "primary", "secondary", "success", "warning", "destructive", "outline"] as const
 const sizes = ["default", "lg", "xl"] as const
 
 // Ícones que dá para escolher nos controles (no código, qualquer ícone do lucide-react serve),
@@ -18,19 +20,39 @@ const icons = {
 }
 type IconName = keyof typeof icons
 
-// Os controles seguem o Badge do Nitro: texto, ícones antes/depois e tamanho.
+// Os controles seguem o Badge do Nitro (texto, ícone, tamanho) mais os extras do Design System CB:
+// indicador e removível. O badge não é clicável; a única ação é remover.
 type BadgeStoryArgs = {
   variant: (typeof variants)[number]
   size: (typeof sizes)[number]
   iconOnly: boolean
   label: string
+  dot: boolean
   showIconLeading: boolean
   iconLeadingName: IconName
-  showIconTrailing: boolean
-  iconTrailingName: IconName
+  removable: boolean
 }
 
-function StoryBadge({ variant, size, iconOnly, label, showIconLeading, iconLeadingName = "Check", showIconTrailing, iconTrailingName = "X" }: BadgeStoryArgs) {
+// controles escondidos não chegam até aqui, por isso os padrões
+function StoryBadge({
+  variant = "default",
+  size = "default",
+  iconOnly = false,
+  label = "Em análise",
+  dot = false,
+  showIconLeading = false,
+  iconLeadingName = "Check",
+  removable = false,
+}: Partial<BadgeStoryArgs>) {
+  // a key de quem usa recria o componente quando "Removível" muda; aqui remover continua funcionando
+  const [removed, setRemoved] = React.useState(false)
+  if (removed) {
+    return (
+      <Button variant="link" size="xs" onClick={() => setRemoved(false)}>
+        Mostrar de novo
+      </Button>
+    )
+  }
   if (iconOnly) {
     const { icon, label: a11y } = icons[iconLeadingName]
     return <Badge variant={variant} size={size} iconLeading={icon} aria-label={a11y} />
@@ -39,8 +61,9 @@ function StoryBadge({ variant, size, iconOnly, label, showIconLeading, iconLeadi
     <Badge
       variant={variant}
       size={size}
+      dot={dot}
       iconLeading={showIconLeading ? icons[iconLeadingName].icon : undefined}
-      iconTrailing={showIconTrailing ? icons[iconTrailingName].icon : undefined}
+      onRemove={removable ? () => setRemoved(true) : undefined}
     >
       {label}
     </Badge>
@@ -50,28 +73,30 @@ function StoryBadge({ variant, size, iconOnly, label, showIconLeading, iconLeadi
 const meta = {
   title: "Componentes/Badge",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Rótulo curto de status ou categoria. Não é clicável." } } },
+  parameters: {
+    docs: { description: { component: "Rótulo curto de status ou categoria. Não é clicável; pode ter a opção de remover." } },
+  },
   args: {
     variant: "default",
     size: "default",
     iconOnly: false,
     label: "Em análise",
+    dot: false,
     showIconLeading: false,
     iconLeadingName: "Check",
-    showIconTrailing: false,
-    iconTrailingName: "X",
+    removable: false,
   },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
+    variant: { name: "Tipo", control: "select", options: variants, description: "Cor do badge. default é o cinza neutro." },
     size: { name: "Tamanho", control: "inline-radio", options: sizes },
     iconOnly: { name: "Apenas ícone", control: "boolean", description: "Mostra só o ícone, sem texto." },
     label: { name: "Label", control: "text", description: "Texto do badge.", if: { arg: "iconOnly", truthy: false } },
+    dot: { name: "Indicador", control: "boolean", description: "Ponto na cor do badge antes do texto.", if: { arg: "iconOnly", truthy: false } },
     showIconLeading: { name: "Icon Leading", control: "boolean", description: "Mostra um ícone antes do texto.", if: { arg: "iconOnly", truthy: false }, table: { category: "Ícones" } },
     iconLeadingName: { name: "Icon Leading · ícone", control: "select", options: Object.keys(icons), table: { category: "Ícones" } },
-    showIconTrailing: { name: "Icon Trailing", control: "boolean", description: "Mostra um ícone depois do texto.", if: { arg: "iconOnly", truthy: false }, table: { category: "Ícones" } },
-    iconTrailingName: { name: "Icon Trailing · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconTrailing" }, table: { category: "Ícones" } },
+    removable: { name: "Removível", control: "boolean", description: "Mostra o x para remover, à direita.", if: { arg: "iconOnly", truthy: false } },
   },
-  render: (args) => <StoryBadge {...args} />,
+  render: (args) => <StoryBadge key={String(args.removable)} {...args} />,
 } satisfies Meta<BadgeStoryArgs>
 
 export default meta
@@ -89,6 +114,21 @@ export const Variantes: Story = {
       </div>
       <div className="flex flex-wrap items-center gap-md">
         {variants.map((variant) => (
+          <StoryBadge key={variant} {...args} variant={variant} iconOnly={false} dot label="Indicador" />
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryBadge key={variant} {...args} variant={variant} iconOnly={false} removable label="Removível" />
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
+          <StoryBadge key={variant} {...args} variant={variant} iconOnly={false} showIconLeading label="Com ícone" />
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {variants.map((variant) => (
           <StoryBadge key={variant} {...args} variant={variant} iconOnly />
         ))}
       </div>
@@ -102,6 +142,11 @@ export const Tamanhos: Story = {
       <div className="flex flex-wrap items-center gap-md">
         {sizes.map((size) => (
           <StoryBadge key={size} {...args} size={size} iconOnly={false} label={`Tamanho ${size}`} />
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-md">
+        {sizes.map((size) => (
+          <StoryBadge key={size} {...args} size={size} iconOnly={false} removable dot label="Removível" />
         ))}
       </div>
       <div className="flex flex-wrap items-center gap-md">
