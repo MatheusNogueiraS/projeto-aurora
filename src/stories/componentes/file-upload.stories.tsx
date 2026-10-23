@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { FileUpload, type FileUploadFile } from "@/components/ui/file-upload"
 
-const states = ["Vazio", "Enviando", "Concluído", "Erro"] as const
+const states = ["Vazio", "Enviando", "Carregando", "Concluído", "Erro"] as const
 type State = (typeof states)[number]
 const errorKinds = ["Sem arquivo", "Falha no envio"] as const
 
@@ -53,8 +53,8 @@ function StoryFileUpload({
       maxSize={5 * 1024 * 1024}
       disabled={disabled}
       file={file}
-      status={failed && file ? "error" : state === "Enviando" ? "uploading" : "done"}
-      progress={progress}
+      status={failed && file ? "error" : state === "Enviando" || state === "Carregando" ? "uploading" : "done"}
+      progress={state === "Carregando" ? undefined : progress}
       error={failed ? error : undefined}
       onFileSelect={(f) => {
         setFailed(false)
@@ -85,7 +85,7 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    state: { name: "Estado", control: "inline-radio", options: states, description: "Vazio, enviando, concluído ou erro." },
+    state: { name: "Estado", control: "inline-radio", options: states, description: "Vazio, enviando (com porcentagem), carregando (sem porcentagem), concluído ou erro." },
     media: { name: "Mídia", control: "inline-radio", options: ["plain", "icon"], description: "plain: só o ícone; icon: ícone num quadro." },
     size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default"], description: "sm (14px) ou default (16px)." },
     orientation: { name: "Orientação", control: "inline-radio", options: ["horizontal", "vertical"], description: "vertical: ícone acima do texto." },
