@@ -6,9 +6,12 @@ import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 type AccordionRootProps = React.ComponentProps<typeof AccordionPrimitive.Root>
 type AccordionMultipleProps = Extract<AccordionRootProps, { type: "multiple" }>
 
-// O componente de design é o item (como no Nitro): uma lista é a soma de itens, e por
-// padrão cada um abre e fecha sozinho (type "multiple"). O grupo existe por acessibilidade
-// (setas do teclado entre os títulos); "um aberto por vez" continua disponível com type="single".
+// Base: o Accordion do shadcn (radix-vega). Adaptações do Aurora:
+// - tokens no lugar das cores e medidas do shadcn;
+// - abre vários de uma vez por padrão (type "multiple"); "um por vez" é type="single" + collapsible;
+// - Tipo do item (como o InfoDrop do Design System CB): linha (divisor só entre os itens, como no
+//   shadcn) ou caixa (borda em volta de UM item; vários em caixa ficam empilhados, com espaço);
+// - ícone opcional antes do título (iconLeading) e altura do conteúdo livre (ver AccordionContent).
 function Accordion({
   className,
   ...props
@@ -17,29 +20,28 @@ function Accordion({
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
-      className={cn("flex w-full flex-col", className)}
+      // itens em caixa ficam separados por um espaço
+      className={cn("flex w-full flex-col has-[>[data-variant=box]]:gap-md", className)}
       {...rootProps}
     />
   )
 }
 
-// O divisor faz parte do item (linha embaixo). Numa lista, o último item fica sem linha;
-// um item sozinho mantém a linha.
+// Linha: como no shadcn, o divisor fica embaixo de cada item, menos do último (um item sozinho
+// não tem). Caixa: a borda envolve só este item.
 function AccordionItem({
   className,
-  divider = true,
+  variant = "line",
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Item> & {
-  /** Linha embaixo do item. Ligada por padrão. */
-  divider?: boolean
+  /** line: divisor entre os itens; box: borda em volta do item. */
+  variant?: "line" | "box"
 }) {
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn(
-        divider && "border-b-default [&:last-child:not(:only-child)]:border-b-(length:--aurora-stroke-none)",
-        className
-      )}
+      data-variant={variant}
+      className={cn(variant === "box" ? "rounded-sm border-default border-divider px-lg" : "not-last:border-b-default", className)}
       {...props}
     />
   )
@@ -78,6 +80,9 @@ function AccordionTrigger({
   )
 }
 
+// O conteúdo é um slot: texto ou outros componentes (ex.: DataLine). Diferente do shadcn, a parte
+// de dentro não fixa a altura medida ao abrir (h-(--radix-accordion-content-height)): com ela, o
+// conteúdo que muda com o item aberto ficava cortado. A medida continua servindo à animação.
 function AccordionContent({
   className,
   children,
@@ -91,7 +96,7 @@ function AccordionContent({
     >
       <div
         className={cn(
-          "h-(--radix-accordion-content-height) pt-none pb-lg [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-lg",
+          "pt-none pb-lg [&_a]:underline [&_a]:underline-offset-(--aurora-underline-offset) [&_a]:hover:text-text-1 [&_p:not(:last-child)]:mb-lg",
           className
         )}
       >
