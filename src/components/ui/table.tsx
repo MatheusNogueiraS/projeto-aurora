@@ -62,12 +62,27 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   )
 }
 
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
+// Alinhamento do conteúdo da célula (cabeçalho e conteúdo da mesma coluna usam o mesmo):
+// valores e números à direita, para as casas se alinharem. O texto segue o text-align; componentes
+// em bloco (Checkbox, Select) vão para o lado pela margem, e grupos em grade (Radio) pelo justify.
+// Na última coluna, overflow-x-clip: a área de toque invisível dos controles (maior que eles) não
+// passa da borda da tabela nem cria rolagem lateral. Só nela: nas outras, cortaria em silêncio
+// um texto (ex.: um valor) quando a coluna tem largura fixa.
+const cellAlign = {
+  left: cn("text-left"),
+  center: cn("text-center *:mx-auto *:justify-items-center"),
+  right: cn("text-right *:ml-auto *:justify-items-end"),
+}
+type CellAlign = keyof typeof cellAlign
+
+// Célula de cabeçalho (título da coluna).
+function TableHead({ className, align = "left", ...props }: Omit<React.ComponentProps<"th">, "align"> & { align?: CellAlign }) {
   return (
     <th
       data-slot="table-head"
       className={cn(
-        "px-sm py-sm text-left align-middle typo-body-md-bold whitespace-nowrap text-text-1 [&:has([role=checkbox])]:pr-none",
+        cellAlign[align],
+        "px-sm last:overflow-x-clip py-sm align-middle typo-body-md-bold whitespace-nowrap text-text-1",
         className
       )}
       {...props}
@@ -75,12 +90,14 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
+// Célula de conteúdo: texto ou qualquer componente dentro (Badge, Checkbox, Avatar, ação...).
+function TableCell({ className, align = "left", ...props }: Omit<React.ComponentProps<"td">, "align"> & { align?: CellAlign }) {
   return (
     <td
       data-slot="table-cell"
       className={cn(
-        "p-sm align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-none",
+        cellAlign[align],
+        "p-sm last:overflow-x-clip align-middle whitespace-nowrap",
         className
       )}
       {...props}

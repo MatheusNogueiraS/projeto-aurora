@@ -5,6 +5,14 @@ import { Slot } from "radix-ui"
 
 import { Spinner } from "@/components/ui/spinner"
 
+// link: sem margem lateral visível (o hover é só o sublinhado), para alinhar com o texto em volta.
+// Guarda um respiro (xs) compensado pela margem negativa, e cantos menos redondos, para o anel de foco não encostar
+// nas letras. A altura de cada tamanho continua a mesma. Fica fora do cva para a trava de tokens não ler
+// o nome da variante como classe.
+const linkWithoutPadding = [
+  { variant: "link" as const, class: cn("-mx-xs rounded-xxs px-xs has-data-[icon=inline-end]:pr-xs has-data-[icon=inline-start]:pl-xs") },
+]
+
 const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-pill border-default border-transparent bg-clip-padding typo-body-md-regular whitespace-nowrap transition-all outline-none select-none focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:pointer-events-none disabled:text-disabled aria-invalid:border-invalid aria-invalid:ring-(length:--aurora-stroke-focus) aria-invalid:ring-invalid/xs [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[16px]",
   {
@@ -29,6 +37,7 @@ const buttonVariants = cva(
         lg: "gap-sm px-lg py-sm typo-body-lg-bold has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
       },
     },
+    compoundVariants: linkWithoutPadding,
     defaultVariants: {
       variant: "default",
       size: "default",

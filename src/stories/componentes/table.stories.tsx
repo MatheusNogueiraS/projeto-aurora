@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-import { Badge } from "@/components/ui/badge"
 import {
   Table,
   TableBody,
@@ -12,48 +11,55 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const parcelas = [
-  { numero: "1/5", vencimento: "10/11/2026", valor: 250, status: "Pago" },
-  { numero: "2/5", vencimento: "10/12/2026", valor: 250, status: "Pendente" },
-  { numero: "3/5", vencimento: "10/01/2027", valor: 250, status: "Pendente" },
-  { numero: "4/5", vencimento: "10/02/2027", valor: 250, status: "Pendente" },
-  { numero: "5/5", vencimento: "10/03/2027", valor: 250, status: "Pendente" },
-]
-const real = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+import { columns, parcelas } from "./table-example"
 
-// Controles no padrão do painel do Figma: quantidade de linhas e partes opcionais.
-type TableStoryArgs = { rows: number; showCaption: boolean; caption: string; showFooter: boolean; selectedRow: boolean }
+// A tabela é só a montagem: Linhas (ver Table/Linha) feitas de Células (ver Table/Célula).
+// O que vai em cada célula e o estado de cada linha se escolhe nas páginas delas.
+type TableStoryArgs = {
+  columns: number
+  showHeader: boolean
+  showFooter: boolean
+  showCaption: boolean
+  caption: string
+}
 
-function StoryTable({ rows, showCaption, caption = "", showFooter, selectedRow }: TableStoryArgs) {
-  const items = parcelas.slice(0, rows)
+// as linhas de conteúdo são só exemplo (4); quem usa monta quantas precisar
+function StoryTable({ columns: count = 4, showHeader = true, showFooter = true, showCaption = false, caption = "" }: Partial<TableStoryArgs>) {
+  const items = parcelas
+  const cols = columns.slice(0, count)
   return (
     <Table>
       {showCaption && <TableCaption>{caption}</TableCaption>}
-      <TableHeader>
-        <TableRow>
-          <TableHead>Parcela</TableHead>
-          <TableHead>Vencimento</TableHead>
-          <TableHead>Valor</TableHead>
-          <TableHead>Status</TableHead>
-        </TableRow>
-      </TableHeader>
+      {showHeader && (
+        <TableHeader>
+          <TableRow>
+            {cols.map((c) => (
+              <TableHead key={c.title} align={c.align}>
+                {c.title}
+              </TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+      )}
       <TableBody>
-        {items.map((p, i) => (
-          <TableRow key={p.numero} data-state={selectedRow && i === 0 ? "selected" : undefined}>
-            <TableCell>{p.numero}</TableCell>
-            <TableCell>{p.vencimento}</TableCell>
-            <TableCell>{real(p.valor)}</TableCell>
-            <TableCell>
-              <Badge variant={p.status === "Pago" ? "primary" : "outline"}>{p.status}</Badge>
-            </TableCell>
+        {items.map((p) => (
+          <TableRow key={p.numero}>
+            {cols.map((c) => (
+              <TableCell key={c.title} align={c.align}>
+                {c.cell(p)}
+              </TableCell>
+            ))}
           </TableRow>
         ))}
       </TableBody>
       {showFooter && (
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell colSpan={2}>{real(items.reduce((s, p) => s + p.valor, 0))}</TableCell>
+            {cols.map((c, i) => (
+              <TableCell key={c.title} align={c.align}>
+                {i === 0 ? "Total" : c.total?.(items)}
+              </TableCell>
+            ))}
           </TableRow>
         </TableFooter>
       )}
@@ -62,16 +68,23 @@ function StoryTable({ rows, showCaption, caption = "", showFooter, selectedRow }
 }
 
 const meta = {
-  title: "Componentes/Table",
+  title: "Componentes/Table/Tabela",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Dados em linhas e colunas para comparar e consultar." } } },
-  args: { rows: 3, showCaption: true, caption: "Parcelas do contrato 4821", showFooter: true, selectedRow: false },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Dados em linhas e colunas para comparar e consultar. Montagem: **Células** formam **Linhas** (cabeçalho, conteúdo e rodapé), e as linhas formam a tabela, com legenda opcional.",
+      },
+    },
+  },
+  args: { columns: 4, showHeader: true, showFooter: true, showCaption: false, caption: "Parcelas do contrato 4821" },
   argTypes: {
-    rows: { name: "Linhas", control: { type: "range", min: 1, max: 5, step: 1 }, description: "Quantidade de linhas de dados." },
-    showCaption: { name: "Legenda", control: "boolean", description: "Mostra uma legenda abaixo da tabela." },
-    caption: { name: "Legenda · conteúdo", control: "text", if: { arg: "showCaption" } },
-    showFooter: { name: "Rodapé", control: "boolean", description: "Mostra a linha de total." },
-    selectedRow: { name: "Linha selecionada", control: "boolean", description: "Destaca a primeira linha.", table: { category: "Estado" } },
+    columns: { name: "Colunas", control: { type: "range", min: 1, max: 7, step: 1 }, description: "Quantidade de colunas." },
+    showHeader: { name: "Cabeçalho", control: "boolean", description: "Mostra a linha de títulos das colunas.", table: { category: "Partes" } },
+    showFooter: { name: "Rodapé", control: "boolean", description: "Mostra a linha de total.", table: { category: "Partes" } },
+    showCaption: { name: "Legenda", control: "boolean", description: "Mostra uma legenda abaixo da tabela.", table: { category: "Partes" } },
+    caption: { name: "Legenda · conteúdo", control: "text", if: { arg: "showCaption" }, table: { category: "Partes" } },
   },
   render: (args) => <StoryTable {...args} />,
 } satisfies Meta<TableStoryArgs>
@@ -80,3 +93,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Padrao: Story = { name: "Padrão" }
+
+// Todas as partes e colunas.
+export const Completa: Story = { args: { columns: 7, showCaption: true } }
