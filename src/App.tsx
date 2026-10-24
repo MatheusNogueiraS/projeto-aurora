@@ -1,6 +1,5 @@
 import * as React from "react"
 import { BoldIcon, InfoIcon, ItalicIcon, MailIcon, MoonIcon, SearchIcon, SunIcon, TriangleAlertIcon } from "lucide-react"
-import { toast } from "sonner"
 
 import { useTheme } from "@/components/theme-provider"
 import {
@@ -61,7 +60,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster, toast } from "@/components/ui/sonner"
 import { Switch } from "@/components/ui/switch"
 import {
   Table,
