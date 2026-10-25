@@ -17,7 +17,7 @@ type InputFieldSize = "sm" | "default" | "lg"
 type FieldIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
 // Altura de cada tamanho: o espaço de cima guarda o label que sobe; o texto acompanha o tamanho.
-// sm 40px, default 46px (50px no celular, texto de 16px) e lg 54px.
+// sm 41px, default 47px (50px no celular, texto de 16px) e lg 54px.
 const inputSize = {
   sm: cn("pt-lg pb-xxs typo-body-md-regular"),
   default: cn("pt-xl pb-xs"),
