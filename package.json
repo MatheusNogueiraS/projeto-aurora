@@ -4,14 +4,12 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/tokens/build.mjs --check && tsc -b && vite build",
+    "build": "node scripts/tokens/build.mjs --check && tsc -b",
     "lint": "eslint . && node scripts/tokens/check.mjs",
     "tokens": "node scripts/tokens/build.mjs",
     "tokens:check": "node scripts/tokens/check.mjs",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
