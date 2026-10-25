@@ -95,7 +95,7 @@ const meta = {
     iconLeadingName: { name: "Icon Left · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Ícones" } },
     showIconTrailing: { name: "Icon Right", control: "boolean", description: "Ícone dentro do campo, à direita. No erro, dá lugar ao alerta.", table: { category: "Ícones" } },
     iconTrailingName: { name: "Icon Right · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconTrailing" }, table: { category: "Ícones" } },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes, description: "sm (40px), default (46px) ou lg (54px), com espaço para o label subir." },
+    size: { name: "Tamanho", control: "inline-radio", options: sizes, description: "sm (41px), default (47px) ou lg (54px), com espaço para o label subir." },
     invalid: { name: "Erro", control: "boolean", description: "Campo em vermelho, com alerta e mensagem.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
     errorMessage: { name: "Erro · mensagem", control: "text", if: { arg: "invalid" }, table: { category: "Estado" } },
     disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o campo. Não fica em erro.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },

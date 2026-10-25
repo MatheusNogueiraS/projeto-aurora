@@ -49,24 +49,44 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
   )
 }
 
+// Mesmas alturas do InputField (sm 41px, default 47px ou 50px no celular, lg 54px), para os dois
+// ficarem harmônicos no formulário. Sem label subindo, o texto fica centralizado: no default o
+// padding da escala já fecha a conta; no sm e no lg não há passo exato, então o mínimo completa.
+const inputSize = {
+  sm: cn("min-h-[39px] py-sm typo-body-md-regular"),
+  default: cn("py-md"),
+  lg: cn("min-h-[52px] py-md typo-body-lg-regular md:typo-body-lg-regular"),
+}
+
 function ComboboxInput({
   className,
   children,
   disabled = false,
   showTrigger = true,
   showClear = false,
+  iconLeading: IconLeading,
+  size = "default",
   ...props
-}: ComboboxPrimitive.Input.Props & {
+}: Omit<ComboboxPrimitive.Input.Props, "size"> & {
   showTrigger?: boolean
   showClear?: boolean
+  /** Ícone dentro do campo, à esquerda (ex.: SearchIcon do lucide-react). */
+  iconLeading?: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  size?: keyof typeof inputSize
 }) {
   return (
     <InputGroup className={cn("w-auto", className)}>
+      {IconLeading && (
+        <InputGroupAddon align="inline-start">
+          <IconLeading aria-hidden />
+        </InputGroupAddon>
+      )}
       <ComboboxPrimitive.Input
-        render={<InputGroupInput disabled={disabled} />}
+        render={<InputGroupInput disabled={disabled} className={inputSize[size]} />}
         {...props}
       />
-      <InputGroupAddon align="inline-end">
+      {/* no sm, o botão da seta (24px) com o padding normal passaria da altura do campo */}
+      <InputGroupAddon align="inline-end" className={cn(size === "sm" && "py-xs")}>
         {showTrigger && (
           <InputGroupButton
             size="icon-xs"
