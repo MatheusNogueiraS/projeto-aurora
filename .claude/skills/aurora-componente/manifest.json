@@ -1,0 +1,716 @@
+{
+  "$comment": "GERADO — não edite à mão. Atualize com: node .claude/skills/aurora-componente/scripts/manifest.mjs",
+  "componentes": {
+    "accordion": {
+      "arquivo": "src/components/ui/accordion.tsx",
+      "exporta": [
+        "Accordion",
+        "AccordionContent",
+        "AccordionItem",
+        "AccordionTrigger"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/accordion-group.stories.tsx",
+        "src/stories/componentes/accordion.stories.tsx"
+      ]
+    },
+    "alert": {
+      "arquivo": "src/components/ui/alert.tsx",
+      "exporta": [
+        "Alert",
+        "AlertAction",
+        "AlertDescription",
+        "AlertTitle",
+        "statusTones"
+      ],
+      "variantes": {
+        "variant": [
+          "default",
+          "info",
+          "success",
+          "warning",
+          "destructive"
+        ]
+      },
+      "usa": [
+        "button"
+      ],
+      "usadoPor": [
+        "sonner"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/alert.stories.tsx"
+      ]
+    },
+    "avatar": {
+      "arquivo": "src/components/ui/avatar.tsx",
+      "exporta": [
+        "Avatar",
+        "AvatarBadge",
+        "AvatarFallback",
+        "AvatarGroup",
+        "AvatarGroupCount",
+        "AvatarImage"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/avatar.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx"
+      ]
+    },
+    "badge": {
+      "arquivo": "src/components/ui/badge.tsx",
+      "exporta": [
+        "Badge",
+        "badgeVariants"
+      ],
+      "variantes": {
+        "variant": [
+          "default",
+          "primary",
+          "secondary",
+          "success",
+          "warning",
+          "destructive",
+          "outline"
+        ],
+        "size": [
+          "default",
+          "lg",
+          "xl"
+        ]
+      },
+      "usa": [
+        "icon-button"
+      ],
+      "usadoPor": [
+        "stepper"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/badge.stories.tsx",
+        "src/stories/componentes/card.stories.tsx",
+        "src/stories/componentes/selection-card.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx",
+        "src/stories/componentes/table-example.tsx"
+      ]
+    },
+    "breadcrumb": {
+      "arquivo": "src/components/ui/breadcrumb.tsx",
+      "exporta": [
+        "Breadcrumb",
+        "BreadcrumbEllipsis",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbList",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/breadcrumb.stories.tsx"
+      ]
+    },
+    "button": {
+      "arquivo": "src/components/ui/button.tsx",
+      "exporta": [
+        "Button",
+        "buttonVariants"
+      ],
+      "variantes": {
+        "variant": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ],
+        "size": [
+          "default",
+          "xs",
+          "sm",
+          "lg"
+        ]
+      },
+      "usa": [
+        "spinner"
+      ],
+      "usadoPor": [
+        "alert",
+        "calendar",
+        "icon-button",
+        "input-group",
+        "pagination",
+        "sonner"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/badge.stories.tsx",
+        "src/stories/componentes/button.stories.tsx",
+        "src/stories/componentes/card.stories.tsx",
+        "src/stories/componentes/hover-card.stories.tsx",
+        "src/stories/componentes/popover.stories.tsx",
+        "src/stories/componentes/sonner.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx",
+        "src/stories/componentes/tooltip.stories.tsx"
+      ]
+    },
+    "calendar": {
+      "arquivo": "src/components/ui/calendar.tsx",
+      "exporta": [
+        "Calendar",
+        "CalendarDayButton"
+      ],
+      "variantes": {},
+      "usa": [
+        "button"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/calendar.stories.tsx"
+      ]
+    },
+    "card": {
+      "arquivo": "src/components/ui/card.tsx",
+      "exporta": [
+        "Card",
+        "CardAction",
+        "CardContent",
+        "CardDescription",
+        "CardFooter",
+        "CardHeader",
+        "CardTitle"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [
+        "selection-card"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/card.stories.tsx"
+      ]
+    },
+    "checkbox": {
+      "arquivo": "src/components/ui/checkbox.tsx",
+      "exporta": [
+        "Checkbox",
+        "checkboxVariants"
+      ],
+      "variantes": {
+        "size": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/checkbox.stories.tsx",
+        "src/stories/componentes/selection-card.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx"
+      ]
+    },
+    "combobox": {
+      "arquivo": "src/components/ui/combobox.tsx",
+      "exporta": [
+        "Combobox",
+        "ComboboxChip",
+        "ComboboxChips",
+        "ComboboxChipsInput",
+        "ComboboxCollection",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxGroup",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxSeparator",
+        "ComboboxTrigger",
+        "ComboboxValue",
+        "useComboboxAnchor"
+      ],
+      "variantes": {},
+      "usa": [
+        "icon-button",
+        "input-field",
+        "input-group"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/combobox.stories.tsx"
+      ]
+    },
+    "data-line": {
+      "arquivo": "src/components/ui/data-line.tsx",
+      "exporta": [
+        "DataLine"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/accordion-group.stories.tsx",
+        "src/stories/componentes/accordion.stories.tsx",
+        "src/stories/componentes/card.stories.tsx",
+        "src/stories/componentes/data-line.stories.tsx"
+      ]
+    },
+    "file-upload": {
+      "arquivo": "src/components/ui/file-upload.tsx",
+      "exporta": [
+        "FileUpload",
+        "formatFileSize"
+      ],
+      "variantes": {},
+      "usa": [
+        "icon-button",
+        "progress",
+        "spinner"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/file-upload.stories.tsx"
+      ]
+    },
+    "hover-card": {
+      "arquivo": "src/components/ui/hover-card.tsx",
+      "exporta": [
+        "HoverCard",
+        "HoverCardContent",
+        "HoverCardTrigger"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/hover-card.stories.tsx"
+      ]
+    },
+    "icon-button": {
+      "arquivo": "src/components/ui/icon-button.tsx",
+      "exporta": [
+        "IconButton",
+        "iconButtonVariants"
+      ],
+      "variantes": {
+        "size": [
+          "xs",
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "usa": [
+        "button",
+        "spinner"
+      ],
+      "usadoPor": [
+        "badge",
+        "combobox",
+        "file-upload",
+        "pagination"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/card.stories.tsx",
+        "src/stories/componentes/icon-button.stories.tsx",
+        "src/stories/componentes/selection-card.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx",
+        "src/stories/componentes/table-example.tsx"
+      ]
+    },
+    "input-field": {
+      "arquivo": "src/components/ui/input-field.tsx",
+      "exporta": [
+        "FieldHint",
+        "FloatingLabel",
+        "InputField",
+        "fieldInputSize"
+      ],
+      "variantes": {},
+      "usa": [
+        "input-group"
+      ],
+      "usadoPor": [
+        "combobox",
+        "textarea-field"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/input.stories.tsx"
+      ]
+    },
+    "input-group": {
+      "arquivo": "src/components/ui/input-group.tsx",
+      "exporta": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupButton",
+        "InputGroupInput",
+        "InputGroupText",
+        "InputGroupTextarea"
+      ],
+      "variantes": {
+        "align": [
+          "inline-start",
+          "inline-end",
+          "block-start",
+          "block-end"
+        ],
+        "size": [
+          "xs",
+          "sm",
+          "icon-xs",
+          "icon-sm"
+        ]
+      },
+      "usa": [
+        "button",
+        "input",
+        "textarea"
+      ],
+      "usadoPor": [
+        "combobox",
+        "input-field"
+      ],
+      "documentadoEm": []
+    },
+    "input": {
+      "arquivo": "src/components/ui/input.tsx",
+      "exporta": [
+        "Input",
+        "inputVariants"
+      ],
+      "variantes": {
+        "size": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [
+        "input-group"
+      ],
+      "documentadoEm": []
+    },
+    "pagination": {
+      "arquivo": "src/components/ui/pagination.tsx",
+      "exporta": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationDot",
+        "PaginationEllipsis",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationNext",
+        "PaginationPrevious",
+        "paginationRange",
+        "paginationSiblings"
+      ],
+      "variantes": {},
+      "usa": [
+        "button",
+        "icon-button"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/pagination.stories.tsx"
+      ]
+    },
+    "popover": {
+      "arquivo": "src/components/ui/popover.tsx",
+      "exporta": [
+        "Popover",
+        "PopoverAnchor",
+        "PopoverContent",
+        "PopoverDescription",
+        "PopoverHeader",
+        "PopoverTitle",
+        "PopoverTrigger"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/popover.stories.tsx"
+      ]
+    },
+    "progress": {
+      "arquivo": "src/components/ui/progress.tsx",
+      "exporta": [
+        "Progress"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [
+        "file-upload"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/progress.stories.tsx"
+      ]
+    },
+    "radio-group": {
+      "arquivo": "src/components/ui/radio-group.tsx",
+      "exporta": [
+        "RadioGroup",
+        "RadioGroupItem"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/radio-group.stories.tsx",
+        "src/stories/componentes/selection-card.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx"
+      ]
+    },
+    "select": {
+      "arquivo": "src/components/ui/select.tsx",
+      "exporta": [
+        "Select",
+        "SelectContent",
+        "SelectGroup",
+        "SelectItem",
+        "SelectLabel",
+        "SelectScrollDownButton",
+        "SelectScrollUpButton",
+        "SelectSeparator",
+        "SelectTrigger",
+        "SelectValue"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/select.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx"
+      ]
+    },
+    "selection-card": {
+      "arquivo": "src/components/ui/selection-card.tsx",
+      "exporta": [
+        "SelectionCard",
+        "SelectionCardAction",
+        "SelectionCardContent",
+        "SelectionCardDescription",
+        "SelectionCardTitle"
+      ],
+      "variantes": {},
+      "usa": [
+        "card"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/selection-card.stories.tsx"
+      ]
+    },
+    "separator": {
+      "arquivo": "src/components/ui/separator.tsx",
+      "exporta": [
+        "Separator"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [
+        "stepper"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/separator.stories.tsx"
+      ]
+    },
+    "skeleton": {
+      "arquivo": "src/components/ui/skeleton.tsx",
+      "exporta": [
+        "Skeleton",
+        "skeletonVariants"
+      ],
+      "variantes": {
+        "shape": [
+          "text",
+          "circle",
+          "block"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/skeleton.stories.tsx"
+      ]
+    },
+    "sonner": {
+      "arquivo": "src/components/ui/sonner.tsx",
+      "exporta": [
+        "Toaster",
+        "toast"
+      ],
+      "variantes": {},
+      "usa": [
+        "alert",
+        "button"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/sonner.stories.tsx"
+      ]
+    },
+    "spinner": {
+      "arquivo": "src/components/ui/spinner.tsx",
+      "exporta": [
+        "Spinner",
+        "spinnerVariants"
+      ],
+      "variantes": {
+        "size": [
+          "sm",
+          "default",
+          "lg"
+        ],
+        "tone": [
+          "brand",
+          "neutral",
+          "inherit"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [
+        "button",
+        "file-upload",
+        "icon-button"
+      ],
+      "documentadoEm": [
+        "src/stories/componentes/spinner.stories.tsx"
+      ]
+    },
+    "stepper": {
+      "arquivo": "src/components/ui/stepper.tsx",
+      "exporta": [
+        "Stepper",
+        "StepperItem"
+      ],
+      "variantes": {},
+      "usa": [
+        "badge",
+        "separator"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/stepper.stories.tsx"
+      ]
+    },
+    "switch": {
+      "arquivo": "src/components/ui/switch.tsx",
+      "exporta": [
+        "Switch"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/switch.stories.tsx",
+        "src/stories/componentes/table-cell.stories.tsx"
+      ]
+    },
+    "table": {
+      "arquivo": "src/components/ui/table.tsx",
+      "exporta": [
+        "Table",
+        "TableBody",
+        "TableCaption",
+        "TableCell",
+        "TableFooter",
+        "TableHead",
+        "TableHeader",
+        "TableRow"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/table-cell.stories.tsx",
+        "src/stories/componentes/table-row.stories.tsx",
+        "src/stories/componentes/table.stories.tsx"
+      ]
+    },
+    "textarea-field": {
+      "arquivo": "src/components/ui/textarea-field.tsx",
+      "exporta": [
+        "TextareaField"
+      ],
+      "variantes": {},
+      "usa": [
+        "input-field",
+        "textarea"
+      ],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/textarea.stories.tsx"
+      ]
+    },
+    "textarea": {
+      "arquivo": "src/components/ui/textarea.tsx",
+      "exporta": [
+        "Textarea",
+        "textareaVariants"
+      ],
+      "variantes": {
+        "size": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [
+        "input-group",
+        "textarea-field"
+      ],
+      "documentadoEm": []
+    },
+    "toggle": {
+      "arquivo": "src/components/ui/toggle.tsx",
+      "exporta": [
+        "Toggle",
+        "toggleVariants"
+      ],
+      "variantes": {
+        "variant": [
+          "default",
+          "outline"
+        ],
+        "size": [
+          "default",
+          "sm",
+          "lg"
+        ]
+      },
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/table-cell.stories.tsx",
+        "src/stories/componentes/toggle.stories.tsx"
+      ]
+    },
+    "tooltip": {
+      "arquivo": "src/components/ui/tooltip.tsx",
+      "exporta": [
+        "Tooltip",
+        "TooltipContent",
+        "TooltipProvider",
+        "TooltipTrigger"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/tooltip.stories.tsx"
+      ]
+    }
+  }
+}
