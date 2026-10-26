@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 // Mesmos tamanhos de texto e respiro do Input (sm, default, lg). Hover: borda roxa.
 // Erro só aparece com o campo habilitado (desabilitado nunca fica em erro).
 const textareaVariants = cva(
-  "flex field-sizing-content min-h-[64px] w-full rounded-sm border-default border-field bg-transparent px-md shadow-s transition-[color,box-shadow] outline-none placeholder:text-text-3 not-aria-invalid:enabled:hover:border-link-4 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:cursor-not-allowed disabled:opacity-md aria-invalid:enabled:border-invalid aria-invalid:enabled:ring-(length:--aurora-stroke-focus) aria-invalid:enabled:ring-invalid/xs",
+  "flex field-sizing-content min-h-[64px] w-full rounded-sm border-default border-field bg-transparent px-md shadow-s transition-[color,box-shadow] outline-none placeholder:text-text-3 not-aria-invalid:not-focus-visible:enabled:hover:border-link-4 focus-visible:border-focus focus-visible:ring-(length:--aurora-stroke-focus) focus-visible:ring-focus/md disabled:cursor-not-allowed disabled:opacity-md aria-invalid:enabled:border-invalid aria-invalid:enabled:ring-(length:--aurora-stroke-focus) aria-invalid:enabled:ring-invalid/xs",
   {
     variants: {
       size: {
