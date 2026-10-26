@@ -38,6 +38,7 @@ node .claude/skills/aurora-componente/scripts/manifest.mjs   # inventário de co
 | Conferir que um componente está inteiro no Storybook e funcionando | `aurora-storybook-cobertura` |
 | Revisar ou padronizar a documentação de componentes | `aurora-storybook-review` |
 | Atualizar o Storybook online (toda PR) | `aurora-storybook-publicar` |
+| Mudar cor ou token, revisar o tema escuro, conferir contraste | `aurora-contraste` |
 
 ## Regras
 
@@ -101,7 +102,7 @@ Cada regra traz o porquê, para ser aplicada com bom senso também em casos que 
 
 ### Componentes
 
-18b. **Checklist de estados** em todo componente revisado: padrão, hover, foco (visível), ativo, desabilitado e, quando fizer sentido, loading e erro. Prioridade quando se somam: desabilitado > loading > ativo > foco > hover > padrão. Cada estado usa semânticos existentes; estado que muda só cor nunca depende só da cor (ícone, texto ou forma junto). Acessibilidade: `disabled`/`aria-disabled`, `aria-busy` no loading, `aria-invalid` + mensagem no erro, contraste mínimo 4.5:1 para texto e 3:1 para borda, ícone e foco.
+18b. **Checklist de estados** em todo componente revisado: padrão, hover, foco (visível), ativo, desabilitado e, quando fizer sentido, loading e erro. Prioridade quando se somam: desabilitado > loading > ativo > foco > hover > padrão. Cada estado usa semânticos existentes; estado que muda só cor nunca depende só da cor (ícone, texto ou forma junto). Acessibilidade: `disabled`/`aria-disabled`, `aria-busy` no loading, `aria-invalid` + mensagem no erro, contraste mínimo 4.5:1 para texto e 3:1 para borda, ícone e foco, nos dois temas (skill `aurora-contraste`).
     **Teste hover e foco de verdade** (mouse sobre o componente e sobre o texto; Tab para o foco). Estados que se excluem viram regra do componente, não só da documentação (ex.: Checkbox: erro só desmarcado e habilitado; desabilitado nunca em erro).
 
 18c. **Storybook: nomes em inglês, explicações em pt-BR, só o necessário.**

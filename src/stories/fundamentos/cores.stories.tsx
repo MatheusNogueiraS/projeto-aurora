@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-import { Grid, Page, Section, TokenCard } from "./doc-ui"
-import { cssVar, foundation, group, resolve, semantic, type Token } from "./tokens-data"
+import { Grid, Page, Section, SemanticColorTable, TokenCard } from "./doc-ui"
+import { foundation, group, resolve, semantic, type Token } from "./tokens-data"
 
 const meta = {
   title: "Foundations/Colors",
@@ -10,11 +10,6 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
-
-/** Amostra de cor semântica: usa a variável CSS, então acompanha o tema ativo. */
-const SemanticSwatch = ({ token }: { token: Token }) => (
-  <div className="size-[40px] rounded-xs border-default border-divider" style={{ background: cssVar(token.id) }} />
-)
 
 /** Amostra de cor da fundação: usa o hex do JSON (átomos não viram variável de componente). */
 const PaletteSwatch = ({ token }: { token: Token }) => (
@@ -44,15 +39,11 @@ export const Semantic: Story = {
     return (
       <Page
         title="Cores semânticas"
-        intro="As únicas cores que os componentes usam. Cada uma aponta para uma cor da paleta (fundação). Use o botão de tema na barra do Storybook para ver o tema escuro."
+        intro="As únicas cores que os componentes usam. Cada uma tem um valor no tema claro e outro no escuro, e os dois apontam para uma cor da paleta (fundação), que não muda entre temas."
       >
         {semanticGroups.map((g) => (
           <Section key={g.title} title={g.title} description={g.description || undefined}>
-            <Grid>
-              {colors.filter(g.filter).map((t) => (
-                <TokenCard key={t.id} token={t} hidePrefix="color." sample={<SemanticSwatch token={t} />} />
-              ))}
-            </Grid>
+            <SemanticColorTable tokens={colors.filter(g.filter)} hidePrefix="color." />
           </Section>
         ))}
       </Page>
