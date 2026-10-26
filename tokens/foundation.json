@@ -19,8 +19,8 @@
     },
     "neutral": {
       "0": { "$value": "#000000" },
-      "10": { "$value": "#1C2027", "$description": "Criado para o tema escuro (fundo da página)." },
-      "15": { "$value": "#2A2F38", "$description": "Criado para o tema escuro (superfície elevada: card, popover)." },
+      "10": { "$value": "#0A0A0A", "$description": "Criado para o tema escuro (fundo da página)." },
+      "15": { "$value": "#171717", "$description": "Criado para o tema escuro (superfície elevada: card, popover)." },
       "20": { "$value": "#37404E" },
       "30": { "$value": "#4A525E", "$description": "Criado para o tema escuro (superfície sutil)." },
       "40": { "$value": "#5E646E" },

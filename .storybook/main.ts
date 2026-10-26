@@ -10,6 +10,8 @@ const config: StorybookConfig = {
   },
   // Não envia estatísticas de uso para fora (projeto interno do banco).
   core: { disableTelemetry: true },
+  // Sem os checklists de onboarding ("Get started") do Storybook na barra lateral e no menu.
+  features: { sidebarOnboardingChecklist: false, menuOnboardingChecklist: false },
 }
 
 export default config
