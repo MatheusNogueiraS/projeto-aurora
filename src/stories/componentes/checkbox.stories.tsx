@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Checkbox } from "@/components/ui/checkbox"
 
-const selections = ["Desmarcado", "Marcado", "Indeterminado"] as const
+const selections = ["unchecked", "checked", "indeterminate"] as const
 type Selection = (typeof selections)[number]
 type CheckedState = React.ComponentProps<typeof Checkbox>["checked"]
 // controles escondidos não chegam até aqui (ex.: Seleção some com Erro ligado), por isso o padrão desmarcado
-const toChecked = (s?: Selection): CheckedState => (s === "Marcado" ? true : s === "Indeterminado" ? "indeterminate" : false)
+const toChecked = (s?: Selection): CheckedState => (s === "checked" ? true : s === "indeterminate" ? "indeterminate" : false)
 
 // Os controles seguem o Checkbox do Nitro: textos, tamanho, seleção e estados.
 type CheckboxStoryArgs = {
@@ -39,28 +39,28 @@ function StoryCheckbox({ showLabel, label, showDescription, description, size, s
 }
 
 const meta = {
-  title: "Componentes/Checkbox",
+  title: "Components/Checkbox",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Marca uma ou mais opções independentes. Texto e descrição são opcionais." } } },
+  parameters: { docs: { description: { component: "Marca uma ou mais opções independentes." } } },
   args: {
     showLabel: true,
     label: "Aceito os termos",
     showDescription: false,
     description: "Você pode cancelar quando quiser.",
     size: "default",
-    selection: "Desmarcado",
+    selection: "unchecked",
     invalid: false,
     disabled: false,
   },
   argTypes: {
-    showLabel: { name: "Texto", control: "boolean", description: "Mostra o texto ao lado." },
-    label: { name: "Texto · conteúdo", control: "text", if: { arg: "showLabel" } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Mostra um texto de apoio." },
-    description: { name: "Descrição · conteúdo", control: "text", if: { arg: "showDescription" } },
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default", "lg"], description: "sm (14px), default (16px) ou lg (20px)." },
-    selection: { name: "Seleção", control: "inline-radio", options: selections, description: "Indeterminado: parte de uma lista marcada.", if: { arg: "invalid", truthy: false } },
-    invalid: { name: "Erro", control: "boolean", description: "Campo obrigatório não marcado. Só aparece desmarcado.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o clique. Não fica em erro.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },
+    showLabel: { name: "Text", control: "boolean" },
+    label: { name: "Text · content", control: "text", if: { arg: "showLabel" } },
+    showDescription: { name: "Description", control: "boolean" },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default", "lg"], table: { defaultValue: { summary: '"default"' } } },
+    selection: { name: "Selection", control: "inline-radio", options: selections, if: { arg: "invalid", truthy: false }, table: { defaultValue: { summary: '"unchecked"' } } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StoryCheckbox key={args.selection} {...args} />,
 } satisfies Meta<CheckboxStoryArgs>
@@ -68,9 +68,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       {selections.map((s) => (
@@ -80,7 +80,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <StoryCheckbox key={"s" + args.selection} {...args} size="sm" label="sm (14px)" />
@@ -90,4 +90,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true, selection: "Marcado" } }
+export const Disabled: Story = { args: { disabled: true, selection: "checked" } }

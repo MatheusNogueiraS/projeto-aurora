@@ -51,9 +51,9 @@ function StoryTextarea({
 }
 
 const meta = {
-  title: "Componentes/Textarea",
+  title: "Components/Textarea",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Campo de texto de várias linhas, com label e dica. Cresce conforme o conteúdo." } } },
+  parameters: { docs: { description: { component: "Campo de texto de várias linhas que cresce conforme o conteúdo." } } },
   args: {
     label: "Observação",
     optional: false,
@@ -67,16 +67,16 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    label: { name: "Label", control: "text", description: "Nome do campo, dentro dele; ao focar ou digitar, diminui e sobe." },
-    optional: { name: "Opcional", control: "boolean", description: "Mostra \"(opcional)\" ao lado do label." },
-    required: { name: "Obrigatório", control: "boolean", description: "Mostra o asterisco ao lado do label." },
-    value: { name: "Valor", control: "text", description: "Texto já preenchido." },
-    showHint: { name: "Hint", control: "boolean", description: "Texto de ajuda embaixo do campo." },
-    hint: { name: "Hint · conteúdo", control: "text", if: { arg: "showHint" } },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes, description: "Muda o tamanho do texto e o respiro interno, com espaço para o label subir." },
-    invalid: { name: "Erro", control: "boolean", description: "Campo em vermelho, com mensagem.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
-    errorMessage: { name: "Erro · mensagem", control: "text", if: { arg: "invalid" }, table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o campo. Não fica em erro.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },
+    label: { name: "Label", control: "text" },
+    optional: { name: "Optional", control: "boolean" },
+    required: { name: "Required", control: "boolean" },
+    value: { name: "Value", control: "text" },
+    showHint: { name: "Hint", control: "boolean" },
+    hint: { name: "Hint · content", control: "text", if: { arg: "showHint" } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    errorMessage: { name: "Error · message", control: "text", if: { arg: "invalid" }, table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StoryTextarea {...args} />,
 } satisfies Meta<TextareaStoryArgs>
@@ -84,9 +84,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
       <StoryTextarea {...args} />
@@ -97,7 +97,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
       {sizes.map((size) => (
@@ -107,4 +107,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true, value: "Cliente prefere contato por e-mail." } }
+export const Disabled: Story = { args: { disabled: true, value: "Cliente prefere contato por e-mail." } }

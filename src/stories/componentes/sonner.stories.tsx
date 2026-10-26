@@ -7,25 +7,25 @@ import { Button } from "@/components/ui/button"
 import { Toaster, toast } from "@/components/ui/sonner"
 
 const types = {
-  Padrão: toast,
-  Sucesso: toast.success,
-  Informação: toast.info,
-  Atenção: toast.warning,
-  Erro: toast.error,
+  default: toast,
+  success: toast.success,
+  info: toast.info,
+  warning: toast.warning,
+  error: toast.error,
 } as const
 type ToastType = keyof typeof types
 
 // Texto de exemplo de cada tipo (no código, o texto é de quem usa).
 const examples: Record<ToastType, { title: string; description: string }> = {
-  Padrão: { title: "Proposta salva", description: "Você pode continuar de onde parou." },
-  Sucesso: { title: "Pagamento confirmado", description: "O valor cai na sua conta em até 1 dia útil." },
-  Informação: { title: "Atualização disponível", description: "Uma nova versão do contrato está pronta." },
-  Atenção: { title: "Documento perto de vencer", description: "Envie um documento atualizado até sexta-feira." },
-  Erro: { title: "Não foi possível enviar", description: "Confira os dados e tente novamente." },
+  default: { title: "Proposta salva", description: "Você pode continuar de onde parou." },
+  success: { title: "Pagamento confirmado", description: "O valor cai na sua conta em até 1 dia útil." },
+  info: { title: "Atualização disponível", description: "Uma nova versão do contrato está pronta." },
+  warning: { title: "Documento perto de vencer", description: "Envie um documento atualizado até sexta-feira." },
+  error: { title: "Não foi possível enviar", description: "Confira os dados e tente novamente." },
 }
 
 const positions = ["top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"] as const
-const buttons = ["Nenhum", "Ação", "Fechar"] as const
+const buttons = ["None", "Action", "Close"] as const
 
 // Os controles seguem o Sonner do shadcn: tipo, texto, descrição, botão (ação ou fechar) e posição.
 type ToastStoryArgs = {
@@ -41,18 +41,18 @@ type ToastStoryArgs = {
 // controles escondidos não chegam até aqui, por isso os padrões; texto vazio usa o exemplo do tipo.
 // Na documentação o aviso fica aberto (duração infinita) para dar para ver; no produto some sozinho.
 function show(toasterId: string, {
-  type = "Sucesso",
+  type = "success",
   title,
   showDescription = true,
   description,
-  button = "Nenhum",
+  button = "None",
   actionLabel = "Desfazer",
 }: Partial<ToastStoryArgs>) {
   return types[type](title || examples[type].title, {
     toasterId,
     description: showDescription ? description || examples[type].description : undefined,
-    action: button === "Ação" ? { label: actionLabel, onClick: () => {} } : undefined,
-    closeButton: button === "Fechar",
+    action: button === "Action" ? { label: actionLabel, onClick: () => {} } : undefined,
+    closeButton: button === "Close",
     duration: Infinity,
   })
 }
@@ -86,33 +86,33 @@ function Preview({ list, position, expand = false }: { list: Partial<ToastStoryA
 }
 
 const meta = {
-  title: "Componentes/Toast",
+  title: "Components/Toast",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Aviso temporário no canto da tela, para dar retorno de uma ação (feedback). Some sozinho. Mesmas cores do **Alert** em cada tipo.",
+          "Aviso temporário no canto da tela para dar retorno de uma ação; some sozinho.",
       },
     },
   },
   args: {
-    type: "Sucesso",
+    type: "success",
     title: "",
     showDescription: true,
     description: "",
-    button: "Nenhum",
+    button: "None",
     actionLabel: "Desfazer",
     position: "bottom-right",
   },
   argTypes: {
-    type: { name: "Tipo", control: "inline-radio", options: Object.keys(types), description: "Padrão, sucesso, informação, atenção ou erro." },
-    title: { name: "Texto", control: "text", description: "Mensagem do aviso. Vazio: o exemplo do tipo." },
-    showDescription: { name: "Descrição", control: "boolean", description: "Mostra um texto de apoio." },
-    description: { name: "Descrição · conteúdo", control: "text", description: "Vazio: o exemplo do tipo.", if: { arg: "showDescription" } },
-    button: { name: "Botão", control: "inline-radio", options: buttons, description: "Uma ação (ex.: Desfazer) ou o X de fechar; nunca os dois." },
-    actionLabel: { name: "Ação · texto", control: "text", if: { arg: "button", eq: "Ação" } },
-    position: { name: "Posição", control: "select", options: positions, description: "Canto da tela onde aparece." },
+    type: { name: "Type", control: "inline-radio", options: Object.keys(types), table: { defaultValue: { summary: '"default"' } } },
+    title: { name: "Text", control: "text" },
+    showDescription: { name: "Description", control: "boolean" },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
+    button: { name: "Button", control: "inline-radio", options: buttons, table: { defaultValue: { summary: '"None"' } } },
+    actionLabel: { name: "Action · text", control: "text", if: { arg: "button", eq: "Action" } },
+    position: { name: "Position", control: "select", options: positions, table: { defaultValue: { summary: '"bottom-right"' } } },
   },
   render: (args) => <Preview list={[args]} position={args.position} />,
 } satisfies Meta<ToastStoryArgs>
@@ -120,9 +120,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <Preview
       list={(Object.keys(types) as ToastType[]).map((type) => ({ ...args, type, ...examples[type] }))}

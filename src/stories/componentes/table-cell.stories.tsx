@@ -14,21 +14,21 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 // A célula é a unidade da tabela (como no Figma): de cabeçalho (TableHead) ou de conteúdo
 // (TableCell). Dentro dela vai texto ou um componente do Aurora (embutido).
-const contents = ["Texto", "Texto com apoio", "Badge", "Checkbox", "Radio", "Switch", "Toggle", "Select", "Avatar", "Ação", "Link"] as const
+const contents = ["Text", "Text with support", "Badge", "Checkbox", "Radio", "Switch", "Toggle", "Select", "Avatar", "Action", "Link"] as const
 type Content = (typeof contents)[number]
-const aligns = { Esquerda: "left", Centro: "center", Direita: "right" } as const
+const aligns = ["left", "center", "right"] as const
 
 type CellStoryArgs = {
-  type: "Cabeçalho" | "Conteúdo"
+  type: "header" | "body"
   content: Content
   text: string
   support: string
-  align: keyof typeof aligns
+  align: (typeof aligns)[number]
 }
 
 function CellContent({ content, text, support }: { content: Content; text: string; support: string }) {
   switch (content) {
-    case "Texto com apoio":
+    case "Text with support":
       return (
         <>
           <span className="block">{text}</span>
@@ -78,7 +78,7 @@ function CellContent({ content, text, support }: { content: Content; text: strin
           {text}
         </span>
       )
-    case "Ação":
+    case "Action":
       return (
         <IconButton variant="ghost" size="sm" aria-label={text}>
           <EllipsisVerticalIcon />
@@ -96,22 +96,22 @@ function CellContent({ content, text, support }: { content: Content; text: strin
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function StoryCell({ type = "Conteúdo", content = "Texto", text = "Maria Souza", support = "CPF 123.456.789-00", align = "Esquerda" }: Partial<CellStoryArgs>) {
+function StoryCell({ type = "body", content = "Text", text = "Maria Souza", support = "CPF 123.456.789-00", align = "left" }: Partial<CellStoryArgs>) {
   const inner = <CellContent content={content} text={text} support={support} />
   return (
     // só a célula: sem divisor nem fundo, que são da Linha (ver Table/Linha)
     <div className="w-[280px]">
       <Table>
-        {type === "Cabeçalho" ? (
+        {type === "header" ? (
           <TableHeader className="[&_tr]:border-b-(length:--aurora-stroke-none)">
             <TableRow className="hover:bg-transparent">
-              <TableHead align={aligns[align]}>{inner}</TableHead>
+              <TableHead align={align}>{inner}</TableHead>
             </TableRow>
           </TableHeader>
         ) : (
           <TableBody>
             <TableRow>
-              <TableCell align={aligns[align]}>{inner}</TableCell>
+              <TableCell align={align}>{inner}</TableCell>
             </TableRow>
           </TableBody>
         )}
@@ -122,8 +122,8 @@ function StoryCell({ type = "Conteúdo", content = "Texto", text = "Maria Souza"
 
 // Texto de exemplo de cada conteúdo (no código, o conteúdo é de quem usa).
 const examples: Record<Content, string> = {
-  Texto: "Maria Souza",
-  "Texto com apoio": "Maria Souza",
+  Text: "Maria Souza",
+  "Text with support": "Maria Souza",
   Badge: "Pago",
   Checkbox: "Selecionar linha",
   Radio: "Escolher esta linha",
@@ -131,28 +131,28 @@ const examples: Record<Content, string> = {
   Toggle: "Favoritar",
   Select: "Prazo",
   Avatar: "Maria Souza",
-  Ação: "Mais ações",
+  Action: "Mais ações",
   Link: "Ver contrato",
 }
 
 const meta = {
-  title: "Componentes/Table/Célula",
+  title: "Components/Table/Cell",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "A unidade da tabela: o espaço interno (padding) e o conteúdo. De **cabeçalho** (título da coluna, em negrito) ou de **conteúdo**; dentro, texto ou um componente do Aurora. Cabeçalho e conteúdo da mesma coluna usam o mesmo alinhamento. Divisor, hover e seleção são da **Linha**.",
+          "A unidade da tabela, de cabeçalho ou de conteúdo, com texto ou um componente dentro.",
       },
     },
   },
-  args: { type: "Conteúdo", content: "Texto", text: "Maria Souza", support: "CPF 123.456.789-00", align: "Esquerda" },
+  args: { type: "body", content: "Text", text: "Maria Souza", support: "CPF 123.456.789-00", align: "left" },
   argTypes: {
-    type: { name: "Tipo", control: "inline-radio", options: ["Cabeçalho", "Conteúdo"], description: "Título da coluna ou dado da linha." },
-    content: { name: "Conteúdo", control: "select", options: contents, description: "Texto ou componente dentro da célula." },
-    text: { name: "Texto", control: "text", description: "Texto da célula (nos controles e na Ação, o nome lido pelo leitor de tela)." },
-    support: { name: "Texto de apoio", control: "text", if: { arg: "content", eq: "Texto com apoio" } },
-    align: { name: "Alinhamento", control: "inline-radio", options: Object.keys(aligns), description: "Valores e números à direita." },
+    type: { name: "Type", control: "inline-radio", options: ["header", "body"] },
+    content: { name: "Content", control: "select", options: contents },
+    text: { name: "Text", control: "text" },
+    support: { name: "Support", control: "text", if: { arg: "content", eq: "Text with support" } },
+    align: { name: "Alignment", control: "inline-radio", options: aligns, table: { defaultValue: { summary: '"left"' } } },
   },
   render: (args) => <StoryCell {...args} />,
 } satisfies Meta<CellStoryArgs>
@@ -160,15 +160,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Cada conteúdo possível numa célula de conteúdo, e a célula de cabeçalho.
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
-      <StoryCell {...args} type="Cabeçalho" content="Texto" text="Cliente" />
+      <StoryCell {...args} type="header" content="Text" text="Cliente" />
       {contents.map((content) => (
-        <StoryCell key={content} {...args} type="Conteúdo" content={content} text={examples[content]} />
+        <StoryCell key={content} {...args} type="body" content={content} text={examples[content]} />
       ))}
     </div>
   ),

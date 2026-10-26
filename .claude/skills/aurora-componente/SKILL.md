@@ -77,7 +77,7 @@ O inventário falha se o componente ficar **órfão** (sem história e sem uso p
 
 ## 6. Storybook
 
-1. História no padrão da skill `aurora-storybook-review` (Padrão / Variantes / Tamanhos / Desabilitado, controles como no Figma).
+1. História no padrão da skill `aurora-storybook-review` (nomes em inglês pelo glossário, descrição do componente em 1 frase em pt-BR, controles sem descrição; Default / Variants / Sizes / Disabled, controles como no Figma).
 2. **Cobertura** com a skill `aurora-storybook-cobertura` (regra 18e): inventário → controles → teste controle a controle no navegador, claro e escuro.
 3. Arquivo novo: reinicie o Storybook local se o CSS não aparecer.
 

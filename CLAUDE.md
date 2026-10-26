@@ -104,7 +104,14 @@ Cada regra traz o porquê, para ser aplicada com bom senso também em casos que 
 18b. **Checklist de estados** em todo componente revisado: padrão, hover, foco (visível), ativo, desabilitado e, quando fizer sentido, loading e erro. Prioridade quando se somam: desabilitado > loading > ativo > foco > hover > padrão. Cada estado usa semânticos existentes; estado que muda só cor nunca depende só da cor (ícone, texto ou forma junto). Acessibilidade: `disabled`/`aria-disabled`, `aria-busy` no loading, `aria-invalid` + mensagem no erro, contraste mínimo 4.5:1 para texto e 3:1 para borda, ícone e foco.
     **Teste hover e foco de verdade** (mouse sobre o componente e sobre o texto; Tab para o foco). Estados que se excluem viram regra do componente, não só da documentação (ex.: Checkbox: erro só desmarcado e habilitado; desabilitado nunca em erro).
 
-18c. **Documentação curta e sem código**: descrição em 1–2 frases; cada controle em uma frase do que faz, sem caracterizar demais ("Mostra o texto ao lado.", nunca "ao lado da caixinha"). Sem tabela de estados: estados mostráveis viram **controles** na categoria "Estado". Histórias Padrão / Variantes / Tamanhos / Desabilitado, com controles nomeados como no painel do Figma. Detalhes na skill `aurora-storybook-review`.
+18c. **Storybook: nomes em inglês, explicações em pt-BR, só o necessário.**
+    - **Inglês:** menu, histórias, categorias, nomes dos controles e opções (o nome do código: `warning`, nunca "Atenção"). Termos no **glossário** da skill `aurora-storybook-review`.
+    - **pt-BR:** descrição do componente, legendas nas histórias, textos de exemplo, textos de interface e `aria-label`.
+    - **Mínimo:** componente em 1 frase, para que serve. **Controles sem descrição:** a tabela mostra só o nome e o tipo (`string`, `boolean`). Os comentários `/** */` das props ficam no código, em pt-BR, para quem programa, e não aparecem na tabela.
+    - **Coluna Default preenchida** com o padrão do código (o valor usado quando nada é informado). Liga/desliga e estados: `false` automático (`.storybook/preview.tsx`); se o código começa ligado, `true` escrito na história. Demais controles: `table.defaultValue` na história (as ligadas ao componente, como a do Button, leem sozinhas). Fica "-" só o que não tem padrão no código: texto de conteúdo, contagens e escolhas que só existem na história.
+    - A trava de inventário (`manifest.mjs`) acusa nome em português e controle com descrição.
+    - Histórias Default / Variants / Sizes / Disabled; estados viram controles na categoria "State", sem tabela de estados.
+    *Por quê:* nomes no idioma do código e do Nitro; explicação curta no idioma de quem lê.
 
 18d. **O componente documentado é a unidade do Figma** (ex.: Accordion = um item; lista = soma de itens independentes). Agrupamentos que existem só por comportamento ou acessibilidade continuam no código, mas não viram controle.
 
@@ -125,7 +132,7 @@ Cada regra traz o porquê, para ser aplicada com bom senso também em casos que 
 
 ### Comunicação
 
-22. **Em português, em linguagem de produto.** O design system é conduzido por design: diga o que vai fazer e por quê, explique termos técnicos rapidamente, use tabelas para comparar opções e recomende uma.
+22. **Conversa e harness em português, em linguagem de produto** (no Storybook, os nomes são em inglês, regra 18c). O design system é conduzido por design: diga o que vai fazer e por quê, explique termos técnicos rapidamente, use tabelas para comparar opções e recomende uma.
 
 23. **Ao terminar um ajuste, diga em uma linha onde ele foi feito** (token, componente ou só documentação) **e liste as decisões tomadas sozinho**, para o responsável poder corrigir.
 

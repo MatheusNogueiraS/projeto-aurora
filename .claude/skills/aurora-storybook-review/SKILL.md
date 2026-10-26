@@ -1,6 +1,6 @@
 ---
 name: aurora-storybook-review
-description: Revisão da documentação de um componente do Aurora (design system do Bmg) no Storybook — controles com nomes do painel do Figma, estados como controles, textos curtos e sem código, histórias Padrão/Variantes/Tamanhos/Desabilitado — e levantamento dos achados que exigem mudar o componente. Use quando pedirem para revisar, padronizar ou "passar o review" na documentação/Storybook de um ou mais componentes, ou para olhar como um componente está configurado no Storybook.
+description: Revisão da documentação de um componente do Aurora (design system do Bmg) no Storybook — nomes em inglês pelo glossário, explicações mínimas em pt-BR, controles com nomes do painel do Figma, estados como controles, histórias Default/Variants/Sizes/Disabled — e levantamento dos achados que exigem mudar o componente. Use quando pedirem para revisar, padronizar ou "passar o review" na documentação/Storybook de um ou mais componentes, ou para olhar como um componente está configurado no Storybook.
 ---
 
 # Review de componente no Storybook — Aurora
@@ -35,27 +35,48 @@ Ao mudar um componente, meça hover/erro no navegador antes de concluir.
 2. Consulte as referências em `.claude/skills/aurora-componente/referencias.md`, filtradas (regra 18a). No Nitro, as `componentPropertyDefinitions` do component set mostram o "painel" de controles.
 3. **O componente documentado é a unidade do Figma** (ex.: Accordion = um item; lista = soma de itens).
 
+## Idioma e glossário (regra 18c)
+
+**Nomes em inglês, explicações em pt-BR.** Nomes (menu, histórias, categorias, controles, opções) seguem a tabela abaixo. A descrição do componente, as legendas, os textos de exemplo e os `aria-label` são em pt-BR. Controles não têm descrição.
+
+Use sempre estes termos, para todo componente falar igual:
+
+| Onde | Termo |
+|---|---|
+| **Menu** | `Introduction`, `Foundations/<page>`, `Components/<Name>`. O nome do componente é o nome do código separado em palavras (`SelectionCard` → "Selection Card", `IconButton` → "Icon Button"). Partes: `Components/Table/Cell`, `…/Row`, `…/Table`; `Components/Accordion/Item`, `…/Group`. |
+| **Histórias** | `Default`, `Variants`, `Sizes`, `Disabled` (o nome do export já é o nome: `export const Default`). |
+| **Categorias** | `State`, `Parts`, `Icons`, `Action`. |
+| **Controles** | Type, Size, Label, Text, Title, Description, Content, Value, Icon, Icon Leading, Icon Trailing, Position, Alignment, Orientation, Divider, Header, Footer, Caption, Action, Tag, Hint, Placeholder, Selection, Display, Count, Mode, Tone, Shape, Media, Emphasis, Steps. |
+| **Estados** | Disabled, Error, Open, Selected, Loading, Required, Optional. "Ligado" segue o termo do componente: Checked (Switch), Pressed (Toggle). |
+| **Controle dependente** | `<Parte> · <detalhe>`, detalhe em minúsculas: `Description · content`, `Tag · text`, `Tag · type`, `Icon Leading · icon`, `Error · message`, `Action · style`. |
+| **Opções** | O valor do código, como está: `warning / default / secondary / success`, `sm / default / lg`, `top / bottom`, `line / box`, `unchecked / checked / indeterminate`, `header / body / footer`. Nunca tradução ("Atenção", "Baixo"). Sem valor no código (escolha que só existe na história): nome em inglês (`Single / Group`, `Text / Data Line`); "nada escolhido" é `None`. Componentes citados pelo nome (`Checkbox`, `Radio`, `Icon Button`). Exemplos de conteúdo nas opções (Pix, prazos) ficam em pt-BR. |
+| **Descrições** | Componente: 1 frase em pt-BR. Controles: nenhuma (a tabela mostra só nome e tipo). |
+| **Coluna Default** | O padrão do código (regra 18c), conferido no arquivo do componente. Na história: `table: { defaultValue: { summary: '"<valor>"' } }` (aspas como o Storybook mostra; número sem aspas). Booleanos saem `false` sozinhos; se o código começa ligado (ex.: `showTrigger = true`), escreva `"true"`. Não ligue a história ao componente (`component:`) só para isso: o Storybook traz junto props de código (`onRemove`…) e bagunça a ordem. |
+| **Legendas nas histórias** (pt-BR) | Curtas: "Aceite de termos". |
+
+Termo novo que não está aqui: escolha o do painel do Nitro (está em inglês) e acrescente a esta tabela.
+
 ## 2. Histórias
 
-- Só as que se aplicam, nesta ordem: **Padrão**, **Variantes**, **Tamanhos**, **Desabilitado**.
+- Só as que se aplicam, nesta ordem: **Default**, **Variants**, **Sizes**, **Disabled**.
 - Simples e visuais, um ao lado do outro. **Nada de histórias de composição/demonstração** (ex.: "Ao lado do Button").
-- Estados viram **controles**, não histórias extras ("Com erro" vira o controle Erro).
+- Estados viram **controles**, não histórias extras ("With error" vira o controle Error).
 - Sem tabela de estados.
 
 ## 3. Controles (painel)
 
-- **Nomes em português, como no painel do Figma/Nitro**: Tipo, Tamanho, Label, Texto, Descrição, Conteúdo, Título, Icon Leading, Icon Trailing, Divisor…
-- Cada parte opcional = **liga/desliga + controle do conteúdo** que só aparece quando ligado (`if: { arg: "showX" }`), ex.: "Descrição" + "Descrição · conteúdo"; "Icon Leading" + "Icon Leading · ícone" (lista curta de ícones do lucide-react).
-- **Estados na categoria "Estado"** (`table: { category: "Estado" }`): Desabilitado, Erro, Aberto, Loading… — só os que o componente realmente suporta.
-- **Estados que se excluem se escondem** uns aos outros com `if` (ex.: Checkbox: Erro esconde Seleção e Desabilitado; Desabilitado esconde Erro). Se o componente permite a combinação proibida, registre como achado.
-- **Fora da tabela** (`table: { disable: true }` ou `parameters.controls.exclude`): `asChild`, `className`, `children` como objeto, `aria-*`, handlers e props de comportamento técnico (ex.: `collapsible`). Comportamento que dá para testar e entender (ex.: "Vários abertos") pode virar controle com nome de produto.
+- **Nomes em inglês, como no painel do Figma/Nitro**, pelo glossário acima: Type, Size, Label, Text, Description, Content, Title, Icon Leading, Icon Trailing, Divider…
+- Cada parte opcional = **liga/desliga + controle do conteúdo** que só aparece quando ligado (`if: { arg: "showX" }`), ex.: "Description" + "Description · content"; "Icon Leading" + "Icon Leading · icon" (lista curta de ícones do lucide-react).
+- **Estados na categoria "State"** (`table: { category: "State" }`): Disabled, Error, Open, Loading… — só os que o componente realmente suporta.
+- **Estados que se excluem se escondem** uns aos outros com `if` (ex.: Checkbox: Error esconde Selection e Disabled; Disabled esconde Error). Se o componente permite a combinação proibida, registre como achado.
+- **Fora da tabela** (`table: { disable: true }` ou `parameters.controls.exclude`): `asChild`, `className`, `children` como objeto, `aria-*`, handlers e props de comportamento técnico (ex.: `collapsible`). Comportamento que dá para testar e entender (ex.: "Multiple open") pode virar controle com nome de produto.
 - `aria-label` obrigatório: **gere na história** a partir do conteúdo (ex.: do ícone escolhido), não exponha.
 
 ## 4. Textos
 
-- Descrição do componente: **1–2 frases**, para que serve.
-- Cada controle: **uma frase curta do que faz**, sem código, sem nomes de props, sem caracterizar demais ("Mostra o texto ao lado.", nunca "ao lado da caixinha").
-- Os tipos (boolean, string…) continuam na tabela.
+- Em pt-BR, curtas e diretas. O que não for necessário, não entra.
+- Componente: **1 frase**, para que serve.
+- Controles: **sem descrição**. A tabela mostra só o nome e o tipo (boolean, string…). Se o componente tiver comentário `/** */` na prop, confira que ele não aparece na tabela.
 
 ## 5. Implementação na história (armadilhas conhecidas)
 

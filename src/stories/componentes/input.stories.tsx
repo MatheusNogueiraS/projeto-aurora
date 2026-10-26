@@ -65,7 +65,7 @@ function StoryInput({
 }
 
 const meta = {
-  title: "Componentes/Input",
+  title: "Components/Input",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Campo de texto de uma linha, com label, dica e ícones opcionais." } } },
   args: {
@@ -85,20 +85,20 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    label: { name: "Label", control: "text", description: "Nome do campo, dentro dele; ao focar ou digitar, diminui e sobe." },
-    optional: { name: "Opcional", control: "boolean", description: "Mostra \"(opcional)\" ao lado do label." },
-    required: { name: "Obrigatório", control: "boolean", description: "Mostra o asterisco ao lado do label." },
-    value: { name: "Valor", control: "text", description: "Texto já preenchido." },
-    showHint: { name: "Hint", control: "boolean", description: "Texto de ajuda embaixo do campo." },
-    hint: { name: "Hint · conteúdo", control: "text", if: { arg: "showHint" } },
-    showIconLeading: { name: "Icon Left", control: "boolean", description: "Ícone dentro do campo, à esquerda.", table: { category: "Ícones" } },
-    iconLeadingName: { name: "Icon Left · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Ícones" } },
-    showIconTrailing: { name: "Icon Right", control: "boolean", description: "Ícone dentro do campo, à direita. No erro, dá lugar ao alerta.", table: { category: "Ícones" } },
-    iconTrailingName: { name: "Icon Right · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconTrailing" }, table: { category: "Ícones" } },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes, description: "sm (41px), default (47px) ou lg (54px), com espaço para o label subir." },
-    invalid: { name: "Erro", control: "boolean", description: "Campo em vermelho, com alerta e mensagem.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
-    errorMessage: { name: "Erro · mensagem", control: "text", if: { arg: "invalid" }, table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o campo. Não fica em erro.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },
+    label: { name: "Label", control: "text" },
+    optional: { name: "Optional", control: "boolean" },
+    required: { name: "Required", control: "boolean" },
+    value: { name: "Value", control: "text" },
+    showHint: { name: "Hint", control: "boolean" },
+    hint: { name: "Hint · content", control: "text", if: { arg: "showHint" } },
+    showIconLeading: { name: "Icon Left", control: "boolean", table: { category: "Icons" } },
+    iconLeadingName: { name: "Icon Left · icon", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Icons" } },
+    showIconTrailing: { name: "Icon Right", control: "boolean", table: { category: "Icons" } },
+    iconTrailingName: { name: "Icon Right · icon", control: "select", options: Object.keys(icons), if: { arg: "showIconTrailing" }, table: { category: "Icons" } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    errorMessage: { name: "Error · message", control: "text", if: { arg: "invalid" }, table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StoryInput {...args} />,
 } satisfies Meta<InputStoryArgs>
@@ -106,9 +106,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
       <StoryInput {...args} />
@@ -121,7 +121,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
       {sizes.map((size) => (
@@ -131,4 +131,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true, value: "Maria Souza" } }
+export const Disabled: Story = { args: { disabled: true, value: "Maria Souza" } }

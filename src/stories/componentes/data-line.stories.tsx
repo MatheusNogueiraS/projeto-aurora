@@ -49,12 +49,12 @@ function StoryLine({
 }
 
 const meta = {
-  title: "Componentes/DataLine",
+  title: "Components/Data Line",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: "Mostra um dado e o seu valor lado a lado. Empilhe quantas linhas precisar, como numa tabela de preço; cada lado ocupa o espaço que precisa.",
+        component: "Mostra um dado e o seu valor lado a lado, como numa tabela de preço.",
       },
     },
   },
@@ -73,18 +73,18 @@ const meta = {
     divider: true,
   },
   argTypes: {
-    label: { name: "Rótulo", control: "text", description: "Nome do dado, à esquerda." },
-    showContext: { name: "Contexto", control: "boolean", description: "Complemento embaixo do rótulo." },
-    context: { name: "Contexto · conteúdo", control: "text", if: { arg: "showContext" } },
-    showValue: { name: "Valor", control: "boolean", description: "Valor à direita. Sem ele, só o rótulo." },
-    value: { name: "Valor · conteúdo", control: "text", if: { arg: "showValue" } },
-    showSupport: { name: "Suporte", control: "boolean", description: "Complemento ao lado do valor.", if: { arg: "showValue" } },
-    support: { name: "Suporte · conteúdo", control: "text", if: { arg: "showSupport" } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Informação embaixo do valor." },
-    description: { name: "Descrição · conteúdo", control: "text", if: { arg: "showDescription" } },
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default", "lg"], description: "sm (14px), default (16px) ou lg (18px)." },
-    emphasis: { name: "Destaque", control: "boolean", description: "Para o total: rótulo em negrito e valor maior." },
-    divider: { name: "Divisória", control: "boolean", description: "Linha embaixo. Some na última linha empilhada." },
+    label: { name: "Label", control: "text" },
+    showContext: { name: "Context", control: "boolean" },
+    context: { name: "Context · content", control: "text", if: { arg: "showContext" } },
+    showValue: { name: "Value", control: "boolean" },
+    value: { name: "Value · content", control: "text", if: { arg: "showValue" } },
+    showSupport: { name: "Support", control: "boolean", if: { arg: "showValue" } },
+    support: { name: "Support · content", control: "text", if: { arg: "showSupport" } },
+    showDescription: { name: "Description", control: "boolean" },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default", "lg"], table: { defaultValue: { summary: '"default"' } } },
+    emphasis: { name: "Emphasis", control: "boolean" },
+    divider: { name: "Divider", control: "boolean", table: { defaultValue: { summary: "true" } } },
   },
   render: (args) => (
     <div className="max-w-[400px]">
@@ -96,10 +96,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // linhas empilhadas, como numa tabela de preço; Tamanho e Divisória continuam valendo
-export const Variantes: Story = {
+export const Variants: Story = {
   render: ({ size, divider }) => (
     <div className="flex max-w-[400px] flex-col gap-xl">
       <div>
@@ -120,7 +120,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex max-w-[400px] flex-col gap-xl">
       <StoryLine {...args} size="sm" />

@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Separator } from "@/components/ui/separator"
 
-const orientations = ["Horizontal", "Vertical"] as const
+const orientations = ["horizontal", "vertical"] as const
 type SeparatorStoryArgs = { orientation: (typeof orientations)[number] }
 
 function StorySeparator({ orientation }: SeparatorStoryArgs) {
-  return orientation === "Vertical" ? (
+  return orientation === "vertical" ? (
     <div className="flex h-[20px] items-center gap-md typo-body-md-regular">
       <span>Perfil</span>
       <Separator orientation="vertical" />
@@ -22,12 +22,12 @@ function StorySeparator({ orientation }: SeparatorStoryArgs) {
 }
 
 const meta = {
-  title: "Componentes/Separator",
+  title: "Components/Separator",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Linha que separa grupos de conteúdo." } } },
-  args: { orientation: "Horizontal" },
+  args: { orientation: "horizontal" },
   argTypes: {
-    orientation: { name: "Orientação", control: "inline-radio", options: orientations, description: "Linha deitada ou em pé." },
+    orientation: { name: "Orientation", control: "inline-radio", options: orientations, table: { defaultValue: { summary: '"horizontal"' } } },
   },
   render: (args) => <StorySeparator {...args} />,
 } satisfies Meta<SeparatorStoryArgs>
@@ -35,9 +35,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
       {orientations.map((o) => (

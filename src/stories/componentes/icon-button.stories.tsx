@@ -44,7 +44,7 @@ function StoryIconButton({ iconName = "Plus", ...args }: IconButtonStoryArgs) {
 }
 
 const meta = {
-  title: "Componentes/IconButton",
+  title: "Components/Icon Button",
   // o aria-label é obrigatório no componente; aqui ele é gerado a partir do ícone escolhido
   component: IconButton as React.ComponentType<IconButtonStoryArgs>,
   tags: ["autodocs"],
@@ -52,17 +52,17 @@ const meta = {
     docs: {
       description: {
         component:
-          "Botão só com ícone, para ações conhecidas (adicionar, fechar, favoritar). Mesmas variantes e alturas do **Button**, e estado carregando.",
+          "Botão só com ícone, para ações conhecidas (adicionar, fechar, favoritar).",
       },
     },
   },
   args: { variant: "default", size: "default", disabled: false, loading: false, iconName: "Plus" },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
-    size: { name: "Tamanho", control: "select", options: sizes },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o botão.", table: { category: "Estado" } },
-    loading: { name: "Carregando", control: "boolean", description: "Troca o ícone pelo Spinner e bloqueia o clique.", table: { category: "Estado" } },
-    iconName: { name: "Ícone", control: "select", options: Object.keys(icons), description: "Ícone exibido." },
+    variant: { name: "Type", control: "select", options: variants },
+    size: { name: "Size", control: "select", options: sizes },
+    disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
+    loading: { name: "Loading", control: "boolean", table: { category: "State" } },
+    iconName: { name: "Icon", control: "select", options: Object.keys(icons) },
     // propriedades de código que não fazem sentido como controle visual
     children: { table: { disable: true } },
     "aria-label": { table: { disable: true } },
@@ -73,9 +73,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <div className="flex flex-wrap items-center gap-md">
@@ -92,7 +92,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-md">
       {sizes.map((size) => (
@@ -102,4 +102,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true } }
+export const Disabled: Story = { args: { disabled: true } }

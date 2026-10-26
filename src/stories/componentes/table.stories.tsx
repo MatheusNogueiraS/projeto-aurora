@@ -68,23 +68,23 @@ function StoryTable({ columns: count = 4, showHeader = true, showFooter = true, 
 }
 
 const meta = {
-  title: "Componentes/Table/Tabela",
+  title: "Components/Table/Table",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Dados em linhas e colunas para comparar e consultar. Montagem: **Células** formam **Linhas** (cabeçalho, conteúdo e rodapé), e as linhas formam a tabela, com legenda opcional.",
+          "Dados em linhas e colunas para comparar e consultar.",
       },
     },
   },
   args: { columns: 4, showHeader: true, showFooter: true, showCaption: false, caption: "Parcelas do contrato 4821" },
   argTypes: {
-    columns: { name: "Colunas", control: { type: "range", min: 1, max: 7, step: 1 }, description: "Quantidade de colunas." },
-    showHeader: { name: "Cabeçalho", control: "boolean", description: "Mostra a linha de títulos das colunas.", table: { category: "Partes" } },
-    showFooter: { name: "Rodapé", control: "boolean", description: "Mostra a linha de total.", table: { category: "Partes" } },
-    showCaption: { name: "Legenda", control: "boolean", description: "Mostra uma legenda abaixo da tabela.", table: { category: "Partes" } },
-    caption: { name: "Legenda · conteúdo", control: "text", if: { arg: "showCaption" }, table: { category: "Partes" } },
+    columns: { name: "Columns", control: { type: "range", min: 1, max: 7, step: 1 } },
+    showHeader: { name: "Header", control: "boolean", table: { category: "Parts" } },
+    showFooter: { name: "Footer", control: "boolean", table: { category: "Parts" } },
+    showCaption: { name: "Caption", control: "boolean", table: { category: "Parts" } },
+    caption: { name: "Caption · content", control: "text", if: { arg: "showCaption" }, table: { category: "Parts" } },
   },
   render: (args) => <StoryTable {...args} />,
 } satisfies Meta<TableStoryArgs>
@@ -92,7 +92,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Todas as partes e colunas.
-export const Completa: Story = { args: { columns: 7, showCaption: true } }
+export const Full: Story = { args: { columns: 7, showCaption: true } }

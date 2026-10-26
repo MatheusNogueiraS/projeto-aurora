@@ -56,14 +56,14 @@ function StoryButton({
 }
 
 const meta = {
-  title: "Componentes/Button",
+  title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Dispara uma ação. Ícone opcional antes e/ou depois do texto, e estado carregando. Para botão só com ícone, use o **IconButton**.",
+          "Dispara uma ação; para botão só com ícone, use o **Icon Button**.",
       },
     },
   },
@@ -79,36 +79,34 @@ const meta = {
     iconTrailingName: "ArrowRight",
   },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Variante visual." },
-    size: { name: "Tamanho", control: "select", options: sizes },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o botão.", table: { category: "Estado" } },
-    loading: { name: "Carregando", control: "boolean", description: "Mostra o Spinner antes do texto e bloqueia o clique.", table: { category: "Estado" } },
-    children: { name: "Label", control: "text", description: "Texto do botão." },
+    variant: { name: "Type", control: "select", options: variants },
+    size: { name: "Size", control: "select", options: sizes },
+    disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
+    loading: { name: "Loading", control: "boolean", table: { category: "State" } },
+    children: { name: "Label", control: "text" },
     showIconLeading: {
       name: "Icon Leading",
       control: "boolean",
-      description: "Mostra um ícone antes do texto.",
-      table: { category: "Ícones" },
+      table: { category: "Icons" },
     },
     iconLeadingName: {
-      name: "Icon Leading · ícone",
+      name: "Icon Leading · icon",
       control: "select",
       options: Object.keys(icons),
       if: { arg: "showIconLeading" },
-      table: { category: "Ícones" },
+      table: { category: "Icons" },
     },
     showIconTrailing: {
       name: "Icon Trailing",
       control: "boolean",
-      description: "Mostra um ícone depois do texto.",
-      table: { category: "Ícones" },
+      table: { category: "Icons" },
     },
     iconTrailingName: {
-      name: "Icon Trailing · ícone",
+      name: "Icon Trailing · icon",
       control: "select",
       options: Object.keys(icons),
       if: { arg: "showIconTrailing" },
-      table: { category: "Ícones" },
+      table: { category: "Icons" },
     },
     // as propriedades reais recebem o componente do ícone; nos controles, usamos os de cima
     iconLeading: { table: { disable: true } },
@@ -120,9 +118,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <div className="flex flex-wrap items-center gap-md">
@@ -143,7 +141,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-md">
       {sizes.map((size) => (
@@ -155,4 +153,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true, showIconLeading: true } }
+export const Disabled: Story = { args: { disabled: true, showIconLeading: true } }

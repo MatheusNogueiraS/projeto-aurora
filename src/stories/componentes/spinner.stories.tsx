@@ -2,37 +2,37 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Spinner } from "@/components/ui/spinner"
 
-const tones = { Marca: "brand", Neutro: "neutral", "Cor do entorno": "inherit" } as const
+const tones = ["brand", "neutral", "inherit"] as const
 const sizes = ["sm", "default", "lg"] as const
 
 // Os controles seguem o Spinner do shadcn (arco girando): cor, tamanho e o texto de contexto
 // opcional. Dentro de um botão, use a opção Carregando do Button.
 type SpinnerStoryArgs = {
   size: (typeof sizes)[number]
-  tone: keyof typeof tones
+  tone: (typeof tones)[number]
   showLabel: boolean
   label: string
   labelPosition: "side" | "below"
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function StorySpinner({ size = "default", tone = "Marca", showLabel = false, label = "Carregando...", labelPosition = "side" }: Partial<SpinnerStoryArgs>) {
-  return <Spinner size={size} tone={tones[tone]} label={showLabel ? label : undefined} labelPosition={labelPosition} />
+function StorySpinner({ size = "default", tone = "brand", showLabel = false, label = "Carregando...", labelPosition = "side" }: Partial<SpinnerStoryArgs>) {
+  return <Spinner size={size} tone={tone} label={showLabel ? label : undefined} labelPosition={labelPosition} />
 }
 
 const meta = {
-  title: "Componentes/Spinner",
+  title: "Components/Spinner",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Indica que algo está carregando. Pode ter um texto de contexto. Em botões, use a opção Carregando do Button." } },
+    docs: { description: { component: "Indica que algo está carregando; em botões, use o Loading do Button." } },
   },
-  args: { size: "default", tone: "Marca", showLabel: false, label: "Carregando...", labelPosition: "side" },
+  args: { size: "default", tone: "brand", showLabel: false, label: "Carregando...", labelPosition: "side" },
   argTypes: {
-    size: { name: "Tamanho", control: "inline-radio", options: sizes, description: "sm (16px), default (24px) ou lg (32px)." },
-    tone: { name: "Cor", control: "inline-radio", options: Object.keys(tones), description: "Laranja da marca, cinza, ou a cor de onde está." },
-    showLabel: { name: "Texto", control: "boolean", description: "Texto de contexto junto do ícone." },
-    label: { name: "Texto · conteúdo", control: "text", if: { arg: "showLabel" } },
-    labelPosition: { name: "Texto · posição", control: "inline-radio", options: ["side", "below"], description: "Ao lado (side) ou embaixo (below).", if: { arg: "showLabel" } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    tone: { name: "Tone", control: "inline-radio", options: tones, table: { defaultValue: { summary: '"brand"' } } },
+    showLabel: { name: "Text", control: "boolean" },
+    label: { name: "Text · content", control: "text", if: { arg: "showLabel" } },
+    labelPosition: { name: "Text · position", control: "inline-radio", options: ["side", "below"], if: { arg: "showLabel" }, table: { defaultValue: { summary: '"side"' } } },
   },
   render: (args) => <StorySpinner {...args} />,
 } satisfies Meta<SpinnerStoryArgs>
@@ -40,14 +40,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
       <div className="flex flex-wrap items-center gap-xl">
-        <StorySpinner {...args} tone="Marca" />
-        <StorySpinner {...args} tone="Neutro" />
+        <StorySpinner {...args} tone="brand" />
+        <StorySpinner {...args} tone="neutral" />
       </div>
       <div className="flex flex-wrap items-center gap-xl">
         <StorySpinner {...args} showLabel labelPosition="side" />
@@ -57,7 +57,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-xl">
       {sizes.map((size) => (

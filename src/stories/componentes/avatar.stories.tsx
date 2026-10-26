@@ -10,8 +10,8 @@ const photo =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" fill="#C6BCDC"/><circle cx="40" cy="32" r="14" fill="#482B74"/><path d="M14 80c2-16 13-24 26-24s24 8 26 24z" fill="#482B74"/></svg>`
   )
 
-const displays = ["Único", "Grupo"] as const
-const contents = ["Foto", "Iniciais", "Ícone"] as const
+const displays = ["Single", "Group"] as const
+const contents = ["Photo", "Initials", "Icon"] as const
 const people = ["MN", "AB", "CD", "EF", "GH"]
 
 // Os controles cobrem todas as partes do componente: conteúdo (foto, iniciais ou ícone),
@@ -28,18 +28,18 @@ type AvatarStoryArgs = {
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function Person({ content = "Foto", initials = "MN", size = "default", showBadge = false, badgeIcon = false }: Partial<AvatarStoryArgs>) {
+function Person({ content = "Photo", initials = "MN", size = "default", showBadge = false, badgeIcon = false }: Partial<AvatarStoryArgs>) {
   return (
     <Avatar size={size}>
-      {content === "Foto" && <AvatarImage src={photo} alt="Foto de perfil" />}
-      <AvatarFallback>{content === "Ícone" ? <UserIcon className="size-[16px]" /> : initials}</AvatarFallback>
+      {content === "Photo" && <AvatarImage src={photo} alt="Foto de perfil" />}
+      <AvatarFallback>{content === "Icon" ? <UserIcon className="size-[16px]" /> : initials}</AvatarFallback>
       {showBadge && <AvatarBadge>{badgeIcon && <CheckIcon />}</AvatarBadge>}
     </Avatar>
   )
 }
 
-function StoryAvatar({ display = "Único", count = 3, extra = 3, ...args }: Partial<AvatarStoryArgs>) {
-  if (display === "Único") return <Person {...args} />
+function StoryAvatar({ display = "Single", count = 3, extra = 3, ...args }: Partial<AvatarStoryArgs>) {
+  if (display === "Single") return <Person {...args} />
   return (
     <AvatarGroup>
       {people.slice(0, count).map((p, i) => (
@@ -51,19 +51,19 @@ function StoryAvatar({ display = "Único", count = 3, extra = 3, ...args }: Part
 }
 
 const meta = {
-  title: "Componentes/Avatar",
+  title: "Components/Avatar",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Representa uma pessoa. Sem foto, mostra as iniciais ou um ícone." } } },
-  args: { display: "Único", content: "Foto", initials: "MN", size: "default", showBadge: false, badgeIcon: false, count: 3, extra: 3 },
+  parameters: { docs: { description: { component: "Representa uma pessoa com foto, iniciais ou um ícone." } } },
+  args: { display: "Single", content: "Photo", initials: "MN", size: "default", showBadge: false, badgeIcon: false, count: 3, extra: 3 },
   argTypes: {
-    display: { name: "Exibição", control: "inline-radio", options: displays, description: "Um avatar ou um grupo sobreposto." },
-    content: { name: "Conteúdo", control: "inline-radio", options: contents, description: "Foto, iniciais ou ícone." },
-    initials: { name: "Iniciais", control: "text", description: "Até duas letras.", if: { arg: "content", eq: "Iniciais" } },
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default", "lg"], description: "sm (24px), default (32px) ou lg (40px)." },
-    showBadge: { name: "Selo", control: "boolean", description: "Mostra um selo no canto (ex.: online).", if: { arg: "display", eq: "Único" } },
-    badgeIcon: { name: "Selo · ícone", control: "boolean", description: "Ícone dentro do selo. Não aparece no sm.", if: { arg: "showBadge" } },
-    count: { name: "Quantidade", control: { type: "range", min: 2, max: 5, step: 1 }, description: "Avatares no grupo.", if: { arg: "display", eq: "Grupo" } },
-    extra: { name: "Contador", control: { type: "number", min: 0, max: 99 }, description: "Pessoas a mais (+N). Zero esconde.", if: { arg: "display", eq: "Grupo" } },
+    display: { name: "Display", control: "inline-radio", options: displays },
+    content: { name: "Content", control: "inline-radio", options: contents },
+    initials: { name: "Initials", control: "text", if: { arg: "content", eq: "Initials" } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default", "lg"], table: { defaultValue: { summary: '"default"' } } },
+    showBadge: { name: "Badge", control: "boolean", if: { arg: "display", eq: "Single" } },
+    badgeIcon: { name: "Badge · icon", control: "boolean", if: { arg: "showBadge" } },
+    count: { name: "Count", control: { type: "range", min: 2, max: 5, step: 1 }, if: { arg: "display", eq: "Group" } },
+    extra: { name: "Group count", control: { type: "number", min: 0, max: 99 }, if: { arg: "display", eq: "Group" } },
   },
   render: (args) => <StoryAvatar {...args} />,
 } satisfies Meta<AvatarStoryArgs>
@@ -71,9 +71,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-lg">
       {contents.map((c) => (
@@ -81,12 +81,12 @@ export const Variantes: Story = {
       ))}
       <Person {...args} showBadge />
       <Person {...args} showBadge badgeIcon />
-      <StoryAvatar {...args} display="Grupo" />
+      <StoryAvatar {...args} display="Group" />
     </div>
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-lg">
       <StoryAvatar {...args} size="sm" />

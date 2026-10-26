@@ -4,7 +4,7 @@ import { Page, Section, TokenName, TokenTable } from "./doc-ui"
 import { cssVarName, foundation, formatValue, group, resolve, semantic } from "./tokens-data"
 
 const meta = {
-  title: "Fundamentos/Tipografia",
+  title: "Foundations/Typography",
   parameters: { layout: "padded" },
 } satisfies Meta
 
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>
 type TypoProp = "font-family" | "font-weight" | "font-size" | "line-height" | "letter-spacing" | "text-case"
 const css = (id: string, prop: TypoProp) => `var(${cssVarName(id)}-${prop})`
 
-export const Estilos: Story = {
+export const Styles: Story = {
   render: () => {
     const styles = group(semantic, ["typography"])
     return (
@@ -60,8 +60,7 @@ export const Estilos: Story = {
   },
 }
 
-export const Fundacao: Story = {
-  name: "Fundação",
+export const Foundation: Story = {
   render: () => (
     <Page title="Fundação de tipografia" intro="As peças que os estilos combinam, na mesma estrutura do Nitro: papéis de fonte, escala de tamanhos (heading e text), pesos, altura de linha e espaço entre letras.">
       <Section title="Papéis de fonte" description="Trocar a fonte do produto = mudar só estes dois tokens.">

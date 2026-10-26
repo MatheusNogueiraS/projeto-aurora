@@ -4,14 +4,14 @@ import { Grid, Page, Section, TokenCard, TokenTable } from "./doc-ui"
 import { cssVar, foundation, group, semantic } from "./tokens-data"
 
 const meta = {
-  title: "Fundamentos/Linha, opacidade e movimento",
+  title: "Foundations/Line, Opacity and Motion",
   parameters: { layout: "padded" },
 } satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Opacidade: Story = {
+export const Opacity: Story = {
   render: () => (
     <Page
       title="Opacidade"
@@ -33,8 +33,7 @@ export const Opacidade: Story = {
   ),
 }
 
-export const Linhas: Story = {
-  name: "Espessura de linha",
+export const StrokeWidth: Story = {
   render: () => (
     <Page title="Espessura de linha" intro="Bordas (border-default) e anel de foco (ring-(length:--aurora-stroke-focus)).">
       <Grid>
@@ -50,7 +49,7 @@ export const Linhas: Story = {
   ),
 }
 
-export const Movimento: Story = {
+export const Motion: Story = {
   render: () => (
     <Page
       title="Movimento"
@@ -64,8 +63,8 @@ export const Movimento: Story = {
   ),
 }
 
-export const CamadasGiroBreakpoints: Story = {
-  name: "Camadas, giro e breakpoints",
+export const LayersRotationBreakpoints: Story = {
+  name: "Layers, rotation and breakpoints",
   render: () => (
     <Page title="Camadas, giro e breakpoints" intro="Ordem de empilhamento (z-overlay...), giros fixos (rotate-flip...) e larguras de tela (sm:, md:, lg:).">
       <Section title="Camadas">
