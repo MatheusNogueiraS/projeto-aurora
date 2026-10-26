@@ -15,8 +15,7 @@ const icons = {
 }
 type IconName = keyof typeof icons
 
-const variants = { Linha: "line", Caixa: "box" } as const
-type VariantName = keyof typeof variants
+const variants = ["line", "box"] as const
 
 // Linhas de exemplo para o conteúdo em DataLine (como o InfoDrop do Design System CB).
 const lines = [
@@ -31,9 +30,9 @@ const lines = [
 // O item é a unidade (como no Figma): título que abre e fecha e conteúdo livre (slot). Para a
 // montagem de vários itens, ver Accordion/Grupo. Controles como no Accordion do Nitro e no InfoDrop.
 type ItemStoryArgs = {
-  variant: VariantName
+  variant: (typeof variants)[number]
   title: string
-  contentType: "Texto" | "Linhas de dados"
+  contentType: "Text" | "Data Line"
   content: string
   lineCount: number
   showIconLeading: boolean
@@ -44,9 +43,9 @@ type ItemStoryArgs = {
 
 // controles escondidos não chegam até aqui, por isso os padrões
 function StoryItem({
-  variant = "Linha",
+  variant = "line",
   title,
-  contentType = "Texto",
+  contentType = "Text",
   content = "",
   lineCount = 3,
   showIconLeading = false,
@@ -57,10 +56,10 @@ function StoryItem({
   return (
     // a key recria o item quando "Aberto" muda nos controles; ele continua clicável
     <Accordion key={String(open)} defaultValue={open ? ["item"] : []} className="max-w-[360px]">
-      <AccordionItem value="item" variant={variants[variant]} disabled={disabled}>
+      <AccordionItem value="item" variant={variant} disabled={disabled}>
         <AccordionTrigger iconLeading={showIconLeading ? icons[iconLeadingName] : undefined}>{title}</AccordionTrigger>
         <AccordionContent>
-          {contentType === "Texto"
+          {contentType === "Text"
             ? content
             : lines.slice(0, lineCount).map((l) => <DataLine key={l.label} size="sm" divider={false} className="py-xs" {...l} />)}
         </AccordionContent>
@@ -70,20 +69,19 @@ function StoryItem({
 }
 
 const meta = {
-  title: "Componentes/Accordion/Item",
+  title: "Components/Accordion/Item",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component:
-          "Seção que abre e fecha, para detalhes opcionais e perguntas frequentes. Em **linha** ou em **caixa** (borda em volta de um item só). O conteúdo é livre: texto ou componentes, como o DataLine. Vários itens juntos: ver **Grupo**.",
+        component: "Seção que abre e fecha, para detalhes opcionais e perguntas frequentes.",
       },
     },
   },
   args: {
-    variant: "Linha",
+    variant: "line",
     title: "Detalhes do empréstimo",
-    contentType: "Linhas de dados",
+    contentType: "Data Line",
     content: "Um empréstimo com parcelas descontadas direto na folha.",
     lineCount: 3,
     showIconLeading: false,
@@ -92,15 +90,15 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    variant: { name: "Tipo", control: "inline-radio", options: Object.keys(variants), description: "Linha (num grupo, divisor entre os itens) ou caixa em volta do item." },
-    title: { name: "Título", control: "text", description: "Texto do título." },
-    contentType: { name: "Conteúdo", control: "inline-radio", options: ["Texto", "Linhas de dados"], description: "O que aparece ao abrir: texto ou linhas de DataLine." },
-    content: { name: "Conteúdo · texto", control: "text", if: { arg: "contentType", eq: "Texto" } },
-    lineCount: { name: "Conteúdo · linhas", control: { type: "range", min: 1, max: 6, step: 1 }, description: "Quantidade de linhas de dados.", if: { arg: "contentType", eq: "Linhas de dados" } },
-    showIconLeading: { name: "Icon Leading", control: "boolean", description: "Mostra um ícone antes do título.", table: { category: "Ícone" } },
-    iconLeadingName: { name: "Icon Leading · ícone", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Ícone" } },
-    open: { name: "Aberto", control: "boolean", description: "Mostra o item aberto.", table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o clique: o item não abre nem fecha.", table: { category: "Estado" } },
+    variant: { name: "Type", control: "inline-radio", options: variants, table: { defaultValue: { summary: '"line"' } } },
+    title: { name: "Title", control: "text" },
+    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Data Line"] },
+    content: { name: "Content · text", control: "text", if: { arg: "contentType", eq: "Text" } },
+    lineCount: { name: "Content · lines", control: { type: "range", min: 1, max: 6, step: 1 }, if: { arg: "contentType", eq: "Data Line" } },
+    showIconLeading: { name: "Icon Leading", control: "boolean", table: { category: "Icons" } },
+    iconLeadingName: { name: "Icon Leading · icon", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Icons" } },
+    open: { name: "Open", control: "boolean", table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
   },
   render: (args) => <StoryItem {...args} />,
 } satisfies Meta<ItemStoryArgs>
@@ -108,18 +106,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Os dois tipos, abertos.
-export const Variantes: Story = {
+export const Variants: Story = {
   args: { open: true },
   render: (args) => (
     <div className="flex flex-wrap items-start gap-xl">
-      {(Object.keys(variants) as VariantName[]).map((variant) => (
+      {variants.map((variant) => (
         <StoryItem key={variant} {...args} variant={variant} />
       ))}
     </div>
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true } }
+export const Disabled: Story = { args: { disabled: true } }

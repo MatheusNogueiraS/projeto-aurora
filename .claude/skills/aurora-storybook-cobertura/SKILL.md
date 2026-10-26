@@ -23,15 +23,15 @@ Cada item do inventário precisa estar em pelo menos um lugar:
 
 | Onde | Para quê |
 |---|---|
-| **Controle** (painel) | Tudo o que o designer escolheria no painel do Figma: conteúdo, variante, tamanho, partes opcionais (liga/desliga + conteúdo), quantidade, estados (categoria "Estado"). |
-| **História** | Padrão / Variantes / Tamanhos / Desabilitado (só as que fizerem sentido). As histórias **repassam os args**, então os controles continuam valendo nelas. |
+| **Controle** (painel) | Tudo o que o designer escolheria no painel do Figma: conteúdo, variante, tamanho, partes opcionais (liga/desliga + conteúdo), quantidade, estados (categoria "State"). |
+| **História** | Default / Variants / Sizes / Disabled (só as que fizerem sentido). As histórias **repassam os args**, então os controles continuam valendo nelas. |
 
 Regras do padrão (detalhes na `aurora-storybook-review`):
-- Nomes dos controles em português, como no Figma. Uma frase curta de descrição.
+- Nomes em inglês (glossário da `aurora-storybook-review`); controles sem descrição.
 - Controles que dependem de outro se escondem (`if:`). Por isso o componente da história tem **valores padrão** para os args escondidos.
 - Um estado de exemplo usa **`key`** para recriar o componente, sem `useEffect`.
 - Nada de controle "só de código" (`asChild`, `className`…).
-- Partes que só existem em conjunto (ex.: grupo, contador) entram como controle de exibição ("Único / Grupo") com os seus próprios controles.
+- Partes que só existem em conjunto (ex.: grupo, contador) entram como controle de exibição ("Single / Group") com os seus próprios controles.
 - **Imagens de exemplo são locais** (SVG desenhado no código), nunca buscadas em serviço externo.
 
 Se algum item não couber em controle nem em história, diga por quê.

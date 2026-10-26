@@ -7,7 +7,7 @@ const options = [
   ["ted", "TED"],
   ["boleto", "Boleto"],
 ] as const
-const selections = ["Nenhuma", "Pix", "TED", "Boleto"] as const
+const selections = ["None", "Pix", "TED", "Boleto"] as const
 
 // Controles no padrão do painel do Figma: opção escolhida, descrição e estados.
 type RadioGroupStoryArgs = {
@@ -37,21 +37,21 @@ function StoryRadioGroup({ selected = "Pix", showDescription, invalid, disabled 
 }
 
 const meta = {
-  title: "Componentes/Radio Group",
+  title: "Components/Radio Group",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Escolha de uma única opção entre poucas, todas visíveis." } } },
   args: { selected: "Pix", showDescription: false, invalid: false, disabled: false },
   argTypes: {
-    selected: { name: "Selecionado", control: "inline-radio", options: selections, description: "Opção marcada.", if: { arg: "invalid", truthy: false } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Mostra um texto de apoio em cada opção." },
-    invalid: { name: "Erro", control: "boolean", description: "Escolha obrigatória não feita. Some ao escolher.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia a escolha.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },
+    selected: { name: "Selected", control: "inline-radio", options: selections, if: { arg: "invalid", truthy: false }, table: { defaultValue: { summary: '"None"' } } },
+    showDescription: { name: "Description", control: "boolean" },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
-  render: (args) => <StoryRadioGroup {...args} selected={args.invalid ? "Nenhuma" : args.selected} />,
+  render: (args) => <StoryRadioGroup {...args} selected={args.invalid ? "None" : args.selected} />,
 } satisfies Meta<RadioGroupStoryArgs>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
-export const Desabilitado: Story = { args: { disabled: true } }
+export const Default: Story = {}
+export const Disabled: Story = { args: { disabled: true } }

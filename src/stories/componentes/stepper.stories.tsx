@@ -42,19 +42,19 @@ function StoryStepper({ orientation = "horizontal", size = "default", steps = 4,
 }
 
 const meta = {
-  title: "Componentes/Stepper",
+  title: "Components/Stepper",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Mostra as etapas de um processo e em qual delas se está, como um andamento ou histórico." } },
+    docs: { description: { component: "Mostra as etapas de um processo e em qual delas se está." } },
   },
   args: { orientation: "horizontal", size: "default", steps: 4, current: 2, error: false, showDescription: false },
   argTypes: {
-    orientation: { name: "Orientação", control: "inline-radio", options: ["horizontal", "vertical"], description: "Etapas lado a lado ou empilhadas (histórico)." },
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default"], description: "sm (círculo de 20px) ou default (27px)." },
-    steps: { name: "Etapas", control: { type: "range", min: 2, max: 6, step: 1 }, description: "Quantas etapas o processo tem." },
-    current: { name: "Etapa atual", control: { type: "range", min: 1, max: 7, step: 1 }, description: "As anteriores ficam concluídas. Depois da última, todas concluídas." },
-    error: { name: "Erro", control: "boolean", description: "A etapa atual teve um problema.", table: { category: "Estado" } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Texto de apoio embaixo de cada etapa." },
+    orientation: { name: "Orientation", control: "inline-radio", options: ["horizontal", "vertical"], table: { defaultValue: { summary: '"horizontal"' } } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default"], table: { defaultValue: { summary: '"default"' } } },
+    steps: { name: "Steps", control: { type: "range", min: 2, max: 6, step: 1 } },
+    current: { name: "Current step", control: { type: "range", min: 1, max: 7, step: 1 } },
+    error: { name: "Error", control: "boolean", table: { category: "State" } },
+    showDescription: { name: "Description", control: "boolean" },
   },
   render: (args) => (
     <div className="max-w-[720px]">
@@ -66,9 +66,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex max-w-[720px] flex-col gap-xl">
       <StoryStepper {...args} orientation="horizontal" current={2} error={false} />
@@ -79,7 +79,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex max-w-[720px] flex-col gap-xl">
       <StoryStepper {...args} size="sm" />

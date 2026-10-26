@@ -32,19 +32,19 @@ function StorySwitch({ showLabel, label = "Receber notificações", showDescript
 }
 
 const meta = {
-  title: "Componentes/Switch",
+  title: "Components/Switch",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Liga ou desliga uma opção com efeito imediato." } } },
   args: { showLabel: true, label: "Receber notificações", showDescription: false, description: "Avisos sobre a sua proposta.", size: "default", checked: false, invalid: false, disabled: false },
   argTypes: {
-    showLabel: { name: "Texto", control: "boolean", description: "Mostra o texto ao lado." },
-    label: { name: "Texto · conteúdo", control: "text", if: { arg: "showLabel" } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Mostra um texto de apoio." },
-    description: { name: "Descrição · conteúdo", control: "text", if: { arg: "showDescription" } },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes },
-    checked: { name: "Ligado", control: "boolean", description: "Mostra a opção ligada.", if: { arg: "invalid", truthy: false } },
-    invalid: { name: "Erro", control: "boolean", description: "Opção obrigatória desligada. Some ao ligar.", if: { arg: "disabled", truthy: false }, table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o clique.", if: { arg: "invalid", truthy: false }, table: { category: "Estado" } },
+    showLabel: { name: "Text", control: "boolean" },
+    label: { name: "Text · content", control: "text", if: { arg: "showLabel" } },
+    showDescription: { name: "Description", control: "boolean" },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    checked: { name: "Checked", control: "boolean", if: { arg: "invalid", truthy: false } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StorySwitch {...args} />,
 } satisfies Meta<SwitchStoryArgs>
@@ -52,9 +52,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <StorySwitch {...args} checked={false} label="Desligado" />
@@ -63,7 +63,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       {sizes.map((size) => (
@@ -73,4 +73,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true, checked: true } }
+export const Disabled: Story = { args: { disabled: true, checked: true } }

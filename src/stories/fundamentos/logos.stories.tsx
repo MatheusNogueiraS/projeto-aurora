@@ -80,7 +80,7 @@ function LogoCard({ family, variant, url }: { family: string; variant: string; u
   )
 }
 
-function Logos() {
+function LogosPage() {
   return (
     <Page
       title="Logos"
@@ -113,11 +113,11 @@ function Logos() {
 }
 
 const meta = {
-  title: "Fundamentos/Logos",
+  title: "Foundations/Logos",
   parameters: { layout: "padded" },
 } satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Logotipos: Story = { name: "Logos", render: () => <Logos /> }
+export const Logos: Story = { render: () => <LogosPage /> }

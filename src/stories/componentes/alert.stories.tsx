@@ -49,14 +49,14 @@ function StoryAlert({
 }
 
 const meta = {
-  title: "Componentes/Alert",
+  title: "Components/Alert",
   component: Alert,
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Mensagem fixa na tela para informar o resultado de uma ação ou um aviso importante. Descrição e ação (CTA) são opcionais; a ação segue a cor do Tipo.",
+          "Mensagem fixa na tela para informar o resultado de uma ação ou um aviso importante.",
       },
     },
   },
@@ -70,13 +70,13 @@ const meta = {
     actionStyle: "link",
   },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Neutro, informação, sucesso, atenção ou erro." },
-    title: { name: "Título", control: "text" },
-    showDescription: { name: "Descrição", control: "boolean", description: "Mostra a descrição abaixo do título." },
-    description: { name: "Descrição · texto", control: "text", if: { arg: "showDescription" } },
-    showAction: { name: "Ação (CTA)", control: "boolean", description: "Mostra uma ação à direita.", table: { category: "Ação" } },
-    actionLabel: { name: "Ação · texto", control: "text", if: { arg: "showAction" }, table: { category: "Ação" } },
-    actionStyle: { name: "Ação · estilo", control: "inline-radio", options: ["link", "outline"], if: { arg: "showAction" }, table: { category: "Ação" } },
+    variant: { name: "Type", control: "select", options: variants, table: { defaultValue: { summary: '"default"' } } },
+    title: { name: "Title", control: "text" },
+    showDescription: { name: "Description", control: "boolean" },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
+    showAction: { name: "Action", control: "boolean", table: { category: "Action" } },
+    actionLabel: { name: "Action · text", control: "text", if: { arg: "showAction" }, table: { category: "Action" } },
+    actionStyle: { name: "Action · style", control: "inline-radio", options: ["link", "outline"], if: { arg: "showAction" }, table: { category: "Action", defaultValue: { summary: '"link"' } } },
   },
   render: (args) => <StoryAlert {...args} />,
 } satisfies Meta<AlertStoryArgs>
@@ -84,9 +84,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       {variants.map((variant) => (

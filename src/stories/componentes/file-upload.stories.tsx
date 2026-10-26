@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { FileUpload, type FileUploadFile } from "@/components/ui/file-upload"
 
-const states = ["Vazio", "Enviando", "Carregando", "Concluído", "Erro"] as const
+const states = ["idle", "uploading", "loading", "done", "error"] as const
 type State = (typeof states)[number]
-const errorKinds = ["Sem arquivo", "Falha no envio"] as const
+const errorKinds = ["No file", "Upload failed"] as const
 
 const sampleFile: FileUploadFile = { name: "comprovante-de-renda.pdf", size: 1_250_000, type: "application/pdf" }
 
@@ -24,7 +24,7 @@ type FileUploadStoryArgs = {
 }
 
 function StoryFileUpload({
-  state = "Vazio",
+  state = "idle",
   media,
   size,
   orientation,
@@ -34,13 +34,13 @@ function StoryFileUpload({
   description = "PDF ou imagem, até 5 MB.",
   progress = 40,
   error = "Não foi possível enviar.",
-  errorKind = "Sem arquivo",
+  errorKind = "No file",
   disabled = false,
 }: Partial<FileUploadStoryArgs>) {
   // a key de quem usa recria o componente quando "Estado" muda; aqui escolher e remover continuam funcionando
-  const sendFailed = state === "Erro" && errorKind === "Falha no envio"
-  const [file, setFile] = React.useState<FileUploadFile | null>(state === "Vazio" || (state === "Erro" && !sendFailed) ? null : sampleFile)
-  const [failed, setFailed] = React.useState(state === "Erro")
+  const sendFailed = state === "error" && errorKind === "Upload failed"
+  const [file, setFile] = React.useState<FileUploadFile | null>(state === "idle" || (state === "error" && !sendFailed) ? null : sampleFile)
+  const [failed, setFailed] = React.useState(state === "error")
   return (
     <FileUpload
       className="max-w-[312px]"
@@ -53,8 +53,8 @@ function StoryFileUpload({
       maxSize={5 * 1024 * 1024}
       disabled={disabled}
       file={file}
-      status={failed && file ? "error" : state === "Enviando" || state === "Carregando" ? "uploading" : "done"}
-      progress={state === "Carregando" ? undefined : progress}
+      status={failed && file ? "error" : state === "uploading" || state === "loading" ? "uploading" : "done"}
+      progress={state === "loading" ? undefined : progress}
       error={failed ? error : undefined}
       onFileSelect={(f) => {
         setFailed(false)
@@ -67,13 +67,13 @@ function StoryFileUpload({
 }
 
 const meta = {
-  title: "Componentes/FileUpload",
+  title: "Components/File Upload",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Envio de um arquivo. Clique ou arraste o arquivo para a área; o tipo e o tamanho são conferidos antes do envio." } },
+    docs: { description: { component: "Envio de um arquivo, clicando ou arrastando para a área." } },
   },
   args: {
-    state: "Vazio",
+    state: "idle",
     media: "plain",
     size: "default",
     orientation: "horizontal",
@@ -81,20 +81,20 @@ const meta = {
     description: "PDF ou imagem, até 5 MB.",
     progress: 40,
     error: "Não foi possível enviar.",
-    errorKind: "Sem arquivo",
+    errorKind: "No file",
     disabled: false,
   },
   argTypes: {
-    state: { name: "Estado", control: "inline-radio", options: states, description: "Vazio, enviando (com porcentagem), carregando (sem porcentagem), concluído ou erro." },
-    media: { name: "Mídia", control: "inline-radio", options: ["plain", "icon"], description: "plain: só o ícone; icon: ícone num quadro." },
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default"], description: "sm (14px) ou default (16px)." },
-    orientation: { name: "Orientação", control: "inline-radio", options: ["horizontal", "vertical"], description: "vertical: ícone acima do texto." },
-    title: { name: "Título", control: "text", description: "Chamada da área vazia.", if: { arg: "state", eq: "Vazio" } },
-    description: { name: "Descrição", control: "text", description: "Requisitos do arquivo.", if: { arg: "state", eq: "Vazio" } },
-    progress: { name: "Progresso", control: { type: "range", min: 0, max: 100, step: 5 }, description: "Quanto já foi enviado, de 0 a 100.", if: { arg: "state", eq: "Enviando" } },
-    error: { name: "Mensagem de erro", control: "text", if: { arg: "state", eq: "Erro" } },
-    errorKind: { name: "Erro · tipo", control: "inline-radio", options: errorKinds, description: "Sem arquivo (ex.: tipo não aceito) ou falha ao enviar um arquivo escolhido.", if: { arg: "state", eq: "Erro" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia a escolha e a remoção.", table: { category: "Estado" } },
+    state: { name: "State", control: "inline-radio", options: states, table: { defaultValue: { summary: '"idle"' } } },
+    media: { name: "Media", control: "inline-radio", options: ["plain", "icon"], table: { defaultValue: { summary: '"plain"' } } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default"], table: { defaultValue: { summary: '"default"' } } },
+    orientation: { name: "Orientation", control: "inline-radio", options: ["horizontal", "vertical"], table: { defaultValue: { summary: '"horizontal"' } } },
+    title: { name: "Title", control: "text", if: { arg: "state", eq: "idle" }, table: { defaultValue: { summary: '"Selecionar arquivo"' } } },
+    description: { name: "Description", control: "text", if: { arg: "state", eq: "idle" } },
+    progress: { name: "Progress", control: { type: "range", min: 0, max: 100, step: 5 }, if: { arg: "state", eq: "uploading" } },
+    error: { name: "Error · message", control: "text", if: { arg: "state", eq: "error" } },
+    errorKind: { name: "Error · type", control: "inline-radio", options: errorKinds, if: { arg: "state", eq: "error" } },
+    disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
   },
   render: (args) => <StoryFileUpload key={args.state + args.errorKind} {...args} />,
 } satisfies Meta<FileUploadStoryArgs>
@@ -102,9 +102,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className={args.orientation === "vertical" ? "flex flex-wrap items-start gap-lg" : "flex flex-col gap-lg"}>
       {states.map((s) => (
@@ -114,7 +114,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className={args.orientation === "vertical" ? "flex flex-wrap items-start gap-lg" : "flex flex-col gap-lg"}>
       <StoryFileUpload key={"s" + args.state} {...args} size="sm" />
@@ -123,4 +123,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true } }
+export const Disabled: Story = { args: { disabled: true } }

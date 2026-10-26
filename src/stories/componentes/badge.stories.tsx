@@ -71,10 +71,10 @@ function StoryBadge({
 }
 
 const meta = {
-  title: "Componentes/Badge",
+  title: "Components/Badge",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Rótulo curto de status ou categoria. Não é clicável; pode ter a opção de remover." } },
+    docs: { description: { component: "Rótulo curto de status ou categoria." } },
   },
   args: {
     variant: "default",
@@ -87,14 +87,14 @@ const meta = {
     removable: false,
   },
   argTypes: {
-    variant: { name: "Tipo", control: "select", options: variants, description: "Cor do badge. default é o cinza neutro." },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes },
-    iconOnly: { name: "Apenas ícone", control: "boolean", description: "Mostra só o ícone, sem texto." },
-    label: { name: "Label", control: "text", description: "Texto do badge.", if: { arg: "iconOnly", truthy: false } },
-    dot: { name: "Indicador", control: "boolean", description: "Ponto na cor do badge antes do texto.", if: { arg: "iconOnly", truthy: false } },
-    showIconLeading: { name: "Icon Leading", control: "boolean", description: "Mostra um ícone antes do texto.", if: { arg: "iconOnly", truthy: false }, table: { category: "Ícones" } },
-    iconLeadingName: { name: "Icon Leading · ícone", control: "select", options: Object.keys(icons), table: { category: "Ícones" } },
-    removable: { name: "Removível", control: "boolean", description: "Mostra o x para remover, à direita.", if: { arg: "iconOnly", truthy: false } },
+    variant: { name: "Type", control: "select", options: variants, table: { defaultValue: { summary: '"default"' } } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    iconOnly: { name: "Icon only", control: "boolean" },
+    label: { name: "Label", control: "text", if: { arg: "iconOnly", truthy: false } },
+    dot: { name: "Dot", control: "boolean", if: { arg: "iconOnly", truthy: false } },
+    showIconLeading: { name: "Icon Leading", control: "boolean", if: { arg: "iconOnly", truthy: false }, table: { category: "Icons" } },
+    iconLeadingName: { name: "Icon Leading · icon", control: "select", options: Object.keys(icons), table: { category: "Icons" } },
+    removable: { name: "Removable", control: "boolean", if: { arg: "iconOnly", truthy: false } },
   },
   render: (args) => <StoryBadge key={String(args.removable)} {...args} />,
 } satisfies Meta<BadgeStoryArgs>
@@ -102,9 +102,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <div className="flex flex-wrap items-center gap-md">
@@ -136,7 +136,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
       <div className="flex flex-wrap items-center gap-md">

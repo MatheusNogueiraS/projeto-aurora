@@ -4,7 +4,7 @@ import { Grid, Page, Section, TokenCard } from "./doc-ui"
 import { cssVar, foundation, group, resolve, semantic, type Token } from "./tokens-data"
 
 const meta = {
-  title: "Fundamentos/Cores",
+  title: "Foundations/Colors",
   parameters: { layout: "padded" },
 } satisfies Meta
 
@@ -38,8 +38,7 @@ const semanticGroups: { title: string; description: string; filter: (t: Token) =
   { title: "Outros", description: "", filter: (t) => t.path.length === 2 && ["splash", "shadow"].includes(t.path[1]) },
 ]
 
-export const Semanticas: Story = {
-  name: "Semânticas",
+export const Semantic: Story = {
   render: () => {
     const colors = group(semantic, ["color"])
     return (
@@ -61,8 +60,8 @@ export const Semanticas: Story = {
   },
 }
 
-export const Paleta: Story = {
-  name: "Paleta (fundação)",
+export const Palette: Story = {
+  name: "Palette (foundation)",
   render: () => {
     const palette = group(foundation, ["color"])
     const families = [...new Set(palette.map((t) => t.path[1]))]

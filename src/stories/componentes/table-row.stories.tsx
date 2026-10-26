@@ -8,19 +8,19 @@ import { columns, parcelas } from "./table-example"
 // (a linha de baixo), do hover e da seleção, que pegam a linha toda. Três tipos, um para cada
 // parte da tabela. As colunas são só exemplos de conteúdo.
 type RowStoryArgs = {
-  type: "Cabeçalho" | "Conteúdo" | "Rodapé"
+  type: "header" | "body" | "footer"
   columns: number
   selected: boolean
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function StoryRow({ type = "Conteúdo", columns: count = 4, selected = false }: Partial<RowStoryArgs>) {
+function StoryRow({ type = "body", columns: count = 4, selected = false }: Partial<RowStoryArgs>) {
   const cols = columns.slice(0, count)
   return (
     // colunas de largura igual, para as linhas soltas das Variantes ficarem alinhadas; a largura
     // mínima faz a linha rolar para o lado em tela estreita, em vez de apertar as colunas
     <Table className="min-w-[640px] table-fixed">
-      {type === "Cabeçalho" && (
+      {type === "header" && (
         <TableHeader>
           <TableRow>
             {cols.map((c) => (
@@ -31,7 +31,7 @@ function StoryRow({ type = "Conteúdo", columns: count = 4, selected = false }: 
           </TableRow>
         </TableHeader>
       )}
-      {type === "Conteúdo" && (
+      {type === "body" && (
         <TableBody>
           <TableRow data-state={selected ? "selected" : undefined}>
             {cols.map((c) => (
@@ -45,7 +45,7 @@ function StoryRow({ type = "Conteúdo", columns: count = 4, selected = false }: 
           <tr aria-hidden />
         </TableBody>
       )}
-      {type === "Rodapé" && (
+      {type === "footer" && (
         <TableFooter>
           <TableRow>
             {cols.map((c, i) => (
@@ -61,21 +61,21 @@ function StoryRow({ type = "Conteúdo", columns: count = 4, selected = false }: 
 }
 
 const meta = {
-  title: "Componentes/Table/Linha",
+  title: "Components/Table/Row",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Junta as **Células** de uma linha, em qualquer quantidade (é um slot). É dela o divisor (a linha de baixo), o hover (passe o mouse) e a seleção, que pegam a linha toda. Tipos: cabeçalho, conteúdo e rodapé (total).",
+          "Junta as células de uma linha; é dela o divisor, o hover e a seleção.",
       },
     },
   },
-  args: { type: "Conteúdo", columns: 4, selected: false },
+  args: { type: "body", columns: 4, selected: false },
   argTypes: {
-    type: { name: "Tipo", control: "inline-radio", options: ["Cabeçalho", "Conteúdo", "Rodapé"], description: "Títulos das colunas, dados ou total." },
-    columns: { name: "Colunas", control: { type: "range", min: 1, max: 7, step: 1 }, description: "Quantidade de células na linha." },
-    selected: { name: "Selecionada", control: "boolean", description: "Destaca a linha (ex.: marcada pela seleção).", if: { arg: "type", eq: "Conteúdo" }, table: { category: "Estado" } },
+    type: { name: "Type", control: "inline-radio", options: ["header", "body", "footer"] },
+    columns: { name: "Columns", control: { type: "range", min: 1, max: 7, step: 1 } },
+    selected: { name: "Selected", control: "boolean", if: { arg: "type", eq: "body" }, table: { category: "State" } },
   },
   render: (args) => <StoryRow {...args} />,
 } satisfies Meta<RowStoryArgs>
@@ -83,16 +83,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Os tipos de linha, na ordem em que aparecem na tabela.
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-xl">
-      <StoryRow {...args} type="Cabeçalho" />
-      <StoryRow {...args} type="Conteúdo" selected={false} />
-      <StoryRow {...args} type="Conteúdo" selected />
-      <StoryRow {...args} type="Rodapé" />
+      <StoryRow {...args} type="header" />
+      <StoryRow {...args} type="body" selected={false} />
+      <StoryRow {...args} type="body" selected />
+      <StoryRow {...args} type="footer" />
     </div>
   ),
 }

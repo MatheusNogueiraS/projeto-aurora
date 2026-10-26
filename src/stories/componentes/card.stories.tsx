@@ -12,7 +12,7 @@ const lines = [
   { label: "Parcelas", value: "84x de R$ 42,38" },
   { label: "Taxa de juros", value: "1,80% a.m." },
 ]
-const actions = ["Nenhuma", "Tag", "Botão de ícone"] as const
+const actions = ["None", "Tag", "Icon Button"] as const
 
 // Como o Card do shadcn: a caixa, com cabeçalho (título, descrição e ação no canto), conteúdo
 // livre e rodapé. Os controles ligam cada parte; o conteúdo é um slot (texto ou outros componentes).
@@ -23,7 +23,7 @@ type CardStoryArgs = {
   showDescription: boolean
   description: string
   action: (typeof actions)[number]
-  contentType: "Texto" | "Linhas de dados"
+  contentType: "Text" | "Data Line"
   showFooter: boolean
 }
 
@@ -34,8 +34,8 @@ function StoryCard({
   title = "",
   showDescription = true,
   description = "",
-  action = "Nenhuma",
-  contentType = "Linhas de dados",
+  action = "None",
+  contentType = "Data Line",
   showFooter = true,
 }: Partial<CardStoryArgs>) {
   return (
@@ -44,7 +44,7 @@ function StoryCard({
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           {showDescription && <CardDescription>{description}</CardDescription>}
-          {action !== "Nenhuma" && (
+          {action !== "None" && (
             <CardAction>
               {action === "Tag" ? (
                 <Badge variant="success">Aprovada</Badge>
@@ -58,7 +58,7 @@ function StoryCard({
         </CardHeader>
       )}
       <CardContent>
-        {contentType === "Texto" ? (
+        {contentType === "Text" ? (
           <p>O valor cai na sua conta em até 1 dia útil depois da assinatura.</p>
         ) : (
           <div>
@@ -80,13 +80,13 @@ function StoryCard({
 }
 
 const meta = {
-  title: "Componentes/Card",
+  title: "Components/Card",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
         component:
-          "Caixa para agrupar um conteúdo na página: cabeçalho, conteúdo e rodapé, todos opcionais. Mesma caixa do **Hover Card** e do **Popover**. Para um card que marca uma escolha, use o **Card de seleção**.",
+          "Caixa para agrupar um conteúdo na página; para marcar uma escolha, use o **Selection Card**.",
       },
     },
   },
@@ -96,19 +96,19 @@ const meta = {
     title: "Resumo da proposta",
     showDescription: true,
     description: "Confira antes de continuar.",
-    action: "Nenhuma",
-    contentType: "Linhas de dados",
+    action: "None",
+    contentType: "Data Line",
     showFooter: true,
   },
   argTypes: {
-    size: { name: "Tamanho", control: "inline-radio", options: ["sm", "default"], description: "Espaço interno de 12px (sm) ou 16px (default)." },
-    showHeader: { name: "Cabeçalho", control: "boolean", description: "Mostra o título no topo.", table: { category: "Partes" } },
-    title: { name: "Título", control: "text", if: { arg: "showHeader" }, table: { category: "Partes" } },
-    showDescription: { name: "Descrição", control: "boolean", description: "Texto de apoio abaixo do título.", if: { arg: "showHeader" }, table: { category: "Partes" } },
-    description: { name: "Descrição · conteúdo", control: "text", if: { arg: "showDescription" }, table: { category: "Partes" } },
-    action: { name: "Ação", control: "inline-radio", options: actions, description: "Algo no canto do cabeçalho: uma tag ou um botão.", if: { arg: "showHeader" }, table: { category: "Partes" } },
-    contentType: { name: "Conteúdo", control: "inline-radio", options: ["Texto", "Linhas de dados"], description: "O que vai no meio: texto ou outros componentes (ex.: DataLine).", table: { category: "Partes" } },
-    showFooter: { name: "Rodapé", control: "boolean", description: "Mostra o rodapé, com o botão.", table: { category: "Partes" } },
+    size: { name: "Size", control: "inline-radio", options: ["sm", "default"], table: { defaultValue: { summary: '"default"' } } },
+    showHeader: { name: "Header", control: "boolean", table: { category: "Parts" } },
+    title: { name: "Title", control: "text", if: { arg: "showHeader" }, table: { category: "Parts" } },
+    showDescription: { name: "Description", control: "boolean", if: { arg: "showHeader" }, table: { category: "Parts" } },
+    description: { name: "Description · content", control: "text", if: { arg: "showDescription" }, table: { category: "Parts" } },
+    action: { name: "Action", control: "inline-radio", options: actions, if: { arg: "showHeader" }, table: { category: "Parts", defaultValue: { summary: '"None"' } } },
+    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Data Line"], table: { category: "Parts" } },
+    showFooter: { name: "Footer", control: "boolean", table: { category: "Parts" } },
   },
   render: (args) => <StoryCard {...args} />,
 } satisfies Meta<CardStoryArgs>
@@ -116,20 +116,20 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Usos comuns: resumo com rodapé, aviso só com texto e card com tag no canto.
-export const Variantes: Story = {
+export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap items-start gap-xl">
       <StoryCard title="Resumo da proposta" description="Confira antes de continuar." />
-      <StoryCard title="Quando o dinheiro cai" showDescription={false} contentType="Texto" showFooter={false} />
+      <StoryCard title="Quando o dinheiro cai" showDescription={false} contentType="Text" showFooter={false} />
       <StoryCard title="Proposta 4821" description="Consignado INSS" action="Tag" showFooter={false} />
     </div>
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-start gap-xl">
       <StoryCard {...args} size="sm" />

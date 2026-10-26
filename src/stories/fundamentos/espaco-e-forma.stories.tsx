@@ -4,7 +4,7 @@ import { Grid, Page, TokenCard, TokenTable } from "./doc-ui"
 import { cssVar, foundation, group, semantic } from "./tokens-data"
 
 const meta = {
-  title: "Fundamentos/Espaço e forma",
+  title: "Foundations/Space and Shape",
   parameters: { layout: "padded" },
 } satisfies Meta
 
@@ -58,7 +58,7 @@ export const Gap: Story = {
   ),
 }
 
-export const Raio: Story = {
+export const Radius: Story = {
   render: () => (
     <Page
       title="Raio"
@@ -82,8 +82,7 @@ export const Raio: Story = {
   ),
 }
 
-export const Elevacao: Story = {
-  name: "Elevação",
+export const Elevation: Story = {
   render: () => (
     <Page title="Elevação" intro="Sombras dos elementos que se destacam na tela. Classes: shadow-s, shadow-m, shadow-inverse.">
       <Grid>
@@ -99,8 +98,8 @@ export const Elevacao: Story = {
   ),
 }
 
-export const Escala: Story = {
-  name: "Escala de valores (fundação)",
+export const Scale: Story = {
+  name: "Value scale (foundation)",
   render: () => (
     <Page
       title="Escala de valores"

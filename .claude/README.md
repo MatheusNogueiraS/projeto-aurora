@@ -51,7 +51,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 
 | Script | Comando | O que faz | Falha quando |
 |---|---|---|---|
-| `manifest.mjs` | `node .claude/skills/aurora-componente/scripts/manifest.mjs` (`--check` só confere) | Inventário: exportações, variantes (cva), quem usa quem (`usa`/`usadoPor`) e onde cada componente está documentado | Manifest desatualizado; componente órfão (sem história e sem uso); variante que não aparece no Storybook |
+| `manifest.mjs` | `node .claude/skills/aurora-componente/scripts/manifest.mjs` (`--check` só confere) | Inventário: exportações, variantes (cva), quem usa quem (`usa`/`usadoPor`) e onde cada componente está documentado | Manifest desatualizado; componente órfão (sem história e sem uso); variante que não aparece no Storybook; nome do Storybook em português ou controle com descrição (regra 18c) |
 | `preparar.mjs` | `node .claude/skills/aurora-storybook-publicar/scripts/preparar.mjs <storybook-static> <saída> [publicados.json]` | Converte o build no formato do Artifact e calcula o que remover do link | Build ausente |
 | `guard.mjs` | (hook, automático) | Ver "Travas" | — |
 | `guard.test.mjs` | `node .claude/hooks/guard.test.mjs` | 26–27 casos da trava (rode na branch e na main) | Algum caso da trava mudou de comportamento |

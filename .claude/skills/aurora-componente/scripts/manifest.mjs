@@ -6,7 +6,9 @@
 // Falha (exit 1) se:
 //   1. manifest.json está desatualizado (só no --check);
 //   2. um componente não tem história nem é usado por outro componente (órfão);
-//   3. um valor de variante (cva) não aparece em nenhum arquivo do Storybook que importa o componente.
+//   3. um valor de variante (cva) não aparece em nenhum arquivo do Storybook que importa o componente;
+//   4. um nome do Storybook está em português (menu, histórias, controles, categorias, opções escritas na
+//      história) ou um controle tem descrição (regra 18c do CLAUDE.md).
 // Peça interna = sem história própria, mas usada por outro componente (ex.: input-group): é coberta pela história de quem a usa.
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from "node:fs"
 import path from "node:path"
@@ -124,6 +126,37 @@ for (const [name, c] of Object.entries(components)) {
     for (const v of values)
       if (!new RegExp(`["'\`]${v.replace(/[-]/g, "\\-")}["'\`]`).test(docs))
         problems.push(`${c.arquivo}: variante ${variant}="${v}" não aparece no Storybook (${c.documentadoEm.join(", ")})`)
+}
+
+// Nomes do Storybook em inglês (regra 18c). Explicações (descrição do componente, legendas, exemplos) ficam livres.
+// shortcut: detecta português por acento ou por uma lista de palavras comuns; palavra sem acento fora da lista passa.
+const PT = /[À-ÖØ-öø-ÿ]|\b(padrao|variantes|tamanhos?|desabilitado|tipo|texto|titulo|conteudo|descricao|erro|aberto|selecionad[oa]|ligado|carregando|posicao|cabecalho|rodape|acao|icones?|estado|partes|nenhum[a]?|linha|caixa|seta|barra|cima|baixo|esquerda|direita|centro|marca|neutro|vazio|enviando|concluido|numeros|pontos|setas|contorno|fantasma|componentes|fundamentos|cores|tipografia|escala|paleta|raio|movimento|opacidade|etapas?|porcentagem|grupo|unico|foto|iniciais|marcado|desmarcado|modo|meses|vizinhos|niveis|colunas|legenda|celula)\b/i
+const strings = s => [...s.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(m => m[1])
+for (const [file, src] of Object.entries(storySrc)) {
+  if (!/\.stories\.tsx$|\.mdx$/.test(file)) continue
+  const flag = (what, text) => PT.test(text) && problems.push(`${file}: ${what} em português: "${text}"`)
+  for (const m of src.matchAll(/<Meta\s+title="([^"]+)"/g)) flag("menu", m[1])
+  const metaAt = src.search(/const meta\s*=\s*\{/)
+  if (metaAt < 0) continue
+  const open = src.indexOf("{", metaAt)
+  const meta = entries(src.slice(open, closing(src, open) + 1))
+  const title = meta.find(e => e.key === "title")?.value
+  if (title) flag("menu", strings(title)[0] ?? "")
+  const argTypes = meta.find(e => e.key === "argTypes")?.value
+  if (argTypes?.startsWith("{"))
+    for (const { key, value } of entries(argTypes)) {
+      if (!value.startsWith("{")) continue
+      const at = Object.fromEntries(entries(value).map(e => [e.key, e.value]))
+      if (at.name) flag(`controle ${key}`, strings(at.name)[0] ?? "")
+      if (at.description) problems.push(`${file}: controle ${key} com descrição (a tabela mostra só nome, tipo e Default)`)
+      const category = at.table?.match(/category:\s*"([^"]+)"/)?.[1]
+      if (category) flag(`categoria de ${key}`, category)
+      if (at.options?.startsWith("[")) strings(at.options).forEach(o => flag(`opção de ${key}`, o))
+    }
+  for (const m of src.matchAll(/^export const (\w+)\s*:\s*Story\s*=\s*\{\s*(?:name:\s*"([^"]+)")?/gm)) {
+    flag("história", m[1].replace(/([a-z])([A-Z])/g, "$1 $2"))
+    if (m[2]) flag("história", m[2])
+  }
 }
 
 const manifest = {

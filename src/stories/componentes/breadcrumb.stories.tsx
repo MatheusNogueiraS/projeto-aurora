@@ -17,7 +17,7 @@ const niveis = ["Início", "Consignado", "Propostas", "Detalhes da proposta"]
 // As reticências não são controle: o componente as mostra sozinho com mais de 3 níveis.
 type BreadcrumbStoryArgs = {
   amount: 2 | 3 | 4
-  divider: "Seta" | "Barra"
+  divider: "arrow" | "slash"
   homeIcon: boolean
   homeIconOnly: boolean
 }
@@ -26,7 +26,7 @@ function StoryBreadcrumb({ amount, divider, homeIcon, homeIconOnly }: Breadcrumb
   // pega o início e os últimos níveis, para sempre terminar na página atual
   const items = [niveis[0], ...niveis.slice(niveis.length - (amount - 1))]
   return (
-    <Breadcrumb divider={divider === "Barra" ? "slash" : "arrow"}>
+    <Breadcrumb divider={divider}>
       <BreadcrumbList>
         {items.map((label, i) => {
           const last = i === items.length - 1
@@ -53,17 +53,17 @@ function StoryBreadcrumb({ amount, divider, homeIcon, homeIconOnly }: Breadcrumb
 }
 
 const meta = {
-  title: "Componentes/Breadcrumb",
+  title: "Components/Breadcrumb",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Mostra onde a pessoa está e permite voltar para níveis anteriores. O último nível é a página atual." } },
+    docs: { description: { component: "Mostra onde a pessoa está e permite voltar para níveis anteriores." } },
   },
-  args: { amount: 3, divider: "Seta", homeIcon: false, homeIconOnly: false },
+  args: { amount: 3, divider: "arrow", homeIcon: false, homeIconOnly: false },
   argTypes: {
-    amount: { name: "Níveis", control: "inline-radio", options: [2, 3, 4], description: "Quantidade de níveis, contando a página atual. Com 4, os do meio viram reticências." },
-    divider: { name: "Divisor", control: "inline-radio", options: ["Seta", "Barra"], description: "Separador entre os níveis." },
-    homeIcon: { name: "Ícone de início", control: "boolean", description: "Mostra um ícone no primeiro nível.", table: { category: "Ícone" } },
-    homeIconOnly: { name: "Apenas ícone", control: "boolean", description: "Mostra só o ícone no primeiro nível.", if: { arg: "homeIcon" }, table: { category: "Ícone" } },
+    amount: { name: "Levels", control: "inline-radio", options: [2, 3, 4] },
+    divider: { name: "Divider", control: "inline-radio", options: ["arrow", "slash"], table: { defaultValue: { summary: '"arrow"' } } },
+    homeIcon: { name: "Home icon", control: "boolean", table: { category: "Icons" } },
+    homeIconOnly: { name: "Icon only", control: "boolean", if: { arg: "homeIcon" }, table: { category: "Icons" } },
   },
   render: (args) => <StoryBreadcrumb {...args} />,
 } satisfies Meta<BreadcrumbStoryArgs>
@@ -71,14 +71,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-col gap-md">
-      <StoryBreadcrumb {...args} divider="Seta" />
-      <StoryBreadcrumb {...args} divider="Barra" />
-      <StoryBreadcrumb {...args} divider="Seta" homeIcon homeIconOnly />
+      <StoryBreadcrumb {...args} divider="arrow" />
+      <StoryBreadcrumb {...args} divider="slash" />
+      <StoryBreadcrumb {...args} divider="arrow" homeIcon homeIconOnly />
       <StoryBreadcrumb {...args} amount={4} />
     </div>
   ),

@@ -3,8 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { DataLine } from "@/components/ui/data-line"
 
-const variants = { Linha: "line", Caixa: "box" } as const
-type VariantName = keyof typeof variants
+const variants = ["line", "box"] as const
 
 // Itens de exemplo (o que vai em cada um se escolhe na página Accordion/Item).
 const items = [
@@ -17,15 +16,15 @@ const items = [
 // O grupo é só a montagem, como no shadcn: Accordion junta os itens e decide se abrem vários
 // juntos ou um por vez. A separação fica só entre os itens: divisor (linha) ou espaço (caixa).
 type GroupStoryArgs = {
-  variant: VariantName
+  variant: (typeof variants)[number]
   count: number
-  openMode: "Vários" | "Um por vez"
+  openMode: "multiple" | "single"
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function StoryGroup({ variant = "Linha", count = 3, openMode = "Vários" }: Partial<GroupStoryArgs>) {
+function StoryGroup({ variant = "line", count = 3, openMode = "multiple" }: Partial<GroupStoryArgs>) {
   const children = items.slice(0, count).map((it, i) => (
-    <AccordionItem key={it.title} value={`item-${i + 1}`} variant={variants[variant]}>
+    <AccordionItem key={it.title} value={`item-${i + 1}`} variant={variant}>
       <AccordionTrigger>{it.title}</AccordionTrigger>
       <AccordionContent>
         {it.text ?? it.lines?.map(([label, value]) => <DataLine key={label} label={label} value={value} size="sm" divider={false} className="py-xs" />)}
@@ -33,7 +32,7 @@ function StoryGroup({ variant = "Linha", count = 3, openMode = "Vários" }: Part
     </AccordionItem>
   ))
   // o primeiro começa aberto; a key recria o grupo quando a abertura muda
-  return openMode === "Um por vez" ? (
+  return openMode === "single" ? (
     <Accordion key={openMode} type="single" collapsible defaultValue="item-1" className="max-w-[360px]">
       {children}
     </Accordion>
@@ -45,21 +44,20 @@ function StoryGroup({ variant = "Linha", count = 3, openMode = "Vários" }: Part
 }
 
 const meta = {
-  title: "Componentes/Accordion/Grupo",
+  title: "Components/Accordion/Group",
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component:
-          "Vários **Itens** juntos. Em linha, um divisor entre eles; em caixa, cada item na sua caixa, com espaço entre elas. Abrem vários juntos ou um por vez.",
+        component: "Vários itens juntos, que abrem ao mesmo tempo ou um por vez.",
       },
     },
   },
-  args: { variant: "Linha", count: 3, openMode: "Vários" },
+  args: { variant: "line", count: 3, openMode: "multiple" },
   argTypes: {
-    variant: { name: "Tipo", control: "inline-radio", options: Object.keys(variants), description: "O tipo de todos os itens: linha ou caixa." },
-    count: { name: "Itens", control: { type: "range", min: 1, max: 4, step: 1 }, description: "Quantidade de itens. Um item sozinho não tem divisor." },
-    openMode: { name: "Abertura", control: "inline-radio", options: ["Vários", "Um por vez"], description: "Vários abertos juntos ou um por vez (abrir um fecha o outro)." },
+    variant: { name: "Type", control: "inline-radio", options: variants, table: { defaultValue: { summary: '"line"' } } },
+    count: { name: "Items", control: { type: "range", min: 1, max: 4, step: 1 } },
+    openMode: { name: "Open mode", control: "inline-radio", options: ["multiple", "single"], table: { defaultValue: { summary: '"multiple"' } } },
   },
   render: (args) => <StoryGroup {...args} />,
 } satisfies Meta<GroupStoryArgs>
@@ -67,13 +65,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
 // Os dois tipos lado a lado.
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-start gap-xl">
-      {(Object.keys(variants) as VariantName[]).map((variant) => (
+      {variants.map((variant) => (
         <StoryGroup key={variant} {...args} variant={variant} />
       ))}
     </div>

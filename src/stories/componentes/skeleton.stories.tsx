@@ -4,32 +4,32 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 // Formato e uma largura de exemplo para cada um (no produto, a largura vem do conteúdo).
 const shapes = {
-  Texto: { shape: "text", className: "w-[200px]" },
-  Círculo: { shape: "circle", className: "w-[40px]" },
-  Bloco: { shape: "block", className: "h-[80px] w-[200px]" },
+  text: { shape: "text", className: "w-[200px]" },
+  circle: { shape: "circle", className: "w-[40px]" },
+  block: { shape: "block", className: "h-[80px] w-[200px]" },
 } as const
 type Shape = keyof typeof shapes
 type SkeletonStoryArgs = { shape: Shape }
 
 const meta = {
-  title: "Componentes/Skeleton",
+  title: "Components/Skeleton",
   tags: ["autodocs"],
   parameters: {
-    docs: { description: { component: "Marcador de lugar enquanto o conteúdo carrega. Imita o formato do que vai aparecer." } },
+    docs: { description: { component: "Marcador de lugar enquanto o conteúdo carrega, no formato do que vai aparecer." } },
   },
-  args: { shape: "Texto" },
+  args: { shape: "text" },
   argTypes: {
-    shape: { name: "Formato", control: "inline-radio", options: Object.keys(shapes), description: "Forma do conteúdo que vai aparecer." },
+    shape: { name: "Shape", control: "inline-radio", options: Object.keys(shapes), table: { defaultValue: { summary: '"block"' } } },
   },
-  render: ({ shape = "Texto" }) => <Skeleton {...shapes[shape]} />,
+  render: ({ shape = "text" }) => <Skeleton {...shapes[shape]} />,
 } satisfies Meta<SkeletonStoryArgs>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-lg">
       {(Object.keys(shapes) as Shape[]).map((s) => (

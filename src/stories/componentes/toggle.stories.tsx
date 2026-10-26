@@ -45,18 +45,18 @@ function StoryToggle({ variant, size, iconName = "Bold", showLabel, label = "Neg
 }
 
 const meta = {
-  title: "Componentes/Toggle",
+  title: "Components/Toggle",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Botão que fica ligado ou desligado, como o negrito numa barra de ferramentas." } } },
   args: { variant: "default", size: "default", iconName: "Bold", showLabel: false, label: "Negrito", pressed: false, disabled: false },
   argTypes: {
-    variant: { name: "Tipo", control: "inline-radio", options: variants, description: "Variante visual." },
-    size: { name: "Tamanho", control: "inline-radio", options: sizes },
-    iconName: { name: "Ícone", control: "select", options: Object.keys(icons), description: "Ícone exibido." },
-    showLabel: { name: "Texto", control: "boolean", description: "Mostra um texto ao lado do ícone." },
-    label: { name: "Texto · conteúdo", control: "text", if: { arg: "showLabel" } },
-    pressed: { name: "Ligado", control: "boolean", description: "Mostra o botão ligado.", table: { category: "Estado" } },
-    disabled: { name: "Desabilitado", control: "boolean", description: "Bloqueia o clique.", table: { category: "Estado" } },
+    variant: { name: "Type", control: "inline-radio", options: variants, table: { defaultValue: { summary: '"default"' } } },
+    size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
+    iconName: { name: "Icon", control: "select", options: Object.keys(icons) },
+    showLabel: { name: "Text", control: "boolean" },
+    label: { name: "Text · content", control: "text", if: { arg: "showLabel" } },
+    pressed: { name: "Pressed", control: "boolean", table: { category: "State" } },
+    disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
   },
   render: (args) => <StoryToggle {...args} />,
 } satisfies Meta<ToggleStoryArgs>
@@ -64,9 +64,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-md">
       {variants.map((variant) => (
@@ -79,7 +79,7 @@ export const Variantes: Story = {
   ),
 }
 
-export const Tamanhos: Story = {
+export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-md">
       {sizes.map((size) => (
@@ -89,4 +89,4 @@ export const Tamanhos: Story = {
   ),
 }
 
-export const Desabilitado: Story = { args: { disabled: true } }
+export const Disabled: Story = { args: { disabled: true } }

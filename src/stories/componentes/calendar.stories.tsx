@@ -9,7 +9,7 @@ const emDias = (n: number) => new Date(hoje.getFullYear(), hoje.getMonth(), hoje
 
 // Controles pensados para quem desenha; as opções técnicas do componente ficam fora.
 type CalendarStoryArgs = {
-  mode: "Data única" | "Intervalo"
+  mode: "single" | "range"
   months: 1 | 2
   showOutsideDays: boolean
   monthYearPicker: boolean
@@ -26,7 +26,7 @@ function StoryCalendar({ mode, months, showOutsideDays, monthYearPicker, disable
     disabled: disablePast ? { before: hoje } : undefined,
     className: "rounded-sm border-default border-divider",
   }
-  return mode === "Intervalo" ? (
+  return mode === "range" ? (
     <Calendar mode="range" selected={intervalo} onSelect={setIntervalo} {...common} />
   ) : (
     <Calendar mode="single" selected={data} onSelect={setData} {...common} />
@@ -34,16 +34,16 @@ function StoryCalendar({ mode, months, showOutsideDays, monthYearPicker, disable
 }
 
 const meta = {
-  title: "Componentes/Calendar",
+  title: "Components/Calendar",
   tags: ["autodocs"],
   parameters: { docs: { description: { component: "Escolha de uma data ou de um intervalo de datas." } } },
-  args: { mode: "Data única", months: 1, showOutsideDays: true, monthYearPicker: false, disablePast: false },
+  args: { mode: "single", months: 1, showOutsideDays: true, monthYearPicker: false, disablePast: false },
   argTypes: {
-    mode: { name: "Modo", control: "inline-radio", options: ["Data única", "Intervalo"], description: "Uma data ou um período (início e fim)." },
-    months: { name: "Meses", control: "inline-radio", options: [1, 2], description: "Quantos meses aparecem lado a lado." },
-    showOutsideDays: { name: "Dias de outros meses", control: "boolean", description: "Mostra os dias do mês anterior e do próximo nas pontas." },
-    monthYearPicker: { name: "Seletor de mês e ano", control: "boolean", description: "Troca o título por listas para escolher mês e ano." },
-    disablePast: { name: "Bloquear datas passadas", control: "boolean", description: "Impede escolher dias antes de hoje.", table: { category: "Estado" } },
+    mode: { name: "Mode", control: "inline-radio", options: ["single", "range"] },
+    months: { name: "Months", control: "inline-radio", options: [1, 2], table: { defaultValue: { summary: "1" } } },
+    showOutsideDays: { name: "Outside days", control: "boolean", table: { defaultValue: { summary: "true" } } },
+    monthYearPicker: { name: "Month and year picker", control: "boolean" },
+    disablePast: { name: "Disable past dates", control: "boolean", table: { category: "State" } },
   },
   render: (args) => <StoryCalendar key={args.mode} {...args} />,
 } satisfies Meta<CalendarStoryArgs>
@@ -51,15 +51,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Padrao: Story = { name: "Padrão" }
+export const Default: Story = {}
 
-export const Variantes: Story = {
+export const Variants: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-start gap-lg">
-      <StoryCalendar {...args} mode="Data única" />
-      <StoryCalendar {...args} mode="Intervalo" />
+      <StoryCalendar {...args} mode="single" />
+      <StoryCalendar {...args} mode="range" />
     </div>
   ),
 }
 
-export const Desabilitado: Story = { args: { disablePast: true } }
+export const Disabled: Story = { args: { disablePast: true } }
