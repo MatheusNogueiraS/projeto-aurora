@@ -6,7 +6,7 @@
 // leva junto o seu publicados.json, então na próxima basta baixá-lo do próprio link.
 // Os que não existem mais no build novo saem como null, para serem removidos na publicação.
 // Saída: <pasta-de-saida>/storybook-aurora.html (a página), <pasta-de-saida>/publicados.json e
-// <pasta-de-saida>/files.json (o mapa `files` pronto para a publicação, com a pasta de saída como `root`).
+// <pasta-de-saida>/files.json (o mapa `files` pronto para a publicação, só com o que mudou, com a pasta de saída como `root`).
 import { readFileSync, writeFileSync, rmSync, cpSync, readdirSync, statSync, existsSync } from "node:fs"
 import path from "node:path"
 
@@ -65,7 +65,11 @@ const files = [...walk(out).map(f => path.relative(out, f).replace(/\\/g, "/")).
 writeFileSync(path.join(out, "publicados.json"), JSON.stringify(files, null, 2))
 const published = publishedFile && existsSync(publishedFile) ? JSON.parse(readFileSync(publishedFile, "utf8")) : []
 const removed = published.filter(p => !PAGE.includes(p) && !files.includes(p))
-const map = Object.fromEntries([...files.map(f => [f, f]), ...removed.map(f => [f, null])])
+// Só vai o que mudou: os arquivos de assets/ têm o hash no nome (mesmo nome = mesmo conteúdo) e, se já estão no link,
+// ficam de fora (a publicação mantém o que não é citado). O resto (iframe.html, index.json, sb-*) vai sempre.
+const keep = new Set(published)
+const send = files.filter(f => !f.startsWith("assets/") || !keep.has(f))
+const map = Object.fromEntries([...send.map(f => [f, f]), ...removed.map(f => [f, null])])
 writeFileSync(path.join(out, "files.json"), JSON.stringify(map, null, 2))
 
 console.log(JSON.stringify({ arquivos: files.length, removidos: removed, fffdTrocados: escaped, fffdRestantes: left }))

@@ -24,7 +24,7 @@ Contrato:
    ```bash
    node .claude/skills/aurora-storybook-publicar/scripts/preparar.mjs storybook-static <scratchpad>/storybook-publicar <publicados.json do passo 2>
    ```
-   O script copia o build, transforma o `index.html` em `storybook-aurora.html` (o Artifact monta o esqueleto da página), troca o caractere U+FFFD (que o Artifact recusa), grava o `publicados.json` novo e o `files.json` com o mapa de arquivos, inclusive os antigos a remover (`null`). A página nunca entra como remoção. Confira na saída: `fffdRestantes` = 0, `arquivos` ≤ 255 e `removidos` só com arquivos de `assets/` de builds anteriores.
+   O script copia o build, transforma o `index.html` em `storybook-aurora.html` (o Artifact monta o esqueleto da página), troca o caractere U+FFFD (que o Artifact recusa), grava o `publicados.json` novo e o `files.json` com o mapa de arquivos **só do que mudou** (a publicação mantém os arquivos de `assets/` que já estão no link) e os antigos a remover (`null`). A página nunca entra como remoção. Confira na saída: `fffdRestantes` = 0, `arquivos` ≤ 255 e `removidos` só com arquivos de `assets/` de builds anteriores.
 4. **Ler antes de publicar:** se o passo 2 usou só a listagem, faça `Artifact` `action: "read"` com o `url` (a publicação é recusada para um link não lido nesta conversa).
 5. **Publicar:** `Artifact` com `file_path` = `<scratchpad>/storybook-publicar/storybook-aurora.html`, `url` = o link, `root` = `<scratchpad>/storybook-publicar` e `files` = o conteúdo de `files.json`.
 6. **Conferir:** abra o link e veja que a página do componente da PR aparece.
