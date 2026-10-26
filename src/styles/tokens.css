@@ -251,7 +251,7 @@
     /* semântico · stroke */
     --aurora-stroke-none: var(--aurora-value-0);
     --aurora-stroke-default: var(--aurora-value-1);
-    --aurora-stroke-focus: var(--aurora-value-3);
+    --aurora-stroke-focus: var(--aurora-value-2);
 
     /* semântico · opacity */
     --aurora-opacity-none: var(--aurora-opacity-0);

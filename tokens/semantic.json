@@ -141,7 +141,7 @@
     "$description": "Espessura de linhas.",
     "none": { "$value": "{value.0}" },
     "default": { "$value": "{value.1}" },
-    "focus": { "$value": "{value.3}", "$description": "Anel de foco." }
+    "focus": { "$value": "{value.2}", "$description": "Anel de foco." }
   },
 
   "opacity": {

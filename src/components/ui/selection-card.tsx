@@ -31,9 +31,9 @@ function SelectionCard({ className, children, ...props }: React.ComponentProps<"
           "*:data-[slot=checkbox]:mt-xs *:data-[slot=radio-group-item]:mt-xs",
           "*:data-[slot=checkbox]:focus-visible:ring-(length:--aurora-stroke-none) *:data-[slot=radio-group-item]:focus-visible:ring-(length:--aurora-stroke-none)",
           "has-data-checked:ring-link-1",
-          // hover só com o controle habilitado
-          "not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:bg-background-4/md",
-          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:ring-link-3",
+          // hover só com o controle habilitado; no foco pelo teclado, a linha fica a do foco
+          "not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:bg-background-4/md",
+          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-3",
           // estados que vêm do controle de dentro (Checkbox ou Radio): erro e foco pelo teclado
           "has-[[aria-invalid=true]:not([data-state=checked])]:ring-invalid has-[[aria-invalid=true]:not([data-state=checked])]:hover:ring-invalid",
           "has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-(length:--aurora-stroke-focus) has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-focus/md",
