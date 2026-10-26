@@ -1,0 +1,34 @@
+[
+  {
+    "primeiroPlano": "link.10",
+    "fundo": "link.1",
+    "motivo": "Branco sobre o laranja da marca (Button primário, Badge primary, dia do Calendar, selo do Avatar). Decisão de marca do responsável em 26/10/2026."
+  },
+  {
+    "primeiroPlano": "alerts.7/40%",
+    "onde": "button.tsx",
+    "motivo": "Foco do Button destructive (borda e halo vermelhos translúcidos). Mantido pelo responsável em 26/10/2026."
+  },
+  {
+    "primeiroPlano": "alerts.7/20%",
+    "onde": "button.tsx",
+    "motivo": "Foco do Button destructive (halo). Mantido pelo responsável em 26/10/2026."
+  },
+  {
+    "primeiroPlano": "link.3",
+    "tema": "escuro",
+    "onde": ["checkbox.tsx", "radio-group.tsx", "selection-card.tsx"],
+    "motivo": "Hover do Checkbox/Radio marcado no escuro. O WCAG não exige 3:1 no hover; link.3 também é o hover do botão primário. Mantido pelo responsável em 26/10/2026."
+  },
+  {
+    "primeiroPlano": "text.3",
+    "fundo": "background.4",
+    "tema": "escuro",
+    "motivo": "Iniciais e contador do Avatar no escuro. Mantido pelo responsável em 26/10/2026."
+  },
+  {
+    "primeiroPlano": "focus/50%",
+    "onde": "selection-card.tsx",
+    "motivo": "Halo do cartão quando o Checkbox/Radio de dentro está em foco; quem marca o foco é a borda sólida do controle."
+  }
+]

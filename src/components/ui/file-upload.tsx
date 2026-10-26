@@ -58,7 +58,7 @@ function matchesAccept(file: File, accept?: string) {
 // Cartão: base no Attachment oficial do shadcn, trazido à mão e adaptado às escalas do Aurora.
 // Estados: idle (vazio, tracejado), uploading, error e done.
 const cardVariants = cva(
-  "group/file-upload relative flex w-full min-w-[0px] rounded-sm border-default border-divider bg-background-6 text-text-1 transition-colors focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/md has-[>button:enabled]:hover:bg-background-4 data-disabled:cursor-not-allowed data-disabled:opacity-md data-[state=error]:border-invalid data-[state=idle]:border-dashed data-[state=idle]:border-field",
+  "group/file-upload relative flex w-full min-w-[0px] rounded-sm border-default border-divider bg-background-6 text-text-1 transition-colors focus-within:ring-(length:--aurora-stroke-focus) focus-within:ring-focus/md has-[>button:enabled]:hover:bg-background-4 data-disabled:cursor-not-allowed data-disabled:opacity-md not-data-[state=error]:focus-within:border-focus data-[state=error]:border-invalid data-[state=idle]:not-focus-within:border-dashed data-[state=idle]:not-focus-within:border-field",
   {
     variants: {
       size: {

@@ -19,6 +19,9 @@ CLAUDE.md                                ← regras (lido em toda conversa)
     │   └── scripts/manifest.mjs         ← gera e confere o manifest + lacunas de documentação
     ├── aurora-storybook-cobertura/SKILL.md  ← tudo do componente no Storybook e testado
     ├── aurora-storybook-review/SKILL.md     ← padrão da documentação + achados
+    ├── aurora-contraste/
+    │   ├── SKILL.md                     ← análise de contraste (WCAG 2.2 AA + APCA), claro e escuro
+    │   └── scripts/contraste.mjs        ← mede os pares usados nos componentes
     └── aurora-storybook-publicar/
         ├── SKILL.md                     ← republicar o Storybook online a cada PR
         └── scripts/preparar.mjs         ← prepara o build para o link de sempre
@@ -45,6 +48,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 | `aurora-componente` | Criar, instalar ou alterar componente | Diagnóstico → partes → tokens → estados → travas → Storybook → revisão de tech lead → aprovação | PR antes da aprovação; token de componente | `manifest.mjs`, `aurora-storybook-cobertura`, `aurora-storybook-review` |
 | `aurora-storybook-cobertura` | Depois de instalar, criar ou alterar componente | Inventário → mapa de cobertura → teste controle a controle no navegador | Corrigir só na história | `manifest.mjs` |
 | `aurora-storybook-review` | Revisar/padronizar a documentação | Ajusta só o arquivo de histórias; levanta achados | Mudar componente ou token | — |
+| `aurora-contraste` | Mudar cor/token, revisar tema escuro | Mede os pares reais nos dois temas, classifica e recomenda | Mudar cor sem o responsável decidir | `contraste.mjs` |
 | `aurora-storybook-publicar` | Abrir ou atualizar PR | Build → preparar → republicar no link de sempre | Criar link novo ou publicar em outro serviço | `preparar.mjs` |
 
 ## Scripts
@@ -53,6 +57,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 |---|---|---|---|
 | `manifest.mjs` | `node .claude/skills/aurora-componente/scripts/manifest.mjs` (`--check` só confere) | Inventário: exportações, variantes (cva), quem usa quem (`usa`/`usadoPor`) e onde cada componente está documentado | Manifest desatualizado; componente órfão (sem história e sem uso); variante que não aparece no Storybook; nome do Storybook em português ou controle com descrição (regra 18c) |
 | `preparar.mjs` | `node .claude/skills/aurora-storybook-publicar/scripts/preparar.mjs <storybook-static> <saída> [publicados.json]` | Converte o build no formato do Artifact e calcula o que remover do link | Build ausente |
+| `contraste.mjs` | `node .claude/skills/aurora-contraste/scripts/contraste.mjs` (`--all`, `--check`, `--selftest`) | Contraste WCAG 2.2 e APCA dos pares usados nos componentes, claro e escuro | `--check`: falha de WCAG AA |
 | `guard.mjs` | (hook, automático) | Ver "Travas" | — |
 | `guard.test.mjs` | `node .claude/hooks/guard.test.mjs` | 26–27 casos da trava (rode na branch e na main) | Algum caso da trava mudou de comportamento |
 
@@ -65,7 +70,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 | `git add -A`, `git add .`, `git commit -a` | git-fluxo 4 | Adicionar arquivos pelo nome |
 | `git push --force` | git-fluxo 9 | Reverter por PR |
 | `git commit` na `main` | 1 | Mover para branch |
-| `git commit` com `pnpm lint`, tipos ou inventário falhando (~7 s) | 4 | O erro, com arquivo e linha |
+| `git commit` com `pnpm lint`, tipos, inventário ou contraste falhando (~7 s) | 4, 18b | O erro, com arquivo e linha |
 
 ## Como manter
 
@@ -100,6 +105,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 | 13 | Permissões pré-aprovadas só para validar e ler (`pnpm lint`, `build`, `git status/diff/log`, `gh pr view/list`) | Menos pedidos de permissão sem liberar nada que mude o Git ou publique. | Liberar `git`/`gh` inteiros |
 | 14 | O link publicado guarda a lista do que publicou (`publicados.json`) | A próxima publicação baixa a lista do próprio link e remove só o que ficou velho. Na primeira versão do script, a página aparecia como `index.html` na listagem e seria marcada para remoção; virou regra do script e caso de teste. | Comparar a listagem à mão a cada PR |
 | 15 | O agente `repo-sync` continua na pasta pessoal (`~/.claude/agents`) | É genérico (serve a vários repositórios) e depende de um script de outro repositório. | Trazer para o Aurora |
+| 17 | Contraste é skill + script (não agente) e trava o commit, com exceções em `excecoes.json` | A conta tem que ser exata e repetível (script); o julgamento de cada achado precisa de critério (skill). As exceções decididas ficam num arquivo, valem só nos arquivos listados e continuam visíveis no relatório. Os pares vêm do uso real nos componentes, não de uma lista à mão. | Agente dedicado; lista fixa de pares; travar sem exceções (toda PR bloqueada) |
 | 16 | As cópias antigas das skills em `~/.claude/skills` são apagadas depois do merge | Skill pessoal com o mesmo nome vence a do projeto; as melhorias do repositório seriam ignoradas na máquina de quem tem a cópia. | Manter as duas |
 
 ## Próximos passos sugeridos

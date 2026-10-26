@@ -1,7 +1,7 @@
 // Peças visuais das páginas de Fundamentos.
 import * as React from "react"
 
-import { chain, formatValue, resolve, type Token } from "./tokens-data"
+import { chain, cssVarName, formatValue, resolve, type Theme, type Token } from "./tokens-data"
 
 export function Page({ title, children, intro }: { title: string; intro: React.ReactNode; children: React.ReactNode }) {
   return (
@@ -102,6 +102,60 @@ export function TokenTable({ tokens }: { tokens: Token[] }) {
               <td className="p-sm align-top typo-body-sm-regular text-text-3">{chain(t.id).slice(1).join(" → ") || "—"}</td>
               <td className="p-sm align-top typo-body-sm-regular">
                 <Values token={t} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/** Uma cor num tema: amostra, hex final e o caminho até a paleta (fundação). */
+function ColorInTheme({ id, theme, hidePrefix }: { id: string; theme: Theme; hidePrefix?: string }) {
+  const hex = String(resolve(id, theme)).toUpperCase()
+  const path = chain(id, theme).slice(1).map((step) => strip(step, hidePrefix))
+  const lightHex = String(resolve(id, "light")).toUpperCase()
+  const samePath = theme === "dark" && chain(id, "dark").join() === chain(id, "light").join() && hex === lightHex
+  return (
+    <div className="flex items-center gap-sm">
+      <div className="size-[32px] shrink-0 rounded-xs border-default border-divider" style={{ background: hex }} />
+      <div className="flex min-w-[0px] flex-col">
+        <code className="typo-body-md-bold">{hex}</code>
+        <span className="typo-body-sm-regular break-all text-text-3">{samePath ? "igual ao claro" : "→ " + path.join(" → ")}</span>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Tabela de cores semânticas: o mesmo token, o valor dele no tema claro e no escuro, lado a lado.
+ * As amostras usam o hex final (não a variável CSS), então os dois temas aparecem sempre, sem trocar o botão de tema.
+ */
+export function SemanticColorTable({ tokens, hidePrefix }: { tokens: Token[]; hidePrefix?: string }) {
+  return (
+    <div className="overflow-x-auto rounded-sm border-default border-divider bg-background-6">
+      <table className="w-full min-w-[640px] table-fixed typo-body-md-regular">
+        <thead>
+          <tr className="border-b-default border-divider text-left">
+            <th className="w-1/3 p-sm typo-body-md-bold">Token</th>
+            <th className="w-1/3 p-sm typo-body-md-bold">Claro</th>
+            <th className="w-1/3 p-sm typo-body-md-bold">Escuro</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tokens.map((t) => (
+            <tr key={t.id} className="border-b-default border-divider last:border-b-(length:--aurora-stroke-none)">
+              <td className="p-sm align-top">
+                <TokenName id={strip(t.id, hidePrefix)} />
+                <div className="typo-body-sm-regular break-all text-text-3">{cssVarName(t.id)}</div>
+                {t.description && <div className="typo-body-sm-regular text-text-3">{t.description}</div>}
+              </td>
+              <td className="p-sm align-top">
+                <ColorInTheme id={t.id} theme="light" hidePrefix={hidePrefix} />
+              </td>
+              <td className="p-sm align-top">
+                <ColorInTheme id={t.id} theme="dark" hidePrefix={hidePrefix} />
               </td>
             </tr>
           ))}

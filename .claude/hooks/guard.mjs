@@ -3,7 +3,7 @@
 //   2. editar arquivo gerado (carimbo de gerado na abertura)  (regra 11)
 //   3. git add -A / git add . / git commit -a                   (aurora-git-fluxo, regra 4)
 //   4. git push --force                                         (aurora-git-fluxo, regra 9)
-//   5. git commit na main, ou com lint/tipos/inventário falhando (regras 1 e 4)
+//   5. git commit na main, ou com lint/tipos/inventário/contraste falhando (regras 1, 4 e 18b)
 // Erro interno da trava não bloqueia (exit 0): uma trava quebrada não pode travar o trabalho.
 import { readFileSync, existsSync } from "node:fs"
 import { execFileSync, execSync } from "node:child_process"
@@ -50,6 +50,7 @@ try {
         ["pnpm lint", "lint e trava de tokens"],
         ["pnpm exec tsc -b --noEmit", "tipos"],
         ["node .claude/skills/aurora-componente/scripts/manifest.mjs --check", "inventário de componentes"],
+        ["node .claude/skills/aurora-contraste/scripts/contraste.mjs --check", "contraste (WCAG AA, claro e escuro)"],
       ]
       for (const [check, label] of checks) {
         try {
