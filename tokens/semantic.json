@@ -83,7 +83,7 @@
     "splash": { "$value": "{color.brand.1}" },
     "shadow": { "$value": "{color.black-alpha.10}", "$description": "Cor das sombras (elevation)." },
 
-    "focus": { "$value": "{color.link.4}", "$description": "Papel: anel e borda de foco em todos os componentes." },
+    "focus": { "$value": "{color.link.1}", "$description": "Papel: anel e borda de foco em todos os componentes (laranja da marca)." },
     "invalid": { "$value": "{color.alerts.7}", "$description": "Papel: borda e anel de campo inválido." },
     "divider": { "$value": "{color.details.3}", "$description": "Papel: borda padrão e separadores." },
     "field": { "$value": "{color.neutral.50}", "$description": "Papel: borda de campos (input, select, checkbox...). Aponta direto para neutral-50 para garantir contraste mínimo de 3:1 (WCAG 1.4.11) nos dois temas." },
