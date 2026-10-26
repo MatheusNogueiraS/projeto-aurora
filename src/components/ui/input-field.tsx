@@ -17,8 +17,9 @@ type InputFieldSize = "sm" | "default" | "lg"
 type FieldIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
 // Altura de cada tamanho: o espaço de cima guarda o label que sobe; o texto acompanha o tamanho.
-// sm 41px, default 47px (50px no celular, texto de 16px) e lg 54px.
-const inputSize = {
+// sm 41px, default 47px (50px no celular, texto de 16px) e lg 54px. É o mesmo espaço de todo campo
+// de digitar (Input, Textarea, Combobox).
+const fieldInputSize = {
   sm: cn("pt-lg pb-xxs typo-body-md-regular"),
   default: cn("pt-xl pb-xs"),
   lg: cn("pt-xl pb-sm typo-body-lg-regular md:typo-body-lg-regular"),
@@ -28,6 +29,60 @@ const floatedLabel = {
   sm: cn("peer-focus:top-xxs peer-[:not(:placeholder-shown)]:top-xxs"),
   default: cn("peer-focus:top-xs peer-[:not(:placeholder-shown)]:top-xs"),
   lg: cn("peer-focus:top-xs peer-[:not(:placeholder-shown)]:top-xs"),
+}
+// campo de várias linhas: o label vazio fica na primeira linha (onde o texto começa), não no meio
+const multilineLabelTop = { sm: "top-lg", default: "top-xl", lg: "top-xl" }
+
+type FloatingLabelProps = {
+  htmlFor: string
+  label: React.ReactNode
+  optional?: boolean
+  required?: boolean
+  size?: InputFieldSize
+  /** Há ícone à esquerda ou à direita: o label recua para não ficar embaixo dele. */
+  iconLeading?: boolean
+  iconTrailing?: boolean
+  /** Campo de várias linhas (Textarea): o label vazio fica no alto, não no meio. */
+  multiline?: boolean
+}
+
+// O label flutuante de todo campo de digitar. Precisa vir logo depois do campo, que leva a classe
+// "peer" e placeholder=" " (o placeholder vazio avisa se há texto). Fica sempre visível: vazio, ocupa
+// o lugar do placeholder; focado ou preenchido, diminui e sobe, sem sumir.
+function FloatingLabel({ htmlFor, label, optional = false, required = false, size = "default", iconLeading = false, iconTrailing = false, multiline = false }: FloatingLabelProps) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className={cn(
+        "pointer-events-none absolute truncate typo-body-md-regular text-text-3 transition-all",
+        // a borda transparente repete a do campo, para o label alinhar com o texto digitado
+        multiline ? cn("border-default border-transparent", multilineLabelTop[size]) : "top-[50%] -translate-y-1/2",
+        iconLeading ? "left-xxl" : "left-md",
+        iconTrailing ? "right-xxl" : "right-md",
+        // focado ou com texto: diminui e sobe
+        "peer-focus:translate-y-none peer-focus:typo-body-sm-regular peer-[:not(:placeholder-shown)]:translate-y-none peer-[:not(:placeholder-shown)]:typo-body-sm-regular",
+        floatedLabel[size]
+      )}
+    >
+      {label}
+      {optional && <span> (opcional)</span>}
+      {required && (
+        <span aria-hidden className="text-alerts-7">
+          {" "}*
+        </span>
+      )}
+    </label>
+  )
+}
+
+// Texto de ajuda embaixo do campo; no erro, fica vermelho e vira a mensagem de erro.
+function FieldHint({ id, invalid = false, disabled = false, children }: { id: string; invalid?: boolean; disabled?: boolean; children: React.ReactNode }) {
+  if (children == null || children === "") return null
+  return (
+    <p id={id} className={cn("typo-body-sm-regular", invalid ? "text-alerts-7" : "text-text-3", disabled && "opacity-md")}>
+      {children}
+    </p>
+  )
 }
 
 type InputFieldProps = Omit<React.ComponentProps<"input">, "size" | "placeholder"> & {
@@ -94,41 +149,22 @@ function InputField({
           aria-describedby={message ? hintId : undefined}
           // o placeholder vazio (" ") avisa se o campo tem texto, e o label sobe
           placeholder=" "
-          className={cn("peer", inputSize[size])}
+          className={cn("peer", fieldInputSize[size])}
           {...props}
         />
-        <label
-            htmlFor={inputId}
-            className={cn(
-              "pointer-events-none absolute top-[50%] -translate-y-1/2 truncate typo-body-md-regular text-text-3 transition-all",
-              IconLeading ? "left-xxl" : "left-md",
-              IconTrailing ? "right-xxl" : "right-md",
-              // focado ou com texto: diminui e sobe
-              "peer-focus:translate-y-none peer-focus:typo-body-sm-regular peer-[:not(:placeholder-shown)]:translate-y-none peer-[:not(:placeholder-shown)]:typo-body-sm-regular",
-              floatedLabel[size]
-            )}
-          >
-            {label}
-            {optional && <span> (opcional)</span>}
-            {required && (
-              <span aria-hidden className="text-alerts-7">
-                {" "}*
-              </span>
-            )}
-        </label>
+        <FloatingLabel htmlFor={inputId} label={label} optional={optional} required={required} size={size} iconLeading={!!IconLeading} iconTrailing={!!IconTrailing} />
         {IconTrailing && (
           <InputGroupAddon align="inline-end" className={cn(showError && "text-alerts-7")}>
             <IconTrailing aria-hidden />
           </InputGroupAddon>
         )}
       </InputGroup>
-      {message != null && message !== "" && (
-        <p id={hintId} className={cn("typo-body-sm-regular", showError ? "text-alerts-7" : "text-text-3", disabled && "opacity-md")}>
-          {message}
-        </p>
-      )}
+      <FieldHint id={hintId} invalid={showError} disabled={disabled}>
+        {message}
+      </FieldHint>
     </div>
   )
 }
 
-export { InputField }
+export { InputField, FloatingLabel, FieldHint, fieldInputSize }
+export type { InputFieldSize, FieldIcon }

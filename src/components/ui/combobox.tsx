@@ -5,6 +5,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react"
 import { cn } from "@/lib/utils"
 
 import { IconButton } from "@/components/ui/icon-button"
+import { FieldHint, FloatingLabel, fieldInputSize } from "@/components/ui/input-field"
 import {
   InputGroup,
   InputGroupAddon,
@@ -49,9 +50,9 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
   )
 }
 
-// Mesmas alturas do InputField (sm 41px, default 47px ou 50px no celular, lg 54px), para os dois
-// ficarem harmônicos no formulário. Sem label subindo, o texto fica centralizado: no default o
+// Sem label (ex.: a busca dentro da lista), o campo é só uma linha de texto centralizada: no default o
 // padding da escala já fecha a conta; no sm e no lg não há passo exato, então o mínimo completa.
+// Com label, vale o espaço do InputField (fieldInputSize), com o label subindo, igual ao Input.
 const inputSize = {
   sm: cn("min-h-[39px] py-sm typo-body-md-regular"),
   default: cn("py-md"),
@@ -66,25 +67,67 @@ function ComboboxInput({
   showClear = false,
   iconLeading: IconLeading,
   size = "default",
+  id,
+  label,
+  optional = false,
+  required = false,
+  hint,
+  invalid = false,
+  errorMessage,
   ...props
 }: Omit<ComboboxPrimitive.Input.Props, "size"> & {
   showTrigger?: boolean
   showClear?: boolean
+  /** Nome do campo, flutuante como no Input: dentro dele, sobe ao focar ou escolher. Sem label, o campo é só a linha de texto. */
+  label?: React.ReactNode
+  /** Mostra "(opcional)" ao lado do label. */
+  optional?: boolean
+  /** Mostra o asterisco de obrigatório ao lado do label. */
+  required?: boolean
+  /** Texto de ajuda embaixo do campo. */
+  hint?: React.ReactNode
+  /** Erro: campo em vermelho. Só aparece com o campo habilitado. */
+  invalid?: boolean
+  /** Mensagem de erro; no erro, aparece no lugar do hint. */
+  errorMessage?: React.ReactNode
   /** Ícone dentro do campo, à esquerda (ex.: SearchIcon do lucide-react). */
   iconLeading?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   size?: keyof typeof inputSize
 }) {
-  return (
-    <InputGroup className={cn("w-auto", className)}>
+  const generatedId = React.useId()
+  const inputId = id ?? generatedId
+  const hintId = `${inputId}-hint`
+  const showError = invalid && !disabled
+  const message = showError && errorMessage ? errorMessage : hint
+  const hasMessage = message != null && message !== ""
+
+  const group = (
+    <InputGroup className={cn("w-auto", !hasMessage && className)}>
       {IconLeading && (
         <InputGroupAddon align="inline-start">
           <IconLeading aria-hidden />
         </InputGroupAddon>
       )}
       <ComboboxPrimitive.Input
-        render={<InputGroupInput disabled={disabled} className={inputSize[size]} />}
+        id={inputId}
+        render={<InputGroupInput disabled={disabled} className={cn(label && "peer", label ? fieldInputSize[size] : inputSize[size])} />}
+        // com label, o placeholder vazio (" ") avisa se o campo tem texto, e o label sobe
+        placeholder={label ? " " : undefined}
+        aria-invalid={showError || undefined}
+        aria-describedby={hasMessage ? hintId : undefined}
         {...props}
       />
+      {label && (
+        <FloatingLabel
+          htmlFor={inputId}
+          label={label}
+          optional={optional}
+          required={required}
+          size={size}
+          iconLeading={!!IconLeading}
+          iconTrailing={showTrigger || showClear}
+        />
+      )}
       {/* no sm, o botão da seta (24px) com o padding normal passaria da altura do campo */}
       <InputGroupAddon align="inline-end" className={cn(size === "sm" && "py-xs")}>
         {showTrigger && (
@@ -103,6 +146,17 @@ function ComboboxInput({
       </InputGroupAddon>
       {children}
     </InputGroup>
+  )
+
+  // a dica fica fora do campo; sem dica, o campo segue sozinho (ex.: a busca dentro da lista)
+  if (!hasMessage) return group
+  return (
+    <div className={cn("flex w-full flex-col gap-xs", className)}>
+      {group}
+      <FieldHint id={hintId} invalid={showError} disabled={disabled}>
+        {message}
+      </FieldHint>
+    </div>
   )
 }
 
