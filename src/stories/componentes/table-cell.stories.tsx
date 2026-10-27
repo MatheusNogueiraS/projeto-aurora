@@ -71,12 +71,9 @@ function CellContent({ content, text, support }: { content: Content; text: strin
       )
     case "Avatar":
       return (
-        <span className="inline-flex items-center gap-sm">
-          <Avatar size="sm">
-            <AvatarFallback>MS</AvatarFallback>
-          </Avatar>
-          {text}
-        </span>
+        <Avatar size="sm" label={text}>
+          <AvatarFallback>MS</AvatarFallback>
+        </Avatar>
       )
     case "Action":
       return (

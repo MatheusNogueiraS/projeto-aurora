@@ -4,14 +4,25 @@ import { Avatar as AvatarPrimitive } from "radix-ui"
 
 // Base: o Avatar do shadcn (radix-vega), trazido à mão e adaptado aos tokens do Aurora.
 // Mostra a foto da pessoa; sem foto (ou enquanto carrega), mostra as iniciais.
+// Com label, o nome da pessoa aparece à direita do círculo (só no avatar único; num grupo seriam vários nomes).
+// O texto acompanha o tamanho do avatar. Sem label, a estrutura é só o círculo, como sempre foi.
+const avatarLabelSize = {
+  sm: "typo-body-sm-regular",
+  default: "typo-body-md-regular",
+  lg: "typo-body-lg-regular",
+}
+
 function Avatar({
   className,
   size = "default",
+  label,
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Root> & {
   size?: "default" | "sm" | "lg"
+  /** Nome da pessoa, à direita do círculo. Sem valor, só o círculo. */
+  label?: React.ReactNode
 }) {
-  return (
+  const avatar = (
     <AvatarPrimitive.Root
       data-slot="avatar"
       data-size={size}
@@ -21,6 +32,16 @@ function Avatar({
       )}
       {...props}
     />
+  )
+  if (label == null || label === "") return avatar
+
+  return (
+    <span data-slot="avatar-item" data-size={size} className="inline-flex max-w-full min-w-[0px] items-center gap-sm">
+      {avatar}
+      <span data-slot="avatar-label" className={cn("truncate text-text-1", avatarLabelSize[size])}>
+        {label}
+      </span>
+    </span>
   )
 }
 
