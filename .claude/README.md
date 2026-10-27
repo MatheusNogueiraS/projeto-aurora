@@ -70,6 +70,7 @@ Uma regra que precisa valer sempre vira trava quando dá para checar por código
 | `git add -A`, `git add .`, `git commit -a` | git-fluxo 4 | Adicionar arquivos pelo nome |
 | `git push --force` | git-fluxo 9 | Reverter por PR |
 | `git commit` na `main` | 1 | Mover para branch |
+| `git commit` com arquivo só em parte no commit (mudança na pasta que não foi adicionada) | 4 | Adicionar o arquivo inteiro ou tirá-lo do commit |
 | `git commit` com `pnpm lint`, tipos, inventário ou contraste falhando (~7 s) | 4, 18b | O erro, com arquivo e linha |
 
 ## Como manter

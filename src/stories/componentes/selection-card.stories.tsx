@@ -19,7 +19,7 @@ const tagVariants = ["warning", "default", "secondary", "success"] as const
 // Os controles seguem o Check_Terms da jornada de Formalização (Genesis) e o Choice Card do shadcn:
 // controle (aceitar ou escolher), tag, título, descrição, ação de abrir e os estados.
 type CardStoryArgs = {
-  control: "Checkbox" | "Radio"
+  control: "Checkbox" | "Radio" | "None"
   showTag: boolean
   tag: string
   tagVariant: (typeof tagVariants)[number]
@@ -49,11 +49,8 @@ function StoryCard({
 }: Partial<CardStoryArgs> & { value?: string }) {
   return (
     <SelectionCard>
-      {control === "Radio" ? (
-        <RadioGroupItem value={value} disabled={disabled} aria-invalid={invalid || undefined} />
-      ) : (
-        <Checkbox defaultChecked={selected} disabled={disabled} aria-invalid={invalid || undefined} />
-      )}
+      {control === "Radio" && <RadioGroupItem value={value} disabled={disabled} aria-invalid={invalid || undefined} />}
+      {control === "Checkbox" && <Checkbox defaultChecked={selected} disabled={disabled} aria-invalid={invalid || undefined} />}
       <SelectionCardContent>
         {showTag && <Badge variant={tagVariant}>{tag}</Badge>}
         <SelectionCardTitle>{title}</SelectionCardTitle>
@@ -104,7 +101,7 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    control: { name: "Selection", control: "inline-radio", options: ["Checkbox", "Radio"] },
+    control: { name: "Selection", control: "inline-radio", options: ["Checkbox", "Radio", "None"] },
     showTag: { name: "Tag", control: "boolean" },
     tag: { name: "Tag · text", control: "text", if: { arg: "showTag" } },
     tagVariant: { name: "Tag · type", control: "inline-radio", options: tagVariants, if: { arg: "showTag" }, table: { defaultValue: { summary: '"default"' } } },
@@ -112,8 +109,8 @@ const meta = {
     showDescription: { name: "Description", control: "boolean" },
     description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
     showAction: { name: "Action", control: "boolean" },
-    selected: { name: "Selected", control: "boolean", table: { category: "State" } },
-    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
+    selected: { name: "Selected", control: "boolean", if: { arg: "control", neq: "None" }, table: { category: "State" } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "control", neq: "None" }, table: { category: "State" } },
     disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StoryOne {...args} />,

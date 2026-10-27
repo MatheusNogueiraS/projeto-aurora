@@ -7,7 +7,8 @@ import { Card } from "@/components/ui/card"
 // Choice Card do shadcn (um <label> envolvendo o controle e o conteúdo); visual do Check_Terms da
 // jornada de Formalização (Genesis). É uma montagem dos nossos componentes, sem recriar nada:
 // - caixa: o Card;
-// - controle: Checkbox (aceitar, vários) ou RadioGroupItem (escolher um, dentro de um RadioGroup);
+// - controle: Checkbox (aceitar, vários), RadioGroupItem (escolher um, dentro de um RadioGroup) ou nenhum
+//   (só informação; sem controle, o card não mostra cursor nem hover de clicável, e a ação continua);
 // - conteúdo: tag (Badge), título e descrição; livre para outros componentes;
 // - ação opcional à direita (ex.: IconButton com seta para abrir o termo), que não marca o card.
 // Foco pelo teclado: o anel aparece no card inteiro, e o anel próprio do controle sai para não duplicar.
@@ -21,7 +22,7 @@ function SelectionCard({ className, children, ...props }: React.ComponentProps<"
   return (
     <label
       data-slot="selection-card"
-      className="group/selection-card group/checkbox-field group/radio-field block w-full cursor-pointer text-left has-[:is([role=checkbox],[role=radio]):disabled]:cursor-not-allowed"
+      className="group/selection-card group/checkbox-field group/radio-field block w-full text-left has-[:is([role=checkbox],[role=radio])]:cursor-pointer has-[:is([role=checkbox],[role=radio]):disabled]:cursor-not-allowed"
       {...props}
     >
       <Card
@@ -32,7 +33,7 @@ function SelectionCard({ className, children, ...props }: React.ComponentProps<"
           "*:data-[slot=checkbox]:focus-visible:ring-(length:--aurora-stroke-none) *:data-[slot=radio-group-item]:focus-visible:ring-(length:--aurora-stroke-none)",
           "has-data-checked:ring-link-1",
           // hover só com o controle habilitado; no foco pelo teclado, a linha fica a do foco
-          "not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:not-has-[[data-slot=selection-card-action]:hover]:hover:bg-background-4/md",
+          "has-[:is([role=checkbox],[role=radio])]:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-4 has-[:is([role=checkbox],[role=radio])]:not-has-[:is([role=checkbox],[role=radio]):disabled]:not-has-[[data-slot=selection-card-action]:hover]:hover:bg-background-4/md",
           "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-3",
           // estados que vêm do controle de dentro (Checkbox ou Radio): erro e foco pelo teclado
           "has-[[aria-invalid=true]:not([data-state=checked])]:ring-invalid has-[[aria-invalid=true]:not([data-state=checked])]:hover:ring-invalid",
