@@ -57,6 +57,9 @@ type ButtonIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 // Os ícones são opcionais e valem em todas as variantes e tamanhos; o lado com ícone
 // ganha menos padding (has-data-[icon=...]) para o conjunto parecer centralizado.
 // Carregando (loading): o Spinner entra no lugar do ícone de antes e o botão fica bloqueado.
+// Largura total (fullWidth): ocupa a linha inteira do espaço onde está (ex.: o botão principal de um formulário
+// no celular); sem ela, o botão acompanha o texto. É propriedade, e não classe solta na aplicação, para todos
+// esticarem o botão do mesmo jeito.
 function Button({
   className,
   variant = "default",
@@ -65,6 +68,7 @@ function Button({
   iconLeading: IconLeading,
   iconTrailing: IconTrailing,
   loading = false,
+  fullWidth = false,
   disabled,
   children,
   ...props
@@ -77,6 +81,8 @@ function Button({
     iconTrailing?: ButtonIcon
     /** Carregando: mostra o Spinner antes do texto e bloqueia o clique. */
     loading?: boolean
+    /** Largura total: ocupa a linha inteira em vez de acompanhar o texto. */
+    fullWidth?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
 
@@ -85,7 +91,8 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
+      // o link tem margem lateral negativa (para alinhar com o texto): na largura total ela sai, senão o botão deslocaria
+      className={cn(buttonVariants({ variant, size, className }), fullWidth && "w-full", fullWidth && variant === "link" && "mx-none")}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}
