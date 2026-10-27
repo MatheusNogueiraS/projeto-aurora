@@ -72,6 +72,7 @@ const meta = {
     size: "default",
     disabled: false,
     loading: false,
+    fullWidth: false,
     children: "Continuar",
     showIconLeading: false,
     iconLeadingName: "Plus",
@@ -83,6 +84,7 @@ const meta = {
     size: { name: "Size", control: "select", options: sizes },
     disabled: { name: "Disabled", control: "boolean", table: { category: "State" } },
     loading: { name: "Loading", control: "boolean", table: { category: "State" } },
+    fullWidth: { name: "Full width", control: "boolean" },
     children: { name: "Label", control: "text" },
     showIconLeading: {
       name: "Icon Leading",
