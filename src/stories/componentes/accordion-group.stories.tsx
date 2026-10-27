@@ -27,7 +27,7 @@ function StoryGroup({ variant = "line", count = 3, openMode = "multiple" }: Part
     <AccordionItem key={it.title} value={`item-${i + 1}`} variant={variant}>
       <AccordionTrigger>{it.title}</AccordionTrigger>
       <AccordionContent>
-        {it.text ?? it.lines?.map(([label, value]) => <DataLine key={label} label={label} value={value} size="sm" divider={false} className="py-xs" />)}
+        {it.text ?? it.lines?.map(([label, value]) => <DataLine key={label} label={label} value={value} divider={false} className="py-xs" />)}
       </AccordionContent>
     </AccordionItem>
   ))

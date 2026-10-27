@@ -12,26 +12,26 @@ import { cn } from "@/lib/utils"
 
 type DataLineSize = "sm" | "default" | "lg"
 
-// estilos por tamanho; o destaque (ex.: total a pagar) deixa o rótulo em negrito e sobe o valor um passo
+// estilos por tamanho, na escala dos componentes que exibem informação (sm 12px, default 14px, lg 16px);
+// o destaque (ex.: total a pagar) deixa o rótulo em negrito e sobe o valor um passo
 const labelStyle = {
-  sm: cn("typo-body-md-regular"),
-  default: cn("typo-body-lg-regular"),
-  lg: cn("typo-body-xl-regular"),
+  sm: cn("typo-body-sm-regular"),
+  default: cn("typo-body-md-regular"),
+  lg: cn("typo-body-lg-regular"),
 }
 const labelEmphasisStyle = {
-  sm: cn("typo-body-md-bold"),
-  default: cn("typo-body-lg-bold"),
-  lg: cn("typo-body-xl-bold"),
+  sm: cn("typo-body-sm-bold"),
+  default: cn("typo-body-md-bold"),
+  lg: cn("typo-body-lg-bold"),
 }
 const valueStyle = {
-  sm: cn("typo-body-md-bold"),
-  default: cn("typo-body-lg-bold"),
-  lg: cn("typo-body-xl-bold"),
+  sm: cn("typo-body-sm-bold"),
+  default: cn("typo-body-md-bold"),
+  lg: cn("typo-body-lg-bold"),
 }
 const valueEmphasisStyle = {
-  sm: cn("typo-body-lg-bold"),
-  default: cn("typo-body-xl-bold"),
-  // só estilos de texto (Lato): no lg o valor já está no maior passo, o destaque fica no rótulo em negrito
+  sm: cn("typo-body-md-bold"),
+  default: cn("typo-body-lg-bold"),
   lg: cn("typo-body-xl-bold"),
 }
 
