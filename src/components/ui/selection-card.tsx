@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card"
 // Choice Card do shadcn (um <label> envolvendo o controle e o conteúdo); visual do Check_Terms da
 // jornada de Formalização (Genesis). É uma montagem dos nossos componentes, sem recriar nada:
 // - caixa: o Card;
-// - controle: Checkbox (aceitar, vários), RadioGroupItem (escolher um, dentro de um RadioGroup) ou nenhum
-//   (só informação; sem controle, o card não mostra cursor nem hover de clicável, e a ação continua);
+// - controle: Checkbox (aceitar, vários) ou RadioGroupItem (escolher um, dentro de um RadioGroup). Com hideControl,
+//   o controle sai da vista mas continua lá (leitor de tela e teclado): o card marca, faz hover e foco igual;
 // - conteúdo: tag (Badge), título e descrição; livre para outros componentes;
 // - ação opcional à direita (ex.: IconButton com seta para abrir o termo), que não marca o card.
 // Foco pelo teclado: o anel aparece no card inteiro, e o anel próprio do controle sai para não duplicar.
@@ -18,7 +18,15 @@ import { Card } from "@/components/ui/card"
 
 // A caixa é o Card (mesmo raio, fundo, linha e sombra); o label em volta faz o card inteiro clicável.
 // A linha do Card é um anel (ring): os estados mudam a cor dela.
-function SelectionCard({ className, children, ...props }: React.ComponentProps<"label">) {
+function SelectionCard({
+  className,
+  children,
+  hideControl = false,
+  ...props
+}: React.ComponentProps<"label"> & {
+  /** Esconde o Checkbox/Radio da vista; o card continua selecionável, com o mesmo hover e estado marcado. */
+  hideControl?: boolean
+}) {
   return (
     <label
       data-slot="selection-card"
@@ -28,6 +36,7 @@ function SelectionCard({ className, children, ...props }: React.ComponentProps<"
       <Card
         className={cn(
           "flex-row items-start gap-lg p-lg transition-[color,background-color,box-shadow]",
+          hideControl && "*:data-[slot=checkbox]:sr-only *:data-[slot=radio-group-item]:sr-only",
           // o controle de 16px alinha com a primeira linha do texto; o anel de foco dele fica com o card
           "*:data-[slot=checkbox]:mt-xs *:data-[slot=radio-group-item]:mt-xs",
           "*:data-[slot=checkbox]:focus-visible:ring-(length:--aurora-stroke-none) *:data-[slot=radio-group-item]:focus-visible:ring-(length:--aurora-stroke-none)",

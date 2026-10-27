@@ -48,9 +48,12 @@ function StoryCard({
   disabled = false,
 }: Partial<CardStoryArgs> & { value?: string }) {
   return (
-    <SelectionCard>
-      {control === "Radio" && <RadioGroupItem value={value} disabled={disabled} aria-invalid={invalid || undefined} />}
-      {control === "Checkbox" && <Checkbox defaultChecked={selected} disabled={disabled} aria-invalid={invalid || undefined} />}
+    <SelectionCard hideControl={control === "None"}>
+      {control === "Radio" ? (
+        <RadioGroupItem value={value} disabled={disabled} aria-invalid={invalid || undefined} />
+      ) : (
+        <Checkbox defaultChecked={selected} disabled={disabled} aria-invalid={invalid || undefined} />
+      )}
       <SelectionCardContent>
         {showTag && <Badge variant={tagVariant}>{tag}</Badge>}
         <SelectionCardTitle>{title}</SelectionCardTitle>
@@ -109,8 +112,8 @@ const meta = {
     showDescription: { name: "Description", control: "boolean" },
     description: { name: "Description · content", control: "text", if: { arg: "showDescription" } },
     showAction: { name: "Action", control: "boolean" },
-    selected: { name: "Selected", control: "boolean", if: { arg: "control", neq: "None" }, table: { category: "State" } },
-    invalid: { name: "Error", control: "boolean", if: { arg: "control", neq: "None" }, table: { category: "State" } },
+    selected: { name: "Selected", control: "boolean", table: { category: "State" } },
+    invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
     disabled: { name: "Disabled", control: "boolean", if: { arg: "invalid", truthy: false }, table: { category: "State" } },
   },
   render: (args) => <StoryOne {...args} />,
