@@ -12,7 +12,7 @@ const photo =
 
 const displays = ["Single", "Group"] as const
 const contents = ["Photo", "Initials", "Icon"] as const
-const people = ["MN", "AB", "CD", "EF", "GH"]
+const people = ["MS", "AB", "CD", "EF", "GH"]
 
 // Os controles cobrem todas as partes do componente: conteúdo (foto, iniciais ou ícone),
 // tamanho, selo (com ou sem ícone) e grupo (quantidade e contador +N).
@@ -21,6 +21,8 @@ type AvatarStoryArgs = {
   content: (typeof contents)[number]
   initials: string
   size: "sm" | "default" | "lg"
+  showLabel: boolean
+  label: string
   showBadge: boolean
   badgeIcon: boolean
   count: number
@@ -28,14 +30,16 @@ type AvatarStoryArgs = {
 }
 
 // controles escondidos não chegam até aqui, por isso os padrões
-function Person({ content = "Photo", initials = "MN", size = "default", showBadge = false, badgeIcon = false }: Partial<AvatarStoryArgs>) {
-  return (
-    <Avatar size={size}>
+function Person({ content = "Photo", initials = "MS", size = "default", showLabel = false, label = "Maria Souza", showBadge = false, badgeIcon = false }: Partial<AvatarStoryArgs>) {
+  const avatar = (
+    <Avatar size={size} label={showLabel ? label : undefined}>
       {content === "Photo" && <AvatarImage src={photo} alt="Foto de perfil" />}
       <AvatarFallback>{content === "Icon" ? <UserIcon className="size-[16px]" /> : initials}</AvatarFallback>
       {showBadge && <AvatarBadge>{badgeIcon && <CheckIcon />}</AvatarBadge>}
     </Avatar>
   )
+  // com nome, o espaço é limitado (como o Input): o nome que passa dele corta com reticências, como numa célula de tabela
+  return showLabel ? <div className="max-w-[240px]">{avatar}</div> : avatar
 }
 
 function StoryAvatar({ display = "Single", count = 3, extra = 3, ...args }: Partial<AvatarStoryArgs>) {
@@ -53,13 +57,15 @@ function StoryAvatar({ display = "Single", count = 3, extra = 3, ...args }: Part
 const meta = {
   title: "Components/Avatar",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Representa uma pessoa com foto, iniciais ou um ícone." } } },
-  args: { display: "Single", content: "Photo", initials: "MN", size: "default", showBadge: false, badgeIcon: false, count: 3, extra: 3 },
+  parameters: { docs: { description: { component: "Representa uma pessoa com foto, iniciais ou um ícone, e o nome ao lado se precisar." } } },
+  args: { display: "Single", content: "Photo", initials: "MS", size: "default", showLabel: false, label: "Maria Souza", showBadge: false, badgeIcon: false, count: 3, extra: 3 },
   argTypes: {
     display: { name: "Display", control: "inline-radio", options: displays },
     content: { name: "Content", control: "inline-radio", options: contents },
     initials: { name: "Initials", control: "text", if: { arg: "content", eq: "Initials" } },
     size: { name: "Size", control: "inline-radio", options: ["sm", "default", "lg"], table: { defaultValue: { summary: '"default"' } } },
+    showLabel: { name: "Label", control: "boolean", if: { arg: "display", eq: "Single" } },
+    label: { name: "Label · text", control: "text", if: { arg: "showLabel" } },
     showBadge: { name: "Badge", control: "boolean", if: { arg: "display", eq: "Single" } },
     badgeIcon: { name: "Badge · icon", control: "boolean", if: { arg: "showBadge" } },
     count: { name: "Count", control: { type: "range", min: 2, max: 5, step: 1 }, if: { arg: "display", eq: "Group" } },
@@ -81,6 +87,7 @@ export const Variants: Story = {
       ))}
       <Person {...args} showBadge />
       <Person {...args} showBadge badgeIcon />
+      <Person {...args} showLabel />
       <StoryAvatar {...args} display="Group" />
     </div>
   ),
@@ -92,6 +99,9 @@ export const Sizes: Story = {
       <StoryAvatar {...args} size="sm" />
       <StoryAvatar {...args} size="default" />
       <StoryAvatar {...args} size="lg" />
+      <Person {...args} size="sm" showLabel />
+      <Person {...args} size="default" showLabel />
+      <Person {...args} size="lg" showLabel />
     </div>
   ),
 }
