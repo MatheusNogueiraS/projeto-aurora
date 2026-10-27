@@ -57,6 +57,8 @@ Decisões do responsável que o relatório continua mostrando como falha, para n
 
 Ficam em [excecoes.json](excecoes.json) (fonte única): par, tema e arquivos onde valem, e o motivo. Uma exceção só vale nos arquivos listados; o mesmo par num componente novo volta a ser falha. Nova exceção só com decisão do responsável.
 
+**Toda falha nova vai ao responsável antes de virar exceção**, mesmo quando a cor foi pedida por ele (ex.: laranja da marca no texto do link). Leve a tabela de decisão (abaixo), os precedentes de `excecoes.json` e as opções com uma recomendada. Só registre depois do aceite, com a data.
+
 ## Formato do relato
 
 ```markdown
@@ -64,3 +66,11 @@ Ficam em [excecoes.json](excecoes.json) (fonte única): par, tema e arquivos ond
 |---|---|---|---|---|---|
 ```
 Feche com o que não deu para verificar (ex.: cor herdada, imagem, gráfico).
+
+Para decidir uma falha nova (aceite do responsável), um par por linha, incluindo os estados que passam:
+
+```markdown
+| Tema | Estado | Contraste | Mínimo | Na tela |
+|---|---|---|---|---|
+```
+Depois: precedentes (exceções parecidas já aceitas) e opções com o risco de cada uma, uma recomendada.

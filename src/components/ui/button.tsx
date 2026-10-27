@@ -5,7 +5,7 @@ import { Slot } from "radix-ui"
 
 import { Spinner } from "@/components/ui/spinner"
 
-// link: sempre sublinhado (no celular não há hover para revelar que é link), em negrito (único Button em bold) e com
+// link: laranja do primário, sempre sublinhado (no celular não há hover para revelar que é link), em negrito (único Button em bold) e com
 // o hover mudando a cor. Sem margem lateral visível, para alinhar com o texto em volta.
 // Guarda um respiro (xs) compensado pela margem negativa, e cantos menos redondos, para o anel de foco não encostar
 // nas letras. A altura de cada tamanho continua a mesma. Fica fora do cva para a trava de tokens não ler
@@ -32,7 +32,7 @@ const buttonVariants = cva(
         ghost: "text-text-2 hover:bg-background-4 aria-expanded:bg-background-4",
         destructive:
           "bg-alerts-8 text-alerts-9 hover:bg-alerts-8/lg focus-visible:border-alerts-7/sm focus-visible:ring-alerts-7/xs disabled:bg-disabled-surface",
-        link: "text-link-4 underline underline-offset-(--aurora-underline-offset) hover:text-link-4/lg",
+        link: "text-link-1 underline underline-offset-(--aurora-underline-offset) hover:text-link-3",
       },
       size: {
         default:

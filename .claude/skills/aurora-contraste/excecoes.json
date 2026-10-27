@@ -17,7 +17,11 @@
   {
     "primeiroPlano": "link.3",
     "tema": "escuro",
-    "onde": ["checkbox.tsx", "radio-group.tsx", "selection-card.tsx"],
+    "onde": [
+      "checkbox.tsx",
+      "radio-group.tsx",
+      "selection-card.tsx"
+    ],
     "motivo": "Hover do Checkbox/Radio marcado no escuro. O WCAG não exige 3:1 no hover; link.3 também é o hover do botão primário. Mantido pelo responsável em 26/10/2026."
   },
   {
@@ -30,5 +34,17 @@
     "primeiroPlano": "focus/50%",
     "onde": "selection-card.tsx",
     "motivo": "Halo do cartão quando o Checkbox/Radio de dentro está em foco; quem marca o foco é a borda sólida do controle."
+  },
+  {
+    "primeiroPlano": "link.1",
+    "tema": "claro",
+    "onde": "button.tsx",
+    "motivo": "Texto do Button link no laranja do primário (3.07:1 sobre o fundo claro). Aceito pelo responsável em 27/10/2026, por enquanto."
+  },
+  {
+    "primeiroPlano": "link.3",
+    "tema": "escuro",
+    "onde": "button.tsx",
+    "motivo": "Hover do Button link no escuro (2.85:1): o mesmo laranja do hover do primário. Aceito pelo responsável em 27/10/2026, por enquanto."
   }
 ]
