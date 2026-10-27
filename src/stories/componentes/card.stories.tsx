@@ -63,7 +63,7 @@ function StoryCard({
         ) : (
           <div>
             {lines.map((l) => (
-              <DataLine key={l.label} {...l} size="sm" />
+              <DataLine key={l.label} {...l} />
             ))}
           </div>
         )}

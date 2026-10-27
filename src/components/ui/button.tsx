@@ -31,10 +31,10 @@ const buttonVariants = cva(
       },
       size: {
         default:
-          "gap-xs px-lg py-sm typo-body-md-bold in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
+          "gap-xs px-lg py-sm typo-body-md-regular in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
         xs: "gap-xs px-sm py-xxs typo-body-sm-regular in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm [&_svg:not([class*='size-'])]:size-[12px]",
-        sm: "gap-xs px-md py-xs typo-body-md-bold in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm",
-        lg: "gap-sm px-lg py-sm typo-body-lg-bold has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
+        sm: "gap-xs px-md py-xs typo-body-md-regular in-data-[slot=button-group]:rounded-pill has-data-[icon=inline-end]:pr-sm has-data-[icon=inline-start]:pl-sm",
+        lg: "gap-sm px-lg py-sm typo-body-lg-regular has-data-[icon=inline-end]:pr-md has-data-[icon=inline-start]:pl-md",
       },
     },
     compoundVariants: linkWithoutPadding,

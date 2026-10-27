@@ -61,7 +61,7 @@ function StoryItem({
         <AccordionContent>
           {contentType === "Text"
             ? content
-            : lines.slice(0, lineCount).map((l) => <DataLine key={l.label} size="sm" divider={false} className="py-xs" {...l} />)}
+            : lines.slice(0, lineCount).map((l) => <DataLine key={l.label} divider={false} className="py-xs" {...l} />)}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

@@ -73,7 +73,7 @@ function StepperItem({ className, step, title, description, status = "upcoming",
         variant={status === "current" ? "primary" : "outline"}
         size={badgeSize}
         aria-hidden
-        className={cn(circle, "p-none tabular-nums", status === "current" ? "typo-body-sm-bold" : "text-text-3")}
+        className={cn(circle, "p-none tabular-nums", status !== "current" && "text-text-3")}
       >
         {step}
       </Badge>
@@ -95,7 +95,6 @@ function StepperItem({ className, step, title, description, status = "upcoming",
       <span
         className={cn(
           size === "sm" ? "typo-body-sm-regular" : "typo-body-md-regular",
-          status === "current" && (size === "sm" ? "typo-body-sm-bold" : "typo-body-md-bold"),
           status === "upcoming" ? "text-text-3" : status === "error" ? "text-alerts-7" : "text-text-1"
         )}
       >
