@@ -3,7 +3,7 @@
 //   2. editar arquivo gerado (carimbo de gerado na abertura)  (regra 11)
 //   3. git add -A / git add . / git commit -a                   (aurora-git-fluxo, regra 4)
 //   4. git push --force                                         (aurora-git-fluxo, regra 9)
-//   5. git commit na main, ou com lint/tipos/inventário/contraste falhando (regras 1, 4 e 18b)
+//   5. git commit na main, com arquivo só em parte no commit, ou com lint/tipos/inventário/contraste falhando (regras 1, 4 e 18b)
 // Erro interno da trava não bloqueia (exit 0): uma trava quebrada não pode travar o trabalho.
 import { readFileSync, existsSync } from "node:fs"
 import { execFileSync, execSync } from "node:child_process"
@@ -46,6 +46,12 @@ try {
       block("push --force reescreve a história. Para desfazer algo, reverta por PR (aurora-git-fluxo, regra 9). Se for mesmo necessário, quem está operando roda à mão.")
     if (/\bgit\s+commit\b/.test(cmd)) {
       if (branch() === "main") block("commit na main não é permitido. Mova as mudanças para uma branch (git switch -c <tipo>/<assunto>).")
+      // as checagens olham a pasta; um arquivo com parte das mudanças fora do commit faria o commit sair
+      // diferente do que foi checado (ex.: renomeado no commit, conteúdo novo só na pasta)
+      const lines = args => execFileSync("git", args, { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean)
+      const staged = new Set(lines(["diff", "--cached", "--name-only"]))
+      const partial = lines(["diff", "--name-only"]).filter(f => staged.has(f))
+      if (partial.length) block(`arquivo com mudanças fora do commit: ${partial.join(", ")}. Adicione as mudanças dele (git add <arquivo>) ou tire-o do commit.`)
       const checks = [
         ["pnpm lint", "lint e trava de tokens"],
         ["pnpm exec tsc -b --noEmit", "tipos"],

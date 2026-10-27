@@ -7,7 +7,8 @@ import { Card } from "@/components/ui/card"
 // Choice Card do shadcn (um <label> envolvendo o controle e o conteúdo); visual do Check_Terms da
 // jornada de Formalização (Genesis). É uma montagem dos nossos componentes, sem recriar nada:
 // - caixa: o Card;
-// - controle: Checkbox (aceitar, vários) ou RadioGroupItem (escolher um, dentro de um RadioGroup);
+// - controle: Checkbox (aceitar, vários) ou RadioGroupItem (escolher um, dentro de um RadioGroup). Com hideControl,
+//   o controle sai da vista mas continua lá (leitor de tela e teclado): o card marca, faz hover e foco igual;
 // - conteúdo: tag (Badge), título e descrição; livre para outros componentes;
 // - ação opcional à direita (ex.: IconButton com seta para abrir o termo), que não marca o card.
 // Foco pelo teclado: o anel aparece no card inteiro, e o anel próprio do controle sai para não duplicar.
@@ -17,23 +18,32 @@ import { Card } from "@/components/ui/card"
 
 // A caixa é o Card (mesmo raio, fundo, linha e sombra); o label em volta faz o card inteiro clicável.
 // A linha do Card é um anel (ring): os estados mudam a cor dela.
-function SelectionCard({ className, children, ...props }: React.ComponentProps<"label">) {
+function SelectionCard({
+  className,
+  children,
+  hideControl = false,
+  ...props
+}: React.ComponentProps<"label"> & {
+  /** Esconde o Checkbox/Radio da vista; o card continua selecionável, com o mesmo hover e estado marcado. */
+  hideControl?: boolean
+}) {
   return (
     <label
       data-slot="selection-card"
-      className="group/selection-card group/checkbox-field group/radio-field block w-full cursor-pointer text-left has-[:is([role=checkbox],[role=radio]):disabled]:cursor-not-allowed"
+      className="group/selection-card group/checkbox-field group/radio-field block w-full text-left has-[:is([role=checkbox],[role=radio])]:cursor-pointer has-[:is([role=checkbox],[role=radio]):disabled]:cursor-not-allowed"
       {...props}
     >
       <Card
         className={cn(
           "flex-row items-start gap-lg p-lg transition-[color,background-color,box-shadow]",
+          hideControl && "*:data-[slot=checkbox]:sr-only *:data-[slot=radio-group-item]:sr-only",
           // o controle de 16px alinha com a primeira linha do texto; o anel de foco dele fica com o card
           "*:data-[slot=checkbox]:mt-xs *:data-[slot=radio-group-item]:mt-xs",
           "*:data-[slot=checkbox]:focus-visible:ring-(length:--aurora-stroke-none) *:data-[slot=radio-group-item]:focus-visible:ring-(length:--aurora-stroke-none)",
           "has-data-checked:ring-link-1",
           // hover só com o controle habilitado; no foco pelo teclado, a linha fica a do foco
-          "not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:bg-background-4/md",
-          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-3",
+          "has-[:is([role=checkbox],[role=radio])]:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-4 has-[:is([role=checkbox],[role=radio])]:not-has-[:is([role=checkbox],[role=radio]):disabled]:not-has-[[data-slot=selection-card-action]:hover]:hover:bg-background-4/md",
+          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-3",
           // estados que vêm do controle de dentro (Checkbox ou Radio): erro e foco pelo teclado
           "has-[[aria-invalid=true]:not([data-state=checked])]:ring-invalid has-[[aria-invalid=true]:not([data-state=checked])]:hover:ring-invalid",
           "has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-(length:--aurora-stroke-focus) has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-focus/md",
@@ -73,13 +83,18 @@ function SelectionCardDescription({ className, ...props }: React.ComponentProps<
   )
 }
 
-// Ação à direita, centralizada na altura do card, com o ícone em cinza (secundário, como no Figma).
-// Um botão aqui não marca o controle (clicar num botão dentro de um label não ativa o label).
+// Ação à direita, com o ícone em cinza (secundário, como no Figma). A faixa inteira da direita, de cima a
+// baixo do card, é a área de clique da ação (menos clique errado): o botão estende a área dele (::after) até
+// a faixa; o hover acende só o botão. Clicar ali abre a ação e não marca o controle (botão dentro de label).
 function SelectionCardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="selection-card-action"
-      className={cn("shrink-0 self-center *:data-[slot=icon-button]:text-text-3", className)}
+      className={cn(
+        "relative -my-lg -mr-lg flex shrink-0 items-center self-stretch px-sm",
+        "*:data-[slot=icon-button]:text-text-3 *:data-[slot=icon-button]:after:absolute *:data-[slot=icon-button]:after:inset-none *:data-[slot=icon-button]:after:content-['']",
+        className
+      )}
       {...props}
     />
   )

@@ -19,7 +19,7 @@ const tagVariants = ["warning", "default", "secondary", "success"] as const
 // Os controles seguem o Check_Terms da jornada de Formalização (Genesis) e o Choice Card do shadcn:
 // controle (aceitar ou escolher), tag, título, descrição, ação de abrir e os estados.
 type CardStoryArgs = {
-  control: "Checkbox" | "Radio"
+  control: "Checkbox" | "Radio" | "None"
   showTag: boolean
   tag: string
   tagVariant: (typeof tagVariants)[number]
@@ -48,7 +48,7 @@ function StoryCard({
   disabled = false,
 }: Partial<CardStoryArgs> & { value?: string }) {
   return (
-    <SelectionCard>
+    <SelectionCard hideControl={control === "None"}>
       {control === "Radio" ? (
         <RadioGroupItem value={value} disabled={disabled} aria-invalid={invalid || undefined} />
       ) : (
@@ -104,7 +104,7 @@ const meta = {
     disabled: false,
   },
   argTypes: {
-    control: { name: "Selection", control: "inline-radio", options: ["Checkbox", "Radio"] },
+    control: { name: "Selection", control: "inline-radio", options: ["Checkbox", "Radio", "None"] },
     showTag: { name: "Tag", control: "boolean" },
     tag: { name: "Tag · text", control: "text", if: { arg: "showTag" } },
     tagVariant: { name: "Tag · type", control: "inline-radio", options: tagVariants, if: { arg: "showTag" }, table: { defaultValue: { summary: '"default"' } } },

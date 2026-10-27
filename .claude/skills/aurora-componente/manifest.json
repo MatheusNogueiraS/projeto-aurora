@@ -248,21 +248,6 @@
         "src/stories/componentes/combobox.stories.tsx"
       ]
     },
-    "data-line": {
-      "arquivo": "src/components/ui/data-line.tsx",
-      "exporta": [
-        "DataLine"
-      ],
-      "variantes": {},
-      "usa": [],
-      "usadoPor": [],
-      "documentadoEm": [
-        "src/stories/componentes/accordion-group.stories.tsx",
-        "src/stories/componentes/accordion.stories.tsx",
-        "src/stories/componentes/card.stories.tsx",
-        "src/stories/componentes/data-line.stories.tsx"
-      ]
-    },
     "file-upload": {
       "arquivo": "src/components/ui/file-upload.tsx",
       "exporta": [
@@ -324,6 +309,23 @@
         "src/stories/componentes/selection-card.stories.tsx",
         "src/stories/componentes/table-cell.stories.tsx",
         "src/stories/componentes/table-example.tsx"
+      ]
+    },
+    "info-line": {
+      "arquivo": "src/components/ui/info-line.tsx",
+      "exporta": [
+        "InfoLine",
+        "InfoLineGroup"
+      ],
+      "variantes": {},
+      "usa": [],
+      "usadoPor": [],
+      "documentadoEm": [
+        "src/stories/componentes/accordion-group.stories.tsx",
+        "src/stories/componentes/accordion.stories.tsx",
+        "src/stories/componentes/card.stories.tsx",
+        "src/stories/componentes/info-line-group.stories.tsx",
+        "src/stories/componentes/info-line.stories.tsx"
       ]
     },
     "input-field": {
