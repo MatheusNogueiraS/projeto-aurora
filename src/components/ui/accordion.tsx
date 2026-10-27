@@ -80,7 +80,7 @@ function AccordionTrigger({
   )
 }
 
-// O conteúdo é um slot: texto ou outros componentes (ex.: DataLine). Diferente do shadcn, a parte
+// O conteúdo é um slot: texto ou outros componentes (ex.: InfoLine). Diferente do shadcn, a parte
 // de dentro não fixa a altura medida ao abrir (h-(--radix-accordion-content-height)): com ela, o
 // conteúdo que muda com o item aberto ficava cortado. A medida continua servindo à animação.
 function AccordionContent({

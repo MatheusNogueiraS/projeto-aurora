@@ -1,8 +1,8 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Data Line: uma linha "rótulo → valor", para tabelas de preço e resumos (parcelas, taxa, CET…).
-// É a unidade: para montar uma tabela, empilhe quantas linhas quiser (divisória só entre elas).
+// Info Line: uma linha "rótulo → valor", para tabelas de preço e resumos (parcelas, taxa, CET…).
+// É a unidade (sem divisor): para montar uma tabela, empilhe as linhas no InfoLineGroup, que as separa.
 // Inspirado no Data Line do Design System CB e no InfoLine do Genesis; construção própria.
 //
 // Encaixe de espaço: grid de duas colunas automáticas. O espaço é dividido por igual até cada lado
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 // fica com o resto. Palavras maiores que a coluna quebram dentro dela (wrap-anywhere), nunca
 // passando por cima do outro lado.
 
-type DataLineSize = "sm" | "default" | "lg"
+type InfoLineSize = "sm" | "default" | "lg"
 
 // estilos por tamanho, na escala dos componentes que exibem informação (sm 12px, default 14px, lg 16px);
 // o destaque (ex.: total a pagar) deixa o rótulo em negrito e sobe o valor um passo
@@ -38,7 +38,7 @@ const valueEmphasisStyle = {
 // texto vazio (ex.: campo em branco vindo do sistema) conta como "sem conteúdo"
 const filled = (node: React.ReactNode) => node != null && node !== false && node !== ""
 
-type DataLineProps = Omit<React.ComponentProps<"dl">, "children"> & {
+type InfoLineProps = Omit<React.ComponentProps<"dl">, "children"> & {
   /** Nome do dado, à esquerda (ex.: "Parcelas"). */
   label: React.ReactNode
   /** Complemento do rótulo, embaixo dele (ex.: "ao mês"). */
@@ -49,14 +49,12 @@ type DataLineProps = Omit<React.ComponentProps<"dl">, "children"> & {
   support?: React.ReactNode
   /** Informação embaixo do valor (ex.: "Total R$ 3.559,92"). */
   description?: React.ReactNode
-  size?: DataLineSize
+  size?: InfoLineSize
   /** Linha de destaque, como o total a pagar: rótulo em negrito e valor maior. */
   emphasis?: boolean
-  /** Linha embaixo, para separar das linhas seguintes (some na última linha empilhada). */
-  divider?: boolean
 }
 
-function DataLine({
+function InfoLine({
   className,
   label,
   context,
@@ -65,9 +63,8 @@ function DataLine({
   description,
   size = "default",
   emphasis = false,
-  divider = true,
   ...props
-}: DataLineProps) {
+}: InfoLineProps) {
   const hasValue = filled(value)
   const hasDescription = filled(description)
   const hasRight = hasValue || hasDescription
@@ -75,12 +72,11 @@ function DataLine({
   // cada linha é uma lista de definição (dl): o leitor de tela liga o rótulo ao valor
   return (
     <dl
-      data-slot="data-line"
+      data-slot="info-line"
       data-size={size}
       data-emphasis={emphasis || undefined}
       className={cn(
         "grid w-full grid-cols-[auto_auto] items-start justify-between gap-x-lg py-md",
-        divider && "border-b-default [&:last-child:not(:only-child)]:border-b-(length:--aurora-stroke-none)",
         className
       )}
       {...props}
@@ -108,4 +104,19 @@ function DataLine({
   )
 }
 
-export { DataLine }
+// Grupo: empilha linhas (como numa tabela de preço) e é quem as separa, como o Accordion e a Table.
+// Com divisor (padrão), uma linha entre os itens; sem divisor, só o espaço de cada linha.
+function InfoLineGroup({ className, divider = true, ...props }: React.ComponentProps<"div"> & {
+  /** Linha entre os itens. */
+  divider?: boolean
+}) {
+  return (
+    <div
+      data-slot="info-line-group"
+      className={cn("flex w-full flex-col", divider && "*:not-last:border-b-default", className)}
+      {...props}
+    />
+  )
+}
+
+export { InfoLine, InfoLineGroup }

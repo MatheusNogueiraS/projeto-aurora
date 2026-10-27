@@ -4,7 +4,7 @@ import { EllipsisVerticalIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { DataLine } from "@/components/ui/data-line"
+import { InfoLine, InfoLineGroup } from "@/components/ui/info-line"
 import { IconButton } from "@/components/ui/icon-button"
 
 const lines = [
@@ -23,7 +23,7 @@ type CardStoryArgs = {
   showDescription: boolean
   description: string
   action: (typeof actions)[number]
-  contentType: "Text" | "Data Line"
+  contentType: "Text" | "Info Line"
   showFooter: boolean
 }
 
@@ -35,7 +35,7 @@ function StoryCard({
   showDescription = true,
   description = "",
   action = "None",
-  contentType = "Data Line",
+  contentType = "Info Line",
   showFooter = true,
 }: Partial<CardStoryArgs>) {
   return (
@@ -61,11 +61,11 @@ function StoryCard({
         {contentType === "Text" ? (
           <p>O valor cai na sua conta em até 1 dia útil depois da assinatura.</p>
         ) : (
-          <div>
+          <InfoLineGroup>
             {lines.map((l) => (
-              <DataLine key={l.label} {...l} />
+              <InfoLine key={l.label} {...l} />
             ))}
-          </div>
+          </InfoLineGroup>
         )}
       </CardContent>
       {showFooter && (
@@ -97,7 +97,7 @@ const meta = {
     showDescription: true,
     description: "Confira antes de continuar.",
     action: "None",
-    contentType: "Data Line",
+    contentType: "Info Line",
     showFooter: true,
   },
   argTypes: {
@@ -107,7 +107,7 @@ const meta = {
     showDescription: { name: "Description", control: "boolean", if: { arg: "showHeader" }, table: { category: "Parts" } },
     description: { name: "Description · content", control: "text", if: { arg: "showDescription" }, table: { category: "Parts" } },
     action: { name: "Action", control: "inline-radio", options: actions, if: { arg: "showHeader" }, table: { category: "Parts", defaultValue: { summary: '"None"' } } },
-    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Data Line"], table: { category: "Parts" } },
+    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Info Line"], table: { category: "Parts" } },
     showFooter: { name: "Footer", control: "boolean", table: { category: "Parts" } },
   },
   render: (args) => <StoryCard {...args} />,

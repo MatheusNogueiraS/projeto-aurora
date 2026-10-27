@@ -32,8 +32,8 @@ function SelectionCard({ className, children, ...props }: React.ComponentProps<"
           "*:data-[slot=checkbox]:focus-visible:ring-(length:--aurora-stroke-none) *:data-[slot=radio-group-item]:focus-visible:ring-(length:--aurora-stroke-none)",
           "has-data-checked:ring-link-1",
           // hover só com o controle habilitado; no foco pelo teclado, a linha fica a do foco
-          "not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:hover:bg-background-4/md",
-          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:hover:ring-link-3",
+          "not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-4 not-has-[:is([role=checkbox],[role=radio]):disabled]:not-has-[[data-slot=selection-card-action]:hover]:hover:bg-background-4/md",
+          "has-data-checked:not-has-[:is([role=checkbox],[role=radio]):is(:disabled,:focus-visible)]:not-has-[[data-slot=selection-card-action]:hover]:hover:ring-link-3",
           // estados que vêm do controle de dentro (Checkbox ou Radio): erro e foco pelo teclado
           "has-[[aria-invalid=true]:not([data-state=checked])]:ring-invalid has-[[aria-invalid=true]:not([data-state=checked])]:hover:ring-invalid",
           "has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-(length:--aurora-stroke-focus) has-[:is([role=checkbox],[role=radio]):focus-visible]:ring-focus/md",
@@ -73,13 +73,18 @@ function SelectionCardDescription({ className, ...props }: React.ComponentProps<
   )
 }
 
-// Ação à direita, centralizada na altura do card, com o ícone em cinza (secundário, como no Figma).
-// Um botão aqui não marca o controle (clicar num botão dentro de um label não ativa o label).
+// Ação à direita, com o ícone em cinza (secundário, como no Figma). A faixa inteira da direita, de cima a
+// baixo do card, é a área de clique da ação (menos clique errado): o botão estende a área dele (::after) até
+// a faixa; o hover acende só o botão. Clicar ali abre a ação e não marca o controle (botão dentro de label).
 function SelectionCardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="selection-card-action"
-      className={cn("shrink-0 self-center *:data-[slot=icon-button]:text-text-3", className)}
+      className={cn(
+        "relative -my-lg -mr-lg flex shrink-0 items-center self-stretch px-sm",
+        "*:data-[slot=icon-button]:text-text-3 *:data-[slot=icon-button]:after:absolute *:data-[slot=icon-button]:after:inset-none *:data-[slot=icon-button]:after:content-['']",
+        className
+      )}
       {...props}
     />
   )

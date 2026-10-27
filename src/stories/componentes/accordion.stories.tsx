@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { CalendarIcon, CircleHelpIcon, ClockIcon, FileTextIcon, InfoIcon, WalletIcon } from "lucide-react"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { DataLine } from "@/components/ui/data-line"
+import { InfoLine, InfoLineGroup } from "@/components/ui/info-line"
 
 // Ícones que dá para escolher nos controles (no código, qualquer ícone do lucide-react serve).
 const icons = {
@@ -17,7 +17,7 @@ type IconName = keyof typeof icons
 
 const variants = ["line", "box"] as const
 
-// Linhas de exemplo para o conteúdo em DataLine (como o InfoDrop do Design System CB).
+// Linhas de exemplo para o conteúdo em InfoLine (como o InfoDrop do Design System CB).
 const lines = [
   { label: "Parcelas", value: "84x de R$ 42,38", support: "(0,00%)" },
   { label: "Taxa de juros", value: "1,80% a.m." },
@@ -32,7 +32,7 @@ const lines = [
 type ItemStoryArgs = {
   variant: (typeof variants)[number]
   title: string
-  contentType: "Text" | "Data Line"
+  contentType: "Text" | "Info Line"
   content: string
   lineCount: number
   showIconLeading: boolean
@@ -61,7 +61,11 @@ function StoryItem({
         <AccordionContent>
           {contentType === "Text"
             ? content
-            : lines.slice(0, lineCount).map((l) => <DataLine key={l.label} divider={false} className="py-xs" {...l} />)}
+            : (
+              <InfoLineGroup divider={false}>
+                {lines.slice(0, lineCount).map((l) => <InfoLine key={l.label} className="py-xs" {...l} />)}
+              </InfoLineGroup>
+            )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -81,7 +85,7 @@ const meta = {
   args: {
     variant: "line",
     title: "Detalhes do empréstimo",
-    contentType: "Data Line",
+    contentType: "Info Line",
     content: "Um empréstimo com parcelas descontadas direto na folha.",
     lineCount: 3,
     showIconLeading: false,
@@ -92,9 +96,9 @@ const meta = {
   argTypes: {
     variant: { name: "Type", control: "inline-radio", options: variants, table: { defaultValue: { summary: '"line"' } } },
     title: { name: "Title", control: "text" },
-    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Data Line"] },
+    contentType: { name: "Content", control: "inline-radio", options: ["Text", "Info Line"] },
     content: { name: "Content · text", control: "text", if: { arg: "contentType", eq: "Text" } },
-    lineCount: { name: "Content · lines", control: { type: "range", min: 1, max: 6, step: 1 }, if: { arg: "contentType", eq: "Data Line" } },
+    lineCount: { name: "Content · lines", control: { type: "range", min: 1, max: 6, step: 1 }, if: { arg: "contentType", eq: "Info Line" } },
     showIconLeading: { name: "Icon Leading", control: "boolean", table: { category: "Icons" } },
     iconLeadingName: { name: "Icon Leading · icon", control: "select", options: Object.keys(icons), if: { arg: "showIconLeading" }, table: { category: "Icons" } },
     open: { name: "Open", control: "boolean", table: { category: "State" } },
