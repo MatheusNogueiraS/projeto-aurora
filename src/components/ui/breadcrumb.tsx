@@ -1,29 +1,13 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
-import { ChevronRightIcon, MoreHorizontalIcon, SlashIcon } from "lucide-react"
+import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
 
 /** Um ícone do lucide-react (ex.: HouseIcon) ou qualquer componente de ícone SVG. */
 type BreadcrumbIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
-// Divisor escolhido uma vez no Breadcrumb (como no Nitro: seta ou barra) e usado por todos
-// os separadores, para não precisar repetir em cada um.
-type BreadcrumbDivider = "arrow" | "slash"
-const BreadcrumbContext = React.createContext<{ divider: BreadcrumbDivider }>({ divider: "arrow" })
-
-function Breadcrumb({
-  className,
-  divider = "arrow",
-  ...props
-}: React.ComponentProps<"nav"> & {
-  /** Divisor entre os níveis: seta (padrão) ou barra. */
-  divider?: BreadcrumbDivider
-}) {
-  return (
-    <BreadcrumbContext.Provider value={{ divider }}>
-      <nav aria-label="breadcrumb" data-slot="breadcrumb" className={cn(className)} {...props} />
-    </BreadcrumbContext.Provider>
-  )
+function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
+  return <nav aria-label="breadcrumb" data-slot="breadcrumb" className={cn(className)} {...props} />
 }
 
 // Regra do componente: com mais de 3 níveis, mostra o início, reticências e os dois últimos
@@ -117,12 +101,12 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
+// Divisor entre os níveis: sempre a seta (a opção de barra saiu em 26/10/2026).
 function BreadcrumbSeparator({
   children,
   className,
   ...props
 }: React.ComponentProps<"li">) {
-  const { divider } = React.useContext(BreadcrumbContext)
   return (
     <li
       data-slot="breadcrumb-separator"
@@ -131,7 +115,7 @@ function BreadcrumbSeparator({
       className={cn("[&>svg]:size-[14px]", className)}
       {...props}
     >
-      {children ?? (divider === "slash" ? <SlashIcon /> : <ChevronRightIcon />)}
+      {children ?? <ChevronRightIcon />}
     </li>
   )
 }
