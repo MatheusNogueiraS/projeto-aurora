@@ -331,6 +331,7 @@
     "input-field": {
       "arquivo": "src/components/ui/input-field.tsx",
       "exporta": [
+        "FieldCounter",
         "FieldHint",
         "FloatingLabel",
         "InputField",

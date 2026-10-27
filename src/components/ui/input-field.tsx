@@ -85,6 +85,18 @@ function FieldHint({ id, invalid = false, disabled = false, children }: { id: st
   )
 }
 
+// Contador de caracteres embaixo do campo, à direita ("42/200"). O leitor de tela não o anuncia a cada tecla:
+// ele só entra no aria-describedby do campo, então o limite é lido ao focar. O limite bloqueia a digitação; só um
+// valor que já chega maior que o limite (ex.: texto salvo antes) passa dele, e aí o contador fica vermelho.
+function FieldCounter({ id, count, max, disabled = false }: { id: string; count: number; max: number; disabled?: boolean }) {
+  return (
+    <p id={id} className={cn("ml-auto shrink-0 typo-body-sm-regular tabular-nums", count > max ? "text-alerts-7" : "text-text-3", disabled && "opacity-md")}>
+      {count}/{max}
+      <span className="sr-only"> caracteres</span>
+    </p>
+  )
+}
+
 type InputFieldProps = Omit<React.ComponentProps<"input">, "size" | "placeholder"> & {
   /** Nome do campo (obrigatório): dentro dele, sobe ao focar ou digitar. */
   label: React.ReactNode
@@ -166,5 +178,5 @@ function InputField({
   )
 }
 
-export { InputField, FloatingLabel, FieldHint, fieldInputSize }
+export { InputField, FloatingLabel, FieldHint, FieldCounter, fieldInputSize }
 export type { InputFieldSize, FieldIcon }
