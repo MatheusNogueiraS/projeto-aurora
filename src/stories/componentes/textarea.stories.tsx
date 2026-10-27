@@ -13,6 +13,8 @@ type TextareaStoryArgs = {
   value: string
   showHint: boolean
   hint: string
+  showCounter: boolean
+  limit: number
   size: (typeof sizes)[number]
   invalid: boolean
   errorMessage: string
@@ -27,6 +29,8 @@ function StoryTextarea({
   value = "",
   showHint = true,
   hint = "Conte o que for importante para o atendimento.",
+  showCounter = false,
+  limit = 200,
   size = "default",
   invalid = false,
   errorMessage = "Escreva uma observação.",
@@ -42,6 +46,7 @@ function StoryTextarea({
       required={required}
       defaultValue={value}
       hint={showHint ? hint : undefined}
+      maxLength={showCounter ? limit : undefined}
       size={size}
       invalid={invalid}
       errorMessage={errorMessage}
@@ -53,7 +58,7 @@ function StoryTextarea({
 const meta = {
   title: "Components/Textarea",
   tags: ["autodocs"],
-  parameters: { docs: { description: { component: "Campo de texto de várias linhas que cresce conforme o conteúdo." } } },
+  parameters: { docs: { description: { component: "Campo de texto de várias linhas que cresce conforme o conteúdo, com contador de caracteres opcional." } } },
   args: {
     label: "Observação",
     optional: false,
@@ -61,6 +66,8 @@ const meta = {
     value: "",
     showHint: true,
     hint: "Conte o que for importante para o atendimento.",
+    showCounter: false,
+    limit: 200,
     size: "default",
     invalid: false,
     errorMessage: "Escreva uma observação.",
@@ -73,6 +80,8 @@ const meta = {
     value: { name: "Value", control: "text" },
     showHint: { name: "Hint", control: "boolean" },
     hint: { name: "Hint · content", control: "text", if: { arg: "showHint" } },
+    showCounter: { name: "Counter", control: "boolean" },
+    limit: { name: "Counter · limit", control: { type: "number", min: 1 }, if: { arg: "showCounter" } },
     size: { name: "Size", control: "inline-radio", options: sizes, table: { defaultValue: { summary: '"default"' } } },
     invalid: { name: "Error", control: "boolean", if: { arg: "disabled", truthy: false }, table: { category: "State" } },
     errorMessage: { name: "Error · message", control: "text", if: { arg: "invalid" }, table: { category: "State" } },
@@ -92,6 +101,7 @@ export const Variants: Story = {
       <StoryTextarea {...args} />
       <StoryTextarea {...args} value="Cliente prefere contato por e-mail." />
       <StoryTextarea {...args} label="Motivo" optional showHint={false} />
+      <StoryTextarea {...args} label="Comentário" showCounter limit={80} value="Cliente prefere contato por e-mail." />
       <StoryTextarea {...args} invalid disabled={false} />
     </div>
   ),
